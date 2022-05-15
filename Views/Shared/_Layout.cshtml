@@ -3,31 +3,62 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <title>@ViewBag.Title - E-Healthcare </title>
+    @Styles.Render("~/Content/css")   
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", required:false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("E-HealthCare", "Index", "Home", new { area = "" }, new { @class = "navbar-brand shadow" })
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.DropDownList("Services","ALL")</li>*@
+                    <li>
+                        <div class="dropdown">                            
+                            <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+                                Services
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a class="colorchange" href="#">Blood bank</a></li>
+                                <li><a href="#">Physiotherapy</a></li>
+                                <li><a href="#">Kidney Care</a></li>
+                                <li><a href="#">Neurology</a></li>
+                                <li><a href="#">General Surgery</a></li>
+                                <li><a href="#">Endocrinology</a></li>
+                                <li><a href="#">Pathology</a></li>
+                                <li><a href="#">CT Scan & MRI</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Others</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="@Url.Action("SignUp","Account")"><Span class="glyphicon glyphicon-user"></Span> Sign Up </a></li>
+
+                    <li><a href="@Url.Action("Login","Account")"><Span class="glyphicon glyphicon-log-in"></Span> Login </a></li>
                 </ul>
             </div>
+
         </div>
+
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-content">        
         @RenderBody()
         <hr />
         <footer>
@@ -35,7 +66,9 @@
         </footer>
     </div>
 
+    
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

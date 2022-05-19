@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - E-Healthcare </title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("Styles", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,63 +22,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.DropDownList("Services","ALL")</li>*@
-                    <li>
-                        <div class="dropdown">
-                            <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
-                                Services
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a class="colorchange" href="#">Blood bank</a></li>
-                                <li><a href="#">Physiotherapy</a></li>
-                                <li><a href="#">Kidney Care</a></li>
-                                <li><a href="#">Neurology</a></li>
-                                <li><a href="#">General Surgery</a></li>
-                                <li><a href="#">Endocrinology</a></li>
-                                <li><a href="#">Pathology</a></li>
-                                <li><a href="#">CT Scan & MRI</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Others</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @if (!Request.IsAuthenticated)
-                        {
-                            <a href="@Url.Action("SignUp","Account")"><Span class="glyphicon glyphicon-user"></Span> Sign Up </a>
-                        }
-                    </li>
-
-                    <li>
-                        @if (Request.IsAuthenticated)
-                        {
-                            <a href="@Url.Action("Logout","Account")"><Span class="glyphicon glyphicon-log-out"></Span> Logout </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Login","Account")"><Span class="glyphicon glyphicon-log-in"></Span> Login </a>
-                        }
-                    </li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
-
         </div>
 
     </div>
-    <div class="container-fluid body-content">
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - E-Healthcare</p>
         </footer>
     </div>
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")

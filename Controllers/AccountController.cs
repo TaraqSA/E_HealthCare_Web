@@ -12,7 +12,7 @@ using System.Web.Security;
 namespace E_HealthCare_Web.Controllers
 {
     public class AccountController : Controller
-    { 
+    {
         
         public ActionResult Index()
         {
@@ -35,7 +35,7 @@ namespace E_HealthCare_Web.Controllers
                 {
                     Patient patient = new Patient();
                     LoginDetail loginDetail = new LoginDetail();
-
+       
                     patient.PatientName = userSignUPViewModels.PatientName;
                     patient.PatientGenderId = userSignUPViewModels.PatientGenderId;
                     patient.PatientAddress = userSignUPViewModels.PatientAddress;
@@ -68,53 +68,11 @@ namespace E_HealthCare_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserLoginViewModel userLoginViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                var isvalidUser = IsValidUser(userLoginViewModel);
 
-                //if user is valid and present in database, redirect to Main page after login 
-                if(isvalidUser != null)
-                {
-                    FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("Failure", "Wrong UserName Or Password!");
-                    return View();
-                }
-            }
-            else
-            {
-                return View(userLoginViewModel);
-            }
         }
 
-
-
-        //function to check if User is valid or not
-        public LoginDetail IsValidUser(UserLoginViewModel model)
         {
-            using (var dataContext = new E_HealthCareEntities())
-            {
-                //Retireving the user details from DB based on username and password enetered by user.
-                LoginDetail user = dataContext.LoginDetails.Where(query => query.UserName.Equals(model.UserName) && query.LoginPassWord.Equals(model.Password)).SingleOrDefault();
-                //If user is present, then true is returned.
-                if (user == null)
-                    return null;
-                //If user is not present false is returned.
-                else
-                    return user;
-            }
-        }
-
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            Session.Abandon(); // it will clear the session at the end of request
-            return RedirectToAction("Index","Home");
         }
 
     }

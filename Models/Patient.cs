@@ -14,11 +14,15 @@ namespace E_HealthCare_Web.Models
     
     public partial class Patient
     {
-        public int PatientId { get; set; }
-        public string PatientName { get; set; }
-        public Nullable<int> PatientAge { get; set; }
-        public Nullable<int> PatientGenderId { get; set; }
-        public string PatientEmail { get; set; }
-        public string PatientAddress { get; set; }
+        public int p_id { get; set; }
+        public string p_name { get; set; }
+        public string p_gender { get; set; }
+        public string p_Email { get; set; }
+        public Nullable<System.DateTime> p_dateOfBirth { get; set; }
+        public string p_address { get; set; }
+        public string p_phone { get; set; }
+        public string p_BloodGroup { get; set; }
+        public string resetCode { get; set; }
+        public string UserName { get; set; }
     }
 }

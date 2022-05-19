@@ -14,8 +14,8 @@ namespace E_HealthCare_Web.Models
     
     public partial class LoginDetail
     {
-        public int LoginId { get; set; }
+        public int id { get; set; }
         public string UserName { get; set; }
-        public string LoginPassWord { get; set; }
+        public string passwordHash { get; set; }
     }
 }

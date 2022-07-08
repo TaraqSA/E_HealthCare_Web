@@ -12,19 +12,14 @@ namespace E_HealthCare_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class Doctor
     {
-        public int p_id { get; set; }
-        public string p_name { get; set; }
-        public string p_gender { get; set; }
-        public string p_Email { get; set; }
-        public Nullable<System.DateTime> p_dateOfBirth { get; set; }
-        public string p_address { get; set; }
-        public string p_phone { get; set; }
-        public string p_BloodGroup { get; set; }
-        public string resetCode { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int Id { get; set; }
+        public string D_Name { get; set; }
+        public string D_Email { get; set; }
+        public Nullable<System.DateTime> D_DateOfBirth { get; set; }
+        public string D_UserName { get; set; }
+        public Nullable<int> D_UserId { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
     }

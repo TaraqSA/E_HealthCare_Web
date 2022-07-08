@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ExpiredLink";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style>
+        .custom-font {
+            font-family: 'Arial Rounded MT';
+            padding: 50px 20px 50px 20px;
+            color: orangered;
+            font-size: larger;
+        }
+    </style>
+}
+
+<div class="custom-font">
+    <p>
+        Password reset link is expired. please request another link to change your password. @Html.ActionLink("get link", "ForgotPassword")
+    </p>
+    
+</div>
+
+

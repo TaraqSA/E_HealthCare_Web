@@ -25,7 +25,10 @@ namespace E_HealthCare_Web.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LoginDetail> LoginDetails { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<SiteUser> SiteUsers { get; set; }
+        public virtual DbSet<Doctor> Doctors { get; set; }
+        public virtual DbSet<UrlLoggin> UrlLoggins { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
     }
 }

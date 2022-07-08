@@ -5,82 +5,288 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="E_HealthCareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="LoginDetail">
+        <EntityType Name="Admin">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="passwordHash" Type="varchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="D_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="D_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="D_DateOfBirth" Type="date" />
+          <Property Name="D_UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="D_UserId" Type="int" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
             <PropertyRef Name="p_id" />
           </Key>
           <Property Name="p_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="p_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="p_gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="p_name" Type="varchar" MaxLength="50" />
+          <Property Name="p_gender" Type="varchar" MaxLength="25" />
           <Property Name="p_Email" Type="varchar" MaxLength="50" />
           <Property Name="p_dateOfBirth" Type="date" />
           <Property Name="p_address" Type="varchar" MaxLength="50" />
           <Property Name="p_phone" Type="varchar" MaxLength="15" />
           <Property Name="p_BloodGroup" Type="varchar" MaxLength="3" />
           <Property Name="resetCode" Type="varchar" MaxLength="50" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
+        <EntityType Name="SiteUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserRole" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PasswordResetCode" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UrlLoggins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Create_Date" Type="datetime" />
+          <Property Name="Link_Status" Type="bit" />
+          <Property Name="Reset_Url_Path" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Patient__UserId__6383C8BA">
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_TOSiteUser">
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserId_to_Id">
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="D_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserIDToIdOfSiteUser">
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
+          <End Role="UrlLoggins" Type="Self.UrlLoggins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UrlLoggins">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="E_HealthCareModelStoreContainer">
-          <EntitySet Name="LoginDetail" EntityType="Self.LoginDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteUser" EntityType="Self.SiteUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlLoggins" EntityType="Self.UrlLoggins" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Patient__UserId__6383C8BA" Association="Self.FK__Patient__UserId__6383C8BA">
+            <End Role="SiteUser" EntitySet="SiteUser" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_TOSiteUser" Association="Self.Fk_TOSiteUser">
+            <End Role="SiteUser" EntitySet="SiteUser" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserId_to_Id" Association="Self.FK_UserId_to_Id">
+            <End Role="SiteUser" EntitySet="SiteUser" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserIDToIdOfSiteUser" Association="Self.FK_UserIDToIdOfSiteUser">
+            <End Role="SiteUser" EntitySet="SiteUser" />
+            <End Role="UrlLoggins" EntitySet="UrlLoggins" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="E_HealthCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="LoginDetail">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="passwordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Patient">
           <Key>
             <PropertyRef Name="p_id" />
           </Key>
           <Property Name="p_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="p_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="p_gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="p_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="p_gender" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="p_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="p_dateOfBirth" Type="DateTime" Precision="0" />
           <Property Name="p_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="p_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="p_BloodGroup" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="resetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK__Patient__UserId__6383C8BA" FromRole="Patient" ToRole="SiteUser" />
         </EntityType>
         <EntityContainer Name="E_HealthCareEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LoginDetails" EntityType="Self.LoginDetail" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="SiteUsers" EntityType="E_HealthCareModel.SiteUser" />
+          <AssociationSet Name="FK__Patient__UserId__6383C8BA" Association="E_HealthCareModel.FK__Patient__UserId__6383C8BA">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <EntitySet Name="Doctors" EntityType="E_HealthCareModel.Doctor" />
+          <AssociationSet Name="FK_UserId_to_Id" Association="E_HealthCareModel.FK_UserId_to_Id">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <EntitySet Name="UrlLoggins" EntityType="E_HealthCareModel.UrlLoggin" />
+          <AssociationSet Name="FK_SiteUser_UserId" Association="E_HealthCareModel.FK_SiteUser_UserId">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="UrlLoggin" EntitySet="UrlLoggins" />
+          </AssociationSet>
+          <EntitySet Name="Admins" EntityType="E_HealthCareModel.Admin" />
+          <AssociationSet Name="Fk_TOSiteUser" Association="E_HealthCareModel.Fk_TOSiteUser">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="SiteUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserRole" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Patients" Relationship="E_HealthCareModel.FK__Patient__UserId__6383C8BA" FromRole="SiteUser" ToRole="Patient" />
+          <Property Name="PasswordResetCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Doctors" Relationship="E_HealthCareModel.FK_UserId_to_Id" FromRole="SiteUser" ToRole="Doctor" />
+          <NavigationProperty Name="UrlLoggins" Relationship="E_HealthCareModel.FK_SiteUser_UserId" FromRole="SiteUser" ToRole="UrlLoggin" />
+          <NavigationProperty Name="Admins" Relationship="E_HealthCareModel.Fk_TOSiteUser" FromRole="SiteUser" ToRole="Admin" />
+        </EntityType>
+        <Association Name="FK__Patient__UserId__6383C8BA">
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
+          <End Type="E_HealthCareModel.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="D_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="D_UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="D_UserId" Type="Int32" />
+          <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK_UserId_to_Id" FromRole="Doctor" ToRole="SiteUser" />
+        </EntityType>
+        <Association Name="FK_UserId_to_Id">
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
+          <End Type="E_HealthCareModel.Doctor" Role="Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="D_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UrlLoggin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Create_Date" Type="DateTime" Precision="3" />
+          <Property Name="Link_Status" Type="Boolean" />
+          <Property Name="Reset_Url_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK_SiteUser_UserId" FromRole="UrlLoggin" ToRole="SiteUser" />
+        </EntityType>
+        <Association Name="FK_SiteUser_UserId">
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
+          <End Type="E_HealthCareModel.UrlLoggin" Role="UrlLoggin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UrlLoggin">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.Fk_TOSiteUser" FromRole="Admin" ToRole="SiteUser" />
+        </EntityType>
+        <Association Name="Fk_TOSiteUser">
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
+          <End Type="E_HealthCareModel.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="E_HealthCareModelStoreContainer" CdmEntityContainer="E_HealthCareEntities">
-          <EntitySetMapping Name="LoginDetails">
-            <EntityTypeMapping TypeName="E_HealthCareModel.LoginDetail">
-              <MappingFragment StoreEntitySet="LoginDetail">
-                <ScalarProperty Name="passwordHash" ColumnName="passwordHash" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="E_HealthCareModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="resetCode" ColumnName="resetCode" />
                 <ScalarProperty Name="p_BloodGroup" ColumnName="p_BloodGroup" />
@@ -94,7 +300,54 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="SiteUsers">
+            <EntityTypeMapping TypeName="E_HealthCareModel.SiteUser">
+              <MappingFragment StoreEntitySet="SiteUser">
+                <ScalarProperty Name="PasswordResetCode" ColumnName="PasswordResetCode" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="E_HealthCareModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="D_UserId" ColumnName="D_UserId" />
+                <ScalarProperty Name="D_UserName" ColumnName="D_UserName" />
+                <ScalarProperty Name="D_DateOfBirth" ColumnName="D_DateOfBirth" />
+                <ScalarProperty Name="D_Email" ColumnName="D_Email" />
+                <ScalarProperty Name="D_Name" ColumnName="D_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrlLoggins">
+            <EntityTypeMapping TypeName="E_HealthCareModel.UrlLoggin">
+              <MappingFragment StoreEntitySet="UrlLoggins">
+                <ScalarProperty Name="Reset_Url_Path" ColumnName="Reset_Url_Path" />
+                <ScalarProperty Name="Link_Status" ColumnName="Link_Status" />
+                <ScalarProperty Name="Create_Date" ColumnName="Create_Date" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="E_HealthCareModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -36,50 +36,80 @@ namespace E_HealthCare_Web.Controllers
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [ActionName("SignUp")]
+        [Authorize]
         public ActionResult SignUpPost(UserSignUpViewModel userSignUPViewModels)
         {
             if (ModelState.IsValid) //checking if user has given correct values to their respective fields
             {
-                if (userSignUPViewModels.Gender == "Male")
-                {
-                    userSignUPViewModels.Gender = "M";
-                }
-                else if (userSignUPViewModels.Gender == "Female")
-                {
-                    userSignUPViewModels.Gender = "F";
-                }
-                else if (userSignUPViewModels.Gender == "Others")
-                {
-                    userSignUPViewModels.Gender = "O";
-                }
                 var HashedPassword = PasswordHashManager.CreateHash(userSignUPViewModels.Password); //creating hash password of password provided by user
 
                 //creating database context using entity framework
                 using (var databseContext = new E_HealthCareEntities()) // E_HealthCareEntities is DBContext for the connected database which is connected through Entity framework
                 {
-                    Patient patient = new Patient();
-                    LoginDetail loginDetail = new LoginDetail();
+                    if (userSignUPViewModels.UserRole == "Patient")
+                    {
 
-                    patient.p_name = userSignUPViewModels.PatientName;
-                    patient.p_gender = userSignUPViewModels.Gender;
-                    patient.p_address = userSignUPViewModels.Address;
-                    patient.p_dateOfBirth = userSignUPViewModels.DateOfBirth;
-                    patient.p_Email = userSignUPViewModels.Email;
-                    patient.UserName = userSignUPViewModels.UserName;
-                    loginDetail.UserName = userSignUPViewModels.UserName;                    
-                    loginDetail.passwordHash = HashedPassword;
+                        Patient patient = new Patient();
+                        SiteUser siteUser = new SiteUser();
 
-                    databseContext.Patients.Add(patient);
-                    databseContext.LoginDetails.Add(loginDetail);
+                        siteUser.Email = userSignUPViewModels.Email;
+                        siteUser.UserName = userSignUPViewModels.UserName;
+                        siteUser.PasswordHash = HashedPassword;
+                        siteUser.UserRole = "Patient";
+                        patient.p_Email = userSignUPViewModels.Email;
+                        patient.UserName = userSignUPViewModels.UserName;
+                        patient.SiteUser = siteUser;
 
-                    databseContext.SaveChanges();
-                    return RedirectToAction("Login");
+                        siteUser.Patients.Add(patient);//for better understanding visit https://docs.microsoft.com/en-us/ef/ef6/fundamentals/relationships  
+                        databseContext.SiteUsers.Add(siteUser);
+                        //databseContext.Patients.Add(patient);
+                        databseContext.SaveChanges();
+
+                        return RedirectToAction("Login");
+                    }
+                    else if (userSignUPViewModels.UserRole == "Doctor")
+                    {
+                        Doctor doctor = new Doctor();
+                        SiteUser siteUser = new SiteUser();
+
+                        siteUser.Email = userSignUPViewModels.Email;
+                        siteUser.UserName = userSignUPViewModels.UserName;
+                        siteUser.PasswordHash = HashedPassword;
+                        siteUser.UserRole = "Doctor";
+                        doctor.D_Email = userSignUPViewModels.Email;
+                        doctor.D_UserName = userSignUPViewModels.UserName;
+                        doctor.SiteUser = siteUser;
+
+                        databseContext.SiteUsers.Add(siteUser);
+                        databseContext.Doctors.Add(doctor);
+                        databseContext.SaveChanges();
+
+                        return RedirectToAction("Login");
+
+                    }
+                    else if (userSignUPViewModels.UserRole == "Admin")
+                    {
+                        Admin admin = new Admin();
+                        SiteUser siteUser = new SiteUser();
+
+                        siteUser.Email = userSignUPViewModels.Email;
+                        siteUser.UserName = userSignUPViewModels.UserName;
+                        siteUser.PasswordHash = HashedPassword;
+                        siteUser.UserRole = "Doctor";
+                        admin.Email = userSignUPViewModels.Email;
+                        admin.UserName = userSignUPViewModels.UserName;
+                        admin.SiteUser = siteUser;
+
+                        databseContext.SiteUsers.Add(siteUser);
+                        databseContext.Admins.Add(admin);
+                        databseContext.SaveChanges();
+
+                        return RedirectToAction("Login");
+
+                    }
+
+                    return View("SignUp", userSignUPViewModels);
                 }
-                //ModelState.Clear();
-                //ViewBag.Message = "Signed Up Successfully!!";
-                //TempData["Success_Message"] = "Registered Successfully!!";
-                //RedirectToAction("SignUp");
-
             }
             else
             {
@@ -103,13 +133,31 @@ namespace E_HealthCare_Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var context = new E_HealthCareEntities();
                 var isvalidUser = IsValidUser(userLoginViewModel);
+
 
                 //if user is valid and present in database, redirect to Main page after login 
                 if (isvalidUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                    return RedirectToAction("Index", "Home");
+                    var getRole = context.SiteUsers.Where(q => q.UserName == userLoginViewModel.UserName).FirstOrDefault().UserRole;
+                    if (getRole == "Patient")
+                    {
+                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
+                        return RedirectToAction("Index", "Patient");
+                    }
+                    else if (getRole == "Doctor")
+                    {
+                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
+                        return RedirectToAction("Index", "Doctor");
+                    }
+                    else if (getRole == "Admin")
+                    {
+                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    return View(userLoginViewModel);
+
                 }
                 else
                 {
@@ -122,6 +170,8 @@ namespace E_HealthCare_Web.Controllers
                 return View(userLoginViewModel);
             }
         }
+
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -142,31 +192,41 @@ namespace E_HealthCare_Web.Controllers
                 var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, varifyUrl);
                 using (var context = new E_HealthCareEntities())
                 {
-                    var getUser = (from s in context.Patients
-                                   where s.p_Email == model.EmailAddress
+                    var getUser = (from s in context.SiteUsers
+                                   where s.Email == model.EmailAddress
                                    select s).FirstOrDefault();
+                    //var getUsers = context.Patients.Where(p => p.p_Email == model.EmailAddress).FirstOrDefault();
 
-                    if(getUser != null)
+                    if (getUser != null)
                     {
-                        getUser.resetCode = resetCode;
+                        getUser.PasswordResetCode = resetCode;
+
                         //context.Configuration.ValidateOnSaveEnabled = false; // This line I have added here to avoid confirm password not match issue, as we had added a confirm password property
                         context.SaveChanges();
 
                         var subject = "Password Reset Request";
-                        var body = "Hi"+getUser.p_name+", <br/> You recently requested a password reset link to reset the " +
-                            "password of your account. click the link below to reset your password."+
+                        var body = "Hi " + getUser.UserName + ", <br/> You recently requested a password reset link to reset the " +
+                            "password of your account. click the link below to reset your password." +
 
                             "<br/> <br/> <a href = '" + link + "'>Reset link</a> <br/><br/>" +
                             "if you did requested a password reset, please ignore this message or reply us to let us know. <br/><br/> Thank you.";
 
-                        SendEmail(getUser.p_Email, body, subject);
+                        SendEmail(getUser.Email, body, subject);
+
+                        UrlLoggin urlLoggin = new UrlLoggin();//adding url data to table to check if url is expired or not
+                        urlLoggin.User_Id = getUser.Id;
+                        urlLoggin.Create_Date = DateTime.Now;
+                        urlLoggin.Link_Status = true;
+                        urlLoggin.Reset_Url_Path = resetCode;
+                        context.UrlLoggins.Add(urlLoggin);
+                        context.SaveChanges();
                         return RedirectToAction("ForgotPasswordConfirmation");
                     }
                     else
-                    {   
+                    {
                         return RedirectToAction("ForgotPasswordConfirmation");
                     }
-                }                
+                }
             }
             else
             {
@@ -174,15 +234,20 @@ namespace E_HealthCare_Web.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult ExpiredLink()
+        {
+            return View();
+        }
 
         private void SendEmail(string emailAddress, string body, string subject)
         {
-            using(MailMessage mm = new MailMessage("salmanchannel212@gmail.com", emailAddress))
+            using (MailMessage mm = new MailMessage("salmanchannel212@gmail.com", emailAddress))
             {
                 mm.Subject = subject;
                 mm.Body = body;
                 mm.IsBodyHtml = true;
-                
+
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
@@ -213,20 +278,36 @@ namespace E_HealthCare_Web.Controllers
                 return HttpNotFound();
             }
 
-            using (var context = new E_HealthCareEntities())
+            var context = new E_HealthCareEntities();
+            var getUrlDetail = context.UrlLoggins.Where(q => q.Reset_Url_Path == id).FirstOrDefault();
+            if (!(getUrlDetail == null))
             {
-                var getUserBasedOnResetCode = context.Patients.Where(query => query.resetCode == id).FirstOrDefault();
-                if(getUserBasedOnResetCode != null)
+                var dateDifference = DateTime.Now.Subtract(getUrlDetail.Create_Date.Value);
+                if (dateDifference.Days < 1)
                 {
-                    ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
-                    resetPasswordViewModel.ResetPasswordCode = id;
-                    return View(resetPasswordViewModel);
+                    using (context)
+                    {
+                        var getUserBasedOnResetCode = context.SiteUsers.Where(query => query.PasswordResetCode == id).FirstOrDefault();
+                        if (getUserBasedOnResetCode != null)
+                        {
+                            ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel();
+                            resetPasswordViewModel.ResetPasswordCode = id;
+                            return View(resetPasswordViewModel);
+                        }
+                        else
+                        {
+                            return HttpNotFound();
+                        }
+                    }
                 }
                 else
                 {
-                    return HttpNotFound();
-                }
-            }            
+                    getUrlDetail.Link_Status = false;
+                    context.SaveChanges();
+                    return RedirectToAction("ExpiredLink");
+                }                
+            }
+            return RedirectToAction("ExpiredLink");
         }
 
         [HttpPost]
@@ -236,28 +317,27 @@ namespace E_HealthCare_Web.Controllers
         {
             var message = "";
             if (ModelState.IsValid)
-            {               
-                using(var context = new E_HealthCareEntities())
+            {
+                using (var context = new E_HealthCareEntities())
                 {
-                    var getUser = context.Patients.Where(q => q.resetCode == model.ResetPasswordCode).FirstOrDefault();
-                    var getUserName = getUser.UserName;                   
-                    var getLoginUser = context.LoginDetails.Where(q => q.UserName == getUserName).FirstOrDefault();
+                    var getUser = context.SiteUsers.Where(q => q.PasswordResetCode == model.ResetPasswordCode).FirstOrDefault();
+                    var getUserName = getUser.UserName;
+                    var getLoginUser = context.SiteUsers.Where(q => q.UserName == getUserName).FirstOrDefault();
 
-                    if(getUser != null)
+                    if (getUser != null)
                     {
-                        getLoginUser.passwordHash = PasswordHashManager.CreateHash(model.NewPassword); //added hashed new password
-                        getUser.resetCode = ""; //reseting reset code to empty string
+                        getLoginUser.PasswordHash = PasswordHashManager.CreateHash(model.NewPassword); //added hashed new password
+                        getUser.PasswordResetCode = ""; //reseting reset code to empty string
                         context.Configuration.ValidateOnSaveEnabled = false; //to avoid validation issue
                         context.SaveChanges();
                         message = "Password Successfully Changed!";
                         return RedirectToAction("Login");
                     }
-
                 }
             }
             else
             {
-                message = "Something is invalid";                
+                message = "Something is invalid";
             }
             TempData["message"] = message;
             return View(model);
@@ -265,17 +345,21 @@ namespace E_HealthCare_Web.Controllers
 
 
         //function to check if User is valid or not
-        public LoginDetail IsValidUser(UserLoginViewModel model)
+        public SiteUser IsValidUser(UserLoginViewModel model)
         {
             using (var dataContext = new E_HealthCareEntities())
             {
 
                 //retreives User object from database by using userName entered in login form 
-                var getUserObject = (from LoginUser in dataContext.LoginDetails
+                var getUserObject = (from LoginUser in dataContext.SiteUsers
                                      where LoginUser.UserName.Equals(model.UserName)
                                      select LoginUser).SingleOrDefault();
+                if (getUserObject == null)
+                {
+                    return null;
+                }
 
-                var correctPassword = getUserObject.passwordHash;
+                var correctPassword = getUserObject.PasswordHash;
                 bool compared = false;
 
                 if (correctPassword.Length > 15)
@@ -285,7 +369,7 @@ namespace E_HealthCare_Web.Controllers
                 }
 
                 //Retireving the user details from DB based on username and password enetered by user.
-                LoginDetail user = dataContext.LoginDetails.Where(query => query.UserName.Equals(model.UserName) && (compared || query.passwordHash.Equals(model.Password))).SingleOrDefault();
+                SiteUser user = dataContext.SiteUsers.Where(query => query.UserName.Equals(model.UserName) && (compared || query.PasswordHash.Equals(model.Password))).SingleOrDefault();
 
                 //If user is present, then true is returned.
                 if (user == null)
@@ -297,17 +381,17 @@ namespace E_HealthCare_Web.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult IsEmailAlreadyExist(string Email)
+        public JsonResult IsEmailAlreadyExist(string email)
         {
-            Patient patient = new Patient();
+            SiteUser user = new SiteUser();
 
             using (var context = new E_HealthCareEntities())
             {
-                patient = context.Patients.Where(query => query.p_Email.ToLower() == Email.ToLower()).FirstOrDefault();
+                user = context.SiteUsers.Where(query => query.Email.ToLower() == email.ToLower()).FirstOrDefault();
             }
             bool status;
 
-            if (patient != null)
+            if (user != null)
             {
                 status = false;
             }
@@ -321,11 +405,11 @@ namespace E_HealthCare_Web.Controllers
         [AllowAnonymous]
         public JsonResult IsUserNameAlreadyExist(string UserName)
         {
-            LoginDetail loginDetail = new LoginDetail();
+            SiteUser loginDetail = new SiteUser();
 
             using (var context = new E_HealthCareEntities())
             {
-                loginDetail = context.LoginDetails.Where(query => query.UserName.ToLower() == UserName.ToLower()).FirstOrDefault();
+                loginDetail = context.SiteUsers.Where(query => query.UserName.ToLower() == UserName.ToLower()).FirstOrDefault();
             }
             bool status;
 
@@ -347,7 +431,7 @@ namespace E_HealthCare_Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [AllowAnonymous]
         public ActionResult DeleteAccount()
         {
             return View();

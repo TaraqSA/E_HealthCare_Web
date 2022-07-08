@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - E-Healthcare </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -22,28 +22,7 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                   
-                    <li>
-                        <div class="dropdown">
-                            <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
-                                Services
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Blood bank</a></li>
-                                <li><a href="#">Physiotherapy</a></li>
-                                <li><a href="#">Kidney Care</a></li>
-                                <li><a href="#">Neurology</a></li>
-                                <li><a href="#">General Surgery</a></li>
-                                <li><a href="#">Endocrinology</a></li>
-                                <li><a href="#">Pathology</a></li>
-                                <li><a href="#">CT Scan & MRI</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Others</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>                  
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -62,7 +41,6 @@
                                     @User.Identity.Name
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li role="separator" class="divider"></li>
                                     <li><a href="@Url.Action("Logout","Account")"><Span class="glyphicon glyphicon-log-out"></Span> Logout </a></li>
                                 </ul>
                             </div>
@@ -87,7 +65,7 @@
 
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")    
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

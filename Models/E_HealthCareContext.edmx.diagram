@@ -4,10 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="493e2bfa130143fda2ae49986589a8a2" Name="Diagram1">
-        <EntityTypeShape EntityType="E_HealthCareModel.LoginDetail" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_HealthCareModel.Patient" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-      </Diagram>
+      <Diagram DiagramId="493e2bfa130143fda2ae49986589a8a2" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="E_HealthCareModel.Patient" Width="1.5" PointX="4.875" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_HealthCareModel.SiteUser" Width="1.75" PointX="1.75" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="E_HealthCareModel.FK__Patient__UserId__6383C8BA" />
+        <EntityTypeShape EntityType="E_HealthCareModel.Doctor" Width="1.5" PointX="4.25" PointY="0.75" />
+        <AssociationConnector Association="E_HealthCareModel.FK_UserId_to_Id" />
+        <EntityTypeShape EntityType="E_HealthCareModel.UrlLoggin" Width="1.5" PointX="4.25" PointY="8.75" />
+        <AssociationConnector Association="E_HealthCareModel.FK_SiteUser_UserId" />
+        <EntityTypeShape EntityType="E_HealthCareModel.Admin" Width="1.5" PointX="4.25" PointY="11.875" />
+        <AssociationConnector Association="E_HealthCareModel.Fk_TOSiteUser" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

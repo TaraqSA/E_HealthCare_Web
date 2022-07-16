@@ -192,9 +192,39 @@
                 font-size: 30px;
             }
 
-            .quick-links ul li{
-                list-style:none;
+        .quick-links {
+            padding:10px 0px 10px 20px;
+            line-height: 2;
+            font-family: initial;
+        }
+        .quick-link-text a {
+            font-weight: 500;            
+            display: flex;
+            align-items:flex-start;
+            padding:15px 0px 5px  15px;
+        }
+
+            .quick-link-text a:hover {
+                text-decoration: none;
+                font-weight: 800;
             }
+
+        
+        .glyphicon-plus-sign{
+            font-size:30px;
+        }
+
+        .glyphicon-calendar{
+            font-size:30px;
+        }
+
+        .text-position {
+            display: inline-block;
+            font-size: 18px;
+            padding: 0px 0px 0px 5px;
+            margin: 0px 0px -15px 0px;
+        }
+
     </style>
 }
 
@@ -244,6 +274,7 @@
 </div>
 
 <div class="description-section col-lg-12 col-md-12">
+
     <div class="inner-description col-lg-8 col-md-8">
         <div>
             @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Blood Bank", "BloodBank")
@@ -532,22 +563,19 @@
                 </div>
             </div>
         </section>
+
     </div>
+
     <div class="quick-links col-lg-4 col-md-4">
         <h3>
             Quick Links
         </h3>
-        <div>
-            <ul>
-                <li>
-                      @Html.ActionLink(" Find a Doctor","DoctorList",null,new {@class="glyphicon glyphicon-plus-sign" })
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    @Html.ActionLink(" Book an Appointment", "BookAppointment", null, new { @class = "glyphicon glyphicon-calendar" })
-                </li>
-            </ul>
+        <div class="quick-link-text">
+            <a href="#"><span  class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+        </div>  
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+            
         </div>
     </div>
 </div>

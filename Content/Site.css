@@ -2,7 +2,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #dfece2;
+    background-color: #dfece2;   
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -110,12 +110,12 @@ ul.dropdown-menu > li > a:hover{
     background-color: #8080ff;
 }
 
-hr {
+.custom-hr {
     height: 1px;
     background-color: #000099;
-    border:none;
-    margin-left : -15px;
-    margin-right : -15px;
+    border: none;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 /* to change color of textbox's border to #CD0A0A99 after validation error */

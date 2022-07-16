@@ -14,5 +14,29 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
+        public ActionResult AdminProfile()
+        {
+            return View();
+        }
+        public ActionResult MakeAdmin()
+        {
+            return View();
+        }
+        public ActionResult DoctorList()
+        {
+            return View();
+        }
+        public ActionResult PatientList()
+        {
+            return View();
+        }
+        public ActionResult Ambulance()
+        {
+            return View();
+        }
+        public ActionResult Perscription()
+        {
+            return View();
+        }
     }
 }

@@ -23,7 +23,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                   
+
                     <li>
                         <div class="dropdown">
                             <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
@@ -31,16 +31,16 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Blood bank</a></li>
-                                <li><a href="#">Physiotherapy</a></li>
-                                <li><a href="#">Kidney Care</a></li>
-                                <li><a href="#">Neurology</a></li>
-                                <li><a href="#">General Surgery</a></li>
-                                <li><a href="#">Endocrinology</a></li>
-                                <li><a href="#">Pathology</a></li>
-                                <li><a href="#">CT Scan & MRI</a></li>
+                                <li><a href="@Url.Action("BloodBank","Home")">Blood bank</a></li>
+                                <li><a href="@Url.Action("Physiotherapy","Home")">Physiotherapy</a></li>
+                                <li><a href="@Url.Action("KidneyCare","Home")">Kidney Care</a></li>
+                                <li><a href="@Url.Action("Neurology","Home")">Neurology</a></li>
+                                <li><a href="@Url.Action("GeneralSurgery","Home")">General Surgery</a></li>
+                                <li><a href="@Url.Action("Endocrinology","Home")">Endocrinology</a></li>
+                                <li><a href="@Url.Action("Pathology","Home")">Pathology</a></li>
+                                <li><a href="@Url.Action("CTScanMri","Home")">CT Scan & MRI</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Others</a></li>
+                                <li><a href="@Url.Action("Others","Home")">Others</a></li>
                             </ul>
                         </div>
                     </li>
@@ -78,8 +78,9 @@
 
     </div>
     <div class="container-fluid body-content">
-        @RenderBody()
-        <hr />
+        
+        @RenderBody()       
+        <hr class="custom-hr" />
         <footer>
             <p>&copy; @DateTime.Now.Year - E-Healthcare</p>
         </footer>

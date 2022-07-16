@@ -87,27 +87,6 @@ namespace E_HealthCare_Web.Controllers
                         return RedirectToAction("Login");
 
                     }
-                    else if (userSignUPViewModels.UserRole == "Admin")
-                    {
-                        Admin admin = new Admin();
-                        SiteUser siteUser = new SiteUser();
-
-                        siteUser.Email = userSignUPViewModels.Email;
-                        siteUser.UserName = userSignUPViewModels.UserName;
-                        siteUser.PasswordHash = HashedPassword;
-                        siteUser.UserRole = "Doctor";
-                        admin.Email = userSignUPViewModels.Email;
-                        admin.UserName = userSignUPViewModels.UserName;
-                        admin.SiteUser = siteUser;
-
-                        databseContext.SiteUsers.Add(siteUser);
-                        databseContext.Admins.Add(admin);
-                        databseContext.SaveChanges();
-
-                        return RedirectToAction("Login");
-
-                    }
-
                     return View("SignUp", userSignUPViewModels);
                 }
             }
@@ -337,7 +316,7 @@ namespace E_HealthCare_Web.Controllers
             }
             else
             {
-                message = "Something is invalid";
+                message = "Something went wrong";
             }
             TempData["message"] = message;
             return View(model);
@@ -436,11 +415,5 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
-
-
-
-
-
-
     }
 }

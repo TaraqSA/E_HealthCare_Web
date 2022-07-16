@@ -210,22 +210,22 @@ namespace E_HealthCare_Web.Models
 
         private const string Hashkey = "Secret";
 
-        public static string GetToken(LinkExpire model)
+        public static string GetToken(DateTime dt, string tokentk)
         {
-            if(model == null)
+            if(dt == null && tokentk == null)
             {
                 throw new ArgumentNullException("model");
             }
-            return CryptoHelperMethods.HashSha256(String.Format("{0}_{1}", Hashkey, model.ExpiresOn.Ticks));
+            return CryptoHelperMethods.HashSha256(String.Format("{0}_{1}", Hashkey, dt.Ticks));
         }
 
-        public static bool IsValidToken(LinkExpire model)
+        public static bool IsValidToken(DateTime dt,string tokentk)
         {
-            if(model == null)
+            if(dt == null && tokentk == null)
             {
                 throw new ArgumentNullException("model");
             }
-            return model.CreateToken == GetToken(model);
+            return tokentk == GetToken(dt,tokentk);
         }
     }
 }

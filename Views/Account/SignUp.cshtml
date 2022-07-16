@@ -67,8 +67,7 @@
             @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" style="padding-top:4px;">
                 <span>@Html.RadioButtonFor(model => model.UserRole, "Patient")&nbsp;Patient</span>&nbsp; &nbsp; &nbsp;
-                <span>@Html.RadioButtonFor(model => model.UserRole, "Doctor")&nbsp;Doctor</span>
-                <span>@Html.RadioButtonFor(model => model.UserRole, "Admin")&nbsp;Admin</span>
+                <span>@Html.RadioButtonFor(model => model.UserRole, "Doctor")&nbsp;Doctor</span>                
 
                 @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger", style = "display:inline;" })
             </div>

@@ -1,0 +1,558 @@
+﻿@model E_HealthCare_Web.ViewModels.AskQuestionViewModel
+
+@{
+    ViewBag.Title = "BloodBank";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .header-section {
+            padding: 10px 0 10px 0px;
+        }
+
+        .description-section {
+            padding: 10px 5px 10px 10px
+        }
+
+        .inner-description {
+            padding: 10px 100px 10px 100px;
+            border-right: 1px solid #ccc;
+        }
+
+        .column1 {
+            height: 500px;
+            display: flex;
+            align-items: center; /*center div vertically*/
+            justify-content: flex-start; /*position div horizontally*/
+            background-image: url('../Images/Hospital-theme-background.jpg');
+            background-size: cover;
+            background-color: #dfece2;
+            background-position: center;
+            background-blend-mode: lighten;
+            margin-left: -15px;
+        }
+
+        .inner-content1 {
+            display: flex;
+            justify-content: flex-start;
+            flex: 1;
+            padding-left: 5em;
+        }
+
+        .column2 {
+            position: relative;
+            height: 500px;
+            padding: 0px 5px 5px 30px;
+        }
+
+            .column2::before {
+                content: '';
+                bottom: 0;
+                left: 6%;
+                position: absolute;
+                border-bottom: 1px solid #ccc;
+                width: 74%;
+            }
+
+
+        .logo-style {
+            height: auto;
+        }
+
+        .logo-description {
+            padding-top: 20px;
+            margin-left: -20px;
+        }
+
+            .logo-description > h1 {
+                font-size: calc(3em + 1vw);
+                font-family: 'Arial Rounded MT';
+            }
+
+            .logo-description > p {
+                font-size: calc(0.75em + 1vw);
+                font-family: 'Arial Rounded MT';
+                color: grey;
+                margin-left: 5px;
+            }
+
+        .input-editor {
+            max-width: 80%;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 10px;
+            background-color: rgba(0,255,153,0.05);
+        }
+
+        .input-button {
+            min-width: 80%;
+            height: 50px;
+            font-size: x-large;
+            border-radius: 5px;
+            border: none;
+            background-color: #00ff99;
+            color: white;
+            text-align: center;
+        }
+
+            .input-button:hover {
+                background-color: #00cc7a;
+            }
+
+        .text-danger {
+            font-family: 'Arial Rounded MT';
+        }
+
+        .checkbox-custom-style {
+            pointer-events: none;
+        }
+
+        .span-text {
+            font-family: 'Arial Rounded MT';
+            color: grey;
+        }
+
+        .div-width {
+            max-width: 80%;
+            display: block;
+        }
+
+        .blood-description {
+            font-family: 'Arial Rounded MT';
+        }
+
+            .blood-description p {
+                color: gray;
+            }
+
+                .blood-description p b {
+                    color: initial;
+                }
+
+        .blood-description-FAQ {
+            width: 100%;
+            margin: 90px auto;
+        }
+
+            .blood-description-FAQ .custom-accordion {
+                position: relative;
+                margin: 10px 10px;
+            }
+
+            .blood-description-FAQ .accordio-label {
+                position: relative;
+                padding: 2px 0;
+                color: #00acee;
+                cursor: pointer;
+                border-top: 1px solid gray;
+                border-bottom: 1px solid gray;
+                background-color: rgba(211,211,211,0.2)
+            }
+
+                .blood-description-FAQ .accordio-label::before {
+                    content: '+';
+                    color: gray;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+            .blood-description-FAQ .accordion-content {
+                position: relative;
+                background: rgba(0,255,153,0.03);
+                max-height: 0px;
+                font-size: 16px;
+                text-align: justify;
+                width: 100%;
+                font-family: 'Arial Rounded MT';
+                color: gray;
+                overflow: hidden;
+                transition: max-height 1s ease-in-out;
+                -webkit-transition: max-height 1s ease-in-out;
+            }
+
+                .blood-description-FAQ .accordion-content p {
+                    padding: 14px 17px 5px 7px;
+                }
+
+
+
+            .blood-description-FAQ .custom-accordion.active .accordion-content { /* Unhides the content part when active. Sets the height */
+                max-height: 230px;
+            }
+
+            .blood-description-FAQ .custom-accordion.active .accordio-label::before { /* Changes from plus sign to negative sign once active */
+                content: '-';
+                font-size: 30px;
+            }
+
+            .quick-links ul li{
+                list-style:none;
+            }
+    </style>
+}
+
+<div class="header-section col-lg-12 col-md-12">
+    <div class="column1 col-lg-8 col-md-8">
+        <div class="inner-content1">
+            <div class="logo-style">
+                <img src="~/Images/logo/blood-type (256).png" />
+            </div>
+            <div class="logo-description">
+                <h1>Blood Bank</h1>
+                <p>Donate Blood. Save Life.</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="column2 col-lg-4 col-md-4">
+        <h1>Have a Questions ?</h1>
+        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            <div>
+                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+            </div><br />
+            <div class="div-width">
+                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                <span class="span-text">
+                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                </span>
+
+            </div><br />
+            <div>
+                <input type="submit" value="Submit" class="input-button check" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="description-section col-lg-12 col-md-12">
+    <div class="inner-description col-lg-8 col-md-8">
+        <div>
+            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Blood Bank", "BloodBank")
+        </div>
+        <section class="blood-description">
+            <h1>Blood Bank Services in India</h1>
+            <p>
+                Blood drives life, it’s constantly circulating within the human body ensuring that all essential substances like nutrition,
+                oxygen reach all different parts of our body and the cells. An average person carries nearly 5 liters of blood,
+                it circulates the body through blood vessels and is pumped through the heart.
+            </p>
+            <p>
+                It can never be substituted, regenerated, or manufactured itself.
+                The only source of blood for patients who need blood transfusion are blood donors.
+                In general, blood is a combination of plasma and cells wherein plasma makes up nearly 55 percent of the blood count.
+                The rest 45 percent is a mix of red/white blood cells and platelets.
+            </p>
+
+            <h3>Basic Components of Blood</h3>
+            <p>
+                In general, blood is a combination of plasma and cells wherein plasma makes up nearly 55 percent of the blood count.
+                The rest 45 percent is a mix of red/white blood cells and platelets. All these components play a vital role in the functioning of blood.
+            </p>
+            <p>
+                Let’s understand the usability of each component separately:
+            </p>
+            <ul><li><b>Plasma</b></li></ul>
+            <p>
+                Out of the entire proportion, nearly 55 percent is plasma.
+                In general, plasma is 92 percent water, while the rest 8 percent is a mix of carbon dioxide,
+                glucose, hormones, proteins, vitamins, and more.
+            </p>
+            <ul><li><b>Red Blood Cells (Erythrocytes)</b></li></ul>
+            <p>
+                They are the most abundant cell type in the blood and are primarily responsible for carrying
+                oxygen to the blood cells and delivering carbon dioxide to the lungs.
+                RBCs are also helpful in determining your blood type. Red blood cells have certain identifiers on
+                their surface called antigens whose presence or absence helps your body’s immune system to recognize its red blood cell type.
+            </p>
+            <ul><li><b>White Blood Cells (Leukocytes)</b></li></ul>
+            <p>
+                They are less than 1 percent of the entire blood content and form a vital defense mechanism against all sorts of
+                illnesses and infections by destroying infectious agents and cancer cells, or producing antibodies.
+                Your WBC count increases during physical exertion, while it minimizes during rest, anemic conditions, or malnutrition.
+                Both the deprivation or higher count of WBCs in the body can indicate diseases.
+            </p>
+            <ul><li><b>Platelets (Thrombocytes)</b></li></ul>
+            <p>
+                They are blood cells responsible for blood clotting. In case of an injury, these platelets form out a plug/clot to help you stop the bleeding.
+                The low count of platelets leads to an increase in bleeding,
+                while too much formation of platelets can lead to abnormal blood clot formation which can be life-threatening
+            </p>
+
+            <h3>
+                What is Meant by Blood Transfusion? Why are Blood Banks Important?
+            </h3>
+            <p>
+                Ideally, blood transfusion is the process of transferring blood components from one person (donor) into the bloodstream of another person (recipient).
+                It comes into play especially as a life-saving process for the recipient when there’s a considerable loss of blood cells
+                through bleeding or depression of the bone marrow. Blood transfusion is believed to be a noble cause.
+            </p>
+            <p>
+                <b>Blood bank services</b> act as the universal point as they collect, test, and store all types of blood. They carefully screen test the blood for any signs of infection.
+                Other than screening for infections, they also check the blood type if it’s type A, B, AB, or O and whether it’s Rh-negative or Rh-positive.
+            </p>
+            <p>
+                <b>Note:</b> If your blood type is “O-negative”, you’re the universal donor who can transfer your blood to nearly everyone and if your blood type is “AB-positive”,
+                you act as universal recipients. However, any mismatch between the blood types can prove fatal, so blood tests must be done, carefully
+            </p>
+
+            <h3>
+                How Is E-HealtCare the Best Blood Bank?
+            </h3>
+            <p>
+                The Blood bank at E-HealthCare is of one of the largest hospital-based blood banks and frequently conducts irradiation of blood components
+                and plateletpheresis. Our blood bank has an unparalleled track record. We make sure that the correct type of blood is provided by following strict
+                quality control measures. Before issuing to the patients, the Blood Bank conducts all the important tests pertaining to blood transfusion.
+                E-HealthCare group a blood bank hospital, frequently conducts various donation camps for people to voluntarily donate blood and encourage patients
+                and their family members to donate blood at the blood bank.
+            </p>
+            <p>
+                Once separated, one unit of blood can be transfused to different patients to cater to their individual needs.
+                A blood bank breaks down every unit of blood into components like red blood cells, plasma, cryoprecipitate AHF, and platelets.
+            </p>
+
+            <h3>
+                Tests conducted pre-transfusion
+            </h3>
+            <p>
+                To ensure effective results and avoid all complications, the blood bank ensures a set of standard tests pre-transfusion. These tests include;
+            </p>
+            <ul><li><b>ABO Typing</b></li></ul>
+            <p>
+                ABO typing is done to determine the blood type. It involves testing red blood cells for the presence of A and B antigens.
+            </p>
+            <ul><li><b>RH Typing</b></li></ul>
+            <p>
+                Rhesus typing also known as Rh typing is a test performed to assess the outer layer of your red blood cells for the presence of a specific protein, Rh factor.
+                The presence or absence of this protein makes you Rh positive or Rh negative.
+            </p>
+            <ul><li><b>Antibody screening</b></li></ul>
+            <p>
+                This test is conducted to screen for antibodies aimed against red blood cell antigens apart from the A and B antigens in an individual’s blood.
+            </p>
+            <ul><li><b>Screening for infections</b></li></ul>
+            <p>
+                Every blood bank conducts tests to check for current or past infections. The infections can include;
+            </p>
+            <ul>
+                <li><b>Hepatitis viruses B and C</b></li>
+                <li><b>Syphilis</b></li>
+                <li><b>Malarial Parasite</b></li>
+                <li><b>Human immunodeficiency virus (HIV)</b></li>
+            </ul>
+
+            <h3>When is blood transfusion needed?</h3>
+            <p>
+                Individuals may need a blood transfusion for different reasons. Some of them include;
+            </p>
+            <p>- To replace lost blood after a serious injury or surgery</p>
+            <p>- Digestive tract bleeding</p>
+            <p>- Leukaemia</p>
+            <p>- Lack of healthy red blood cells</p>
+            <p>- Radiation therapy, chemotherapy or other cancer treatments</p>
+            <p>- @Html.ActionLink("Liver problems", "LiverProblems")</p>
+            <p>- Blood disorders</p>
+
+            <h3>
+                Does Blood Transfusion Have Any Potential Side Effects?
+            </h3>
+            <p>
+                The entire blood transfusion process is critical and one must ensure that there’s a proper match between the blood types of the donor and the recipient.
+                Generally, there are no complications associated with a blood transfusion process, however, at times, minor to severe problems can arise after several days.
+            </p>
+            <p>
+                Some of the most common complications in the blood transfusion process in blood bank services include the following:
+            </p>
+            <ul><li><b>Allergic Reactions</b></li></ul>
+            <p>
+                Even if you’re receiving the right blood type, you might experience an allergic reaction during the blood transfusion process.
+                In such cases, the most common symptoms include hives and itching. In case, you’re experiencing any such symptoms,
+                either treat it with antihistamines (drugs which treat allergic rhinitis & other allergies) or @Html.ActionLink("consult a doctor", "ConsultDoctor") immediately to avoid serious complications.
+            </p>
+            <ul><li><b>Fever</b></li></ul>
+            <p>
+                When the blood transfusion process is complete, you might experience a little fever.
+                It’s a normal response of your body to the white blood cells that get transfused within your body.
+                However, if the conditions persist for a longer duration in combination with other signs like nausea or @Html.ActionLink("chest pain", "ChestPain"), it could be serious.
+                If you notice any such reaction, consulting your doctor is the best option.
+            </p>
+            <ul><li><b>Acute Immune Hemolytic Reaction</b></li></ul>
+            <p>
+                This is one of the most critical, and rare reactions that you might experience if your body starts attacking the transfused red blood cells.
+                In this condition, the attack on RBCs triggers the release of a substance that damages your kidneys.
+                This is more commonly seen in individuals wherein there’s a mismatch between the donor blood and the recipients’ blood type.
+                The symptoms include nausea, fever, chest or lower back pain, and dark urine.
+            </p>
+            <ul><li><b>Blood-Borne Diseases</b></li></ul>
+            <p>
+                Usually, before any blood transfusion process, the blood is always screened and tested for any potential presence of viruses, bacteria, etc.
+                However, they can still be present inside and infect the patient after the transfusion process.
+            </p>
+        </section>
+        <br />
+
+        <section class="blood-description-FAQ">
+            <h3>Blood Bank FAQs</h3>
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>How does a blood bank work?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A Blood bank is a medical facility where blood is collected from donors and it’s separated based on the type and components.
+                        It is then stored and prepared for transfusion to its recipients.The separation of blood is usually done when each
+                        donated unit of blood is separated into multiple components like red blood cells platelets and plasma.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What is a common blood bank procedure?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A common blood bank procedure done by any blood bank in India that has become increasingly common is apheresis.
+                        This is the process of extraction specific elements of the blood like platelets and returning the remaining elements (red blood cells and plasma)
+                        to the donor. This procedure allows one particular component of the blood to be collected and have it separated from a whole unit of blood.
+                        Apheresis is performed to collect plasma- the liquid part of the blood, and granulocytes- the white blood cells.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Who receives blood from blood banks?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Blood bank services will provide blood to accident victims, patients undergoing surgery,
+                        patients who are receiving treatment for leukaemia or other diseases like sickle cell disease, and thalassemia..
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>How long can a blood bank store blood?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A blood bank service can store blood for 35 or 42 days if it’s not frozen. If the blood is frozen then it can be stored for up to 10 years,
+                        but this is not a popular option because freezing the blood is a poor way of storing it.
+                        Generally, blood is kept in a refrigerator, where it’s stored for up to 35 or 42 days.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>How long is it safe to store blood in a cool box?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Blood can be stored in a cooler that is validated by a blood bank service, for up to six hours.
+                        The cooler must be returned to the blood bank once the six hours are over.
+                        The cooler will be repacked and reissued if the blood is still required.
+                        The expiration time will be marked on the outside of the cooler.
+                        If the transfusion is not initiated within the given time frame,
+                        which is completed within four hours of the time issued,
+                        then the component has to be returned to the blood bank.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Who can donate blood?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Who can donate blood?<br />
+                        Any healthy induvial male of female between age group of 18 to 60 years<br />
+                        Average body weight for blood donation should be 45 Kgs<br />
+                        Haemoglobin content should be 12.5 gm/dl<br />
+                        Men can donate the blood every 3 months<br />
+                        Women can donate the blood every 3 months
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the instructions follow after blood donation?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Have a refreshing drink<br />
+                        Do not smoke for 30 mins<br />
+                        Avoid alcohol immediately<br />
+                        Drink plenty of fluids during next 3 days<br />
+                        You may remove ban aid after 2-3 hours<br />
+                        If you feel giddiness lay down or sit down with your head between the knees<br />
+                        You may resume to work soon after donation<br />
+                        Please do not drive for half an hour after donation
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the benefits of blood donation?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Enhances the production of new blood cells<br />
+                        Improves overall cardiovascular health<br />
+                        Lower Cholesterol level<br />
+                        Helps in weight loss<br />
+                        Lowers the risk of stroke<br />
+                        Lowers the risk of cancer<br />
+                        Reduces the chances of heart attacks<br />
+                        Makes the donor psychologically rejuvenate
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="quick-links col-lg-4 col-md-4">
+        <h3>
+            Quick Links
+        </h3>
+        <div>
+            <ul>
+                <li>
+                      @Html.ActionLink(" Find a Doctor","DoctorList",null,new {@class="glyphicon glyphicon-plus-sign" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    @Html.ActionLink(" Book an Appointment", "BookAppointment", null, new { @class = "glyphicon glyphicon-calendar" })
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Utility.js"></script>
+}
+

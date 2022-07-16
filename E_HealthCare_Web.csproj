@@ -160,7 +160,6 @@
       <DependentUpon>E_HealthCareContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\HelperMethods.cs" />
-    <Compile Include="Models\LinkExpire.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
@@ -172,6 +171,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -382,10 +382,15 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
     <Content Include="Images\aditya-romansa-5zp0jym2w9M-unsplash.jpg" />
+    <Content Include="Images\another-resize-hospital-theme.jpg" />
     <Content Include="Images\camilo-jimenez-vGu08RYjO-s-unsplash.jpg" />
+    <Content Include="Images\logo\blood-type %28128%29.png" />
+    <Content Include="Images\logo\blood-type %28256%29.png" />
     <Content Include="Images\pexels-shvets-production-8413230.jpg" />
     <Content Include="Images\pexels-shvets-production-8413285.jpg" />
     <Content Include="Images\richard-catabay-05kHY7AYCp8-unsplash.jpg" />
+    <Content Include="Images\Hospital-theme-background.jpg" />
+    <Content Include="Images\Hospital-theme.jpg" />
     <Content Include="Models\E_HealthCareContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>E_HealthCareContext.edmx</DependentUpon>
@@ -581,6 +586,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Utility.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -615,6 +621,16 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Account\DeleteAccount.cshtml" />
     <Content Include="Views\Account\ExpiredLink.cshtml" />
+    <Content Include="Views\Home\BloodBank.cshtml" />
+    <Content Include="Views\Home\Physiotherapy.cshtml" />
+    <Content Include="Views\Home\KidneyCare.cshtml" />
+    <Content Include="Views\Home\Neurology.cshtml" />
+    <Content Include="Views\Home\GeneralSurgery.cshtml" />
+    <Content Include="Views\Home\Endocrinology.cshtml" />
+    <Content Include="Views\Home\Pathology.cshtml" />
+    <Content Include="Views\Home\CTScanMri.cshtml" />
+    <Content Include="Views\Home\Others.cshtml" />
+    <Content Include="Views\Home\Patholog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

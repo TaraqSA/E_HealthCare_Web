@@ -14,5 +14,20 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Appointments()
+        {
+            return View();
+        }
+
+        public ActionResult DoctorProfile()
+        {
+            return View();
+        }
+        public ActionResult PatientList()
+        {
+            return View();
+        }
+        
     }
 }

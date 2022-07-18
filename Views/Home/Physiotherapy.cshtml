@@ -1,8 +1,596 @@
-﻿
+﻿@model E_HealthCare_Web.ViewModels.AskQuestionViewModel
 @{
     ViewBag.Title = "Physiotherapy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Physiotherapy</h2>
+@section Styles{
+    <style type="text/css">
 
+        .header-section {
+            padding: 10px 0 10px 0px;
+        }
+
+        .description-section {
+            padding: 10px 5px 10px 10px
+        }
+
+        .inner-description {
+            padding: 10px 100px 10px 100px;
+            border-right: 1px solid #ccc;
+        }
+
+        .column1 {
+            height: 500px;
+            display: flex;
+            align-items: center; /*center div vertically*/
+            justify-content: flex-start; /*position div horizontally*/
+            background-image: url('../Images/Hospital-theme-background.jpg');
+            background-size: cover;
+            background-color: #dfece2;
+            background-position: center;
+            background-blend-mode: lighten;
+            margin-left: -15px;
+        }
+
+        .inner-content1 {
+            display: flex;
+            justify-content: flex-start;
+            flex: 1;
+            padding-left: 5em;
+        }
+
+        .column2 {
+            position: relative;
+            height: 500px;
+            padding: 0px 5px 5px 30px;
+        }
+
+            .column2::before {
+                content: '';
+                bottom: 0;
+                left: 6%;
+                position: absolute;
+                border-bottom: 1px solid #ccc;
+                width: 74%;
+            }
+
+
+        .logo-style {
+            height: auto;
+            padding-top: 50px;
+        }
+
+        .logo-description {
+            margin-top: -20px;
+            margin-left: 20px;
+        }
+
+            .logo-description > h1 {
+                font-size: calc(3em + 1vw);
+                font-family: 'Arial Rounded MT';
+            }
+
+            .logo-description > p {
+                font-size: calc(0.75em + 1vw);
+                font-family: 'Arial Rounded MT';
+                color: grey;
+                margin-left: 5px;
+            }
+
+        .input-editor {
+            max-width: 80%;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 10px;
+            background-color: rgba(0,255,153,0.05);
+        }
+
+        .input-button {
+            min-width: 80%;
+            height: 50px;
+            font-size: x-large;
+            border-radius: 5px;
+            border: none;
+            background-color: #00ff99;
+            color: white;
+            text-align: center;
+        }
+
+            .input-button:hover {
+                background-color: #00cc7a;
+            }
+
+        .text-danger {
+            font-family: 'Arial Rounded MT';
+        }
+
+        .checkbox-custom-style {
+            pointer-events: none;
+        }
+
+        .span-text {
+            font-family: 'Arial Rounded MT';
+            color: grey;
+        }
+
+        .div-width {
+            max-width: 80%;
+            display: block;
+        }
+
+        .Physiotherapy-description {
+            font-family: 'Arial Rounded MT';
+            color:gray;
+        }
+
+                .Physiotherapy-description p b, .Physiotherapy-description h1{
+                    color: black;
+                }
+
+        .Physiotherapy-description-FAQ {
+            width: 100%;
+            margin: 90px auto;
+        }
+
+            .Physiotherapy-description-FAQ .custom-accordion {
+                position: relative;
+                margin: 10px 10px;
+            }
+
+            .Physiotherapy-description-FAQ .accordio-label {
+                position: relative;
+                padding: 2px 0;
+                color: #00acee;
+                cursor: pointer;
+                border-top: 1px solid gray;
+                border-bottom: 1px solid gray;
+                background-color: rgba(211,211,211,0.2)
+            }
+
+                .Physiotherapy-description-FAQ .accordio-label::before {
+                    content: '+';
+                    color: gray;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+            .Physiotherapy-description-FAQ .accordion-content {
+                position: relative;
+                background: rgba(0,255,153,0.03);
+                max-height: 0px;
+                font-size: 16px;
+                text-align: justify;
+                width: 100%;
+                font-family: 'Arial Rounded MT';
+                color: gray;
+                overflow: hidden;
+                transition: max-height 0.7s ease-in-out;
+                -webkit-transition: max-height 1s ease-in-out;
+            }
+
+                .Physiotherapy-description-FAQ .accordion-content p {
+                    padding: 14px 17px 5px 7px;
+                }
+
+
+
+            .Physiotherapy-description-FAQ .custom-accordion.active .accordion-content { /* Unhides the content part when active. Sets the height */
+                max-height: 290px;
+            }
+
+            .Physiotherapy-description-FAQ .custom-accordion.active .accordio-label::before { /* Changes from plus sign to negative sign once active */
+                content: '-';
+                font-size: 30px;
+            }
+
+        .quick-links {
+            padding: 10px 0px 10px 20px;
+            line-height: 2;
+            font-family: initial;
+        }
+
+        .quick-link-text a {
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0px 5px 15px;
+        }
+
+            .quick-link-text a:hover {
+                text-decoration: none;
+                font-weight: 800;
+            }
+
+
+        .glyphicon-plus-sign {
+            font-size: 30px;
+        }
+
+        .glyphicon-calendar {
+            font-size: 30px;
+        }
+
+        .text-position {
+            display: inline-block;
+            font-size: 18px;
+            padding: 0px 0px 0px 5px;
+            margin: 0px 0px -15px 0px;
+        }
+    </style>
+}
+
+<div class="header-section col-lg-12 col-md-12">
+    <div class="column1 col-lg-8 col-md-8">
+        <div class="inner-content1">
+            <div class="logo-style">
+                <img src="~/Images/logo/physiotherapy128.png" />
+            </div>
+            <div class="logo-description">
+                <h1>Physiotherapy</h1>
+                <p>
+                    Our Department of Physiotherapy helps patients to maximize their Quality of Life.
+                    Our team of Physiotherapists works closely with Medical Specialists,
+                    helping patients Post surgeries..
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="column2 col-lg-4 col-md-4">
+        <h1>Have a Questions ?</h1>
+        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            <div>
+                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+            </div><br />
+            <div class="div-width">
+                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                <span class="span-text">
+                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                </span>
+
+            </div><br />
+            <div>
+                <input type="submit" value="Submit" class="input-button check" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="description-section col-lg-12 col-md-12">
+
+    <div class="inner-description col-lg-8 col-md-8">
+        <div>
+            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Physiotherapy", "Physiotherapy")
+        </div>
+        <section class="Physiotherapy-description">
+            <h1>Physiotherapy</h1>
+            <p>
+                Physiotherapy provides services to develop maintain and restore maximum movement and functional ability throughout the lifespan.
+                This includes providing services in circumstances where movement and function are threatened by ageing, injury,
+                diseases, disorders, conditions or environmental factors. Functional movement is central to what it means to be healthy.
+            </p>
+            <p>
+                Physiotherapy is concerned with identifying and maximizing quality of life and movement potential within the spheres of promotion, prevention,
+                treatment/intervention, habilitation and rehabilitation. This encompasses physical, psychological, emotional and social wellbeing.
+                Physical therapy involves the interaction between physical @Html.ActionLink("therapist", "Physiotherapists"), patients/clients, other health professionals, families, caregivers and communities in a
+                process where movement potential is assessed and goals are agreed upon,
+                using knowledge and skills unique to physical therapists.
+            </p>
+
+            <b>@Html.ActionLink("Physiotherapists", "Physiotherapists") can help patient in following process</b>
+
+            <ul>
+                <li>
+                    Undertake a comprehensive examination/assessment of the patient/client or needs of a client group
+                </li>
+                <li>
+                    Evaluate the findings from the examination/assessment to make clinical judgments regarding patients/clients
+                </li>
+                <li>
+                    Formulate a diagnosis, prognosis and plan
+                </li>
+                <li>
+                    Provide consultation within their expertise and determine when patients/clients need to be referred to another healthcare professional
+                </li>
+                <li>
+                    Implement a physical therapist intervention/treatment programme
+                </li>
+                <li>
+                    Determine the outcomes of any interventions/treatments
+                </li>
+                <li>
+                    Make recommendations for self-management
+                </li>
+            </ul>
+            <h3>
+                Common Physiotherapy Treatments
+            </h3>
+            <p>
+                Physiotherapy is quite effective to speed up the healing process for patients with amputations,
+                strains in the spine, @Html.ActionLink("arthritis", "Arthritis") or who underwent any sort of medical operation.
+            </p>
+            <h3>
+                Some of the common treatments involved in physiotherapy include:
+            </h3>
+            <h3>
+                Electrotherapy
+            </h3>
+            <p>
+                It is a type of energy-based physiotherapy technique in which electrical stimulation is delivered with the help of electrodes attached to the skin.
+                Electrotherapy is performed in patients with @Html.ActionLink("paralysis", "Paralysis") and severely reduced range of motion.
+            </p>
+            <h3>
+                Range of Motion Exercises
+            </h3>
+            <p>
+                The body needs adequate rest during the early stages of recovery from surgery or bone injuries, but long periods of immobility may actually
+                lengthen the healing process. Therefore, range of motion exercises are ordered to encourage movement and joint mobility and facilitate circulation.
+                It is also beneficial in preventing muscle atrophy and related postural problems.
+            </p>
+            <h3>
+                Cryotherapy and Heat Therapy
+            </h3>
+            <p>
+                Professional athletes and people with desk jobs often complain of sore and stiff muscles.
+                In such a case, application of heat or cold to the affected areas can relieve them of muscle tightness anywhere on their body.
+                In heat therapy, hot packs or paraffin wax are applied.
+                Cryotherapy may involve an ice massage or application of ice pack.
+            </p>
+
+            <h3>
+                Soft Tissue Mobilisation
+            </h3>
+            <p>
+                It is also known as therapeutic massage and can help in relaxing the muscles and reduce the swelling in certain areas.
+                Soft tissue mobilisation is an excellent technique to treat the pain associated with athletic injuries.
+                It also helps in ensuring adequate blood circulation, lymph flow and reducing swelling around the inflamed joints.
+            </p>
+            <h3>
+                Kinesio Taping
+            </h3>
+            <p>
+                In this physiotherapy treatment, a Kinesio tape is applied to the skin to stabilise the joints and muscles while the patient undergoes treatment.
+                Moreover, the Kinesio tape doesn’t obstruct any movement during the range of motion exercises.
+            </p>
+
+            <h3>
+                Therapeutic Ultrasound
+            </h3>
+            <p>
+                It involves the utilisation of sound waves to treat injuries in the body.
+                The sound waves are absorbed by ligaments, tendons and fascia and can relieve a person suffering from arthritis, muscle strains and tendonitis.
+            </p>
+        </section>
+        <br />
+
+        <section class="Physiotherapy-description-FAQ">
+            <h3>Physiotherapy FAQs</h3>
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Who needs physiotherapy?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Modern life is fast-paced and chock a block full of needs, demands, deadlines, and hassles.
+                        Everyone is running after something in emergency mode. As a result, back pain, @Html.ActionLink("knee pain", "KneePain"), neck strains, etc.
+                        have become commonplace. People rely on all sorts of over-the-counter medications and painkillers to relieve them.
+                        However, they don’t think of visiting a physiotherapist until the problem has aggravated.
+                    </p>
+                    <p>
+                        Although you do not need a physiotherapist for every sprain and ache, you must pay a visit when you have any of the following conditions.
+                    </p>
+                    <ul>
+                        <li>
+                            <b>Loss of balance:</b> <p>
+                                You may feel a loss of balance if you have issues in your inner ear.
+                                Known as the vestibular system, certain structures inside your ear maintain your body’s balance system.
+                                So, any conditions affecting the inner ear can produce symptoms of vertigo, dizziness, and balance disturbance.
+                                Physiotherapy can help you to re-train your central nervous system and compensate for the vestibular problems.
+                            </p>
+                        </li>
+                        <li>
+                            <b>Chronic pain:</b> <p>
+                                If you have been in pain for more than a few days, you need to go to a physiotherapist.
+                                They can diagnose your problem and suggest a treatment plan.
+                            </p>
+                        </li>
+                        <li>
+                            <b>Before and after surgery:</b> <p>As surgeries can result in certain complications, getting physiotherapy is essential both pre and post operations.</p>
+                        </li>
+                        <li>
+                            <b>Neurological disease:</b> <p>
+                                Conditions like Parkinson’s disease, cerebral palsy, spinal cord injuries, and stroke can affect the patient’s movements severely.
+                                With physiotherapy treatment, they can’t get rid of the condition, but can surely have a better quality of life.
+                            </p>
+                        </li>
+                        <li>
+                            <b>Pregnancy:</b> <p>
+                                During pregnancy and after it, you have to pay extra attention to your body. The ligaments that support your back can soften due to hormonal changes.
+                                The muscles of your pelvic floor and stomach stretch as your baby grows. Without adequate joint support, 3
+                                injury to the pelvis and back can happen. Physiotherapy not only helps you to support your body but also helps you to recover faster.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Does physiotherapy really work?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        The thought of participating in physiotherapy can bring a lot of questions to your mind.
+                        You may be concerned if it is worth the try or if it could bring you more harm than good. 
+                        But rest assured that physiotherapy is very effective rehabilitation treatment in which trained professionals
+                        diagnose and treat any abnormalities in physical conditioning. Whether you have suffered a physical injury while playing a sport or sprained your neck during sleep,
+                        physiotherapy can help you in all kinds of situations where your mobility is affected.
+                    </p>
+                    <p>
+                        Physical therapists help to improve and restore mobility in their patients. 
+                        In many cases, patients have also been able to avoid expensive surgeries and long-term use of prescription medicines with physiotherapy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the advantages of physiotherapy?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Physiotherapy uses a holistic approach to promote and maintain proper physical function and activity in individuals.
+                        You can find licensed physical therapists in various healthcare settings, including hospitals, rehab centers, home health,
+                        nursing homes, sports and fitness centers, etc.
+                    </p>
+                    <p>
+                        They can help you with many things:
+                    </p>
+                    <ul>
+                        <li>
+                            <p>Restoring mobility, maintaining physical activity, and enhancing overall health and wellness</p>
+                        </li>
+                        <li>
+                            <p>Preventing disease, injury, and disability</p>
+                        </li>
+                        <li>
+                            <p>Reducing or eliminating pain with therapeutic exercises and techniques like joint and soft tissue mobilization</p>
+                        </li>
+                        <li>
+                            <p>Strengthening the weakened parts of the body after a stroke</p>
+                        </li>
+                        <li>
+                            <p>Eliminating acute and chronic health conditions that limit activity and mobility</p>
+                        </li>
+                        <li>
+                            <p>Can help with diabetes and vascular diseases</p>
+                        </li>
+                        <li>
+                            <p>Helps patients manage the pain from arthritis, osteoporosis, or joint replacements.</p>
+                        </li>
+                        <li>
+                            <p>Physiotherapy at cardiac rehabilitation is focused on improving the quality of life through strength building and breathing exercises.</p>
+                        </li>
+                        <li>
+                            <p>Educating and developing support programs to reduce the chances of re-injury or re-occurrence of the conditions.</p>
+                        </li>
+                        <li>
+                            <p>Additionally, one can also get some specialized treatment for pelvic health and pain, bowel incontinence, fibromyalgia, urinary continence, and lymphedema.</p>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What is physiotherapy treatment?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Physiotherapy is a customized physical therapy program that can be beneficial for individuals trying to return to their earlier levels of mobility and functionality.
+                        It is aimed at inculcating activities and lifestyle changes to prevent further injuries and bring overall well-being
+                    </p>
+                    <p>
+                        While the treatment for every individual is tailored to fit their specific conditions,
+                        the therapies that physiotherapist will choose can be broadly divided into the following.
+                    </p>
+                    <ul>
+                        <li><b>Manual therapies:</b> Manual therapies include manipulation and mobilization techniques for the joints and spinal cord, stretching exercises, and manual resistance training.</li>
+                        <li>
+                            <b>Exercise programs:</b> Training programs like cardiovascular stretching, muscle strengthening, and posture retraining fall into this category.
+                        </li>
+                        <li>
+                            <b>Electrotherapy techniques:</b> These consist of laser therapy, diathermy, TENS or Transcutaneous Electrical Nerve Stimulation, and ultrasound.
+                        </li>
+                    </ul>
+                    <p>
+                        Some other treatment methods include cryotherapy and Kinesio taping. Cryotherapy involves the application of heat or cold to the areas of muscle tightness. 
+                        In the other method, Kinesio tape is directly applied to the skin to stabilize the joints and muscles of the patients during the treatment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What conditions do physical therapists treat?</h4>
+                </div>
+                <div class="accordion-content">
+                    <h5>
+                        There are several conditions that physical therapists treat. Some of them are:
+                    </h5>
+                    <ul>
+                        <li>
+                            Dizziness or vertigo due to inner ear issues
+                        </li>
+
+                        <li>
+                            Neurological disorders and strokes
+                        </li>
+
+                        <li>
+                            Temporomandibular joint dysfunction or jaw pain
+                        </li>
+
+                        <li>
+                            Pain in the neck and back
+                        </li>
+
+                        <li>
+                            Obstructions in the range of motion of the joints
+
+                        </li>
+
+                        <li>
+                            Blunt force injuries and other work or industry-related injuries
+                        </li>
+                        <li>
+                            Arthritis and chronic knee pain
+                        </li>
+                        <li>
+                            Burns
+                        </li>
+                        <li>
+                            Care after knee and hip replacement surgeries
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+        </section>
+
+    </div>
+
+    <div class="quick-links col-lg-4 col-md-4">
+        <h3>
+            Quick Links
+        </h3>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+        </div>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Utility.js"></script>
+}

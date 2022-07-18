@@ -386,6 +386,13 @@
     <Content Include="Images\camilo-jimenez-vGu08RYjO-s-unsplash.jpg" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
     <Content Include="Images\logo\blood-type %28256%29.png" />
+    <Content Include="Images\logo\brain.png" />
+    <Content Include="Images\logo\kidney.png" />
+    <Content Include="Images\logo\microscope.png" />
+    <Content Include="Images\logo\physiotherapy128.png" />
+    <Content Include="Images\logo\surgery.png" />
+    <Content Include="Images\logo\thyroid.png" />
+    <Content Include="Images\logo\tooth.png" />
     <Content Include="Images\pexels-shvets-production-8413230.jpg" />
     <Content Include="Images\pexels-shvets-production-8413285.jpg" />
     <Content Include="Images\richard-catabay-05kHY7AYCp8-unsplash.jpg" />
@@ -623,14 +630,13 @@
     <Content Include="Views\Account\ExpiredLink.cshtml" />
     <Content Include="Views\Home\BloodBank.cshtml" />
     <Content Include="Views\Home\Physiotherapy.cshtml" />
-    <Content Include="Views\Home\KidneyCare.cshtml" />
+    <Content Include="Views\Home\Nephrology.cshtml" />
     <Content Include="Views\Home\Neurology.cshtml" />
     <Content Include="Views\Home\GeneralSurgery.cshtml" />
     <Content Include="Views\Home\Endocrinology.cshtml" />
     <Content Include="Views\Home\Pathology.cshtml" />
-    <Content Include="Views\Home\CTScanMri.cshtml" />
+    <Content Include="Views\Home\DentalScience.cshtml" />
     <Content Include="Views\Home\Others.cshtml" />
-    <Content Include="Views\Home\Patholog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

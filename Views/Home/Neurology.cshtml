@@ -1,8 +1,911 @@
-﻿
+﻿@model E_HealthCare_Web.ViewModels.AskQuestionViewModel
 @{
-    ViewBag.Title = "Neurology";
+    ViewBag.Title = "Neurologyy";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Neurology</h2>
+@section Styles{
+    <style type="text/css">
+
+        .header-section {
+            padding: 10px 0 10px 0px;
+        }
+
+        .description-section {
+            padding: 10px 5px 10px 10px
+        }
+
+        .inner-description {
+            padding: 10px 100px 10px 100px;
+            border-right: 1px solid #ccc;
+        }
+
+        .column1 {
+            height: 500px;
+            display: flex;
+            align-items: center; /*center div vertically*/
+            justify-content: flex-start; /*position div horizontally*/
+            background-image: url('../Images/Hospital-theme-background.jpg');
+            background-size: cover;
+            background-color: #dfece2;
+            background-position: center;
+            background-blend-mode: lighten;
+            margin-left: -15px;
+        }
+
+        .inner-content1 {
+            display: flex;
+            justify-content: flex-start;
+            flex: 1;
+            padding-left: 5em;
+        }
+
+        .column2 {
+            position: relative;
+            height: 500px;
+            padding: 0px 5px 5px 30px;
+        }
+
+            .column2::before {
+                content: '';
+                bottom: 0;
+                left: 6%;
+                position: absolute;
+                border-bottom: 1px solid #ccc;
+                width: 74%;
+            }
+
+
+        .logo-style {
+            height: auto;
+        }
+
+        .logo-description {
+            margin-top: -20px;
+            margin-left: 20px;
+        }
+
+            .logo-description > h1 {
+                font-size: calc(3em + 1vw);
+                font-family: 'Arial Rounded MT';
+            }
+
+            .logo-description > p {
+                font-size: calc(0.75em + 1vw);
+                font-family: 'Arial Rounded MT';
+                color: grey;
+                margin-left: 5px;
+            }
+
+        .input-editor {
+            max-width: 80%;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 10px;
+            background-color: rgba(0,255,153,0.05);
+        }
+
+        .input-button {
+            min-width: 80%;
+            height: 50px;
+            font-size: x-large;
+            border-radius: 5px;
+            border: none;
+            background-color: #00ff99;
+            color: white;
+            text-align: center;
+        }
+
+            .input-button:hover {
+                background-color: #00cc7a;
+            }
+
+        .text-danger {
+            font-family: 'Arial Rounded MT';
+        }
+
+        .checkbox-custom-style {
+            pointer-events: none;
+        }
+
+        .span-text {
+            font-family: 'Arial Rounded MT';
+            color: grey;
+        }
+
+        .div-width {
+            max-width: 80%;
+            display: block;
+        }
+
+        .neurology-description {
+            font-family: 'Arial Rounded MT';
+            color: gray;
+        }
+
+            .neurology-description p b, .neurology-description h1 {
+                color: black;
+            }
+
+        .neurology-description-FAQ {
+            width: 100%;
+            margin: 90px auto;
+        }
+
+            .neurology-description-FAQ .custom-accordion {
+                position: relative;
+                margin: 10px 10px;
+            }
+
+            .neurology-description-FAQ .accordio-label {
+                position: relative;
+                padding: 2px 0;
+                color: #00acee;
+                cursor: pointer;
+                border-top: 1px solid gray;
+                border-bottom: 1px solid gray;
+                background-color: rgba(211,211,211,0.2)
+            }
+
+                .neurology-description-FAQ .accordio-label::before {
+                    content: '+';
+                    color: gray;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+            .neurology-description-FAQ .accordion-content {
+                position: relative;
+                background: rgba(0,255,153,0.03);
+                max-height: 0px;
+                font-size: 16px;
+                text-align: justify;
+                width: 100%;
+                font-family: 'Arial Rounded MT';
+                color: gray;
+                overflow: hidden;
+                transition: max-height 0.7s ease-in-out;
+                -webkit-transition: max-height 1s ease-in-out;
+            }
+
+                .neurology-description-FAQ .accordion-content p {
+                    padding: 14px 17px 5px 7px;
+                }
+
+
+
+            .neurology-description-FAQ .custom-accordion.active .accordion-content { /* Unhides the content part when active. Sets the height */
+                max-height: 550px;
+            }
+
+            .neurology-description-FAQ .custom-accordion.active .accordio-label::before { /* Changes from plus sign to negative sign once active */
+                content: '-';
+                font-size: 30px;
+            }
+
+        .quick-links {
+            padding: 10px 0px 10px 20px;
+            line-height: 2;
+            font-family: initial;
+        }
+
+        .quick-link-text a {
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0px 5px 15px;
+        }
+
+            .quick-link-text a:hover {
+                text-decoration: none;
+                font-weight: 800;
+            }
+
+
+        .glyphicon-plus-sign {
+            font-size: 30px;
+        }
+
+        .glyphicon-calendar {
+            font-size: 30px;
+        }
+
+        .text-position {
+            display: inline-block;
+            font-size: 18px;
+            padding: 0px 0px 0px 5px;
+            margin: 0px 0px -15px 0px;
+        }
+    </style>
+}
+
+<div class="header-section col-lg-12 col-md-12">
+    <div class="column1 col-lg-8 col-md-8">
+        <div class="inner-content1">
+            <div class="logo-style">
+                <img src="~/Images/logo/brain.png" />
+            </div>
+            <div class="logo-description">
+                <h1>Neurology</h1>
+                <p>
+                    Our team of expert Neurologists provide Accurate
+                    Diagnosis and Care for a wide range of Neurological Conditions.
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="column2 col-lg-4 col-md-4">
+        <h1>Have a Questions ?</h1>
+        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            <div>
+                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+            </div><br />
+            <div class="div-width">
+                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                <span class="span-text">
+                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                </span>
+
+            </div><br />
+            <div>
+                <input type="submit" value="Submit" class="input-button check" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="description-section col-lg-12 col-md-12">
+
+    <div class="inner-description col-lg-8 col-md-8">
+        <div>
+            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Neurology", "Neurology")
+        </div>
+        <section class="neurology-description">
+            <h1>Neurology</h1>
+            <h3>Overview</h3>
+            <p>
+                Neurology is the branch of medicine that deals with the study and treatment of nervous system disorders.
+                The nervous system itself is composed of the central nervous nervous system and the peripheral nervous system.
+                The central nervous system is the brain and the spinal cord,
+                while the peripheral nervous system is composed of all the other nerves and sensory receptors in the sense organs (such as the eyes, ears, skin etc.).
+            </p>
+            <p>
+                A doctor who specialises in neurology is called a neurologist, and surgeons who perform surgeries related to neurology are called neurosurgeons
+            </p>
+
+            <h3>
+                Why should you see a neurologist?
+            </h3>
+            <p>
+                You may need to consult a nephrologist if you are facing organic conditions of the brain, spinal cord, muscles, and the nervous system.
+                Neurologists assist the patients by examining the signs and conditions that have affected their mental state.
+            </p>
+            <p>
+                Here are six signs that tell it is time to visit <b><i>neuro specialty hospital:</i></b>
+            </p>
+
+            <h3>
+                Chronic headaches
+            </h3>
+            <p>
+                If you have migraine pain, you should probably make an appointment with a neurologist especially if the symptoms are associated with neurological disorders.
+            </p>
+            <h3>
+                Chronic pain
+            </h3>
+            <p>
+                When pain in your muscles prolongs for more than 10 weeks and your primary care cannot help manage it, you should consider visiting a neurologist.
+            </p>
+            <h3>
+                Dizziness
+            </h3>
+            <p>
+                Vertigo(feeling like your head is spinning) or having difficulty keeping your balance could also point to some serious neurological disorder.
+            </p>
+            <h3>
+                Numbness or tingling
+            </h3>
+            <p>
+                Numbing or tingling sensation on one side of the body for a prolonged time that often comes and goes suddenly can be because of a stroke or some serious condition.
+            </p>
+            <h3>
+                Movement condition or imbalance
+            </h3>
+            <p>
+                Difficulty walking because of imbalance or staggering and unintentional jerks all shows up some serious neurological disorders.
+            </p>
+            <h3>
+                Confusion
+            </h3>
+            <p>
+                Loss of memory or personality changes or fumbling could be a sign of Alzheimer's.
+            </p>
+            <h3>
+                Why E-HealthCare?
+            </h3>
+            <p>
+                Cerebral stroke or 'Brain Attack' is the leading cause of disability and probably the third leading cause of death in India.
+                At Narayana Health, we use a new technique known as a temporary endovascular bypass.
+                There are interventional neurological procedures, which are used for the treatment of acute stroke or @Html.ActionLink("epilepsy", "Epilepsy") and are practised abroad very routinely.
+                We hope to increase awareness of stroke and its prevention so that the focus is on prevention rather than cure.
+            </p>
+            <p>
+                The network of hospitals under Narayana Health offers comprehensive packages for epileptic care services, cerebral stroke programmes including rehabilitation and
+                evaluation of complex neuromuscular disorders for which a recommended course of neurological disorders treatment is followed.
+            </p>
+            <h3>
+                Our neurologists are experienced in treating patients with neurological disorders and diseases including:
+            </h3>
+            <ul>
+                <li>
+                    Autism, learning disabilities
+                </li>
+                <li>
+                    Epilepsy, @Html.ActionLink("dizziness", "Dizziness") and fainting
+                </li>
+                <li>
+                    Chronic tension or stress-related headache, @Html.ActionLink("migraine", "MIgraine")
+                </li>
+                <li>
+                    Persistent backache and spine problems
+                </li>
+                <li>
+                    Short-term memory loss and dementia
+                </li>
+                <li>
+                    Parkinson's disease, cerebral stroke
+                </li>
+                <li>
+                    @Html.ActionLink("Cancers", "Cancer") and @Html.ActionLink("tumours", "Tumours")
+                </li>
+                <li>
+                    Meningitis or brain fever
+                </li>
+                <li>
+                    Sleep apnoea, semi-somnia, insomnia (sleep disorders)
+                </li>
+                <li>
+                    Nerve-related issues (stress and nervous tensions) and trauma cases
+                </li>
+            </ul>
+            <h3>
+                Nerve-related issues (stress and nervous tensions) and trauma cases
+            </h3>
+            <p>
+                Neurological disorders and diseases are caused by problems in either the central or peripheral nervous systems, or both. They can affect one, or many parts,
+                of the nervous system such as the brain, spinal cord, nerves, nerve roots, neuromuscular junctions, the autonomic nervous system, and so on.
+            </p>
+            <p>
+                The causes of neurological disorders are varied. They can be caused by faulty genes, injuries, malnutrition, infection, or a response to an infection.
+                E-HealthCare is the best neurology hospital in India to treat all types of neurological disorders.
+                There are more than 600 types of neurological diseases and disorders, but they can be broadly classified as follows-
+            </p>
+            <ul>
+                <li>
+                    Problems at the developmental stages of the nervous system such as spina bifida.
+                </li>
+                <li>
+                    Genetic diseases such as muscular dystrophy and Huntington’s disease.
+                </li>
+                <li>
+                    Degenerative or demyelinating diseases that cause the cells of the nervous system to die, or get damaged, over
+                </li>
+                <li>
+                    time such as Parkinson's disease and Alzheimer's disease.
+                </li>
+                <li>
+                    Problems with the blood supply to the brain causing cerebrovascular disease such as a stroke.
+                </li>
+                <li>
+                    Memory loss and dementia
+                </li>
+                <li>
+                    Spinal cord disorders
+                </li>
+                <li>
+                    Speech and learning disorders
+                </li>
+                <li>
+                    Headache disorders such as migraines
+                </li>
+                <li>
+                    Seizures
+                </li>
+                <li>
+                    Pinched nerves
+                </li>
+                <li>
+                    Tremors or uncontrolled movements
+                </li>
+                <li>
+                    @Html.ActionLink("Cancers", "Cancer")
+                </li>
+                <li>
+                    Infections
+                </li>
+                <li>
+                    Sleep disorders
+                </li>
+            </ul>
+
+
+            <h3>
+                Diagnosis
+            </h3>
+            <p>
+                During the first meeting with a neurologist at Neuro Hospital, you will be undergoing a physical examination to look for any abnormality in speech,
+                vision, cognitive abilities, coordination, strength, sensation and reflexes.
+                Subsequently, diagnostic tests will be prescribed if required to better study and confirm the neurological problem if any.
+            </p>
+            <p>
+                At E-HealthCare the most commonly prescribed tests for neurological disorders are
+            </p>
+            <h5>
+                Imaging tests
+            </h5>
+            <p>
+                Modern imaging techniques use different methods to obtain and study images of tissues within the body, in order to diagnose various problems.
+                The most commonly used imaging techniques to diagnose neurological problems are Computed Tomography (CT or CAT), Magnetic Resonance Imaging (MRI),
+                Positron Emission Tomography (PET) and Single-Photon Emission (SPECT) scans. These scans help the neurologist to clearly observe and diagnose strokes,
+                injuries, tumours, malformation or haemorrhage of blood vessels or abnormalities during the development of the brain.
+            </p>
+            <ul>
+                <li>
+                    <b>Computed Tomography (CT):</b> CT scans are extensively used to obtain two-dimensional images of the internal structures of the body.
+                    It involves the injection of a contrast dye into the bloodstream of the patient to help visualise the images better.
+                    A CT scan of the brain can be used to easily detect any structural abnormalities, strokes, haemorrhages, bone or blood vessel malformations or damage,
+                    amongst other disorders. Spinal CT scans can be used to diagnose problems such as a spinal fracture, herniated disc, or narrowing of the spinal canal.
+                    CT scans should be avoided by pregnant women as they involve radiation and may be harmful to the fetus.
+                    These scans are preferable for those patients who are unable to undergo an MRI scan.
+                </li>
+                <li>
+                    <b>Magnetic Resonance Imaging (MRI):</b> This type of imaging uses a very powerful magnetic field and radio waves to obtain images of the body.
+                    In addition to showing images, it can also be used to measure the flow of blood as well as mineral deposits. A contrast dye may be injected to improve imaging.
+                    MRI scans are usually used to diagnose multiple sclerosis, brain damage, inflammation, infection, structural abnormalities, damage and degeneration.
+                    Since an MRI’s magnetic field works on the water molecules in the tissues, it can be used to clearly study the water content and properties of different tissues.
+                    It’s important that there be absolutely no metal on the patient as the metal will be attracted by the magnetic field.
+                    People with implanted devices or infusion devices must be especially cautious to avoid MRIs.
+                    MRIs are much safer than CT scans because there is no radiation used.
+                </li>
+                <li>
+                    <b>Functional MRI (fMRI):</b> Blood has its own magnetic properties. fMRI uses these unique properties of blood to obtain images of the blood flow to different areas of the
+                    brain. This gives neurologists a tool by which they can study and pinpoint the areas of the brain that are activated for different functions and also
+                    study how long they stay active.
+                    This helps to localise the regions used for different functions before surgery, degenerative disorders and head injuries.
+                </li>
+                <li>
+                    <b>Positron Emission Tomography (PET):</b> PET scans are used to produce images that are more detailed than a CT or MRI scan.
+                    PET scans produce two and three-dimensional images using radioactive isotopes that are called tracers injected into the bloodstream.
+                    These scans are used to study tumours, blood flow, tissue metabolism, diseased tissue, as well as brain changes. D
+                    ifferent compounds can be used to study multiple functions of the brain simultaneously.
+                </li>
+                <li>
+                    <b>Single Photon Emission Computed Tomography (SPECT):</b> This is a nuclear imaging test that also uses radioactive isotopes similar to those used in PET scans.
+                    It is used as a followup to other scans to diagnose neurological problems such as infections, tumours, degenerative diseases,
+                    spine disease, stress fractures and the areas of the brain that are involved in seizures.
+                    A Dopamine Transporter Imaging With Single-photon Emission Computed Tomography (DAT-SPECT) scan is another type of
+                    SPECT scan that is particularly used to diagnose Parkinson disease.
+                </li>
+            </ul>
+
+            <h5>
+                Blood And Urine Tests
+            </h5>
+            <p>
+                Blood and urine tests are used by neurologists to detect the presence of toxins, as well as, infections and protein disorders.
+            </p>
+            <h5>
+                Electroencephalogram (EEG)
+            </h5>
+            <p>
+                EEG is a test that is used to study and record the electrical patterns generated in the brain.
+                This is achieved by placing electrodes on the scalp to detect electrical patterns.
+                EEG is useful in diagnosing epilepsy, seizures, injuries, headaches, dizziness, tumours and sleeping disorders; this test is also used to confirm brain death.
+            </p>
+            <h5>
+                Electromyogram (EMG)
+            </h5>
+            <p>
+                EMG is a test that is used to evaluate communication levels between a specific nerve and the muscle that it controls.
+                This is achieved by the placement of electrodes on the skin’s surface or through a needle.
+            </p>
+
+            <h5>
+                Electronystagmography (ENG)
+            </h5>
+            <p>
+                This is a set of tests that are designed to diagnose neurological problems that cause dizziness, balance issues, and involuntary eye movements.
+                Small electrodes or infrared photography is used during these tests.
+            </p>
+            <h5>
+                Polysomnogram
+            </h5>
+            <p>
+                This is a test that is used to monitor the activity of the body and the brain when the patient is asleep.
+                It involves placing electrodes to the patient's eyes, scalp, and chin to record brain waves. The person's heart rate, breathing,
+                eye movements, and other body movements are also recorded to diagnose sleep disorders.
+            </p>
+
+            <h5>
+                Evoked Potentials
+            </h5>
+            <p>
+                Evoked potentials are the tests that are used to study and determine the reaction and response of the brain to specific stimuli.
+                The equipment is similar to that used in an EEG.
+            </p>
+            <h5>
+                Spinal Tap or Lumbar Puncture
+            </h5>
+            <p>
+                When a neurologist needs to study the cerebrospinal fluid for infection, blood or any other abnormalities,
+                a spinal tap or lumbar puncture is performed. This involves extracting a small amount of the spinal fluid to be examined in the laboratory.
+            </p>
+            <h5>
+                Nerve or Muscle Biopsy
+            </h5>
+            <p>
+                A biopsy of nerve or muscle tissue is performed in patients with neuromuscular disorders. Muscle samples are usually removed surgically or
+                through a thin hollow needle. Nerve samples are removed through an incision. Sometimes skin biopsies are required to test for metabolic disorders or for
+                the measurement of the small nerve fibres present in the sample.
+                Certain infections or tumours in the brain are tested through a biopsy where the sample is retrieved through a surgical procedure.
+            </p>
+            <h5>
+                Ultrasound Imaging / Ultrasonography
+            </h5>
+            <p>
+                This test uses high-frequency sound waves to get images of the body.
+                It is usually used to assess a fetus or a newborn for any neurological problems, such as hydrocephalus.
+                Ultrasounds are also useful in studying the blood flow in specific areas of the body.
+                The carotid Doppler ultrasound studies the blood flow in the blood vessels within the neck, while the transcranial
+                Doppler ultrasound studies the blood flow in blood vessels within the skull.
+                These studies are particularly useful in patients who are being assessed for risk of stroke.
+            </p>
+            <h5>
+                Treatment & Preventions
+            </h5>
+            <p>
+                Most neurological problems are not preventable. However, the ones that are avertible can be prevented by maintaining a healthy lifestyle;
+                this means you should have a balanced diet. Keeping your fat intake to the minimum ensures that the blood vessels don’t get clogged.
+                Avoiding bad habits such as drinking and smoking, along with leading an active lifestyle supports overall good health.
+                Regular medical checkups are important to catch any problems early. When there are underlying health conditions such as high blood pressure and diabetes,
+                they should be managed under medical supervision. When a person has been diagnosed with a neurological disorder,
+                it should be treated under medical supervision, and in conditions such as epilepsy, measures should be taken to prevent further episodes.
+            </p>
+            <h6>
+                Here are some of the significant neurology specialities at E-HealthCare that offer excellent patient treatment services:
+            </h6>
+            <h3>
+                Interventional Neurology
+            </h3>
+            <p>
+                Interventional neurology is a speciality which uses minimally invasive and image-based technologies procedures for the diagnosis and treatment of
+                diseases of blood vessels of the brain and spinal cord (neurovascular diseases). These kinds of neurological diseases include paralytic strokes,
+                brain aneurysms and arteio-venous malformations (AVM’s) of blood supplying the brain and spinal cords using coiling, stenting and embolization.
+                Stroke “Brain attack” is the rapidly developing loss of brain functions due to the disturbance in the blood supply to the brain.
+                Stroke is one of the leading causes of disability and death in India. India will face an enormous socio-economic burden to meet the costs of rehabilitation of "Stroke victims"
+                because the population is now surviving through the peak years of the occurrence of stroke. Stroke is a treatable and preventable disease.
+            </p>
+            <p>
+                An interventional neurologist is specially trained to perform minimally invasive procedures for the treatment of conditions like aneurysms,
+                strokes, spinal compression fractures and other complex diseases of the brain, neck and spine.
+                Depending on your medical condition, they may order one or more of the following procedures.
+            </p>
+            <ul>
+                <li>
+                    Angiogram and venogram
+                </li>
+            </ul>
+            <P>
+                Angiogram and venogram are a type of X-rays, which are used to identify any blockages in the blood vessel and other problems associated with it.
+                The procedure involves advancing a tiny tube in the vein or artery and injecting a dye through it. This enables the doctor to monitor blood flow.
+            </P>
+            <ul>
+                <li>
+                    Angioplasty and Stenting
+                </li>
+            </ul>
+            <p>
+                These procedures are followed to open narrowed or blocked blood vessels that lead to the spine or brain.
+                A `thin tube is used in the procedure. It holds a guidewire with a tiny deflated balloon in it.
+                The guidewire is advanced through the blood vessel until it reaches the blockage.
+                The balloon is then inflated to remove the blockage and open the blood vessel.
+                Sometimes, a small, metal mesh tube called a stent is used to open the blood vessel permanently.
+            </p>
+            <ul>
+                <li>
+                    Catheter Embolization
+                </li>
+            </ul>
+            <p>
+                Through catheter embolization procedure, the blood supply to an unhealthy tissue in the brain or spine (such as a tumour) can be rerouted or completely stopped.
+                It can be carried out by placing a glue-like fluid or coil in the blood vessel.
+            </p>
+
+            <h3>
+                Neuro Rehabilitation
+            </h3>
+            <p>
+                Recognizing the need to rehabilitate patients with neurological/spinal injuries or disorders into mainstream life, Narayana Health
+                has a specially designated department to take care of those who need counselling, care and routine check-up. The objective of this
+                department is to improve a patient's quality of life in case of a traumatic case history or simply provide handholding and
+                offer support services until the individual can manage his life smoothly. The path to recovery is then a quick and smooth process
+            </p>
+            <h6>
+                Some of the conditions that can benefit from a neurological rehab centre are as follows.
+            </h6>
+            <ul>
+                <li>
+                    Trauma by injury to the brain or spinal cord
+                </li>
+                <li>
+                    Vascular disorders like haemorrhagic strokes, ischemic strokes, subdural haematoma and transient ischemic attacks
+                </li>
+                <li>
+                    Structural or neuromuscular disorders, such as cervical spondylosis, bell palsy, brain or spinal cord tumours,
+                    carpal tunnel syndrome, myasthenia gravis, peripheral neuropathy and Guillain-Barré syndrome.
+                </li>
+                <li>
+                    Infections, such as meningitis, polio, encephalitis and brain abscesses
+                </li>
+                <li>
+                    Degenerative disorders like multiple sclerosis, Alzheimer’s disease, Parkinson’s disease, Huntington chorea, etc
+                </li>
+            </ul>
+        </section>
+        <br />
+
+        <section class="neurology-description-FAQ">
+            <h3>Neurology FAQs</h3>
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What does neurology mean?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        <b>Neurology</b> is the medical field that deals with nervous system disorders. It takes on the treatment and diagnosis of
+                        diseases that involve the central and peripheral nervous system this includes the brain, nerves, and the spinal cord.
+                        It also includes coverings, effector tissues, blood vessels, and major muscle groups.
+                        @Html.ActionLink("Neurologists", "Neurologists") are generally consulted to treat cerebrovascular diseases such as Stroke,
+                        Multiple sclerosis, Parkinsons, Alzheimers, Lou Gehrigs disease, Epilepsy, and other speech and language disorders.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What does a neurologist treat you for?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A neurologist is a medical professional who focuses on treating diseases that affect the nervous system.
+                        The human nervous system is divided into two parts central and peripheral, which is inclusive of the brain and spinal cord.
+                        They are responsible for diagnosing, managing, and treating your neurological disorders.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Why would you be referred to a neurologist?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Firstly, you should consult with your primary care doctor to confirm your symptoms, they will recommend you to a neurologist;
+                        this is done when the symptoms are intense, and it needs immediate attention from a specialist.
+                    </p>
+                    <p>
+                        Some of the prevalent diseases in neurology include Alzheimers disease, Parkinsons disease, severe @Html.ActionLink("migraines", "Migrain"), strokes, epilepsy, and movement disorders.
+                        The reason youre referred to a neurologist is that they will inquire about your medical history to analyze your
+                        symptoms better and conduct physical exams on your brain/nerves.
+                        This will help them diagnose and manage your condition in the best way.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the signs and symptoms of neurological disorder?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Some of the common symptoms of neurological disorders are as follows:
+                    </p>
+                    <ul>
+                        <li>
+                            Weak muscles
+                        </li>
+                        <li>
+                            Dizziness
+                        </li>
+                        <li>
+                            Decreased mobility
+                        </li>
+                    </ul>
+                    <p>
+                        People who begin to experience problems with touch, smell, or eyesight, may need to see a neurologist as soon as possible.
+                        These problems usually signal to a deeper issue that can be connected to your nervous system.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the signs and symptoms of neurological disorder?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A neurological disorder can have an intense impact on the patients life.
+                        Therefore, its important to get yourself checked when you experience the following signs and symptoms:
+                    </p>
+                    <p>
+                        <b>
+                            Pain:
+                        </b>
+                    </p>
+                    <p>
+                        This is a common symptom in neurological disorders, and it can be easy to overlook it. However, as you keep ignoring the pain, it will get more intense and unbearable.
+                        The chronic pain can be related to age as well, so its best that you dont overlook this sign and get it checked.
+                    </p>
+                    <p>
+                        Experiencing trouble with memory:
+                    </p>
+                    <p>
+                        Lack of concentration power and difficulty with memory are symptoms that a person may have a progressive disease like Amnesia or Alzheimers.
+                    </p>
+                    <p>
+                        Feeling numb:
+                    </p>
+                    <p>
+                        This is another symptom of a neurological disorder, that is, complete or partial loss of sensation.
+                        Here, the person wont be able to experience vibration, pain, or temperature. This also leads to difficulty with balance,
+                        coordination, walking, or doing any other physical activity. If this issue is persistent, then you have to visit a doctor immediately.
+                    </p>
+                    <p>
+                        In addition to these, you may also suffer from partial or complete paralysis, seizures, a decline in cognitive abilities,
+                        unexplained pain and a decreased alertness or situational awareness.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the most common neurological disorders?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        <b>Alzheimers and Dementia:</b> These are the most common neurological issues, and they affect the persons memory and cognitive process.
+                        These diseases mostly occur due to aging and are progressive, however, there are treatments that can help with improving the patients quality of life.
+                    </p>
+                    <p>
+                        <b>Epilepsy:</b> This disorder takes place due to the irregular electrical activity in the brain, which leads to seizures.
+                    </p>
+                    <p>
+                        <b>Stroke:</b> This happens when the brain doesnt receive enough blood and nutrients, which can lead to severe brain damage.
+                    </p>
+                    <p>
+                        <b>Parkinsons disease:</b> This is a neurological disease that affects the motor system of the human body and takes place due to the lack of dopamine-producing cells.
+                        The patient can experience tremors and impaired coordination and balance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What tests does a neurologist do?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Neurologists will make use of several varieties of diagnostic tests so that they can identify the nature of your disease, injury, or condition.
+                        The results will help them plan treatments and also manage the symptoms. Some of the common tests performed by
+                        neurologists are Brainstorm Auditory Response Test, Carotid Duplex, Cerebral Angiography, Computed Tomography, Doppler Ultrasound, and so on.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Why Do I Need A Blood Test Before An MRI?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        In cases where a contrast dye must be injected to improve the imaging, a contrast agent called gadolinium is used.
+                        This material can be harmful to patients who suffer from kidney disease.
+                        This is why a kidney function test is conducted before an MRI to determine if the patient has normal kidney function, in case the dye needs to be used.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What Is A Fetal MRI?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Sometimes, when an ultrasound of a fetus indicates a problem, a fetal MRI may be performed to get a clearer picture.
+                        Since there is no radiation or contrast dye involved, its considered safe as a prenatal ultrasound that reveals a possible problem with a fetus.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What Are The Common Symptoms Of Neurological Diseases?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Since the nervous system controls all the parts of the body, neurological disorders can cause many symptoms that affect many different parts of the body. S
+                        ometimes the symptoms can even be emotional. The most common symptoms are-
+                    </p>
+                    <ul>
+                        <li>
+                            Headaches
+                        </li>
+                        <li>
+                            Lack of coordination or clumsiness, balance problemss
+                        </li>
+                        <li>
+                            Being less alert
+                        </li>
+                        <li>
+                            Having difficulty reading, writing, speaking or understanding conversation
+                        </li>
+                        <li>
+                            Behavioural changes
+                        </li>
+                        <li>
+                            Numbness, weakness or loss of sensation
+                        </li>
+                        <li>
+                            Seizures.
+                        </li>
+                        <li>
+                            Complete or partial @Html.ActionLink("paralysis", "Paralysis")
+                        </li>
+                        <li>
+                            Pain that cannot be explained otherwise
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="quick-links col-lg-4 col-md-4">
+        <h3>
+            Quick Links
+        </h3>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+        </div>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Utility.js"></script>
+}
+
+
 

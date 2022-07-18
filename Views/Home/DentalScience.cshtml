@@ -1,0 +1,522 @@
+﻿@model E_HealthCare_Web.ViewModels.AskQuestionViewModel
+@{
+    ViewBag.Title = "Dental Hospital";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .header-section {
+            padding: 10px 0 10px 0px;
+        }
+
+        .description-section {
+            padding: 10px 5px 10px 10px
+        }
+
+        .inner-description {
+            padding: 10px 100px 10px 100px;
+            border-right: 1px solid #ccc;
+        }
+
+        .column1 {
+            height: 500px;
+            display: flex;
+            align-items: center; /*center div vertically*/
+            justify-content: flex-start; /*position div horizontally*/
+            background-image: url('../Images/Hospital-theme-background.jpg');
+            background-size: cover;
+            background-color: #dfece2;
+            background-position: center;
+            background-blend-mode: lighten;
+            margin-left: -15px;
+        }
+
+        .inner-content1 {
+            display: flex;
+            justify-content: flex-start;
+            flex: 1;
+            padding-left: 5em;
+        }
+
+        .column2 {
+            position: relative;
+            height: 500px;
+            padding: 0px 5px 5px 30px;
+        }
+
+            .column2::before {
+                content: '';
+                bottom: 0;
+                left: 6%;
+                position: absolute;
+                border-bottom: 1px solid #ccc;
+                width: 74%;
+            }
+
+
+        .logo-style {
+            height: auto;
+            padding-top: 2px;
+        }
+
+        .logo-description {
+            margin-top: -20px;
+            margin-left: 20px;
+        }
+
+            .logo-description > h1 {
+                font-size: calc(3em + 1vw);
+                font-family: 'Arial Rounded MT';
+            }
+
+            .logo-description > p {
+                font-size: calc(0.75em + 1vw);
+                font-family: 'Arial Rounded MT';
+                color: grey;
+                margin-left: 5px;
+            }
+
+        .input-editor {
+            max-width: 80%;
+            height: 50px;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 10px;
+            background-color: rgba(0,255,153,0.05);
+        }
+
+        .input-button {
+            min-width: 80%;
+            height: 50px;
+            font-size: x-large;
+            border-radius: 5px;
+            border: none;
+            background-color: #00ff99;
+            color: white;
+            text-align: center;
+        }
+
+            .input-button:hover {
+                background-color: #00cc7a;
+            }
+
+        .text-danger {
+            font-family: 'Arial Rounded MT';
+        }
+
+        .checkbox-custom-style {
+            pointer-events: none;
+        }
+
+        .span-text {
+            font-family: 'Arial Rounded MT';
+            color: grey;
+        }
+
+        .div-width {
+            max-width: 80%;
+            display: block;
+        }
+
+        .ds-description {
+            font-family: 'Arial Rounded MT';
+            color: gray;
+        }
+
+            .ds-description p b, .ds-description h1 {
+                color: black;
+            }
+
+        .ds-description-FAQ {
+            width: 100%;
+            margin: 90px auto;
+        }
+
+            .ds-description-FAQ .custom-accordion {
+                position: relative;
+                margin: 10px 10px;
+            }
+
+            .ds-description-FAQ .accordio-label {
+                position: relative;
+                padding: 2px 0;
+                color: #00acee;
+                cursor: pointer;
+                border-top: 1px solid gray;
+                border-bottom: 1px solid gray;
+                background-color: rgba(211,211,211,0.2)
+            }
+
+                .ds-description-FAQ .accordio-label::before {
+                    content: '+';
+                    color: gray;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    font-size: 30px;
+                    transform: translateY(-50%);
+                    -webkit-transform: translateY(-50%);
+                }
+
+            .ds-description-FAQ .accordion-content {
+                position: relative;
+                background: rgba(0,255,153,0.03);
+                max-height: 0px;
+                font-size: 16px;
+                text-align: justify;
+                width: 100%;
+                font-family: 'Arial Rounded MT';
+                color: gray;
+                overflow: hidden;
+                transition: max-height 0.7s ease-in-out;
+                -webkit-transition: max-height 1s ease-in-out;
+            }
+
+                .ds-description-FAQ .accordion-content p {
+                    padding: 14px 17px 5px 7px;
+                }
+
+
+
+            .ds-description-FAQ .custom-accordion.active .accordion-content { /* Unhides the content part when active. Sets the height */
+                max-height: 300px;
+            }
+
+            .ds-description-FAQ .custom-accordion.active .accordio-label::before { /* Changes from plus sign to negative sign once active */
+                content: '-';
+                font-size: 30px;
+            }
+
+        .quick-links {
+            padding: 10px 0px 10px 20px;
+            line-height: 2;
+            font-family: initial;
+        }
+
+        .quick-link-text a {
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0px 5px 15px;
+        }
+
+            .quick-link-text a:hover {
+                text-decoration: none;
+                font-weight: 800;
+            }
+
+
+        .glyphicon-plus-sign {
+            font-size: 30px;
+        }
+
+        .glyphicon-calendar {
+            font-size: 30px;
+        }
+
+        .text-position {
+            display: inline-block;
+            font-size: 18px;
+            padding: 0px 0px 0px 5px;
+            margin: 0px 0px -15px 0px;
+        }
+    </style>
+}
+
+<div class="header-section col-lg-12 col-md-12">
+    <div class="column1 col-lg-8 col-md-8">
+        <div class="inner-content1">
+            <div class="logo-style">
+                <img src="~/Images/logo/tooth.png" />
+            </div>
+            <div class="logo-description">
+                <h1>Dental Sciences</h1>
+                <p>
+                    We have a team of specialists in every field of Dentistry, Orthodontics, Periodontics, Prosthodontics, and Endodontics.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="column2 col-lg-4 col-md-4">
+        <h1>Have a Questions ?</h1>
+        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            <div>
+                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+            </div><br />
+            <div>
+                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+            </div><br />
+            <div class="div-width">
+                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                <span class="span-text">
+                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                </span>
+
+            </div><br />
+            <div>
+                <input type="submit" value="Submit" class="input-button check" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="description-section col-lg-12 col-md-12">
+
+    <div class="inner-description col-lg-8 col-md-8">
+        <div>
+            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Dental Sciences", "DentalScience")
+        </div>
+        <section class="ds-description">
+            <h1>Dental Science</h1>
+
+            <p>
+                Years ago, a physician who suspected heart disease in you probably did not refer you to a gum specialist.
+                Times have changed. The past years have seen increasing links between oral health and body health.<br />
+
+                Visiting a dentist is as necessary as consulting a cardiologist for your heart health.
+                We do tend to ignore our oral care because we feel it is not as crucial as our kidney,
+                heart, liver. Remember, by doing so, you are playing with your health.<br />
+
+                Teeth are a very important part of the body because good health starts with good oral health.
+                General well-being is associated with good oral health.
+                New research has shown a close relation between Periodontal Diseases and @Html.ActionLink("Cardiac Diseases", "HeartDisease").<br />
+
+                Looking after your teeth then becomes a very important aspect and we at Narayana Health,
+                a dental hospital in India provide comprehensive dental care including dental surgery in an extremely clean and hygienic
+                environment and that too at an affordable cost. Narayana Health Dental Care Department is India’s round the clock Health care
+                service fueled with comprehensive knowledge and vast experience. It takes a great amount of knowledge to be a dental
+                specialist and be a one-stop-solution for all your dental care needs. We are equipped with the latest equipment and accessories
+                needed to make your look good after all dental care is not only about gum health only.
+            </p>
+            <h3>
+                Facial and Dental Aesthetics
+            </h3>
+            <p>
+                Our @Html.ActionLink("Dentists", "Dentist") specializes in treatments like treatment of medically compromised patients,
+                mentally challenged children & adult under general anaesthesia. The dental team at Narayana Health consists of
+                dental surgeons having vast experience in different types of dental surgery including the best dental implant
+                hospital in India and root canal treatment in India. Aesthetic dentistry has been a boom over the last
+                30 years when it comes to such innovative techniques as teeth whitening and minimally invasive veneers
+            </p>
+
+            <h3>
+                Diagnosis of dental and oral problems: What to expect?
+            </h3>
+            <p>
+                Your dentist should be able to diagnose most of the dental and oral problems during a dental exam, where your teeth,
+                mouth, throat, tongue, cheeks, jaw and neck are thoroughly checked.<br />
+
+                Dentists use various tools and instruments to look or scrape at your teeth to move further with the diagnosis.
+                You might be asked to get dental X-rays of your mouth to get an image of each of your teeth.
+                A tool called a probe is also used to measure your gum pockets and identify whether you have gum disease or receding gums.<br />
+
+                In case, any abnormal lumps, lesions or growths in your mouth is found, your dentist will perform a gum biopsy.
+                A piece of tissue removed from the growth or lump will be examined under a microscope to check for cancerous cells.
+                If oral cancer is suspected, further imaging tests, such as X-ray, MRI scan, CT scan, endoscopy may be ordered to see if cancer has spread.
+            </p>
+            <p>
+                Different types of Dental Services you get at Narayana Health, a dental hospital in India:
+                <ul>
+                    <li>
+                        Braces (metal, ceramic and invisible)
+                    </li>
+                    <li>
+                        Bridges and Implants
+                    </li>
+                    <li>
+                        Crowns
+                    </li>
+                    <li>
+                        Dentures (fixed or removable; partial or full)
+                    </li>
+                    <li>
+                        Extractions
+                    </li>
+                    <li>
+                        Fillings and Repairs
+                    </li>
+                    <li>
+                        Gum Surgery
+                    </li>
+                    <li>
+                        Oral Cancer Examinations
+                    </li>
+                    <li>
+                        Root Canals
+                    </li>
+                    <li>
+                        Sealants
+                    </li>
+                    <li>
+                        Teeth Whitening
+                    </li>
+                    <li>
+                        Veneers
+                    </li>
+                </ul>
+            </p>
+
+            <h3>
+                Treatment procedures
+            </h3>
+            <p>
+                Although you follow good dental care and hygiene, you will still have to get a professional cleaning done twice a year on your routine visit with the dentist.
+                If you show any symptoms of gum disease, infection or other dental problems, your dentist may recommend the following treatments:<br />
+                cleanings, fluoride treatment, antibiotics, root canal, probiotics, fillings, crowns and sealants, root canal treatment in India.<br />
+
+                In more serious cases of periodontal disease, performing oral surgeries may be necessary.
+                So, always count on the best dental treatment hospital for your needs.
+            </p>
+            <h3>
+                Flap surgery
+            </h3>
+            <p>
+                The surgeon makes a small cut in the gum, lifts a section of the tissue and removes the tartar and bacteria present underneath the gums.
+            </p>
+
+            <h3>
+                Bone grafting
+            </h3>
+            <p>
+                The bone grafting procedure is performed when the bone surrounding the root of your tooth is damaged due to gum diseases.
+                A damaged bone is replaced with a graft made from either your own bone or a synthetic one.
+            </p>
+
+            <h3>
+                Soft tissue grafts
+            </h3>
+            <p>
+                In this procedure, the dentist takes a small piece of tissue from your mouth or uses donor tissue to attach it to the areas of your gums that are missing.
+            </p>
+
+            <h3>
+                Tooth extraction
+            </h3>
+            <p>
+                Tooth extraction is the last resort when there is no way of saving the tooth with a root canal or other surgery.
+            </p>
+        </section>
+        <br />
+
+        <section class="ds-description-FAQ">
+            <h3>Dental Sciences FAQ's</h3>
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Why should you visit the dentist?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        A dental checkup is so much more than just getting your teeth cleaned, when you visit your dentist regularly you will
+                        detect cavities while they are still in the initial stages, detect the onset of gum diseases, check your fillings, treat dry mouth or bad breath,
+                        upgrade your oral hygiene, and protect your overall health. During your dental visits, the dentist will remove any plaque or tartar buildup.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>How often should you visit the dentist?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        It’s necessary that you meet with your dentist once every six months. However, there are some clinics that schedule annual appointments, as well.
+                        If you have any oral condition that needs consistent treatment, then the dentist will suggest that you set up frequent appointments.
+                        Poor oral hygiene has been connected to several other overall health problems like diabetes, oral cancers, and at times even heart disease.
+                        Children should go at least once a year because their teeth are more prone to decay,
+                        while adults can visit the doctor once every two years, that is if they don’t face any major problems and are committed to proper oral hygiene.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>Can regular cleaning damage the enamel on your teeth?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        When you go for a regular visit to the dental office, you may feel that your enamel is getting damaged during the plaque removal process.
+                        The scraping sound and buzzing sensation may cause you some discomfort, especially if you have sensitive teeth. However,
+                        this doesn’t mean that your enamel has been scraped off; it’s normal for your teeth to be sensitive to hot and cold foods.
+                        When your tongue touches the cleaned teeth, it may feel like the enamel is worn out, but it just means that the plaque is gone.
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>How to stop gums from receding?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        If you’ve noticed that your teeth have been looking a little longer than usual, and your gums are pulling back from your teeth, 
+                        then you’re experiencing receding gums. Gum recession is a condition that can’t be reversed, which means 
+                        the gum won’t grow back, but you can control the problem from getting worse. You can talk to your dentist and 
+                        figure out the main cause of the problem and start altering your daily oral hygiene habits. 
+                        Healthy lifestyle choices that don’t include smoking or chewing tobacco will prevent gums from receding.
+                    </p>
+                </div>
+            </div>
+
+            <div class="custom-accordion">
+                <div class="accordio-label">
+                    <h4>What are the symptoms of gingivitis?</h4>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Gingivitis results in the inflammation of gums, and it usually occurs due to the excessive buildup of plaque and bacteria that accumulates on 
+                        the teeth. Some of the major symptoms of Gingivitis include puffy red gums that bleed when you brush your teeth. Patients usually don’t realize 
+                        they have Gingivitis, if it’s mild, nevertheless it has to be treated as soon as possible. The other symptoms for Gingivitis include:<br />
+                        <ul>
+                            <li>
+                                Bright purple or red gums
+                            </li>
+                            <li>
+                                Tender gums that are painful to touch
+                            </li>
+                            <li>
+                                Bleeding when flossing or brushing
+                            </li>
+                            <li>
+                                Bad breath
+                            </li>
+                            <li>
+                                Gum swelling
+                            </li>
+                            <li>
+                                Soft gums
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="quick-links col-lg-4 col-md-4">
+        <h3>
+            Quick Links
+        </h3>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+        </div>
+        <div class="quick-link-text">
+            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Utility.js"></script>
+}
+

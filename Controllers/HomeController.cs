@@ -22,7 +22,7 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
-        public ActionResult KidneyCare()
+        public ActionResult Nephrology()
         {
             return View();
         }
@@ -47,10 +47,11 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
-        public ActionResult CTScanMri()
+        public ActionResult DentalScience()
         {
             return View();
         }
+
         public ActionResult Others()
         {
             return View();

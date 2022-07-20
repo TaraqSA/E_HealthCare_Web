@@ -6,28 +6,97 @@
 
 @section Styles{
     <style>
-        .main-wrapper{
+        .main-heading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(180deg,hsl(134deg 73% 71% / 97%),hsl(134deg 26% 66% / 0%));
+            height: 100px;
+            width: auto;
+            margin: 0px -15px 10px -15px;
+            background-clip: content-box;
+        }
 
+        .main-wrapper {
+            display: grid;
+            gap: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
         }
 
         .card {
-            height:300px;
-            width:300px;
-            background-color:aquamarine;
+            height: 400px;
+            width: 250px;
+            box-shadow: 0px 0px 5px 3px #cce1d1;
         }
 
+        .card-image {
+            height: 40%;
+            cursor: pointer;
+        }
+
+            .card-image img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+            }
+
+        .content-head {
+            margin: 10px 10px;
+            font-size: 2rem;
+            color: hsla(139, 23%, 16%, 0.75);
+        }
+
+            .content-head::after {
+                margin: 5px 5px;
+                display: block;
+                content: '';
+                bottom: 0;
+                left: 1%;
+                position: relative;
+                border-bottom: 2px solid hsla(135, 73%, 39%, 0.19);
+                width: 25%;
+            }
+
+        .content-desc {
+            margin: 12px 12px;
+            color: gray;
+        }
+
+        .visit-btn {
+            position:relative;
+            margin-left: 10px;
+            font-size: 1.5rem;            
+            padding: 8px 16px;
+        }
+
+        @@media 
     </style>
-    }
+}
 
 
-
-<h2>Others Services</h2>
+<div class="main-heading">
+    <h2>Other Services</h2>
+</div>
 <div class="main-wrapper">
     <div class="card">
-        <h3>Dermatology and Cosmetology</h3>
+        <div class="card-image">
+            <a href="~/Home/Dermatology"><img src="~/Images/dermatology.jpg" alt="dermatology" /></a>
+        </div>
+        <p class="content-head">Dermatology</p>
+        <p class="content-desc">
+            Dermatology and Cosmetology are among the most dynamic sciences in the world and we have been successfully serving the need of the patients...
+        </p>
+        @Html.ActionLink("KNOW MORE", "Dermatology", null, new { @class = "btn btn-success visit-btn" })
     </div>
 
     <div class="card">
-        <h3>Psychiatry & Clinical Psychology</h3>
+        <div class="card-image">
+            <a href="~/Home/Psychology"><img src="~/Images/appointment-psychologist.jpg" alt="psychology" /></a>
+        </div>
+        <p class="content-head">Psychology</p>
+        <p class="content-desc">
+            Our highly experienced team offers Comprehensive Counselling to all Age groups and provides services such as Neuropsychiatry, Addiction Medicine, Memory Clinics, and Child Psychiatry...
+        </p>        
+            @Html.ActionLink("KNOW MORE", "Psychology", null, new { @class = "btn btn-success visit-btn" })        
     </div>
 </div>

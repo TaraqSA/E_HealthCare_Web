@@ -52,6 +52,16 @@ namespace E_HealthCare_Web.Controllers
             return View();
         }
 
+        public ActionResult Dermatology()
+        {
+            return View();
+        }
+
+        public ActionResult Psychology()
+        {
+            return View();
+        }
+
         public ActionResult Others()
         {
             return View();

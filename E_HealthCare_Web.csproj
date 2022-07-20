@@ -383,13 +383,17 @@
     <Content Include="Icon.png" />
     <Content Include="Images\aditya-romansa-5zp0jym2w9M-unsplash.jpg" />
     <Content Include="Images\another-resize-hospital-theme.jpg" />
+    <Content Include="Images\appointment-psychologist.jpg" />
     <Content Include="Images\camilo-jimenez-vGu08RYjO-s-unsplash.jpg" />
+    <Content Include="Images\dermatology.jpg" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
     <Content Include="Images\logo\blood-type %28256%29.png" />
     <Content Include="Images\logo\brain.png" />
     <Content Include="Images\logo\kidney.png" />
     <Content Include="Images\logo\microscope.png" />
     <Content Include="Images\logo\physiotherapy128.png" />
+    <Content Include="Images\logo\psychology.png" />
+    <Content Include="Images\logo\derm.png" />
     <Content Include="Images\logo\surgery.png" />
     <Content Include="Images\logo\thyroid.png" />
     <Content Include="Images\logo\tooth.png" />
@@ -637,6 +641,8 @@
     <Content Include="Views\Home\Pathology.cshtml" />
     <Content Include="Views\Home\DentalScience.cshtml" />
     <Content Include="Views\Home\Others.cshtml" />
+    <Content Include="Views\Home\Dermatology.cshtml" />
+    <Content Include="Views\Home\Psychology.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

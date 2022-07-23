@@ -221,7 +221,7 @@ namespace E_HealthCare_Web.Controllers
 
         private void SendEmail(string emailAddress, string body, string subject)
         {
-            using (MailMessage mm = new MailMessage("salmanchannel212@gmail.com", emailAddress))
+            using (MailMessage mm = new MailMessage("your_email", emailAddress))
             {
                 mm.Subject = subject;
                 mm.Body = body;

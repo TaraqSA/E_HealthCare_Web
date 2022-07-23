@@ -231,7 +231,7 @@ namespace E_HealthCare_Web.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
 
-                NetworkCredential networkCredential = new NetworkCredential("salmanchannel212@gmail.com", "jzwsyxrbnncpdoqv");
+                NetworkCredential networkCredential = new NetworkCredential(your_email, your_password);
 
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = networkCredential;

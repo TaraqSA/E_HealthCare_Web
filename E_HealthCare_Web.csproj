@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
@@ -643,6 +644,8 @@
     <Content Include="Views\Home\Others.cshtml" />
     <Content Include="Views\Home\Dermatology.cshtml" />
     <Content Include="Views\Home\Psychology.cshtml" />
+    <Content Include="Views\Error\NotFound403.cshtml" />
+    <None Include="Views\Error\NotFound404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

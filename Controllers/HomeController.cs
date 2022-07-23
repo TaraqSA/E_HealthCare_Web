@@ -7,8 +7,9 @@ using E_HealthCare_Web.Models;
 
 namespace E_HealthCare_Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
-    {
+    {   
         public ActionResult Index()
         {
 

@@ -1,33 +1,29 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "NotFound404";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Styles{
     <style type="text/css">
-        
         .error-text {
-            height: 500px;
-            width:inherit;
+            height: 100vh;
+            width: inherit;
             position: relative;
             background-image: linear-gradient(180deg,hsl(134deg 73% 71% / 97%),hsl(134deg 26% 66% / 0%),hsl(134deg 26% 66% / 0%));
             margin: 0px -15px 10px -15px;
         }
 
-        .error-text h1{
-            position:absolute;
-            top:25%;
-            left:10%;
-            right:10%;
-            bottom:10%;
-            font-family:Britannic;
-        }
+            .error-text h1 {
+                position: absolute;
+                top: 25%;
+                left: 10%;
+                right: 10%;
+                bottom: 10%;
+                font-family: Britannic;
+            }
     </style>
-    
-    }
-<div class="main-div">
-    <div class="error-text">
-        <h1>The Resource you are looking for, is unavailable at the moment</h1>
-    </div>
-</div>
 
+}
+
+<div class="error-text">
+    <h1>The Resource you are looking for, is unavailable at the moment</h1>
+</div>

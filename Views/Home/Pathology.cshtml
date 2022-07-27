@@ -225,397 +225,401 @@
     </style>
 }
 
-<div class="header-section col-lg-12 col-md-12">
-    <div class="column1 col-lg-8 col-md-8">
-        <div class="inner-content1">
-            <div class="logo-style">
-                <img src="~/Images/logo/microscope.png" />
-            </div>
-            <div class="logo-description">
-                <h1>Pathology</h1>
-                <p>
-                    Our State-of-the-Art facilities along with a dedicated team of @Html.ActionLink("Pathologists", "Pathologist"), offer you the most Advanced Diagnosis and Accurate Results.
-                </p>
+<div class="row">
+    <div class="header-section col-lg-12 col-md-12">
+        <div class="column1 col-lg-8 col-md-8">
+            <div class="inner-content1">
+                <div class="logo-style">
+                    <img src="~/Images/logo/microscope.png" />
+                </div>
+                <div class="logo-description">
+                    <h1>Pathology</h1>
+                    <p>
+                        Our State-of-the-Art facilities along with a dedicated team of @Html.ActionLink("Pathologists", "Pathologist"), offer you the most Advanced Diagnosis and Accurate Results.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="column2 col-lg-4 col-md-4">
-        <h1>Have a Questions ?</h1>
-        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken();
-            <div>
-                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
-                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
-                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
-                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
-            </div><br />
-            <div class="div-width">
-                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
-                <span class="span-text">
-                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
-                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
-                </span>
+        <div class="column2 col-lg-4 col-md-4">
+            <h1>Have a Question ?</h1>
+            @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken();
+                <div>
+                    @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                    @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                    @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                    @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="div-width">
+                    @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                    <span class="span-text">
+                        By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                        and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                    </span>
 
-            </div><br />
-            <div>
-                <input type="submit" value="Submit" class="input-button check" />
-            </div>
-        }
+                </div><br />
+                <div>
+                    <input type="submit" value="Submit" class="input-button check" />
+                </div>
+            }
+        </div>
     </div>
 </div>
 
-<div class="description-section col-lg-12 col-md-12">
+<div class="row">
+    <div class="description-section col-lg-12 col-md-12">
 
-    <div class="inner-description col-lg-8 col-md-8">
-        <div>
-            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Pathology", "Pathology")
-        </div>
-        <section class="pathology-description">
-            <h1>Human Pathology</h1>
-            <h2>
-                DEFINITION
-            </h2>
-            <p>
-                The word ‘Pathology’ is derived from two Greek words:
-            </p>
-            <p>
-                <b>Pathos-</b> meaning suffering, and <b>logos -</b> meaning study.
-            </p>
-            <p>
-                <b>Pathology</b> is the branch of science that deals with scientific study of structure and function of the body in
-                disease through laboratory examinations of samples of blood ,body fluids, tissues (biopsy samples),
-                surgically removed organs, and in some cases the whole body (autopsy), for diagnostic or forensic purposes.
-            </p>
-            <p>
-                Pathologists are often called 'Doctor's Doctor'. Medical practitioners who are pathologists have expertise in illness and disease.
-                This expertise is extremely helpful in all aspects of healthcare,
-                from helping doctors in diagnosing and treating common diseases, to using pioneering technologies to treat patients with critical health conditions.
-            </p>
-
-            <h3>
-                Branches of Pathology:
-            </h3>
-            <p>
-                Human pathology is the largest branch of pathology.
-            </p>
-            <p>
-                It is conventionally divided into
-            </p>
-            <p>
-                1. General Pathology dealing with general principles of disease
-            </p>
-            <p>
-                2. Systemic Pathology that includes study of diseases pertaining to the specific organs and body systems.
-            </p>
-
-            <h3>
-                Subdivisions of Pathology.
-            </h3>
-            <b>
-                A. HISTOPATHOLOGY
-            </b>
-            <p>
-                Histopathology, used synonymously with anatomic pathology, pathologic anatomy, or morbid anatomy .
-                The study includes structural changes observed by naked eye examination referred to as gross or
-                macroscopic changes,and the changes detected by light and electron microscopy
-                supported by numerous special staining methods including histochemical and immunological techniques to arrive at the most accurate diagnosis.
-            </p>
-            <p>
-                Anatomic pathology includes the following 3 main subdivisions:
-                1.Surgical pathology. It deals with the study of tissues removed from the living body.<br />
-
-                2.Forensic pathology and autopsy work.This includes the study of organs and tissues removed at postmortem for medicolegal work and for determining the underlying sequence and cause of death. <br />
-
-                3.Cytopathology. It includes study of cells shedoff from the lesions (exfoliative cytology) and fine-needleaspiration cytology (FNAC) of superficial and deep-seated lesions for diagnosis<br />
-
-                Modern anatomic pathology includes super-specialities such as,<br />
-                <ul>
-                    <li>
-                        cardiacpathology
-                    </li>
-                    <li>
-                        pulmonary pathology
-                    </li>
-                    <li>
-                        neuropathology
-                    </li>
-                    <li>
-                        renalpathology
-                    </li>
-                    <li>
-                        gynaecologic pathology
-                    </li>
-                    <li>
-                        breast pathology
-                    </li>
-                    <li>
-                        dermatopathology
-                    </li>
-                    <li>
-                        gastrointestinal pathology
-                    </li>
-                    <li>
-                        oralpathology, and so on.
-                    </li>
-                </ul>
-            </p>
-
-
-
-
-            <b>B. HAEMATOLOGY.</b>
-            <p>
-                Haematology deals with the diseases of blood. It includes laboratory haematology and clinical haematology; the latter covers the management of patientas well.
-            </p>
-
-            <b>
-                C. CHEMICAL PATHOLOGY
-            </b>
-            <p>
-                .Analysis of biochemical constituents of blood, urine, semen, CSF and other bodyfluids is included in this branch of pathology.
-            </p>
-
-            <b>D. IMMUNOLOGY</b>
-            <p>
-                .Detection of abnormalities in the immune system of the body comprises immunology and immunopathology.
-            </p>
-
-            <b>E. EXPERIMENTAL PATHOLOGY.</b>
-            <p>
-                This is defined as production of disease in the experimental animal and its study.
-                However, all the findings of experimental work in animals may not be applicable to human beings due to species differences.
-            </p>
-
-            <b>F. GEOGRAPHIC PATHOLOGY.</b>
-            <p>
-                The study of differences in distribution of frequency and type of diseases in populations in different parts of the world forms geographic pathology.
-            </p>
-
-            <b>G. MEDICAL GENETICS.</b>
-            <p>
-                This is the branch of human genetics that deals with the relationship between heredity and disease.
-                There have been important developments in the field of medical genetics e.g.
-                in blood groups, inbornerrors of metabolism, chromosomal aberrations incongenital malformations and neoplasms etc.
-            </p>
-
-            <b>H. MOLECULAR PATHOLOGY.</b>
-            <p>
-                The detection and diagnosis of abnormalities at the level of DNA of the cell is included in molecular pathology.
-                Recent advancements in molecular biologic techniques have resulted in availability of
-                these methods not only for research purposes but also as a tool in diagnostic pathology
-            </p>
-
-            <h3>
-                Routine testes done in laboratory:
-            </h3>
-            <b>Blood tests:</b>
-            <p>
-                It is the most common pathological test which a doctor prescribes to detect any abnormalities or illness. Your doctor might also recommend you to do blood tests annually to monitor your health. Here are a few common blood tests -
-                <b>Complete Blood Count (CBC)</b> - A CBC test determines if there are any increase or decrease in your red blood cells, white blood cells, haemoglobin, hematocrit, and platelet counts.
-            </p>
-
-            <p>
-                <b>Erythrocyte Sedimentation Rate (ESR) Test -</b> It helps to check for inflammation. It is usually performed along with other tests, as it doesn't indicate where the inflammation is or what is causing the inflammation.
-            </p>
-
-            <p><b>Blood Grouping-</b> Determines the blood group type of a person.</p>
-            <p>
-                <b>Basic Metabolic Panel -</b> A basic metabolic panel is a combination of tests that helps doctors determine and assess important bodily functions.
-                It comprises tests for BUN (blood urea nitrogen), creatinine, glucose, albumin, CO2 (carbon dioxide or bicarbonate),
-                calcium, sodium, potassium, and chloride in the body.
-                This test helps to diagnose conditions like kidney problems, lung problems, chronic pancreatic or insulin metabolism
-            </p>
-
-            <p>
-                <b>Lipid Profile -</b> It determines various levels of cholesterol and other fats in the blood. This test is recommended for people above 40 years of age
-                who have high blood pressure or @Html.ActionLink("diabetes", "Diabetes") to monitor the cholesterol level to avoid conditions like @Html.ActionLink("heart disease", "HeartDisease").
-            </p>
-
-            <p>
-                <b>Thyroid Panel -</b> Thyroid function tests are a series of blood tests the functioning of the thyroid gland. This test includes the T3,T4,TSH,FT3,FT4 and Anti-TPO tests.
-            </p>
-
-            <p>
-                <b>Blood Glucose Test -</b> Commonly known as blood sugar tests, this test is used to monitor diabetes. Blood sugar levels are tested in two conditions, fasting or post eating food.
-            </p>
-
-            <p>
-                <b>Calcium Blood Test -</b>Calcium strengthens the bones. Calcium is also a crucial component for the proper functioning of the body muscles,
-                nerves, and heart. Calcium blood tests help determine kidney disease, 
-                kidney stones, bone disease, thyroid disease, intestinal diseases, some types of cancer, and poor nutrition.
-            </p>
-
-            <p>
-                <b>Liver Function Tests -</b> Liver function tests (also called LFTs) are blood tests that comprise various tests to diagnose how your liver is working. 
-                A pathologist tests the levels of enzymes and proteins that are either produced by liver cells or released into the blood when liver cells are damaged.
-            </p>
-
-            <p>
-                <b>Cardiac Enzymes Test or Troponin Test -</b> Troponin is a protein found in the heart muscle. 
-                It helps regulate the heart blood flow, in case of heart injury through heart attack, etc. 
-                This test helps determine any kind of abnormality in the heart.
-            </p>
-
-            <p>
-                <b>Iron studies /Vitamin B12 or Vitamin D test -</b> This test helps determine any kind of Iron/vitamin deficiency in 
-                the body and these types of tests can help your doctor treat your condition accordingly.
-            </p>
-
-            <p>
-                Also Urine examination and Stool examination is carried out to see any abnormalities.<br />
-
-                Detection of many type of fever like Dengue,Malaria,Microfilaria,chikungunya,<br />
-
-                Typhoid etc is also done.<br />
-
-                Detection of HIV,Various type of Hepatitis like A,B,C,E,Syphilis and other Special tests are done as per requirement.
-            </p>
-
-            <h3>
-                Why E-HealthCare?
-            </h3>
-            <p>
-                E-HealthCare hospitals have one of the best pathology labs in India. The department offers timely and accurate histopathology and cytopathology 
-                services to various clinical specialities. Annually we receive large numbers of histology specimens, cytology specimens, and cervical smears.
-                We report on tissue biopsies and resections from various sites including cancer biopsies and complex cancer resections. Neuropathology services are also provided. 
-                We also perform and report on fine needle aspirations (FNAC) from various sites. We also report on fluid cytology specimens and cervical smears.
-                We have a fairly large panel of immunohistochemical markers to assist in diagnosis, 
-                and also to carry out therapeutic and prognostic immunohistochemical tests. Various special histochemical stains, when needed, are also carried out here.
-            </p>
-        </section>
-        <br />
-
-        <section class="pathology-description-FAQ">
-            <h3>Pathology FAQs</h3>
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What does a pathologist do?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        A pathologist is a physician who studies the body’s tissues and fluids,
-                        they help your primary care doctor make a diagnosis about your current health situation along with any medical problems you may have,
-                        and use laboratory tests to monitor the health of patients with chronic conditions. They help care for the patients by providing
-                        the doctors with the appropriate information that is needed to ensure proper patient care. They also recommend steps
-                        that you can take to prevent illnesses and maintain good health. For instance, when a pathologist draws blood for your annual physical exam,
-                        they may supervise the test or perform tests to help determine your current health conditions.
-                    </p>
-                </div>
+        <div class="inner-description col-lg-8 col-md-8">
+            <div>
+                @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Pathology", "Pathology")
             </div>
+            <section class="pathology-description">
+                <h1>Human Pathology</h1>
+                <h2>
+                    DEFINITION
+                </h2>
+                <p>
+                    The word ‘Pathology’ is derived from two Greek words:
+                </p>
+                <p>
+                    <b>Pathos-</b> meaning suffering, and <b>logos -</b> meaning study.
+                </p>
+                <p>
+                    <b>Pathology</b> is the branch of science that deals with scientific study of structure and function of the body in
+                    disease through laboratory examinations of samples of blood ,body fluids, tissues (biopsy samples),
+                    surgically removed organs, and in some cases the whole body (autopsy), for diagnostic or forensic purposes.
+                </p>
+                <p>
+                    Pathologists are often called 'Doctor's Doctor'. Medical practitioners who are pathologists have expertise in illness and disease.
+                    This expertise is extremely helpful in all aspects of healthcare,
+                    from helping doctors in diagnosing and treating common diseases, to using pioneering technologies to treat patients with critical health conditions.
+                </p>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>How many types of pathology are there?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        There are three main types of pathology- anatomical, clinical, and molecular. These subtypes can be broken into even more specific categories.
-                        Pathology is a vast and diverse field because so many different diseases and ways of studying diseases exist.
-                    </p>
-                    <p>
-                        Anatomical Pathology is divided into way more subcategories which include-
-                    </p>
+                <h3>
+                    Branches of Pathology:
+                </h3>
+                <p>
+                    Human pathology is the largest branch of pathology.
+                </p>
+                <p>
+                    It is conventionally divided into
+                </p>
+                <p>
+                    1. General Pathology dealing with general principles of disease
+                </p>
+                <p>
+                    2. Systemic Pathology that includes study of diseases pertaining to the specific organs and body systems.
+                </p>
+
+                <h3>
+                    Subdivisions of Pathology.
+                </h3>
+                <b>
+                    A. HISTOPATHOLOGY
+                </b>
+                <p>
+                    Histopathology, used synonymously with anatomic pathology, pathologic anatomy, or morbid anatomy .
+                    The study includes structural changes observed by naked eye examination referred to as gross or
+                    macroscopic changes,and the changes detected by light and electron microscopy
+                    supported by numerous special staining methods including histochemical and immunological techniques to arrive at the most accurate diagnosis.
+                </p>
+                <p>
+                    Anatomic pathology includes the following 3 main subdivisions:
+                    1.Surgical pathology. It deals with the study of tissues removed from the living body.<br />
+
+                    2.Forensic pathology and autopsy work.This includes the study of organs and tissues removed at postmortem for medicolegal work and for determining the underlying sequence and cause of death. <br />
+
+                    3.Cytopathology. It includes study of cells shedoff from the lesions (exfoliative cytology) and fine-needleaspiration cytology (FNAC) of superficial and deep-seated lesions for diagnosis<br />
+
+                    Modern anatomic pathology includes super-specialities such as,<br />
                     <ul>
                         <li>
-                            Surgical pathology- is an examination of the tissues extracted during a surgery
+                            cardiacpathology
                         </li>
                         <li>
-                            Histopathology – this is an examination of cells seen under a microscope, these cells are stained by a dye so that’s it easier to observe them.
+                            pulmonary pathology
                         </li>
                         <li>
-                            Cytopathology- is the study of small cell groups that shed bodily fluids
+                            neuropathology
+                        </li>
+                        <li>
+                            renalpathology
+                        </li>
+                        <li>
+                            gynaecologic pathology
+                        </li>
+                        <li>
+                            breast pathology
+                        </li>
+                        <li>
+                            dermatopathology
+                        </li>
+                        <li>
+                            gastrointestinal pathology
+                        </li>
+                        <li>
+                            oralpathology, and so on.
                         </li>
                     </ul>
+                </p>
 
-                    <p>
-                        Clinical pathology consists of the following subcategories-
-                    </p>
-                    <ul>
-                        <li>
-                            Immunology- is a study for of immune system disorders
-                        </li>
-                        <li>
-                            Hematology- is related to the study of blood
-                        </li>
-                        <li>
-                            Chemical Pathology- involves chemical analysis of body fluids, through microscopy and testing
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Do pathologists ever consult with patients?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        Pathologists are medical experts who specialize in diagnosing and managing diseases through the best pathology lab tests.
-                        Pathologists bring valuable assets to the table, but a patient may never have to visit them during their treatment.
-                        They may see a bill from a pathologist, but it’s really for producing pathology lab tests that were ordered from primary doctors.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What is a pathology test?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        Pathology is a medical specialty that confirms the cause and nature of various diseases by testing and examining body tissues and fluids;
-                        this includes biopsies, pap smears, blood, and urine.
-                        Pathology tests help prevent, diagnose, and treat infections, allergies, chronic diseases, cancers, along with many other medical conditions.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Do all pathologists perform autopsies?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        Autopsies are performed by pathologists, they are physicians who have received special training in diagnosing diseases based on a
-                        thorough examination of various tissues and organs.
-                        In many cases, autopsies are performed by pathologists who are on the staff of the hospital where the deceased patient received health care.
-                    </p>
-                </div>
-            </div>
+                <b>B. HAEMATOLOGY.</b>
+                <p>
+                    Haematology deals with the diseases of blood. It includes laboratory haematology and clinical haematology; the latter covers the management of patientas well.
+                </p>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>How long does it take to receive a pathology report?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        Depends on the test request by doctor, for few blood tests report will be available with 1 or 2 hours.For Biopsy specimen it may require 3 to 4 days. 
-                        For Any special investigations like molecular testing it may require few days to 3 weeks. 
-                        Patients can ask their doctors for a copy of their results and have the primary doctor explain it to them.
-                    </p>
-                </div>
-            </div>
-        </section>
+                <b>
+                    C. CHEMICAL PATHOLOGY
+                </b>
+                <p>
+                    .Analysis of biochemical constituents of blood, urine, semen, CSF and other bodyfluids is included in this branch of pathology.
+                </p>
 
-    </div>
+                <b>D. IMMUNOLOGY</b>
+                <p>
+                    .Detection of abnormalities in the immune system of the body comprises immunology and immunopathology.
+                </p>
 
-    <div class="quick-links col-lg-4 col-md-4">
-        <h3>
-            Quick Links
-        </h3>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+                <b>E. EXPERIMENTAL PATHOLOGY.</b>
+                <p>
+                    This is defined as production of disease in the experimental animal and its study.
+                    However, all the findings of experimental work in animals may not be applicable to human beings due to species differences.
+                </p>
+
+                <b>F. GEOGRAPHIC PATHOLOGY.</b>
+                <p>
+                    The study of differences in distribution of frequency and type of diseases in populations in different parts of the world forms geographic pathology.
+                </p>
+
+                <b>G. MEDICAL GENETICS.</b>
+                <p>
+                    This is the branch of human genetics that deals with the relationship between heredity and disease.
+                    There have been important developments in the field of medical genetics e.g.
+                    in blood groups, inbornerrors of metabolism, chromosomal aberrations incongenital malformations and neoplasms etc.
+                </p>
+
+                <b>H. MOLECULAR PATHOLOGY.</b>
+                <p>
+                    The detection and diagnosis of abnormalities at the level of DNA of the cell is included in molecular pathology.
+                    Recent advancements in molecular biologic techniques have resulted in availability of
+                    these methods not only for research purposes but also as a tool in diagnostic pathology
+                </p>
+
+                <h3>
+                    Routine testes done in laboratory:
+                </h3>
+                <b>Blood tests:</b>
+                <p>
+                    It is the most common pathological test which a doctor prescribes to detect any abnormalities or illness. Your doctor might also recommend you to do blood tests annually to monitor your health. Here are a few common blood tests -
+                    <b>Complete Blood Count (CBC)</b> - A CBC test determines if there are any increase or decrease in your red blood cells, white blood cells, haemoglobin, hematocrit, and platelet counts.
+                </p>
+
+                <p>
+                    <b>Erythrocyte Sedimentation Rate (ESR) Test -</b> It helps to check for inflammation. It is usually performed along with other tests, as it doesn't indicate where the inflammation is or what is causing the inflammation.
+                </p>
+
+                <p><b>Blood Grouping-</b> Determines the blood group type of a person.</p>
+                <p>
+                    <b>Basic Metabolic Panel -</b> A basic metabolic panel is a combination of tests that helps doctors determine and assess important bodily functions.
+                    It comprises tests for BUN (blood urea nitrogen), creatinine, glucose, albumin, CO2 (carbon dioxide or bicarbonate),
+                    calcium, sodium, potassium, and chloride in the body.
+                    This test helps to diagnose conditions like kidney problems, lung problems, chronic pancreatic or insulin metabolism
+                </p>
+
+                <p>
+                    <b>Lipid Profile -</b> It determines various levels of cholesterol and other fats in the blood. This test is recommended for people above 40 years of age
+                    who have high blood pressure or @Html.ActionLink("diabetes", "Diabetes") to monitor the cholesterol level to avoid conditions like @Html.ActionLink("heart disease", "HeartDisease").
+                </p>
+
+                <p>
+                    <b>Thyroid Panel -</b> Thyroid function tests are a series of blood tests the functioning of the thyroid gland. This test includes the T3,T4,TSH,FT3,FT4 and Anti-TPO tests.
+                </p>
+
+                <p>
+                    <b>Blood Glucose Test -</b> Commonly known as blood sugar tests, this test is used to monitor diabetes. Blood sugar levels are tested in two conditions, fasting or post eating food.
+                </p>
+
+                <p>
+                    <b>Calcium Blood Test -</b>Calcium strengthens the bones. Calcium is also a crucial component for the proper functioning of the body muscles,
+                    nerves, and heart. Calcium blood tests help determine kidney disease,
+                    kidney stones, bone disease, thyroid disease, intestinal diseases, some types of cancer, and poor nutrition.
+                </p>
+
+                <p>
+                    <b>Liver Function Tests -</b> Liver function tests (also called LFTs) are blood tests that comprise various tests to diagnose how your liver is working.
+                    A pathologist tests the levels of enzymes and proteins that are either produced by liver cells or released into the blood when liver cells are damaged.
+                </p>
+
+                <p>
+                    <b>Cardiac Enzymes Test or Troponin Test -</b> Troponin is a protein found in the heart muscle.
+                    It helps regulate the heart blood flow, in case of heart injury through heart attack, etc.
+                    This test helps determine any kind of abnormality in the heart.
+                </p>
+
+                <p>
+                    <b>Iron studies /Vitamin B12 or Vitamin D test -</b> This test helps determine any kind of Iron/vitamin deficiency in
+                    the body and these types of tests can help your doctor treat your condition accordingly.
+                </p>
+
+                <p>
+                    Also Urine examination and Stool examination is carried out to see any abnormalities.<br />
+
+                    Detection of many type of fever like Dengue,Malaria,Microfilaria,chikungunya,<br />
+
+                    Typhoid etc is also done.<br />
+
+                    Detection of HIV,Various type of Hepatitis like A,B,C,E,Syphilis and other Special tests are done as per requirement.
+                </p>
+
+                <h3>
+                    Why E-HealthCare?
+                </h3>
+                <p>
+                    E-HealthCare hospitals have one of the best pathology labs in India. The department offers timely and accurate histopathology and cytopathology
+                    services to various clinical specialities. Annually we receive large numbers of histology specimens, cytology specimens, and cervical smears.
+                    We report on tissue biopsies and resections from various sites including cancer biopsies and complex cancer resections. Neuropathology services are also provided.
+                    We also perform and report on fine needle aspirations (FNAC) from various sites. We also report on fluid cytology specimens and cervical smears.
+                    We have a fairly large panel of immunohistochemical markers to assist in diagnosis,
+                    and also to carry out therapeutic and prognostic immunohistochemical tests. Various special histochemical stains, when needed, are also carried out here.
+                </p>
+            </section>
+            <br />
+
+            <section class="pathology-description-FAQ">
+                <h3>Pathology FAQs</h3>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What does a pathologist do?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            A pathologist is a physician who studies the body’s tissues and fluids,
+                            they help your primary care doctor make a diagnosis about your current health situation along with any medical problems you may have,
+                            and use laboratory tests to monitor the health of patients with chronic conditions. They help care for the patients by providing
+                            the doctors with the appropriate information that is needed to ensure proper patient care. They also recommend steps
+                            that you can take to prevent illnesses and maintain good health. For instance, when a pathologist draws blood for your annual physical exam,
+                            they may supervise the test or perform tests to help determine your current health conditions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>How many types of pathology are there?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            There are three main types of pathology- anatomical, clinical, and molecular. These subtypes can be broken into even more specific categories.
+                            Pathology is a vast and diverse field because so many different diseases and ways of studying diseases exist.
+                        </p>
+                        <p>
+                            Anatomical Pathology is divided into way more subcategories which include-
+                        </p>
+                        <ul>
+                            <li>
+                                Surgical pathology- is an examination of the tissues extracted during a surgery
+                            </li>
+                            <li>
+                                Histopathology – this is an examination of cells seen under a microscope, these cells are stained by a dye so that’s it easier to observe them.
+                            </li>
+                            <li>
+                                Cytopathology- is the study of small cell groups that shed bodily fluids
+                            </li>
+                        </ul>
+
+                        <p>
+                            Clinical pathology consists of the following subcategories-
+                        </p>
+                        <ul>
+                            <li>
+                                Immunology- is a study for of immune system disorders
+                            </li>
+                            <li>
+                                Hematology- is related to the study of blood
+                            </li>
+                            <li>
+                                Chemical Pathology- involves chemical analysis of body fluids, through microscopy and testing
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Do pathologists ever consult with patients?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Pathologists are medical experts who specialize in diagnosing and managing diseases through the best pathology lab tests.
+                            Pathologists bring valuable assets to the table, but a patient may never have to visit them during their treatment.
+                            They may see a bill from a pathologist, but it’s really for producing pathology lab tests that were ordered from primary doctors.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What is a pathology test?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Pathology is a medical specialty that confirms the cause and nature of various diseases by testing and examining body tissues and fluids;
+                            this includes biopsies, pap smears, blood, and urine.
+                            Pathology tests help prevent, diagnose, and treat infections, allergies, chronic diseases, cancers, along with many other medical conditions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Do all pathologists perform autopsies?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Autopsies are performed by pathologists, they are physicians who have received special training in diagnosing diseases based on a
+                            thorough examination of various tissues and organs.
+                            In many cases, autopsies are performed by pathologists who are on the staff of the hospital where the deceased patient received health care.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>How long does it take to receive a pathology report?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Depends on the test request by doctor, for few blood tests report will be available with 1 or 2 hours.For Biopsy specimen it may require 3 to 4 days.
+                            For Any special investigations like molecular testing it may require few days to 3 weeks.
+                            Patients can ask their doctors for a copy of their results and have the primary doctor explain it to them.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
         </div>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
 
+        <div class="quick-links col-lg-4 col-md-4">
+            <h3>
+                Quick Links
+            </h3>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+            </div>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+
+            </div>
         </div>
     </div>
 </div>

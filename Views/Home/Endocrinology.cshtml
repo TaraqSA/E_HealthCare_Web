@@ -225,338 +225,343 @@
     </style>
 }
 
-<div class="header-section col-lg-12 col-md-12">
-    <div class="column1 col-lg-8 col-md-8">
-        <div class="inner-content1">
-            <div class="logo-style">
-                <img src="~/Images/logo/thyroid.png" />
-            </div>
-            <div class="logo-description">
-                <h1>Endocrinology</h1>
-                <p>
-                    We provide the highest quality care to our patients suffering from Endocrine Diseases and Diabetes.
-                </p>
 
+<div class="row">
+    <div class="header-section col-lg-12 col-md-12">
+        <div class="column1 col-lg-8 col-md-8">
+            <div class="inner-content1">
+                <div class="logo-style">
+                    <img src="~/Images/logo/thyroid.png" />
+                </div>
+                <div class="logo-description">
+                    <h1>Endocrinology</h1>
+                    <p>
+                        We provide the highest quality care to our patients suffering from Endocrine Diseases and Diabetes.
+                    </p>
+
+                </div>
             </div>
         </div>
-    </div>
-    <div class="column2 col-lg-4 col-md-4">
-        <h1>Have a Questions ?</h1>
-        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken();
-            <div>
-                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
-                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
-                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
-                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
-            </div><br />
-            <div class="div-width">
-                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
-                <span class="span-text">
-                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
-                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
-                </span>
+        <div class="column2 col-lg-4 col-md-4">
+            <h1>Have a Question ?</h1>
+            @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken();
+                <div>
+                    @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                    @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                    @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                    @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="div-width">
+                    @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                    <span class="span-text">
+                        By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                        and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                    </span>
 
-            </div><br />
-            <div>
-                <input type="submit" value="Submit" class="input-button check" />
-            </div>
-        }
+                </div><br />
+                <div>
+                    <input type="submit" value="Submit" class="input-button check" />
+                </div>
+            }
+        </div>
     </div>
 </div>
 
-<div class="description-section col-lg-12 col-md-12">
+<div class="row">
+    <div class="description-section col-lg-12 col-md-12">
 
-    <div class="inner-description col-lg-8 col-md-8">
-        <div>
-            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Endocrinology", "Endocrinology")
+        <div class="inner-description col-lg-8 col-md-8">
+            <div>
+                @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Endocrinology", "Endocrinology")
+            </div>
+            <section class="endocrinology-description">
+                <h1>Endocrinology</h1>
+                <p>
+                    The department of endocrinology at Narayana Health offers the best treatment modalities available for endocrine disorders and works closely
+                    along with other departments such as oncology, neurology, reproductive medicine,
+                    reproductive medicine, and genetics to provide accurate and comprehensive care for its patients suffering from various endocrine diseases.
+                </p>
+
+                <h3>
+                    Key endocrine disorders treated include-
+                </h3>
+
+                <ul>
+                    <li>
+                        <b>
+                            Thyroid gland:
+                        </b>
+                        <P>
+                            Hypothyroidism, Hyperthyroidism, @Html.ActionLink("Thyroid", "ThyroidProblems") Nodules, Thyroid Eye Disorders, and Thyroid Cancers.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Pituitary gland:
+                        </b>
+                        <P>
+                            Pituitary Tumours, Acromegaly, Cushing’s disease, Prolactin Disorders, Diabetes Insipidus, Hypophysitis and Sheehan’s Syndrome.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Reproductive endocrine disorders:
+                        </b>
+                        <P>
+                            PCOS, Hirsutism, Male & Female Infertility, and Sexual Disorders.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Paediatric Endocrinology:
+                        </b>
+                        <P>
+                            Growth, Thyroid, Puberty, Bone & Calcium Disorders.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Metabolic bone disorders:
+                        </b>
+                        <P>
+                            Vitamin D Deficiency, Rickets, Parathyroid Disorders, Osteoporosis, and Genetic Disorders of the Bone.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Obesity Management:
+                        </b>
+                        <P>
+                            Childhood and Adult Obesity Management. Collaborates with Bariatric surgeons and @Html.ActionLink("nutritionists", "DeititionNutritiionist") for weight management.
+                        </P>
+                    </li>
+
+                    <li>
+                        <b>
+                            Adrenal gland:
+                        </b>
+                        <P>
+                            Hypertension, Congenital Adrenal Hyperplasia, Adrenal Tumours, Pheochromocytoma, and Aldosteronism (Conn’s Syndrome).
+
+                        </P>
+                    </li>
+                </ul>
+                <h3>
+                    Diagnosis of Endocrine Disorders: What to expect?
+                </h3>
+                <p>
+                    The symptoms of hormone imbalance can be diverse and can largely affect the functioning of the body.
+                    It is vital to seek immediate treatment to avoid critical complications further in life.
+                    @Html.ActionLink("Endocrinologists", "Endocrinologist") are doctors who work towards the diagnosis, treatment and prevention of endocrine disorders.
+                    Your primary physician will refer you to an endocrinologist in case you’re at risk of an endocrine disorder.
+                    Most commonly observed symptoms are fatigue and weakness.
+                    Depending on the severity of your condition, the doctor can order one or more of the following tests;
+                </p>
+
+                <b>
+                    -Blood tests
+                </b>
+                <p>
+                    A blood test can detect most hormonal imbalances such as that of the thyroid, testosterone, cortisol, and estrogen levels.
+                </p>
+
+                <b>
+                    -Pelvic Exam
+                </b>
+                <p>
+                    For women, your doctor will perform a Pap test also called a Pap Smear.
+                    The test is performed to detect the presence of cancerous cells on the opening of the uterus, cervix. Unusual lumps, cysts or tumours are checked for.
+                </p>
+                <p>
+                    Pelvic examination in men includes checking for any form of abnormalities or presence of lumps in the scrotum.
+                </p>
+
+                <b>-Ultrasound</b>
+                <p>
+                    For the diagnosis of endocrine disorders, doctors can also suggest an ultrasound to create an image of the internals of one’s uterus, pituitary gland or testicles.
+                    An ultrasound can help gather more details on the source of the disease.
+                </p>
+
+                <b>-Biopsy</b>
+                <p>
+                    A biopsy is performed by extracting a sample of cells or tissues for further examination.
+                    A biopsy is mostly conducted if the cause and the exact character of the disease are uncertain.
+                </p>
+
+                <b>-MRI</b>
+                <p>
+                    MRI is a medical imaging technique that helps create an image of the processes of the body.
+                    Concerning endocrine disorders, an MRI is performed to better distinguish adrenal and liver masses and to identify parathyroid glands.
+                    Imaging tests such as an MRI is mostly suggested to find a nodule or tumour.
+                </p>
+                <p>
+                    In some cases, additional tests like sperm count, X-ray, a thyroid scan is also recommended for better clarity of the disease.
+                </p>
+
+                <h3>
+                    Key features of treatment at E-HealthCare include,
+                </h3>
+
+                <ul>
+                    <li>
+                        State-of-the-art laboratory services for hormonal concentration estimation
+                    </li>
+                    <li>
+                        A multi-disciplinary approach to endocrine disorder treatment, leading to better clinical outcomes
+                    </li>
+                    <li>
+                        World-class medical equipment and infrastructure
+                    </li>
+                    <li>
+                        Ultrasound services for thyroid treatment and parathyroid disorders
+                    </li>
+                    <li>
+                        Fine Needle Aspiration Cytology (FNAC) for thyroid nodules
+                    </li>
+                </ul>
+
+                <p>
+                    Narayana Health provides the highest quality care and is at
+                    the forefront of cutting-edge research on endocrine diseases and diabetes with compassion and concern for patients’ wellbeing.
+                </p>
+            </section>
+            <br />
+
+            <section class="endocrinology-description-FAQ">
+                <h3>Endocrinology FAQs</h3>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Which disorders does an Endocrinologist treat?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            The endocrine system is a set of all glands, organs and hormones in the human body. The endocrine system plays a vital role in the overall functioning of the body.
+                            An @Html.ActionLink("endocrinologist", "Endocrinologist") is a specialist in treating the ailments concerning different glands in the body. Some of the disorders that endocrinologists treat include
+                        </p>
+
+                        <ul>
+                            <li>
+                                Adrenal insufficiency
+                            </li>
+                            <li>
+                                Cushing’s disease
+                            </li>
+                            <li>
+                                Hyperthyroidism
+                            </li>
+                            <li>
+                                Hypothyroidism
+                            </li>
+                            <li>
+                                Polycystic ovary syndrome
+                            </li>
+                            <li>
+                                Hypopituitarism
+                            </li>
+                            <li>
+                                Precocious puberty
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Who is an Endocrinologist?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            An endocrinologist is a doctor who specializes in the functioning of glands and hormones in your body.
+                            They treat all ailments concerning all glands in the human body. These specialists work with both adults and kids.
+                            Endocrinologists who treat kids are called pediatric endocrinologists.
+                            They diagnose and treat conditions such as cholesterol, blood pressure, metabolism, stress response, thyroid and more.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What is the most common disorder of the endocrine system?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            One of the most common endocrine disorders treated is diabetes.
+                            Diabetes is referred to as a silent killer because of its easy-to-miss symptoms.
+                            Diabetes occurs when the pancreas is not releasing enough insulin or when your body stops responding to insulin suitably.
+                            Insulin is the hormone that helps store and use the fat from the food you consume.
+                            @Html.ActionLink("Diabetes is of three types", "Diabetes") which are type 1, type 2, and gestational diabetes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Why would you be referred to an Endocrinologist?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            If you’re facing problems controlling diabetes, then your primary physician can refer you to an endocrinologist.
+                            Some of the warning signs that suggest critical diabetes are
+                        </p>
+                        <ul>
+                            <li>Kidney issues</li>
+                            <li>
+                                Vision issues
+                            </li>
+                            <li>
+                                Weight changes
+                            </li>
+                            <li>
+                                Frequent switching in blood sugar levels
+                            </li>
+                            <li>
+                                Symptoms of nerve damage.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What does an Endocrinologist do for diabetes?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            An endocrinologist is a specialist who diagnoses, treats, recommends ways to manage diseases concerning any glands in the body.
+                            People with type 1 and type 2 diabetes is mostly referred to an endocrinologist. The specialists guide their treatment plan to get blood glucose levels under control.
+                            Endocrinologists treat diabetes with the help of medications and by suggesting a diet that’s healthier in the long term.
+                            These doctors also keep monitoring the patient’s health to avoid any other diseases or health problems.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
         </div>
-        <section class="endocrinology-description">
-            <h1>Endocrinology</h1>
-            <p>
-                The department of endocrinology at Narayana Health offers the best treatment modalities available for endocrine disorders and works closely
-                along with other departments such as oncology, neurology, reproductive medicine,
-                reproductive medicine, and genetics to provide accurate and comprehensive care for its patients suffering from various endocrine diseases.
-            </p>
 
+        <div class="quick-links col-lg-4 col-md-4">
             <h3>
-                Key endocrine disorders treated include-
+                Quick Links
             </h3>
-
-            <ul>
-                <li>
-                    <b>
-                        Thyroid gland:
-                    </b>
-                    <P>
-                        Hypothyroidism, Hyperthyroidism, @Html.ActionLink("Thyroid", "ThyroidProblems") Nodules, Thyroid Eye Disorders, and Thyroid Cancers.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Pituitary gland:
-                    </b>
-                    <P>
-                        Pituitary Tumours, Acromegaly, Cushing’s disease, Prolactin Disorders, Diabetes Insipidus, Hypophysitis and Sheehan’s Syndrome.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Reproductive endocrine disorders:
-                    </b>
-                    <P>
-                        PCOS, Hirsutism, Male & Female Infertility, and Sexual Disorders.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Paediatric Endocrinology:
-                    </b>
-                    <P>
-                        Growth, Thyroid, Puberty, Bone & Calcium Disorders.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Metabolic bone disorders:
-                    </b>
-                    <P>
-                        Vitamin D Deficiency, Rickets, Parathyroid Disorders, Osteoporosis, and Genetic Disorders of the Bone.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Obesity Management:
-                    </b>
-                    <P>
-                        Childhood and Adult Obesity Management. Collaborates with Bariatric surgeons and @Html.ActionLink("nutritionists", "DeititionNutritiionist") for weight management.
-                    </P>
-                </li>
-
-                <li>
-                    <b>
-                        Adrenal gland:
-                    </b>
-                    <P>
-                        Hypertension, Congenital Adrenal Hyperplasia, Adrenal Tumours, Pheochromocytoma, and Aldosteronism (Conn’s Syndrome).
-
-                    </P>
-                </li>
-            </ul>
-            <h3>
-                Diagnosis of Endocrine Disorders: What to expect?
-            </h3>
-            <p>
-                The symptoms of hormone imbalance can be diverse and can largely affect the functioning of the body. 
-                It is vital to seek immediate treatment to avoid critical complications further in life. 
-                @Html.ActionLink("Endocrinologists", "Endocrinologist") are doctors who work towards the diagnosis, treatment and prevention of endocrine disorders. 
-                Your primary physician will refer you to an endocrinologist in case you’re at risk of an endocrine disorder.
-                Most commonly observed symptoms are fatigue and weakness. 
-                Depending on the severity of your condition, the doctor can order one or more of the following tests;
-            </p>
-
-            <b>
-                -Blood tests
-            </b>
-            <p>
-                A blood test can detect most hormonal imbalances such as that of the thyroid, testosterone, cortisol, and estrogen levels.
-            </p>
-
-            <b>
-                -Pelvic Exam
-            </b>
-            <p>
-                For women, your doctor will perform a Pap test also called a Pap Smear.
-                The test is performed to detect the presence of cancerous cells on the opening of the uterus, cervix. Unusual lumps, cysts or tumours are checked for.
-            </p>
-            <p>
-                Pelvic examination in men includes checking for any form of abnormalities or presence of lumps in the scrotum.
-            </p>
-
-            <b>-Ultrasound</b>
-            <p>
-                For the diagnosis of endocrine disorders, doctors can also suggest an ultrasound to create an image of the internals of one’s uterus, pituitary gland or testicles.
-                An ultrasound can help gather more details on the source of the disease.
-            </p>
-
-            <b>-Biopsy</b>
-            <p>
-                A biopsy is performed by extracting a sample of cells or tissues for further examination. 
-                A biopsy is mostly conducted if the cause and the exact character of the disease are uncertain.
-            </p>
-
-            <b>-MRI</b>
-            <p>
-                MRI is a medical imaging technique that helps create an image of the processes of the body. 
-                Concerning endocrine disorders, an MRI is performed to better distinguish adrenal and liver masses and to identify parathyroid glands.
-                Imaging tests such as an MRI is mostly suggested to find a nodule or tumour.
-            </p>
-            <p>
-                In some cases, additional tests like sperm count, X-ray, a thyroid scan is also recommended for better clarity of the disease.
-            </p>
-
-            <h3>
-                Key features of treatment at E-HealthCare include,
-            </h3>
-            
-            <ul>
-                <li>
-                    State-of-the-art laboratory services for hormonal concentration estimation
-                </li>
-                <li>
-                    A multi-disciplinary approach to endocrine disorder treatment, leading to better clinical outcomes
-                </li>
-                <li>
-                    World-class medical equipment and infrastructure
-                </li>
-                <li>
-                    Ultrasound services for thyroid treatment and parathyroid disorders
-                </li>
-                <li>
-                    Fine Needle Aspiration Cytology (FNAC) for thyroid nodules
-                </li>
-            </ul>
-
-            <p>
-                Narayana Health provides the highest quality care and is at 
-                the forefront of cutting-edge research on endocrine diseases and diabetes with compassion and concern for patients’ wellbeing.
-            </p>
-        </section>
-        <br />
-
-        <section class="endocrinology-description-FAQ">
-            <h3>Endocrinology FAQs</h3>
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Which disorders does an Endocrinologist treat?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        The endocrine system is a set of all glands, organs and hormones in the human body. The endocrine system plays a vital role in the overall functioning of the body.
-                        An @Html.ActionLink("endocrinologist", "Endocrinologist") is a specialist in treating the ailments concerning different glands in the body. Some of the disorders that endocrinologists treat include
-                    </p>
-
-                    <ul>
-                        <li>
-                            Adrenal insufficiency
-                        </li>
-                        <li>
-                            Cushing’s disease
-                        </li>
-                        <li>
-                            Hyperthyroidism
-                        </li>
-                        <li>
-                            Hypothyroidism
-                        </li>
-                        <li>
-                            Polycystic ovary syndrome
-                        </li>
-                        <li>
-                            Hypopituitarism
-                        </li>
-                        <li>
-                            Precocious puberty
-                        </li>
-                    </ul>
-                </div>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
             </div>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Who is an Endocrinologist?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        An endocrinologist is a doctor who specializes in the functioning of glands and hormones in your body. 
-                        They treat all ailments concerning all glands in the human body. These specialists work with both adults and kids. 
-                        Endocrinologists who treat kids are called pediatric endocrinologists. 
-                        They diagnose and treat conditions such as cholesterol, blood pressure, metabolism, stress response, thyroid and more.
-                    </p>
-                </div>
             </div>
-
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What is the most common disorder of the endocrine system?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        One of the most common endocrine disorders treated is diabetes.
-                        Diabetes is referred to as a silent killer because of its easy-to-miss symptoms.
-                        Diabetes occurs when the pancreas is not releasing enough insulin or when your body stops responding to insulin suitably. 
-                        Insulin is the hormone that helps store and use the fat from the food you consume. 
-                        @Html.ActionLink("Diabetes is of three types","Diabetes") which are type 1, type 2, and gestational diabetes.
-                    </p>
-                </div>
-            </div>
-
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Why would you be referred to an Endocrinologist?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        If you’re facing problems controlling diabetes, then your primary physician can refer you to an endocrinologist. 
-                        Some of the warning signs that suggest critical diabetes are
-                    </p>
-                    <ul>
-                        <li>Kidney issues</li>
-                        <li>
-                            Vision issues
-                        </li>
-                        <li>
-                            Weight changes
-                        </li>
-                        <li>
-                            Frequent switching in blood sugar levels
-                        </li>
-                        <li>
-                            Symptoms of nerve damage.
-                        </li>
-                    </ul>                    
-                </div>
-            </div>
-
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What does an Endocrinologist do for diabetes?</h4>
-                </div>
-                <div class="accordion-content">
-                    <p>
-                        An endocrinologist is a specialist who diagnoses, treats, recommends ways to manage diseases concerning any glands in the body. 
-                        People with type 1 and type 2 diabetes is mostly referred to an endocrinologist. The specialists guide their treatment plan to get blood glucose levels under control. 
-                        Endocrinologists treat diabetes with the help of medications and by suggesting a diet that’s healthier in the long term. 
-                        These doctors also keep monitoring the patient’s health to avoid any other diseases or health problems.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <div class="quick-links col-lg-4 col-md-4">
-        <h3>
-            Quick Links
-        </h3>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
-        </div>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
-
         </div>
     </div>
 </div>

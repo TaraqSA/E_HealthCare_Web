@@ -224,745 +224,749 @@
     </style>
 }
 
-<div class="header-section col-lg-12 col-md-12">
-    <div class="column1 col-lg-8 col-md-8">
-        <div class="inner-content1">
-            <div class="logo-style">
-                <img src="~/Images/logo/kidney.png" />
-            </div>
-            <div class="logo-description">
-                <h1>Nephrology</h1>
-                <p>
-                    With our expert team of Nephrologists and state-of-the-art diagnostic and medical equipment,
-                    we provide treatment for simple to complex Nephrological Conditions.
-                </p>
+<div class="row">
+    <div class="header-section col-lg-12 col-md-12">
+        <div class="column1 col-lg-8 col-md-8">
+            <div class="inner-content1">
+                <div class="logo-style">
+                    <img src="~/Images/logo/kidney.png" />
+                </div>
+                <div class="logo-description">
+                    <h1>Nephrology</h1>
+                    <p>
+                        With our expert team of Nephrologists and state-of-the-art diagnostic and medical equipment,
+                        we provide treatment for simple to complex Nephrological Conditions.
+                    </p>
 
+                </div>
             </div>
         </div>
-    </div>
-    <div class="column2 col-lg-4 col-md-4">
-        <h1>Have a Questions ?</h1>
-        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken();
-            <div>
-                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
-                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
-                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
-                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
-            </div><br />
-            <div class="div-width">
-                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
-                <span class="span-text">
-                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
-                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
-                </span>
+        <div class="column2 col-lg-4 col-md-4">
+            <h1>Have a Question ?</h1>
+            @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken();
+                <div>
+                    @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                    @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                    @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                    @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="div-width">
+                    @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                    <span class="span-text">
+                        By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                        and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                    </span>
 
-            </div><br />
-            <div>
-                <input type="submit" value="Submit" class="input-button check" />
-            </div>
-        }
+                </div><br />
+                <div>
+                    <input type="submit" value="Submit" class="input-button check" />
+                </div>
+            }
+        </div>
     </div>
 </div>
 
-<div class="description-section col-lg-12 col-md-12">
+<div class="row">
+    <div class="description-section col-lg-12 col-md-12">
 
-    <div class="inner-description col-lg-8 col-md-8">
-        <div>
-            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Nephrology", "Nephrology")
-        </div>
-        <section class="Nephrology-description">
-            <h1>Nephrology</h1>
-            <p>
-                Nephrology is the branch of internal medicine's subspecialty that deals with the diagnosis and treatment of kidney-related diseases.
-                A human body has two kidneys; they are the bean-shaped organs located on either side in the retroperitoneal space.
-                Kidneys are responsible for removing waste products and excess fluid from the body.
-                They are also critical for retaining fluid intake and maintaining electrolyte concentrations that may be subjected to change due to numerous conditions or medicines.
-            </p>
-            <p>
-                Several kidney complications are systematic disorders, i.e. they are not only confined to the organ itself.
-                These conditions need specialized treatment and medical care.
-            </p>
-            <p>
-                The Nephrology Division at Narayana Health Hospitals offers comprehensive care to patients suffering from a spectrum of chronic and acute @Html.ActionLink("kidney diseases", "KidneyDiseases").
-                We are one of the best kidney hospitals in India renowned for using advanced facilities and treatment options.
-                The Nephrology experts at NH consistently invest time, effort, and expertise to help people maintain their kidney health through various non-invasive procedures.
-            </p>
-            <p>
-                Our team of experienced Nephrologists is acclaimed for its rare clinical skills and for providing top-notch treatment to all classes of people ranging from children to adults.
-                We at NH boast an adroit team of professionals including kidney transplant specialists, nephrologists, urologists, and other nursing staff.
-            </p>
+        <div class="inner-description col-lg-8 col-md-8">
+            <div>
+                @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Nephrology", "Nephrology")
+            </div>
+            <section class="Nephrology-description">
+                <h1>Nephrology</h1>
+                <p>
+                    Nephrology is the branch of internal medicine's subspecialty that deals with the diagnosis and treatment of kidney-related diseases.
+                    A human body has two kidneys; they are the bean-shaped organs located on either side in the retroperitoneal space.
+                    Kidneys are responsible for removing waste products and excess fluid from the body.
+                    They are also critical for retaining fluid intake and maintaining electrolyte concentrations that may be subjected to change due to numerous conditions or medicines.
+                </p>
+                <p>
+                    Several kidney complications are systematic disorders, i.e. they are not only confined to the organ itself.
+                    These conditions need specialized treatment and medical care.
+                </p>
+                <p>
+                    The Nephrology Division at Narayana Health Hospitals offers comprehensive care to patients suffering from a spectrum of chronic and acute @Html.ActionLink("kidney diseases", "KidneyDiseases").
+                    We are one of the best kidney hospitals in India renowned for using advanced facilities and treatment options.
+                    The Nephrology experts at NH consistently invest time, effort, and expertise to help people maintain their kidney health through various non-invasive procedures.
+                </p>
+                <p>
+                    Our team of experienced Nephrologists is acclaimed for its rare clinical skills and for providing top-notch treatment to all classes of people ranging from children to adults.
+                    We at NH boast an adroit team of professionals including kidney transplant specialists, nephrologists, urologists, and other nursing staff.
+                </p>
 
-            <h3>Diseases Treated Under the Branch of Nephrology</h3>
-            <p>
-                Nephrology focuses on ensuring the normal functioning of kidneys by treating conditions that hinder its processes.
-                The various conditions that fall under the scope of nephrology include:
-            </p>
+                <h3>Diseases Treated Under the Branch of Nephrology</h3>
+                <p>
+                    Nephrology focuses on ensuring the normal functioning of kidneys by treating conditions that hinder its processes.
+                    The various conditions that fall under the scope of nephrology include:
+                </p>
 
-            <ul>
-                <li>
-                    Urine abnormalities such as excess excretion of protein, sugar, blood, casts, and crystals
-                </li>
-                <li>
-                    Glomerular complications that affect the tiny filtering systems of the kidneys known the glomerulus
-                </li>
-                <li>
-                    Cancers of the kidneys, bladder, and urethra
-                </li>
-                <li>
-                    Acute, sudden, long-term or chronic Renal failure
-                </li>
-                <li>
-                    Kidney infections
-                </li>
-                <li>
-                    Effects of diseases like @Html.ActionLink("diabetes", "Diabetes") and @Html.ActionLink("hypertension", "Hypertension") on the kidneys
-                </li>
-                <li>
-                    Acid-base fluctuations.
-                </li>
-                <li>
-                    Kidney and bladder stones
-                </li>
-                <li>
-                    Ill effects of toxins and drugs on the kidneys
-                </li>
-                <li>
-                    Nephrotic syndrome and nephritis
-                </li>
-                <li>
-                    Renal vascular diseases that disturb the blood vessel networks within the kidneys.
-                </li>
-                <li>
-                    Tubulointerstitial diseases affecting the kidneys tubules
-                </li>
-                <li>
-                    Autoimmune diseases including lupus and autoimmune vasculitis
-                </li>
-                <li>
-                    Hydronephrosis
-                </li>
-                <li>
-                    Dialysis and its associated long-term complications - hemodialysis as well as peritoneal dialysis
-                </li>
-                <li>
-                    Renal Transplantations
-                </li>
-                <li>
-                    Polycystic kidneys diseases in which large cysts or fluid-filled sacs grow within the kidney damaging its normal functioning – this may be congenital, inherited or genetic.
-                </li>
-                <li>
-                    Anemia related to kidney disease.
-                </li>
-                <li>
-                    Bone disease related to kidney disease
-                </li>
-            </ul>
+                <ul>
+                    <li>
+                        Urine abnormalities such as excess excretion of protein, sugar, blood, casts, and crystals
+                    </li>
+                    <li>
+                        Glomerular complications that affect the tiny filtering systems of the kidneys known the glomerulus
+                    </li>
+                    <li>
+                        Cancers of the kidneys, bladder, and urethra
+                    </li>
+                    <li>
+                        Acute, sudden, long-term or chronic Renal failure
+                    </li>
+                    <li>
+                        Kidney infections
+                    </li>
+                    <li>
+                        Effects of diseases like @Html.ActionLink("diabetes", "Diabetes") and @Html.ActionLink("hypertension", "Hypertension") on the kidneys
+                    </li>
+                    <li>
+                        Acid-base fluctuations.
+                    </li>
+                    <li>
+                        Kidney and bladder stones
+                    </li>
+                    <li>
+                        Ill effects of toxins and drugs on the kidneys
+                    </li>
+                    <li>
+                        Nephrotic syndrome and nephritis
+                    </li>
+                    <li>
+                        Renal vascular diseases that disturb the blood vessel networks within the kidneys.
+                    </li>
+                    <li>
+                        Tubulointerstitial diseases affecting the kidneys tubules
+                    </li>
+                    <li>
+                        Autoimmune diseases including lupus and autoimmune vasculitis
+                    </li>
+                    <li>
+                        Hydronephrosis
+                    </li>
+                    <li>
+                        Dialysis and its associated long-term complications - hemodialysis as well as peritoneal dialysis
+                    </li>
+                    <li>
+                        Renal Transplantations
+                    </li>
+                    <li>
+                        Polycystic kidneys diseases in which large cysts or fluid-filled sacs grow within the kidney damaging its normal functioning – this may be congenital, inherited or genetic.
+                    </li>
+                    <li>
+                        Anemia related to kidney disease.
+                    </li>
+                    <li>
+                        Bone disease related to kidney disease
+                    </li>
+                </ul>
 
-            <h3>
-                Additional Conditions
-            </h3>
-            <p>
-                The Nephrology team at NH specializes in offering evaluation and treatment for a wide range of kidney-related complications including:
-            </p>
-            <ul>
-                <li>
-                    <b>Amyloidosis:</b> <p>This disease is characterized by abnormal growth of protein known as amyloids in different parts of the body.</p>
-                </li>
-                <li>
-                    <b>Diabetic kidney disorder:</b> <p>
-                        The long-standing complications of diabetes contribute to kidney diseases. It is one of the prominent causes of kidney failure.
-                        Around one-third of people having diabetes are exposed to the risk of developing diabetic nephropathy.
-                    </p>
-                </li>
-                <li>
-                    <b>Electrolyte disorders:</b> <p>
-                        This condition results from an abnormal imbalance of minerals in the body that results in potentially harmful damage to vital organs including the brain and muscles.
-                    </p>
-                </li>
-                <li>
-                    <b>Glomerulonephritis:</b> <p>
-                        This is a kind of disease that develops due to inflammation in tiny kidney organs called glomeruli.
-                        The glomeruli are important structures that are responsible for removing extra fluid and waste from your bloodstream.
-                    </p>
-                </li>
-                <li>
-                    <b>Hypertension (chronic hypertension): </b>
-                    <p>
-                        This refers to high blood pressure, a condition wherein arteries are exposed to a consistent increase in blood pressure levels.
-                        This condition affects different body organs and results in illnesses involving kidney failures, heart failure, aneurysm, and stroke.
-                    </p>
-                </li>
-                <li>
-                    <b>Kidney disease:</b>
-                    <p>
-                        Kidney diseases comprise a wide range of damages to the organ that results in its system failure.
-                        These complications make kidneys inefficient to remove waste and excess fluid from the body.
-                    </p>
-                </li>
-                <li>
-                    <b>Kidney failure: </b>
-                    <p>
-                        Also referred to as a renal failure, this is a medical condition in which kidneys become incapable of filtering out waste products from the blood.
-                    </p>
-                </li>
-                <li>
-                    <b>Lupus nephritis:</b>
-                    <p>
-                        This is a condition in which inflammation of kidneys occurs due to systemic lupus erythematosus (SLE), an autoimmune disease.
-                    </p>
-                </li>
-                <li>
-                    <b>Nephrotic syndrome:</b>
-                    <p>
-                        This is a kind of kidney disorder that occurs due to damage in small blood cells of the kidney.
-                        This syndrome results in excretion of excessive protein in your urine.
-                    </p>
-                </li>
-                <li>
-                    <b>Pyelonephritis: </b>
-                    <p>
-                        This is a kind of bacterial infection that leads to inflammation of substances of the kidney.
-                    </p>
-                </li>
-                <li>
-                    <b>Polycystic kidney disorder:</b>
-                    <p>
-                        It is a genetic disorder that leads to the development of a cluster of cysts within kidneys and results in high blood pressure and kidney failure.
-                    </p>
-                </li>
-                <li>
-                    <b>Renal insufficiency: </b>
-                    <p>
-                        This is a medical condition in which blood flow to kidneys reduces significantly due to renal artery diseases and leads to poor kidney functioning.
-                    </p>
-                </li>
-            </ul>
+                <h3>
+                    Additional Conditions
+                </h3>
+                <p>
+                    The Nephrology team at NH specializes in offering evaluation and treatment for a wide range of kidney-related complications including:
+                </p>
+                <ul>
+                    <li>
+                        <b>Amyloidosis:</b> <p>This disease is characterized by abnormal growth of protein known as amyloids in different parts of the body.</p>
+                    </li>
+                    <li>
+                        <b>Diabetic kidney disorder:</b> <p>
+                            The long-standing complications of diabetes contribute to kidney diseases. It is one of the prominent causes of kidney failure.
+                            Around one-third of people having diabetes are exposed to the risk of developing diabetic nephropathy.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Electrolyte disorders:</b> <p>
+                            This condition results from an abnormal imbalance of minerals in the body that results in potentially harmful damage to vital organs including the brain and muscles.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Glomerulonephritis:</b> <p>
+                            This is a kind of disease that develops due to inflammation in tiny kidney organs called glomeruli.
+                            The glomeruli are important structures that are responsible for removing extra fluid and waste from your bloodstream.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Hypertension (chronic hypertension): </b>
+                        <p>
+                            This refers to high blood pressure, a condition wherein arteries are exposed to a consistent increase in blood pressure levels.
+                            This condition affects different body organs and results in illnesses involving kidney failures, heart failure, aneurysm, and stroke.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Kidney disease:</b>
+                        <p>
+                            Kidney diseases comprise a wide range of damages to the organ that results in its system failure.
+                            These complications make kidneys inefficient to remove waste and excess fluid from the body.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Kidney failure: </b>
+                        <p>
+                            Also referred to as a renal failure, this is a medical condition in which kidneys become incapable of filtering out waste products from the blood.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Lupus nephritis:</b>
+                        <p>
+                            This is a condition in which inflammation of kidneys occurs due to systemic lupus erythematosus (SLE), an autoimmune disease.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Nephrotic syndrome:</b>
+                        <p>
+                            This is a kind of kidney disorder that occurs due to damage in small blood cells of the kidney.
+                            This syndrome results in excretion of excessive protein in your urine.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Pyelonephritis: </b>
+                        <p>
+                            This is a kind of bacterial infection that leads to inflammation of substances of the kidney.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Polycystic kidney disorder:</b>
+                        <p>
+                            It is a genetic disorder that leads to the development of a cluster of cysts within kidneys and results in high blood pressure and kidney failure.
+                        </p>
+                    </li>
+                    <li>
+                        <b>Renal insufficiency: </b>
+                        <p>
+                            This is a medical condition in which blood flow to kidneys reduces significantly due to renal artery diseases and leads to poor kidney functioning.
+                        </p>
+                    </li>
+                </ul>
 
-            <h3>
-                Signs and symptoms of Nephrology Diseases
-            </h3>
-            <p>
-                Some common signs and symptoms that indicate the risk of severe kidney complication include:
-            </p>
-            <ul>
-                <li>
-                    Frequent swelling in the legs, ankles, or feet
-                </li>
+                <h3>
+                    Signs and symptoms of Nephrology Diseases
+                </h3>
+                <p>
+                    Some common signs and symptoms that indicate the risk of severe kidney complication include:
+                </p>
+                <ul>
+                    <li>
+                        Frequent swelling in the legs, ankles, or feet
+                    </li>
 
-                <li>
-                    Consistent headaches
-                </li>
+                    <li>
+                        Consistent headaches
+                    </li>
 
-                <li>
-                    Dry and itchiness in the skin
-                </li>
+                    <li>
+                        Dry and itchiness in the skin
+                    </li>
 
-                <li>
-                    Nausea
-                </li>
+                    <li>
+                        Nausea
+                    </li>
 
-                <li>
-                    Reduced sense of taste and appetite
-                </li>
+                    <li>
+                        Reduced sense of taste and appetite
+                    </li>
 
-                <li>
-                    Less energy and trouble concentrating
-                </li>
+                    <li>
+                        Less energy and trouble concentrating
+                    </li>
 
-                <li>
-                    Unexplained confusion, memory problems, or trouble focusing
-                </li>
+                    <li>
+                        Unexplained confusion, memory problems, or trouble focusing
+                    </li>
 
-                <li>
-                    Pain, fluid in the joints, or stiffness
-                </li>
+                    <li>
+                        Pain, fluid in the joints, or stiffness
+                    </li>
 
-                <li>
-                    Unexplained blood pressure problems
-                </li>
+                    <li>
+                        Unexplained blood pressure problems
+                    </li>
 
-                <li>
-                    Muscle cramps, numbness, or weakness
-                </li>
+                    <li>
+                        Muscle cramps, numbness, or weakness
+                    </li>
 
-                <li>
-                    Exhaustion during the day but problems sleeping at night
-                </li>
+                    <li>
+                        Exhaustion during the day but problems sleeping at night
+                    </li>
 
-                <li>
-                    Blood in the urine (hematuria)
-                </li>
+                    <li>
+                        Blood in the urine (hematuria)
+                    </li>
 
-                <li>
-                    Reduced urine output not related to dehydration
-                </li>
+                    <li>
+                        Reduced urine output not related to dehydration
+                    </li>
 
-                <li>
-                    Abnormal weight loss
-                </li>
-            </ul>
+                    <li>
+                        Abnormal weight loss
+                    </li>
+                </ul>
 
-            <h3>
-                Treatments Available for Nephrology Diseases
-            </h3>
-            <p>
-                The state-of-the-art dialysis units with modern equipment and facilities for nephrology treatment operates 24/7 at full capacity across all multispecialty hospitals of Narayana Health.
-                Different services offered by the nephrology department include-
-            </p>
-            <ul>
-                <li>
-                    Continuous Renal Replacement Therapy (CRRT)
-                </li>
-                <li>
+                <h3>
+                    Treatments Available for Nephrology Diseases
+                </h3>
+                <p>
+                    The state-of-the-art dialysis units with modern equipment and facilities for nephrology treatment operates 24/7 at full capacity across all multispecialty hospitals of Narayana Health.
+                    Different services offered by the nephrology department include-
+                </p>
+                <ul>
+                    <li>
+                        Continuous Renal Replacement Therapy (CRRT)
+                    </li>
+                    <li>
+                        Peritoneal Dialysis (CPD)
+                    </li>
+                    <li>
+                        Plasma Dialysis (Plasmapheresis)
+                    </li>
+                    <li>
+                        Liver Dialysis (MARS Therapy)
+                    </li>
+                    <li>
+                        Kidney Transplant
+                    </li>
+                    <li>
+                        Combined Kidney & Liver Transplant and Kidney Biopsy
+                    </li>
+                </ul>
+
+                <h3>Continuous Renal Replacement Therapy (CRRT)</h3>
+                <p>
+                    Patients who are critically ill tend to have a high metabolic rate as their bodies are trying to recover from the disease.
+                    They need vasoactive drugs and continuous waste elimination while also simultaneously receiving large volumes of fluid in
+                    the form of nutritional and inotropic agents and drug infusions. Therefore, CRRT or continuous
+                    renal replacement therapy is followed so that wastes and water can be gently removed without causing hypotension.
+                </p>
+                <p>CRRT is a slow form of haemodialysis, where the blood is removed and pumped through a hemofilter.</p>
+
+                <h3>
                     Peritoneal Dialysis (CPD)
-                </li>
-                <li>
-                    Plasma Dialysis (Plasmapheresis)
-                </li>
-                <li>
+                </h3>
+                <p>
+                    During peritoneal dialysis, a fluid known as dialysate is put into the peritoneal or abdominal cavity with the help of a catheter.
+                    The dialysate is allowed to sit there for several hours while waste products pass from the capillaries into the liquid.
+                    The dialysate is then drained out.
+                </p>
+
+                <h3>
                     Liver Dialysis (MARS Therapy)
-                </li>
-                <li>
+                </h3>
+                <p>
+                    The Molecular Adsorbent Recirculating System or MARS therapy is based on the concept of albumin dialysis and
+                    quite effectively eliminates the protein-bound and water-soluble toxins.
+                    The treatment procedure could facilitate liver regeneration and stabilisation of vital organ functions.
+                </p>
+
+                <h3>
                     Kidney Transplant
-                </li>
-                <li>
+                </h3>
+                <p>
+                    Patients with kidney failure have to go for dialysis or a kidney transplant. Dialysis takes time, and patients have to visit a dialysis centre frequently for treatments.
+                    But with a liver transplantation, they don’t have to depend on a dialysis machine and can have a chance at leading a better quality of life.
+                </p>
+
+                <h3>
                     Combined Kidney & Liver Transplant and Kidney Biopsy
-                </li>
-            </ul>
+                </h3>
+                <p>
+                    Combined kidney and liver transplantation are usually done in patients with cirrhosis and other kidney diseases associated with it.
+                </p>
+                <p>
+                    During a kidney biopsy, the doctor will collect samples of the kidney to check them in great detail under special microscopes.
+                    It can be done either through percutaneous biopsy or open biopsy.
+                    In a percutaneous biopsy, a needle is advanced through the skin over the kidney and guided to the required place by ultrasound.
+                </p>
+                <p>
+                    In an open biopsy, the sample is taken from the kidney during surgery.
+                </p>
+                <p>
+                    Other treatment options available are:
+                </p>
+                <ul>
+                    <li>
+                        Full range dialysis services and chronic dialysis on an outpatient basis.
+                    </li>
+                    <li>
+                        Chronic peritoneal dialysis care, including continuous cycling peritoneal dialysis (CCPD) or continuous ambulatory peritoneal dialysis (CAPD).
+                    </li>
+                    <li>
+                        Real-time ultrasound guidance for Percutaneous needle biopsy of native kidneys and kidney transplants.
+                    </li>
+                    <li>
+                        Percutaneous cannula placement through ultrasound guidance
+                    </li>
+                    <li>
+                        Dialysis and transplant services for patients with end-stage renal complications.
+                    </li>
+                    <li>
+                        Therapies to all end-stage renal disease, including kidney transplantation, hemodialysis, and peritoneal dialysis.
+                    </li>
+                    <li>
+                        Continuous renal replacement therapy, including citrate anticoagulation for critically ill patients.
+                    </li>
+                </ul>
 
-            <h3>Continuous Renal Replacement Therapy (CRRT)</h3>
-            <p>
-                Patients who are critically ill tend to have a high metabolic rate as their bodies are trying to recover from the disease.
-                They need vasoactive drugs and continuous waste elimination while also simultaneously receiving large volumes of fluid in
-                the form of nutritional and inotropic agents and drug infusions. Therefore, CRRT or continuous
-                renal replacement therapy is followed so that wastes and water can be gently removed without causing hypotension.
-            </p>
-            <p>CRRT is a slow form of haemodialysis, where the blood is removed and pumped through a hemofilter.</p>
+                <h3>
+                    Common Medical Procedures Used in Nephrology
+                </h3>
+                <p>
+                    There are several medical procedures that your Nephrologists may use for diagnosing, monitoring, and treating kidney diseases. Some of the most common ones are:
+                </p>
+                <p>
+                    <b>Ultrasound:</b> Ultrasound is an imaging test that uses high-frequency sound waves to capture internal images of your kidneys.
+                    This test helps in the identification of abnormalities in kidneys such as a change in size and position.
+                    Moreover, it can detect the presence of obstructions involving the formation of cysts or tumors.
+                </p>
+                <p>
+                    <b>CT scan:</b> As known as computed tomography, a CT scan allows doctors to capture cross-sectional images of kidneys.
+                    Sometimes the process may also be performed using intravenous contrast dye. This test can identify obstruction in organs in a more precise manner.
+                </p>
+                <p>
+                    <b>Biopsy:</b> A biopsy involves removing tiny samples of tissues by inserting a thin needle.
+                    These cells from your body help healthcare professionals examine the condition in laboratories.
+                </p>
+                <p>You doctor may conduct a biopsy for some specific reasons including:</p>
+                <ul>
+                    <li>
+                        Assessing kidney damage
+                    </li>
+                    <li>
+                        Identifying disease processes and checking its response to treatment
+                    </li>
+                    <li>
+                        Analyzing the complications associated with transplantation
+                    </li>
+                </ul>
 
-            <h3>
-                Peritoneal Dialysis (CPD)
-            </h3>
-            <p>
-                During peritoneal dialysis, a fluid known as dialysate is put into the peritoneal or abdominal cavity with the help of a catheter.
-                The dialysate is allowed to sit there for several hours while waste products pass from the capillaries into the liquid.
-                The dialysate is then drained out.
-            </p>
+                <p>
+                    <b>Hemodialysis:</b> Hemodialysis is a specialized process that uses an artificial kidney machine called hemodialyzer for extracting extra waste,
+                    fluid, and chemicals from the blood before returning it to the body.
+                    After purification blood is returned to the body through a catheter or port, in leg, arm, or neck.
+                </p>
 
-            <h3>
-                Liver Dialysis (MARS Therapy)
-            </h3>
-            <p>
-                The Molecular Adsorbent Recirculating System or MARS therapy is based on the concept of albumin dialysis and
-                quite effectively eliminates the protein-bound and water-soluble toxins.
-                The treatment procedure could facilitate liver regeneration and stabilisation of vital organ functions.
-            </p>
+                <p>
+                    This procedure is usually used for patients who have reached the end stage of kidney failure.
+                    At this stage, 85–90% functioning of kidneys is lost and during this a patient requires around 4 hours of hemodialysis sessions three times a week.
+                </p>
 
-            <h3>
-                Kidney Transplant
-            </h3>
-            <p>
-                Patients with kidney failure have to go for dialysis or a kidney transplant. Dialysis takes time, and patients have to visit a dialysis centre frequently for treatments.
-                But with a liver transplantation, they don’t have to depend on a dialysis machine and can have a chance at leading a better quality of life.
-            </p>
+                <p>
+                    <b>Kidney transplant:</b> Transplantation is a surgical procedure that involves removing
+                    a particular section or the entire of the damaged kidney and replacing it with a matching donor organ.
+                </p>
+            </section>
+            <br />
 
-            <h3>
-                Combined Kidney & Liver Transplant and Kidney Biopsy
-            </h3>
-            <p>
-                Combined kidney and liver transplantation are usually done in patients with cirrhosis and other kidney diseases associated with it.
-            </p>
-            <p>
-                During a kidney biopsy, the doctor will collect samples of the kidney to check them in great detail under special microscopes.
-                It can be done either through percutaneous biopsy or open biopsy.
-                In a percutaneous biopsy, a needle is advanced through the skin over the kidney and guided to the required place by ultrasound.
-            </p>
-            <p>
-                In an open biopsy, the sample is taken from the kidney during surgery.
-            </p>
-            <p>
-                Other treatment options available are:
-            </p>
-            <ul>
-                <li>
-                    Full range dialysis services and chronic dialysis on an outpatient basis.
-                </li>
-                <li>
-                    Chronic peritoneal dialysis care, including continuous cycling peritoneal dialysis (CCPD) or continuous ambulatory peritoneal dialysis (CAPD).
-                </li>
-                <li>
-                    Real-time ultrasound guidance for Percutaneous needle biopsy of native kidneys and kidney transplants.
-                </li>
-                <li>
-                    Percutaneous cannula placement through ultrasound guidance
-                </li>
-                <li>
-                    Dialysis and transplant services for patients with end-stage renal complications.
-                </li>
-                <li>
-                    Therapies to all end-stage renal disease, including kidney transplantation, hemodialysis, and peritoneal dialysis.
-                </li>
-                <li>
-                    Continuous renal replacement therapy, including citrate anticoagulation for critically ill patients.
-                </li>
-            </ul>
-
-            <h3>
-                Common Medical Procedures Used in Nephrology
-            </h3>
-            <p>
-                There are several medical procedures that your Nephrologists may use for diagnosing, monitoring, and treating kidney diseases. Some of the most common ones are:
-            </p>
-            <p>
-                <b>Ultrasound:</b> Ultrasound is an imaging test that uses high-frequency sound waves to capture internal images of your kidneys.
-                This test helps in the identification of abnormalities in kidneys such as a change in size and position.
-                Moreover, it can detect the presence of obstructions involving the formation of cysts or tumors.
-            </p>
-            <p>
-                <b>CT scan:</b> As known as computed tomography, a CT scan allows doctors to capture cross-sectional images of kidneys.
-                Sometimes the process may also be performed using intravenous contrast dye. This test can identify obstruction in organs in a more precise manner.
-            </p>
-            <p>
-                <b>Biopsy:</b> A biopsy involves removing tiny samples of tissues by inserting a thin needle.
-                These cells from your body help healthcare professionals examine the condition in laboratories.
-            </p>
-            <p>You doctor may conduct a biopsy for some specific reasons including:</p>
-            <ul>
-                <li>
-                    Assessing kidney damage
-                </li>
-                <li>
-                    Identifying disease processes and checking its response to treatment
-                </li>
-                <li>
-                    Analyzing the complications associated with transplantation
-                </li>
-            </ul>
-
-            <p>
-                <b>Hemodialysis:</b> Hemodialysis is a specialized process that uses an artificial kidney machine called hemodialyzer for extracting extra waste,
-                fluid, and chemicals from the blood before returning it to the body.
-                After purification blood is returned to the body through a catheter or port, in leg, arm, or neck.
-            </p>
-
-            <p>
-                This procedure is usually used for patients who have reached the end stage of kidney failure.
-                At this stage, 85–90% functioning of kidneys is lost and during this a patient requires around 4 hours of hemodialysis sessions three times a week.
-            </p>
-
-            <p>
-                <b>Kidney transplant:</b> Transplantation is a surgical procedure that involves removing
-                a particular section or the entire of the damaged kidney and replacing it with a matching donor organ.
-            </p>
-        </section>
-        <br />
-
-        <section class="Nephrology-description-FAQ">
-            <h3>Nephrology Bank FAQs</h3>
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Who is a nephrologist?</h4>
+            <section class="Nephrology-description-FAQ">
+                <h3>Nephrology Bank FAQs</h3>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Who is a nephrologist?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            A nephrologist is a doctor who is certified in nephrology and specializes in diagnosing and treating kidney diseases.
+                            Nephrologists study internal medicine and then go into more specialized training to treat patients with kidney disorders.
+                            They commonly deal with the treatment of chronic kidney disease, acute renal failure, kidney stones, etc.
+                            and are quite knowledgeable about kidney transplantation and dialysis.
+                            A nephrologist is usually consulted to deal with severe and complex kidney conditions.
+                        </p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        A nephrologist is a doctor who is certified in nephrology and specializes in diagnosing and treating kidney diseases.
-                        Nephrologists study internal medicine and then go into more specialized training to treat patients with kidney disorders.
-                        They commonly deal with the treatment of chronic kidney disease, acute renal failure, kidney stones, etc.
-                        and are quite knowledgeable about kidney transplantation and dialysis.
-                        A nephrologist is usually consulted to deal with severe and complex kidney conditions.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>When should you see a nephrologist?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>When should you see a nephrologist?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            If your kidneys are in the early stages of a disease, a general care doctor may be able to help to prevent and treat them.
+                            However, in many cases, kidney diseases occur without any or non-specific symptoms that are hard to detect.
+                            Some of them include fatigue, changes in the urine amount, and sleep troubles.
+                        </p>
+                        <p>
+                            Therefore, people who are at a higher risk for kidney diseases must go through regular tests to monitor their kidney health and functioning.
+                            Individuals with diabetes, heart disease, high blood pressure, and a family history of kidney problems should be cautious.
+                        </p>
+                        <p>
+                            Regular tests will help you detect any signs of declining kidney function like an increase in albumin level in urine or a decrease in GFR value.
+                            If the tests show that your kidney functions are rapidly or continually deteriorating, it's time to see a nephrologist.
+                        </p>
+                        <p>
+                            Some of the common reasons why your doctor may refer you to a nephrologist are mentioned below.
+                        </p>
+                        <ul>
+                            <li>
+                                Sudden loss of kidney functions or acute renal failure
+                            </li>
+                            <li>
+                                CKD (chronic kidney disease) with a long-term decline in kidney functions
+                            </li>
+                            <li>
+                                Cystitis or bladder infections and Pyelonephritis or kidney infection
+                            </li>
+                            <li>
+                                Recurring kidney stone formation
+                            </li>
+                            <li>
+                                Presence of blood, crystals, proteins or casts in the urine
+                            </li>
+                            <li>
+                                Acid-base imbalance or electrolyte disorders
+                            </li>
+                            <li>
+                                Diabetic nephropathy
+                            </li>
+                            <li>
+                                Hypertensive nephrosclerosis (kidney damage from high blood pressure)
+                            </li>
+                            <li>
+                                Atheroembolic kidney disease (kidney damage from atherosclerosis)
+                            </li>
+                            <li>
+                                Autoimmune diseases such as lupus, autoimmune vasculitis, etc.
+                            </li>
+                            <li>
+                                Drugs or toxins that may have caused kidney damage
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        If your kidneys are in the early stages of a disease, a general care doctor may be able to help to prevent and treat them.
-                        However, in many cases, kidney diseases occur without any or non-specific symptoms that are hard to detect.
-                        Some of them include fatigue, changes in the urine amount, and sleep troubles.
-                    </p>
-                    <p>
-                        Therefore, people who are at a higher risk for kidney diseases must go through regular tests to monitor their kidney health and functioning.
-                        Individuals with diabetes, heart disease, high blood pressure, and a family history of kidney problems should be cautious.
-                    </p>
-                    <p>
-                        Regular tests will help you detect any signs of declining kidney function like an increase in albumin level in urine or a decrease in GFR value.
-                        If the tests show that your kidney functions are rapidly or continually deteriorating, it's time to see a nephrologist.
-                    </p>
-                    <p>
-                        Some of the common reasons why your doctor may refer you to a nephrologist are mentioned below.
-                    </p>
-                    <ul>
-                        <li>
-                            Sudden loss of kidney functions or acute renal failure
-                        </li>
-                        <li>
-                            CKD (chronic kidney disease) with a long-term decline in kidney functions
-                        </li>
-                        <li>
-                            Cystitis or bladder infections and Pyelonephritis or kidney infection
-                        </li>
-                        <li>
-                            Recurring kidney stone formation
-                        </li>
-                        <li>
-                            Presence of blood, crystals, proteins or casts in the urine
-                        </li>
-                        <li>
-                            Acid-base imbalance or electrolyte disorders
-                        </li>
-                        <li>
-                            Diabetic nephropathy
-                        </li>
-                        <li>
-                            Hypertensive nephrosclerosis (kidney damage from high blood pressure)
-                        </li>
-                        <li>
-                            Atheroembolic kidney disease (kidney damage from atherosclerosis)
-                        </li>
-                        <li>
-                            Autoimmune diseases such as lupus, autoimmune vasculitis, etc.
-                        </li>
-                        <li>
-                            Drugs or toxins that may have caused kidney damage
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What is the difference between Urology and Nephrology?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What is the difference between Urology and Nephrology?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Though Urology and Nephrology deal with kidney problems, they are reasonably different.
+                            A urologic surgeon or urologist is a surgical specialist who treats kidney diseases caused by physical reasons, such as
+                        </p>
+                        <ul>
+                            <li>
+                                kidney stones
+                            </li>
+                            <li>
+                                prostate enlargement
+                            </li>
+                            <li>
+                                bladder infections and bladder control issues
+                            </li>
+                            <li>
+                                cancer of the urinary tract
+                            </li>
+                            <li>
+                                hydronephrosis or swelling of the kidney occurring due to the blockage in the passage of urine
+                            </li>
+                            <li>
+                                other defects like cysts and deformed kidneys, etc.
+                            </li>
+                        </ul>
+                        <p>
+                            They also focus on other parts of the urinary tract, including the ureters, bladder, and urethra.
+                        </p>
+                        <p>
+                            On the other hand, a nephrologist's area of expertise is focused on treating the functional issues of the kidney.
+                            They prescribe non-surgical medical treatments if your kidney function is impaired by:
+                        </p>
+                        <ul>
+                            <li>
+                                kidney failure
+                            </li>
+                            <li>
+                                blood or protein leakage in your urine
+                            </li>
+                            <li>
+                                advanced chronic kidney disease
+                            </li>
+                            <li>
+                                hypertension or high blood pressure
+                            </li>
+                            <li>
+                                inherited kidney disease
+                            </li>
+                            <li>
+                                a chemical imbalance in the blood (can occur from high or low sodium and potassium levels in the blood)
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        Though Urology and Nephrology deal with kidney problems, they are reasonably different.
-                        A urologic surgeon or urologist is a surgical specialist who treats kidney diseases caused by physical reasons, such as
-                    </p>
-                    <ul>
-                        <li>
-                            kidney stones
-                        </li>
-                        <li>
-                            prostate enlargement
-                        </li>
-                        <li>
-                            bladder infections and bladder control issues
-                        </li>
-                        <li>
-                            cancer of the urinary tract
-                        </li>
-                        <li>
-                            hydronephrosis or swelling of the kidney occurring due to the blockage in the passage of urine
-                        </li>
-                        <li>
-                            other defects like cysts and deformed kidneys, etc.
-                        </li>
-                    </ul>
-                    <p>
-                        They also focus on other parts of the urinary tract, including the ureters, bladder, and urethra.
-                    </p>
-                    <p>
-                        On the other hand, a nephrologist's area of expertise is focused on treating the functional issues of the kidney.
-                        They prescribe non-surgical medical treatments if your kidney function is impaired by:
-                    </p>
-                    <ul>
-                        <li>
-                            kidney failure
-                        </li>
-                        <li>
-                            blood or protein leakage in your urine
-                        </li>
-                        <li>
-                            advanced chronic kidney disease
-                        </li>
-                        <li>
-                            hypertension or high blood pressure
-                        </li>
-                        <li>
-                            inherited kidney disease
-                        </li>
-                        <li>
-                            a chemical imbalance in the blood (can occur from high or low sodium and potassium levels in the blood)
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What tests do nephrologists perform?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What tests do nephrologists perform?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            A nephrologist conducts several tests and procedures to determine various conditions and disorders of the kidney.
+                        </p>
+                        <b>
+                            Laboratory tests
+                        </b>
+                        <p>
+                            The laboratory tests are usually performed on the blood or urine sample of the patient.
+                            Again, there are many tests that a nephrologist can perform to check the functioning of the kidneys.
+                        </p>
+                        <b>
+                            Blood tests
+                        </b>
+                        <ul>
+                            <li>
+                                <b>GFR or Glomerular filtration rate:</b> The GFR test tells whether your kidneys are functioning well to filter the blood.
+                                If you have a disease, your GFR goes below the normal levels.
+                            </li>
+                            <li>
+                                <b>Serum creatinine:</b> This test measures the level of creatinine in the blood. Individuals with kidney dysfunction will have a higher creatinine level in the blood.
+                            </li>
+                            <li>
+                                <b>BUN or Blood urea nitrogen:</b> Like creatinine, urea nitrogen is a waste product. High levels of BUN indicate kidney dysfunction.
+                            </li>
+                        </ul>
+                        <b>
+                            Urine tests
+                        </b>
+                        <ul>
+                            <li>
+                                <b>Urinalysis:</b> Here, a urine sample is tested for the presence of abnormal levels of blood, glucose, bacteria, or protein.
+                            </li>
+                            <li>
+                                <b>ACR or Albumin/creatinine ratio:</b> It determines the level of the protein albumin in the urine.
+                            </li>
+                            <li>
+                                <b>24-hour urine collection:</b> In this method, all of the urine that the patient produces is collected for 24 hours. Samples collected are sent for further testing.
+                            </li>
+                            <li>
+                                <b>Creatinine clearance:</b> Here, a blood sample and a 24-hour urine sample are put through the test to calculate the amount of creatinine that left the blood and moved to the urine.
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        A nephrologist conducts several tests and procedures to determine various conditions and disorders of the kidney.
-                    </p>
-                    <b>
-                        Laboratory tests
-                    </b>
-                    <p>
-                        The laboratory tests are usually performed on the blood or urine sample of the patient.
-                        Again, there are many tests that a nephrologist can perform to check the functioning of the kidneys.
-                    </p>
-                    <b>
-                        Blood tests
-                    </b>
-                    <ul>
-                        <li>
-                            <b>GFR or Glomerular filtration rate:</b> The GFR test tells whether your kidneys are functioning well to filter the blood.
-                            If you have a disease, your GFR goes below the normal levels.
-                        </li>
-                        <li>
-                            <b>Serum creatinine:</b> This test measures the level of creatinine in the blood. Individuals with kidney dysfunction will have a higher creatinine level in the blood.
-                        </li>
-                        <li>
-                            <b>BUN or Blood urea nitrogen:</b> Like creatinine, urea nitrogen is a waste product. High levels of BUN indicate kidney dysfunction.
-                        </li>
-                    </ul>
-                    <b>
-                        Urine tests
-                    </b>
-                    <ul>
-                        <li>
-                            <b>Urinalysis:</b> Here, a urine sample is tested for the presence of abnormal levels of blood, glucose, bacteria, or protein.
-                        </li>
-                        <li>
-                            <b>ACR or Albumin/creatinine ratio:</b> It determines the level of the protein albumin in the urine.
-                        </li>
-                        <li>
-                            <b>24-hour urine collection:</b> In this method, all of the urine that the patient produces is collected for 24 hours. Samples collected are sent for further testing.
-                        </li>
-                        <li>
-                            <b>Creatinine clearance:</b> Here, a blood sample and a 24-hour urine sample are put through the test to calculate the amount of creatinine that left the blood and moved to the urine.
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>Does a nephrologist perform surgery?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>Does a nephrologist perform surgery?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            A nephrologist sees patients with problems and conditions related to the kidneys or specific type of metabolic disorders.
+                            They conduct blood and urine tests to determine how well their kidneys are functioning.
+                            In some cases, they may also order an ultrasound or a kidney biopsy to get a better idea of the conditions.
+                            However, nephrologists don’t typically perform surgeries. Operations and surgeries for the treatment of various kidney conditions are usually performed by urologists.
+                        </p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        A nephrologist sees patients with problems and conditions related to the kidneys or specific type of metabolic disorders.
-                        They conduct blood and urine tests to determine how well their kidneys are functioning.
-                        In some cases, they may also order an ultrasound or a kidney biopsy to get a better idea of the conditions.
-                        However, nephrologists don’t typically perform surgeries. Operations and surgeries for the treatment of various kidney conditions are usually performed by urologists.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>When is dialysis needed?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>When is dialysis needed?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Dialysis is needed by a patient when he/she reaches the end stage of kidney failure.
+                            Usually, at this level a person loses around 85 to 90 percent of kidney functioning and his/her GFR becomes less than 15.
+                        </p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        Dialysis is needed by a patient when he/she reaches the end stage of kidney failure.
-                        Usually, at this level a person loses around 85 to 90 percent of kidney functioning and his/her GFR becomes less than 15.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What role does dialysis have?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What role does dialysis have?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Dialysis ensures the normal functioning of the body by:
+                        </p>
+                        <ul>
+                            <li>
+                                Removing waste, extra liquid and salt to prevent it from clogging up in the body
+                            </li>
+                            <li>
+                                Maintain a proper level of chemicals in the blood, like sodium, potassium, and bicarbonate
+                            </li>
+                            <li>
+                                Controlling blood pressure levels
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        Dialysis ensures the normal functioning of the body by:
-                    </p>
-                    <ul>
-                        <li>
-                            Removing waste, extra liquid and salt to prevent it from clogging up in the body
-                        </li>
-                        <li>
-                            Maintain a proper level of chemicals in the blood, like sodium, potassium, and bicarbonate
-                        </li>
-                        <li>
-                            Controlling blood pressure levels
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What is the role of a nephrologist?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What is the role of a nephrologist?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Nephrologists are doctors specializing in the care and treatment of kidney or renal related diseases.
+                            Disorders that are treated by nephrologists include kidney cancers, blood pressure, autoimmune disorders, diabetic nephropathy, and other related complications.
+                        </p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        Nephrologists are doctors specializing in the care and treatment of kidney or renal related diseases.
-                        Disorders that are treated by nephrologists include kidney cancers, blood pressure, autoimmune disorders, diabetic nephropathy, and other related complications.
-                    </p>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>How long do hemodialysis treatments last?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>How long do hemodialysis treatments last?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            This is subjected to vary depending upon certain factors which include:
+                        </p>
+                        <ul>
+                            <li>
+                                Effectiveness of kidney function
+                            </li>
+                            <li>
+                                Type of dialyzer being used
+                            </li>
+                            <li>
+                                Bodyweight and build of a patient
+                            </li>
+                            <li>
+                                Fluid weight gained between treatments
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        This is subjected to vary depending upon certain factors which include:
-                    </p>
-                    <ul>
-                        <li>
-                            Effectiveness of kidney function
-                        </li>
-                        <li>
-                            Type of dialyzer being used
-                        </li>
-                        <li>
-                            Bodyweight and build of a patient
-                        </li>
-                        <li>
-                            Fluid weight gained between treatments
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="custom-accordion">
-                <div class="accordio-label">
-                    <h4>What causes kidney disease?</h4>
+                <div class="custom-accordion">
+                    <div class="accordio-label">
+                        <h4>What causes kidney disease?</h4>
+                    </div>
+                    <div class="accordion-content">
+                        <p>
+                            Diabetes and high blood pressure are the two major causes responsible for kidney disease.
+                            Apart from this, other factors may include inherited kidney disorders like lupus or polycystic kidney disease.
+                        </p>
+                        <p>
+                            High blood pressure, also called hypertension, results in damage to blood vessels in your vital body organs such as the heart, brain, and kidneys.
+                            However, if you already have kidney disease then it can worsen the situation for high blood pressure, making it critically dangerous.
+                        </p>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <p>
-                        Diabetes and high blood pressure are the two major causes responsible for kidney disease. 
-                        Apart from this, other factors may include inherited kidney disorders like lupus or polycystic kidney disease.
-                    </p>
-                    <p>
-                        High blood pressure, also called hypertension, results in damage to blood vessels in your vital body organs such as the heart, brain, and kidneys. 
-                        However, if you already have kidney disease then it can worsen the situation for high blood pressure, making it critically dangerous.
-                    </p>
-                </div>
-            </div>
-        </section>
+            </section>
 
-    </div>
-
-    <div class="quick-links col-lg-4 col-md-4">
-        <h3>
-            Quick Links
-        </h3>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
         </div>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
 
+        <div class="quick-links col-lg-4 col-md-4">
+            <h3>
+                Quick Links
+            </h3>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+            </div>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
+
+            </div>
         </div>
     </div>
 </div>

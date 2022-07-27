@@ -225,162 +225,166 @@
     </style>
 }
 
-<div class="header-section col-lg-12 col-md-12">
-    <div class="column1 col-lg-8 col-md-8">
-        <div class="inner-content1">
-            <div class="logo-style">
-                <img src="~/Images/logo/psychology.png" />
-            </div>
-            <div class="logo-description">
-                <h1>Psycholoogy</h1>
-                <p>
-                    Our highly experienced team offers Comprehensive Counselling to all Age groups and provides services such as Neuropsychiatry,
-                    Addiction Medicine, Memory Clinics, and Child Psychiatry.
-                </p>
+<div class="row">
+    <div class="header-section col-lg-12 col-md-12">
+        <div class="column1 col-lg-8 col-md-8">
+            <div class="inner-content1">
+                <div class="logo-style">
+                    <img src="~/Images/logo/psychology.png" />
+                </div>
+                <div class="logo-description">
+                    <h1>Psycholoogy</h1>
+                    <p>
+                        Our highly experienced team offers Comprehensive Counselling to all Age groups and provides services such as Neuropsychiatry,
+                        Addiction Medicine, Memory Clinics, and Child Psychiatry.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="column2 col-lg-4 col-md-4">
-        <h1>Have a Questions ?</h1>
-        @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken();
-            <div>
-                @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
-                @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
-                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
-            </div><br />
-            <div>
-                @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
-                @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
-            </div><br />
-            <div class="div-width">
-                @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
-                <span class="span-text">
-                    By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
-                    and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
-                </span>
+        <div class="column2 col-lg-4 col-md-4">
+            <h1>Have a Question ?</h1>
+            @using (@Html.BeginForm("SubmittedQuestion", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken();
+                <div>
+                    @Html.EditorFor(p => p.FullName, "FullName", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Name" } })
+                    @Html.ValidationMessageFor(p => p.FullName, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Email, "Email", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Email Address" } })
+                    @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+                </div><br />
+                <div>
+                    @Html.EditorFor(p => p.Contact, "Contact", new { htmlAttributes = new { @class = "form-control input-editor", @placeholder = "Enter Mobile Number" } })
+                    @Html.ValidationMessageFor(p => p.Contact, "", new { @class = "text-danger" })
+                </div><br />
+                <div class="div-width">
+                    @Html.CheckBoxFor(p => p.PrivacyPermission, new { @class = "checkbox-custom-style", @checked = "true" })
+                    <span class="span-text">
+                        By Clicking Submit, I agree to have read and understood the @Html.ActionLink("Terms and Conditions", "TermsAndCondition")
+                        and @Html.ActionLink("Privacy Policy", "PrivacyPolicy") of E_HealthCare & give my consent to contact me.
+                    </span>
 
-            </div><br />
-            <div>
-                <input type="submit" value="Submit" class="input-button check" />
-            </div>
-        }
+                </div><br />
+                <div>
+                    <input type="submit" value="Submit" class="input-button check" />
+                </div>
+            }
+        </div>
     </div>
 </div>
 
-<div class="description-section col-lg-12 col-md-12">
+<div class="row">
+    <div class="description-section col-lg-12 col-md-12">
 
-    <div class="inner-description col-lg-8 col-md-8">
-        <div>
-            @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Psychology", "Psychology")
+        <div class="inner-description col-lg-8 col-md-8">
+            <div>
+                @Html.ActionLink("E-HealthCare", "Index") >> @Html.ActionLink("Services", "Services") >> @Html.ActionLink("Psychology", "Psychology")
+            </div>
+            <section class="psychology-description">
+                <h1>Psychiatry and Clinical Psychology</h1>
+                <h2>
+                    DEFINITION
+                </h2>
+                <p>
+                    E-HealthCare offers comprehensive psychiatric assessments for all age groups, management of common and enduring mental illnesses with a multispecialty
+                    team-based approach and specialist services such as Neuropsychiatry, Addiction Medicine, Memory Clinics, Liaison and Child Psychiatry.<br />
+
+                    'Mind' is perhaps the most powerful and fascinating organ of every individual. Anything and everything we think, feel, process and plan in daily life is anchored
+                    by our mind. Any significant distress in the mind can lead to disorders which can be very disabling to the individual and their families. Fortunately, many mental
+                    health disorders can be treated or kept under control with various pharmacological and psychosocial interventions to enable the subjects to function efficiently.
+                </p>
+                <h3>
+                    Specialist Services
+                </h3>
+                <h3>
+                    Neuropsychiatry
+                </h3>
+                <p>
+                    Neuropsychiatry is an area of science and medicine that is focused on the study and treatment of psychiatric and neurological disorders in individuals.
+                </p>
+                <p>
+                    Some of the clinical problems that need the intervention of a Neuropsychiatrist are:
+                </p>
+                <p>
+                    - Parkinson’s disease leading to hallucinations or delusions on dopamine-enhancing medications.<br />
+
+                    - Huntington disease exhibiting violent behaviour and personality changes.<br />
+
+                    - Dementia causing behavioural and social disruptions.<br />
+
+                    - Seizures with psychosis or depression.<br />
+
+                    - Developmentally disabled patients with self-harming behaviour.<br />
+
+                    - Patients with both schizophrenia and dementia.<br />
+
+                    - Patients with Tourette's syndrome and severe obsessive-compulsive disorder.
+                </p>
+
+                <h3>
+                    Addiction Medicine
+                </h3>
+                <p>
+                    Addiction medicine is the field of psychiatry that deals with the diagnosis, evaluation, prevention, treatment and recovery of people with addiction.
+                    They are also concerned with the treatment of people who are involved in unhealthy
+                    substance abuse including nicotine, prescription medications, alcohol and other licit or illicit drugs.
+                </p>
+
+                <h3>
+                    Memory Clinics
+                </h3>
+                <p>
+                    Memory clinics offer the services of many specialists who treat and manage patients with issues related to mental health and ageing.
+                    Generally, the patients are given a series of tests to check their ability to remember facts, process and retain information.
+                    This diagnosis provides the doctors with an initial insight into their mental capabilities.
+                    Further tests like a CAT scan to take x-ray images of the brain or an MRI scan to show a detailed picture of the brain may be ordered.<br />
+
+                    Other tests that may be performed are SPECT scan and EEG. The SPECT scan depends on single-photon emission computerised tomography to check blood
+                    flow through the brain. And the EEG uses an electroencephalogram imaging to record electrical activity within the brain.
+                </p>
+                <h3>
+                    Child Psychiatry
+                </h3>
+                <p>
+                    Child @Html.ActionLink("psychiatrists", "psychiatrists") assist children with mental health difficulties. Some of the mental health conditions that child psychiatrists can treat are – <br />acute symptoms of psychosis, expression of acute suicidal ideation and deliberate self-harming behaviours.
+                </p>
+                <p>
+                    <b>Other Services include</b>
+                    <ul>
+                        <li>Psychological Assessment</li>
+                        <li>Neuropsychological / Cognitive</li>
+                        <li>Memory</li>
+                        <li>Intelligence (IQ)</li>
+                        <li>Learning Difficulty and Disability</li>
+                        <li>Personality</li>
+                        <li>Diagnostic Evaluation</li>
+                        <li>Psychotherapy</li>
+                        <li>Behaviour Therapy</li>
+                        <li>Counselling and Coaching</li>
+                        <li>Family Therapy</li>
+                        <li>Marital Therapy</li>
+                        <li>Cognitive Behaviour Therapy</li>
+                    </ul>
+                </p>
+
+                <p>
+                    We understand the decision to seek psychiatric care can be stressful and is just not easy. However, be assured as,
+                    at E-HealthCare, you will be treated with sensitivity and respect to meet your individual, unique needs.
+                </p>
+            </section>
         </div>
-        <section class="psychology-description">
-            <h1>Psychiatry and Clinical Psychology</h1>
-            <h2>
-                DEFINITION
-            </h2>
-            <p>
-                E-HealthCare offers comprehensive psychiatric assessments for all age groups, management of common and enduring mental illnesses with a multispecialty
-                team-based approach and specialist services such as Neuropsychiatry, Addiction Medicine, Memory Clinics, Liaison and Child Psychiatry.<br />
-
-                'Mind' is perhaps the most powerful and fascinating organ of every individual. Anything and everything we think, feel, process and plan in daily life is anchored
-                by our mind. Any significant distress in the mind can lead to disorders which can be very disabling to the individual and their families. Fortunately, many mental
-                health disorders can be treated or kept under control with various pharmacological and psychosocial interventions to enable the subjects to function efficiently.
-            </p>
+        <div class="quick-links col-lg-4 col-md-4">
             <h3>
-                Specialist Services
+                Quick Links
             </h3>
-            <h3>
-                Neuropsychiatry
-            </h3>
-            <p>
-                Neuropsychiatry is an area of science and medicine that is focused on the study and treatment of psychiatric and neurological disorders in individuals.
-            </p>
-            <p>
-                Some of the clinical problems that need the intervention of a Neuropsychiatrist are:
-            </p>
-            <p>
-                - Parkinson’s disease leading to hallucinations or delusions on dopamine-enhancing medications.<br />
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
+            </div>
+            <div class="quick-link-text">
+                <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
 
-                - Huntington disease exhibiting violent behaviour and personality changes.<br />
-
-                - Dementia causing behavioural and social disruptions.<br />
-
-                - Seizures with psychosis or depression.<br />
-
-                - Developmentally disabled patients with self-harming behaviour.<br />
-
-                - Patients with both schizophrenia and dementia.<br />
-
-                - Patients with Tourette's syndrome and severe obsessive-compulsive disorder.
-            </p>
-
-            <h3>
-                Addiction Medicine
-            </h3>
-            <p>
-                Addiction medicine is the field of psychiatry that deals with the diagnosis, evaluation, prevention, treatment and recovery of people with addiction.
-                They are also concerned with the treatment of people who are involved in unhealthy
-                substance abuse including nicotine, prescription medications, alcohol and other licit or illicit drugs.
-            </p>
-
-            <h3>
-                Memory Clinics
-            </h3>
-            <p>
-                Memory clinics offer the services of many specialists who treat and manage patients with issues related to mental health and ageing.
-                Generally, the patients are given a series of tests to check their ability to remember facts, process and retain information.
-                This diagnosis provides the doctors with an initial insight into their mental capabilities.
-                Further tests like a CAT scan to take x-ray images of the brain or an MRI scan to show a detailed picture of the brain may be ordered.<br />
-
-                Other tests that may be performed are SPECT scan and EEG. The SPECT scan depends on single-photon emission computerised tomography to check blood
-                flow through the brain. And the EEG uses an electroencephalogram imaging to record electrical activity within the brain.
-            </p>
-            <h3>
-                Child Psychiatry
-            </h3>
-            <p>
-                Child @Html.ActionLink("psychiatrists", "psychiatrists") assist children with mental health difficulties. Some of the mental health conditions that child psychiatrists can treat are – <br />acute symptoms of psychosis, expression of acute suicidal ideation and deliberate self-harming behaviours.
-            </p>
-            <p>
-                <b>Other Services include</b>
-                <ul>
-                    <li>Psychological Assessment</li>
-                    <li>Neuropsychological / Cognitive</li>
-                    <li>Memory</li>
-                    <li>Intelligence (IQ)</li>
-                    <li>Learning Difficulty and Disability</li>
-                    <li>Personality</li>
-                    <li>Diagnostic Evaluation</li>
-                    <li>Psychotherapy</li>
-                    <li>Behaviour Therapy</li>
-                    <li>Counselling and Coaching</li>
-                    <li>Family Therapy</li>
-                    <li>Marital Therapy</li>
-                    <li>Cognitive Behaviour Therapy</li>
-                </ul>
-            </p>
-
-            <p>
-                We understand the decision to seek psychiatric care can be stressful and is just not easy. However, be assured as,
-                at E-HealthCare, you will be treated with sensitivity and respect to meet your individual, unique needs.
-            </p>
-        </section>
-    </div>
-    <div class="quick-links col-lg-4 col-md-4">
-        <h3>
-            Quick Links
-        </h3>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-plus-sign"></span><div class="text-position">Find a Doctor</div></a>
-        </div>
-        <div class="quick-link-text">
-            <a href="#"><span class="glyphicon glyphicon-calendar"></span><div class="text-position">Book an Appointment</div></a>
-
+            </div>
         </div>
     </div>
 </div>

@@ -69,47 +69,379 @@
                 gap: 10px;
             }
 
-            .column:nth-child(-n+3){
-                border-bottom:1px solid gray;
-                padding-bottom:25px;
+            .column:nth-child(-n+3) {
+                border-bottom: 1px solid gray;
+                padding-bottom: 25px;
             }
         }
 
         .column {
-            display:flex;
-            justify-content:flex-start;
-            align-content:flex-start;
-            padding:5px;            
-        }
-        .column:nth-child(-n+2){
-            border-bottom:1px solid gray;
-            padding-bottom:25px;
+            display: flex;
+            justify-content: flex-start;
+            align-content: flex-start;
+            padding: 5px;
         }
 
-        .col-logo{
-            margin-top:10px;
+            .column:nth-child(-n+2) {
+                border-bottom: 1px solid gray;
+                padding-bottom: 25px;
+            }
+
+        .col-logo {
+            margin-top: 10px;
+            padding: 2px;
+        }
+
+        .col-description {
+            color: gray;
+            padding: 5px;
+        }
+
+
+            .col-description p {
+                margin-left: 12px;
+            }
+
+        .column-head-pos {
+            padding: 3px;
+            margin-left: 10px;
+        }
+
+        .column-head {
+            font-size: 2rem;
+            color: black;
+        }
+
+        .col-logo-pos {
+            margin-top: 15px;
+        }
+
+
+
+        /*patient review crousel division*/
+        .patient-reviews {
+            box-sizing: border-box;
+            padding: 5px;
+            margin: 2px;
+        }
+
+        .review-head {
+            font-size: 4rem;
+            font-family: initial;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            color: #4682B4;
+            padding-top: 10px;
+            margin-bottom: -15px;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            height: 550px;
+            width: 100%;
+            background-color: inherit;
+            margin: 0 auto;
+        }
+
+        .carousel-content-wrapper {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: relative;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            transition: 0.3s ease-in;
+        }
+
+        .slide-content {
+            display: grid;
+            justify-items: center;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .slide-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .prev-arrow {
+            position: absolute;
+            cursor: pointer;
+            height: 25px;
+            width: 25px;
+            top: 45%;
+            left: 5%;
+            border-left: 8px solid hsla(30deg, 0%, 0%, 0.8);
+            border-bottom: 8px solid hsla(30deg, 0%, 0%, 0.8);
+            border-right: none;
+            border-top: none;
+            transform: rotate(45deg);
+            background: transparent;
+        }
+
+        .next-arrow:hover {
+            border-color: gray;
+            box-shadow: 3px 3px 6px -3px rgba(0,0,0,0.7);
+        }
+
+        .prev-arrow:hover {
+            border-color: gray;
+            box-shadow: -4px 4px 5px -3px rgba(0,0,0,0.7);
+        }
+
+        .next-arrow {
+            position: absolute;
+            right: 5%;
+            top: 45%;
+            cursor: pointer;
+            height: 25px;
+            width: 25px;
+            border-right: 8px solid hsla(30deg, 0%, 0%, 0.8);
+            border-bottom: 8px solid hsla(30deg, 0%, 0%, 0.8);
+            border-left: none;
+            border-top: none;
+            background: transparent;
+            transform: rotate(-45deg);
+        }
+
+        .dot-container {
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            padding: 12px 0px;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: transparent;
+            margin: 0 5px;
+        }
+
+            .dot:hover {
+                cursor: pointer;
+                box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.7);
+                background-color: black;
+            }
+
+            .dot.IsActive {
+                width: 11px;
+                height: 11px;
+                box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.7);
+                background-color: black;
+            }
+
+        .is-hidden {
+            display: none;
+        }
+
+
+
+        /*review comments content's division*/
+
+        .review-main-content {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+            width: 80%;
+            height: 80%;
+            gap: 80px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .card {
+            height: fit-content;
+            width: fit-content;
+            padding: 10px;
+            box-shadow: 0px 0px 5px 3px #cce1d1;
+            color: gray;
+        }
+
+        .review-description {
+            box-sizing: border-box;
+            padding: 1rem;
+        }
+
+        .patient-details {
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 0.5rem 0.5rem 1rem 0.5rem;
+        }
+
+        .patient-profile-pic {
+            box-sizing: border-box;
+            padding: 3px 5px;
+        }
+
+        .patient-name {
+            box-sizing: border-box;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+
+
+        /*styles for disease info carousel*/
+        .info-head {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            font-family: initial;
+            color: #4682B4;
+            margin:0 0 20px 0;
+        }
+
+
+        .main-wrapper {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .main-slide {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            margin: 1px;
+        }
+
+        .slide-container {
+            --slider-index : 0;
+            display: flex;
+            gap:2%;
+            flex-grow:1;        
+            height: 100%;
+            width: 90%;
+            transition: 0.3s ease-in-out;
+            transform:translateX(calc(var(--slider-index)*-109%));
+        }
+
+        .slide {
+            display: flex;
+            flex: 0 0 25%;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 2px;
+            background-color:inherit;
+        }
+
+        .arrow-container {
+            box-sizing: border-box;           
+            width: 5%;
+            background-color: inherit;
+            border: none;
+            margin-top: 2px;
+            z-index:10;
+        }
+
+            .arrow-container:hover {
+                background-color: rgba(164, 187, 170, 0.2);
+            }
+                    
+    
+        .prev-slide-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;            
+            cursor: pointer;
+        }
+        .text {
+            font-size: 4rem;
+        }
+
+            .text:hover, .arrow-container:hover {
+                font-size: 5rem;
+                color: white;
+            }
+
+        .next-slide-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            cursor: pointer;
+        }
+
+        .disease-card {
+            box-sizing: border-box;
+            box-shadow: 0px 0px 5px 3px #cce1d1;
+            border-radius:2%;
+        }
+        .disease-card-img{
+            width:100%;
+            height:100%;
+        }
+
+        .disease-card-img > img{
+            object-fit:cover;
+            border-top-right-radius:2%;
+            border-top-left-radius:2%;
+            height:100%;
+            width:100%;
+            cursor:pointer;
+        }
+        .disease-card-description{
+            position:relative;
+            margin:0.5rem;
+        }
+        .disease-card-description > h2{
+            font-size:2em;
+            color:rgba(0, 0, 0, 0.8);
+            margin:0.2rem 0 0.8rem 0;
             padding:2px;
         }
-        .col-description{
-            color:gray;
-            padding:5px;
+
+        .disease-name::after {
+            content: '';
+            display: block;
+            position: relative;
+            margin-top: 5px;
+            width: 25%;
+            left: 2%;
+            border-bottom: 2px solid hsla(135, 73%, 39%, 0.19);
+        }
+            .disease-card-description > p {
+                color: gray;
+                margin: 0.2rem 0.5rem 0.8rem 0;
+                padding: 4px;
+            }
+            
+        .disease-card-button{
+            box-sizing:border-box;
+            margin:1rem;
         }
 
-       
-        .col-description p {
-            margin-left:12px;
-        }
 
-        .column-head-pos{
-            padding:3px;
-            margin-left:10px;
-        }
-        .column-head{            
-            font-size:2rem;
-            color:black;
-        }
-        .col-logo-pos{
-            margin-top:15px;
+        /**/
+        .Blogs-info-head {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 4rem;
+            font-family: initial;
+            color: #4682B4;
+            margin: 0 0 2rem 2rem;
+            border-bottom: 2px solid #4682B4;
         }
     </style>
 }
@@ -189,36 +521,36 @@
         </div>
         <div class="column">
             <div class="col-logo">
-                <img src="~/Images/logo/24-hours.png" class="col-logo-pos"/>
+                <img src="~/Images/logo/24-hours.png" class="col-logo-pos" />
             </div>
             <div class="col-description">
                 <div class="column-head-pos">
                     <h2 class="column-head"> Support At All Time </h2>
                 </div>
                 <p>
-                    E-HealthCare provides services to everyone with different time zones. therefore we provide our services all and any time and anywhere in the world. 
+                    E-HealthCare provides services to everyone with different time zones. therefore we provide our services all and any time and anywhere in the world.
                 </p>
             </div>
-            
+
         </div>
         <div class="column">
             <div class="col-logo">
-                <img src="~/Images/logo/hospital.png" class="col-logo-pos"/>
+                <img src="~/Images/logo/hospital.png" class="col-logo-pos" />
             </div>
             <div class="col-description">
                 <div class="column-head-pos">
                     <h2 class="column-head">All In Under One Roof</h2>
                 </div>
                 <p>
-                    We also got hospital for physical healthcare where patients can come get their treament physically and meet doctors and get treated offline. we have all kinds of services from surgery to cancer therapy and many more.. 
+                    We also got hospital for physical healthcare where patients can come get their treament physically and meet doctors and get treated offline. we have all kinds of services from surgery to cancer therapy and many more..
                 </p>
             </div>
-            
+
         </div>
         <div class="column">
             <div class="col-logo">
                 <img src="~/Images/logo/doctor.png" class="col-logo-pos" />
-            </div>    
+            </div>
             <div class="col-description">
                 <div class="column-head-pos">
                     <h2 class="column-head">Easily Available Doctors</h2>
@@ -227,13 +559,364 @@
                     we have doctors who are easily available online with appoinments and patient can make appointments and talk to doctors as well. our doctors are specialists who specialize in different kind of field with years of experience..
                 </p>
             </div>
-            
+
         </div>
 
     </div>
 </div>
 
 <div class="patient-reviews">
+    <h1 class="review-head">Patient Reviews</h1>
+    <div class="carousel-wrapper">
+        <div class="carousel-content-wrapper">
+            <ul class="carousel-slide">
+                <li class="slide-content IsActive">
+                    <div class="review-main-content">
+                        <div class="card">
+                            <p class="review-description">
+                                I am always so impressed and pleased with each and every visit I have had at Comprehensive Dental Care. The entire staff, Dr. Hendrickson and Dr. Le are all phenomenal in their treatment and care. Always so professional and thorough with their evaluations and care! I am thankful for their wonderful people and care skills that's made me no longer dread going to the dentist. They are a blessing! My smile has never been better!
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserMan.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Ramesh Kumar</strong></p>
+                                    <p><strong>12-08-2020</strong></p>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="card">
+                            <p class="review-description">
+                                Wonderful experience! Great staff from the moment you walk in to seeing the doctor. Everything is explained and went over so that you understand. Office is high tech, never had a teeth scan before it was quite interesting. The time they take with you is exceptional! I even liked having my teeth cleaned! I highly recommend this office as they will be my office for all my dental need for the long haul!!
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserWomen.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Ayesha Khan</strong></p>
+                                    <p><strong>11-05-2021</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="slide-content">
+                    <div class="review-main-content">
+                        <div class="card">
+                            <p class="review-description">
+                                I've been going to Comprehensive Dental Care a while now and it is a really great place. The front desk staff makes you feel right at home immediately when you walk in the door. Everything was on time and it was an extremely professionally run office, from the dentists to the staff are very friendly and my hygienist want clean teeth ask for Angie shes amazing, and Dr Le, does such a great job she is one of the best there is, no word to describe I'm truly grateful to have her as my dentist! I highly recommend Comprehensive Dental Care if you're looking for a dentist's office.
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserMan.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Jeet Sharma</strong></p>
+                                    <p><strong>01-12-2022</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <p class="review-description">
+                                Dr. Jeetendra gets it. From his excellent treatment, curiosity, investigative mind and ability to connect, you know where you stand immediately and what next steps look like. Attention doctors if you want a masterclass in watching a doctor bring medical knowledge and build rapport so that message is heard by patient and therefore delivered watch this guy.
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserWomen.png" />
+                                </div>
+
+                                <div class="patient-name">
+                                    <p><strong>Mahek Kumari</strong></p>
+                                    <p><strong>11-05-2020</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="slide-content">
+                    <div class="review-main-content">
+                        <div class="card">
+                            <p class="review-description">
+                                Great experience as a first timer. I barely waited to be helped when I checked in. The staff and Drs were all very friendly and helpful. I especially loved how Dr. Shafiq really took his time to explain my conditions with me as well as my treatment options. I had a great visit and the doctor’s demeanor has really put me at ease so I highly recommend this clinic.
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserMan.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Mark Wood</strong></p>
+                                    <p><strong>05-11-2022</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <p class="review-description">
+                                E-HealthCare is incredible. Not only has it taken great care of my health, but also doctors are lovely to speak with at every appointment. It’s rare to find a doctor that combines such personal touches and care for a patient as a person with outstanding quality of medical care. I highly recommend E-HealthCare
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserMan.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Toby</strong></p>
+                                    <p><strong>12-08-2022</strong></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="slide-content">
+                    <div class="review-main-content">
+                        <div class="card">
+                            <p class="review-description">
+                                The services that I receive from E-HealthCare is excellent. Dr. Morgan and the staff are friendly and ensure that I am properly informed about my health and care. I would have no qualms in recommending them to friendly and friends.
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserWomen.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>Lily</strong></p>
+                                    <p><strong>26-08-2020</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <p class="review-description">
+                                Wonderful experience with E-HealthCare  Dr. Perry was a wonderful surgeon, and the staff was always helpful and kind. They ensured I had a smooth prep, surgery, and follow-up. I am so glad I chose E-HealthCare and would highly recommend to anyone.
+                            </p>
+                            <div class="patient-details">
+                                <div class="patient-profile-pic">
+                                    <img src="~/Images/logo/UserMan.png" />
+                                </div>
+                                <div class="patient-name">
+                                    <p><strong>John yue</strong></p>
+                                    <p><strong>21-08-2019</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="arrow-container">
+            <button type="button" class="prev-arrow is-hidden"></button>
+            <button type="button" class="next-arrow"></button>
+        </div>
+
+        <div class="dot-container">
+            <button class="dot IsActive"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+            <button class="dot"></button>
+        </div>
+
+    </div>
+</div>
+
+<div class="disease-info-wrapper">
+    <div class="info-head">
+        <h1>Diseases</h1>
+    </div>
+    <div class="main-wrapper">
+        <div class="main-slide">
+            <button class="arrow-container prev-slide-arrow">
+                <div class="text">&#8249;</div>
+            </button>
+            <div class="slide-container">
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/cancer-patient-small.jpg" alt="cancer" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Cancer</h2>
+                            <p>
+                                Cancer is a broad term. It describes the disease that results when cellular changes cause the uncontrolled growth and division of cells.
+                                Some types of cancer cause rapid cell growth, while others cause cells to grow and divide at a slower rate.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE","Cancer", null ,new { @class = "btn btn-success"})
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/aids-small.jpg" alt="AIDS&HIV" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">AIDS & HIV</h2>
+                            <p>
+                                HIV is a virus that damages the immune system. Untreated HIV affects and kills CD4 cells, which are a type of immune cell called T cell.
+                                Over time, as HIV kills more CD4 cells, the body is more likely to get various types of conditions and cancers.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "HIV", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/alzhimer-small.jpg" alt="Alzheimer" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Alzheimer</h2>
+                            <p>
+                                Alzheimer’s disease is a neurological condition in which the death of brain cells causes memory loss and cognitive decline.                                
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Alzheimer", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/bronchitis-small.jpg" alt="Bronchitis" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Bronchitis</h2>
+                            <p>
+                                People with bronchitis have swelling and inflammation in their bronchial tubes, the air passages that link the mouth and nose with the lungs.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Bronchitis", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/diabetes-small.jpg" alt="Diabetes" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Diabetes</h2>
+                            <p>
+                                Diabetes mellitus, commonly known as diabetes, is a metabolic disease that causes high blood sugar. 
+                                The hormone insulin moves sugar from the blood into your cells to be stored or used for energy.
+                                With diabetes, your body either doesn’t make enough insulin or can’t effectively use the insulin it does make.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Diabetes", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/flu-small.jpg" alt="Flu" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Flu</h2>
+                            <p>
+                                Influenza, or flu, is a respiratory illness that results from a viral infection. Flu is highly contagious and spreads through respiratory droplets. 
+                                A person can pass it on while talking or through physical contact, such as shaking hands.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Flu", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/heart-small.jpg" alt="Heart" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Heart Diseases</h2>
+                            <p>
+                                Heart disease refers to any condition affecting the heart. There are many types, some of which are preventable.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "HeartDisease", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/pneumonia-small.jpg" alt="Pneumonia" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Pneumonia</h2>
+                            <p>
+                                neumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus (purulent material), 
+                                causing cough with phlegm or pus, fever, chills, and difficulty breathing. A variety of organisms, including bacteria, viruses and fungi, can cause pneumonia.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Pneumonia", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/stroke-small.jpg" alt="Stroke" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Stroke</h2>
+                            <p>
+                                Stroke occurs due to a decrease or blockage in the brain’s blood supply. A person experiencing a stroke needs immediate emergency treatment.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Stroke", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="disease-card">
+                        <div class="disease-card-img">
+                            <img src="~/Images/Disease/tuberclosis-small.jpg" alt="tuberclosis" />
+                        </div>
+                        <div class="disease-card-description">
+                            <h2 class="disease-name">Tuberclosis</h2>
+                            <p>
+                                Tuberculosis (TB) is an infectious disease that usually affects the lungs, though it can affect any organ in the body. 
+                                It can develop when bacteria spread through droplets in the air. TB can be fatal, but in many cases, it is preventable and treatable.
+                            </p>
+                        </div>
+                        <div class="disease-card-button">
+                            @Html.ActionLink("KNOW MORE", "Tuberclosis", null, new { @class = "btn btn-success" })
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <button class="arrow-container next-slide-arrow">
+                <div class="text">&#8250;</div>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="Blogs-wrapper">
+    <div class="Blogs-info-head">
+        <h1>Blogs & News</h1>
+    </div>
 
 </div>
+
+@section scripts{
+    <script src="~/Scripts/CustomCarousel.js"></script>
+}

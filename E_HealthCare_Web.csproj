@@ -387,6 +387,18 @@
     <Content Include="Images\appointment-psychologist.jpg" />
     <Content Include="Images\camilo-jimenez-vGu08RYjO-s-unsplash.jpg" />
     <Content Include="Images\dermatology.jpg" />
+    <Content Include="Images\Disease\aids-small.jpg" />
+    <Content Include="Images\Disease\alzhimer-small.jpg" />
+    <Content Include="Images\Disease\bronchitis-small.jpg" />
+    <Content Include="Images\Disease\cancer-patient-small.jpg" />
+    <Content Include="Images\Disease\cancer.jpg" />
+    <Content Include="Images\Disease\diabetes-small.jpg" />
+    <Content Include="Images\Disease\flu-small.jpg" />
+    <Content Include="Images\Disease\heart-small.jpg" />
+    <Content Include="Images\Disease\hiv-small.jpg" />
+    <Content Include="Images\Disease\pneumonia-small.jpg" />
+    <Content Include="Images\Disease\stroke-small.jpg" />
+    <Content Include="Images\Disease\tuberclosis-small.jpg" />
     <Content Include="Images\Icons\health-care.png" />
     <Content Include="Images\logo\24-hours.png" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
@@ -403,6 +415,8 @@
     <Content Include="Images\logo\surgery.png" />
     <Content Include="Images\logo\thyroid.png" />
     <Content Include="Images\logo\tooth.png" />
+    <Content Include="Images\logo\UserMan.png" />
+    <Content Include="Images\logo\UserWomen.png" />
     <Content Include="Images\pexels-shvets-production-8413230.jpg" />
     <Content Include="Images\pexels-shvets-production-8413285.jpg" />
     <Content Include="Images\richard-catabay-05kHY7AYCp8-unsplash.jpg" />
@@ -440,6 +454,7 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\CustomCarousel.js" />
     <Content Include="Scripts\CustomeDate.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />

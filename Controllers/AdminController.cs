@@ -38,5 +38,7 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
+
+
     }
 }

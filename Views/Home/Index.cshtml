@@ -307,7 +307,7 @@
             font-size: 4rem;
             font-family: initial;
             color: #4682B4;
-            margin:0 0 20px 0;
+            margin: 0 0 20px 0;
         }
 
 
@@ -325,14 +325,14 @@
         }
 
         .slide-container {
-            --slider-index : 0;
+            --slider-index: 0;
             display: flex;
-            gap:2%;
-            flex-grow:1;        
+            gap: 2%;
+            flex-grow: 1;
             height: 100%;
             width: 90%;
             transition: 0.3s ease-in-out;
-            transform:translateX(calc(var(--slider-index)*-109%));
+            transform: translateX(calc(var(--slider-index)*-109%));
         }
 
         .slide {
@@ -342,29 +342,30 @@
             align-items: center;
             height: 100%;
             margin: 2px;
-            background-color:inherit;
+            background-color: inherit;
         }
 
         .arrow-container {
-            box-sizing: border-box;           
+            box-sizing: border-box;
             width: 5%;
             background-color: inherit;
             border: none;
             margin-top: 2px;
-            z-index:10;
+            z-index: 10;
         }
 
             .arrow-container:hover {
                 background-color: rgba(164, 187, 170, 0.2);
             }
-                    
-    
+
+
         .prev-slide-arrow {
             display: flex;
             justify-content: center;
-            align-items: center;            
+            align-items: center;
             cursor: pointer;
         }
+
         .text {
             font-size: 4rem;
         }
@@ -385,31 +386,34 @@
         .disease-card {
             box-sizing: border-box;
             box-shadow: 0px 0px 5px 3px #cce1d1;
-            border-radius:2%;
-        }
-        .disease-card-img{
-            width:100%;
-            height:100%;
+            border-radius: 2%;
         }
 
-        .disease-card-img > img{
-            object-fit:cover;
-            border-top-right-radius:2%;
-            border-top-left-radius:2%;
-            height:100%;
-            width:100%;
-            cursor:pointer;
+        .disease-card-img {
+            width: 100%;
+            height: 100%;
         }
-        .disease-card-description{
-            position:relative;
-            margin:0.5rem;
+
+            .disease-card-img > img {
+                object-fit: cover;
+                border-top-right-radius: 2%;
+                border-top-left-radius: 2%;
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+            }
+
+        .disease-card-description {
+            position: relative;
+            margin: 0.5rem;
         }
-        .disease-card-description > h2{
-            font-size:2em;
-            color:rgba(0, 0, 0, 0.8);
-            margin:0.2rem 0 0.8rem 0;
-            padding:2px;
-        }
+
+            .disease-card-description > h2 {
+                font-size: 2em;
+                color: rgba(0, 0, 0, 0.8);
+                margin: 0.2rem 0 0.8rem 0;
+                padding: 2px;
+            }
 
         .disease-name::after {
             content: '';
@@ -420,19 +424,24 @@
             left: 2%;
             border-bottom: 2px solid hsla(135, 73%, 39%, 0.19);
         }
-            .disease-card-description > p {
-                color: gray;
-                margin: 0.2rem 0.5rem 0.8rem 0;
-                padding: 4px;
-            }
-            
-        .disease-card-button{
-            box-sizing:border-box;
-            margin:1rem;
+
+        .disease-card-description > p {
+            color: gray;
+            margin: 0.2rem 0.5rem 0.8rem 0;
+            padding: 4px;
+        }
+
+        .disease-card-button {
+            box-sizing: border-box;
+            margin: 1rem;
         }
 
 
-        /**/
+        /*Styles for blogs and news section*/
+        .Blogs-wrapper {
+            margin: 10rem 0 5rem 0;
+        }
+
         .Blogs-info-head {
             display: flex;
             justify-content: flex-start;
@@ -441,7 +450,102 @@
             font-family: initial;
             color: #4682B4;
             margin: 0 0 2rem 2rem;
-            border-bottom: 2px solid #4682B4;
+            border-bottom: 2px solid rgba(70, 130, 180, 0.4);
+        }
+
+        .Blogs-info-container {
+            margin: 0 0 0.5rem 2rem;
+        }
+
+        .Blog-main {
+            margin: 1rem 0.3rem;
+            display: flex;
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+
+        .Blog-main-img {
+            max-width: 25%;
+            min-width:25%;
+            margin-bottom: 0.5rem;
+        }
+
+        .Blog-main-img-link {
+            width: 100%;
+            height: 100%;
+        }
+
+            .Blog-main-img-link > img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+
+        .Blog-main-description {
+            margin-left: 1.5em;
+            color: gray;
+        }
+
+        .blog-main-head {
+            color: black;
+        }
+
+        .blog-description-preview {
+            margin: 0 0 0 0.5rem;
+            letter-spacing:1.1px;
+        }
+
+        .blog-author-detail {
+            margin: 0 0 0 0.5rem;
+            letter-spacing: 1.1px;
+        }
+
+        .blog-main-head {
+            cursor: pointer;
+            color: inherit;
+            letter-spacing: 1.5px;
+        }
+
+            .blog-main-head a {
+                text-decoration: none;
+                color: rgba(0,0,0,0.8);
+            }
+
+                .blog-main-head a:hover {
+                    color: rgba(70, 130, 180, 0.4);
+                }
+
+            .blog-main-head:hover {
+                color: rgba(70, 130, 180, 0.4);
+            }
+
+        .blog-ReadMore-btn {
+            background-color: rgba(116, 189, 160, 0.9);
+            padding: 1rem 2rem;
+            text-align:center;
+            vertical-align:central;
+            line-height:1.4;
+            border: 1px solid rgba(116, 189, 160,0.9);
+            color: white;
+            border-radius: 4px;
+            font-size: large;
+            cursor:pointer;
+
+        }
+            .blog-ReadMore-btn:hover {
+                background-color: rgba(116, 189, 160, 1);                
+                font-weight:500;
+                color:white;
+            }
+
+            .blog-btn-section {
+                display: flex;
+                justify-content: center;
+                margin-top:3rem;
+            }
+        .blog-btn-section a{
+            text-decoration:none;
         }
     </style>
 }
@@ -493,11 +597,6 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
     </div>
-    @* <div class="topleft">
-            Welcome<br />To<br /> E-HealthCare
-
-        </div>
-    *@
 </div>
 
 <div class="whyeh-wrapper">
@@ -746,10 +845,10 @@
                             </p>
                         </div>
                         <div class="disease-card-button">
-                            @Html.ActionLink("KNOW MORE","Cancer", null ,new { @class = "btn btn-success"})
+                            @Html.ActionLink("KNOW MORE", "Cancer", null, new { @class = "btn btn-success" })
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="slide">
                     <div class="disease-card">
@@ -776,7 +875,7 @@
                         <div class="disease-card-description">
                             <h2 class="disease-name">Alzheimer</h2>
                             <p>
-                                Alzheimer’s disease is a neurological condition in which the death of brain cells causes memory loss and cognitive decline.                                
+                                Alzheimer’s disease is a neurological condition in which the death of brain cells causes memory loss and cognitive decline.
                             </p>
                         </div>
                         <div class="disease-card-button">
@@ -808,7 +907,7 @@
                         <div class="disease-card-description">
                             <h2 class="disease-name">Diabetes</h2>
                             <p>
-                                Diabetes mellitus, commonly known as diabetes, is a metabolic disease that causes high blood sugar. 
+                                Diabetes mellitus, commonly known as diabetes, is a metabolic disease that causes high blood sugar.
                                 The hormone insulin moves sugar from the blood into your cells to be stored or used for energy.
                                 With diabetes, your body either doesn’t make enough insulin or can’t effectively use the insulin it does make.
                             </p>
@@ -826,7 +925,7 @@
                         <div class="disease-card-description">
                             <h2 class="disease-name">Flu</h2>
                             <p>
-                                Influenza, or flu, is a respiratory illness that results from a viral infection. Flu is highly contagious and spreads through respiratory droplets. 
+                                Influenza, or flu, is a respiratory illness that results from a viral infection. Flu is highly contagious and spreads through respiratory droplets.
                                 A person can pass it on while talking or through physical contact, such as shaking hands.
                             </p>
                         </div>
@@ -859,7 +958,7 @@
                         <div class="disease-card-description">
                             <h2 class="disease-name">Pneumonia</h2>
                             <p>
-                                neumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus (purulent material), 
+                                neumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus (purulent material),
                                 causing cough with phlegm or pus, fever, chills, and difficulty breathing. A variety of organisms, including bacteria, viruses and fungi, can cause pneumonia.
                             </p>
                         </div>
@@ -892,14 +991,14 @@
                         <div class="disease-card-description">
                             <h2 class="disease-name">Tuberclosis</h2>
                             <p>
-                                Tuberculosis (TB) is an infectious disease that usually affects the lungs, though it can affect any organ in the body. 
+                                Tuberculosis (TB) is an infectious disease that usually affects the lungs, though it can affect any organ in the body.
                                 It can develop when bacteria spread through droplets in the air. TB can be fatal, but in many cases, it is preventable and treatable.
                             </p>
                         </div>
                         <div class="disease-card-button">
                             @Html.ActionLink("KNOW MORE", "Tuberclosis", null, new { @class = "btn btn-success" })
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             <button class="arrow-container next-slide-arrow">
@@ -911,9 +1010,146 @@
 
 
 <div class="Blogs-wrapper">
-    <div class="Blogs-info-head">
-        <h1>Blogs & News</h1>
-    </div>
+    <section>
+        <div class="Blogs-info-head">
+            <h1>Blogs & News</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="Blogs-info-container">
+            <div class="Blog-main">
+                <div class="Blog-main-img">
+                    <a href='@Url.Action("GreenTea","Home")' class="Blog-main-img-link">
+                        <img src="~/Images/Green-Tea-small.jpg" alt="GreenTea" />
+                    </a>
+                </div>
+                <div class="Blog-main-description">
+                    <div class="blog-main-head">
+                        <a href="@Url.Action("Is-tea-better","Home")"><h2>Is Green Tea Better Than Other Teas</h2></a>
+                    </div>
+                    <div class="blog-author-detail">
+                        <p>
+                            <i>
+                                published by&nbsp;Piyush Singh&nbsp;On&nbsp;<time>13-06-2022</time>
+                            </i>
+                        </p>
+                    </div>
+                    <div class="blog-description-preview">
+                        <p>
+                            Water is the elixir of life and essential for your well being. However, tea ranks next on account of its popularity as the beverage of choice...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Blog-main">
+                <div class="Blog-main-img">
+                    <a href='@Url.Action("LegExercising","Home")' class="Blog-main-img-link">
+                        <img src="~/Images/runnig-small.jpg" alt="Running" />
+                    </a>
+                </div>
+                <div class="Blog-main-description">
+                    <div class="blog-main-head">
+                        <a href="@Url.Action("Strong-leg","Home")">
+                            <h2>Strong Leg Exercising Help Improving Summer Activities: Hiking, Running or Biking</h2>
+                        </a>
+                    </div>
+                    <div class="blog-author-detail">
+                        <p>
+                            <i>
+                                Published by&nbsp;John Doe&nbsp;On&nbsp;<time> 25-02-2020</time>
+                            </i>
+                        </p>
+                    </div>
+                    <div class="blog-description-preview">
+                        <p>
+                            Legs are the foundation for many enjoyable activities—running, bicycling, swimming, and more. Building strong leg muscles can improve your performance,
+                            build endurance, and reduce your risk of injury. These exercises will work all of the major muscle groups in your legs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Blog-main">
+                <div class="Blog-main-img">
+                    <a href='@Url.Action("MosquitoBiting","Home")' class="Blog-main-img-link">
+                        <img src="~/Images/mosquito-small.jpg" alt="Mosquito" />
+                    </a>
+                </div>
+                <div class="Blog-main-description">
+                    <div class="blog-main-head">
+                        <a href="@Url.Action("Do-Mosquito-Always-bite","Home")"><h2>Why Do Mosquito Always Bite Some Person</h2></a>
+                    </div>
+                    <div class="blog-author-detail">
+                        <p>
+                            <i>
+                                Published by&nbsp;Mary Jane&nbsp;On&nbsp;26-12-2018
+                            </i>
+                        </p>
+                    </div>
+                    <div class="blog-description-preview">
+                        <p>
+                            Relaxing outside on a summer evening — what could be nicer?
+                            Then, someone gets a mosquito bite, and the onslaught begins. As the mosquitoes feast on their chosen targets, others escape unscathed — but why?..
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Blog-main">
+                <div class="Blog-main-img">
+                    <a href=" @Url.Action("LowerCholesterol","Home")" class="Blog-main-img-link">
+                        <img src="~/Images/Disease/heart-small.jpg" alt="Cholesteol" />
+                    </a>
+                </div>
+                <div class="Blog-main-description">
+                    <div class="blog-main-head">
+                        <a href="@Url.Action("Lower-Cholesterol","Home")"><h2>Natural Ways To Lower Cholesterol</h2></a>
+                    </div>
+                    <div class="blog-author-detail">
+                        <p><i>Published by&nbsp;Parul Dube&nbsp;On&nbsp;<time> 21-09-2020</time></i></p>
+                    </div>
+                    <div class="blog-description-preview">
+                        <p>
+                            In simplest terms, cholesterol is a waxy substance present in your blood.
+                            It is essential for the build-up of healthy cells in your body.  Although it is a crucial blood component, an excess might lead to heart health issues...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Blog-main">
+                <div class="Blog-main-img">
+                    <a href="@Url.Action("TiredBrain","Home")" class="Blog-main-img-link">
+                        <img src="~/Images/Disease/alzhimer-small.jpg" alt="brain" />
+                    </a>
+                </div>
+                <div class="Blog-main-description">
+                    <div class="blog-main-head">
+                        <a href="@Url.Action("Why-feel-mentally-tired","Home")"><h2>Why We Feel Tired After Mentally Demanding Work?</h2></a>
+                    </div>
+                    <div class="blog-author-detail">
+                        <p>
+                            <i>
+                                Published by&nbsp;Susan&nbsp;On&nbsp;<time>18-09-2015</time>
+                            </i>
+                        </p>
+                    </div>
+                    <div class="blog-description-preview">
+                        <p>
+                            Scientists find clues that may explain why we feel tired after mentally demanding work.
+                            Similar to physical work, mental work over a long duration can produce a feeling of tiredness, also referred to as cognitive fatigue...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-btn-section">
+        <a href="@Url.Action("Index","Blog")" class="blog-ReadMore-btn">Read More &#8250;</a>
+    </section>
 
 </div>
 

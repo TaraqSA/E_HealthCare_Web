@@ -336,6 +336,8 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -378,6 +380,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -399,6 +402,8 @@
     <Content Include="Images\Disease\pneumonia-small.jpg" />
     <Content Include="Images\Disease\stroke-small.jpg" />
     <Content Include="Images\Disease\tuberclosis-small.jpg" />
+    <Content Include="Images\Green-Tea-big.jpg" />
+    <Content Include="Images\Green-Tea-small.jpg" />
     <Content Include="Images\Icons\health-care.png" />
     <Content Include="Images\logo\24-hours.png" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
@@ -417,11 +422,15 @@
     <Content Include="Images\logo\tooth.png" />
     <Content Include="Images\logo\UserMan.png" />
     <Content Include="Images\logo\UserWomen.png" />
+    <Content Include="Images\mosquito-big.jpg" />
+    <Content Include="Images\mosquito-small.jpg" />
     <Content Include="Images\pexels-shvets-production-8413230.jpg" />
     <Content Include="Images\pexels-shvets-production-8413285.jpg" />
     <Content Include="Images\richard-catabay-05kHY7AYCp8-unsplash.jpg" />
     <Content Include="Images\Hospital-theme-background.jpg" />
     <Content Include="Images\Hospital-theme.jpg" />
+    <Content Include="Images\runnig-small.jpg" />
+    <Content Include="Images\running-big.jpg" />
     <Content Include="Models\E_HealthCareContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>E_HealthCareContext.edmx</DependentUpon>
@@ -453,6 +462,11 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\CustomCarousel.js" />
     <Content Include="Scripts\CustomeDate.js" />

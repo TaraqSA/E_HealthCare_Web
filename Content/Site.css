@@ -49,20 +49,24 @@ textarea {
     text-shadow: 5px 5px 5px black;
 }
 
+.navbar-nav li{
+    margin:0;
+}
+
 .navbar-inverse .navbar-nav > li > a {
-    color: black;
+    color: black;    
 }
 
     .navbar-inverse .navbar-nav > li > a:hover, .Dropdown-btn:hover, .Dropdown-btn:focus {
-        background-color: #8080ff;
+        /*background-color: #8080ff;*/
+        background-color: rgba(128, 128, 255,0.5);
         color: white;
     }
 
 
 .glyph-pad {
     left: -4px;
-    top: 4px;
-}
+    top: 4px;}
 
 
 .Dropdown-btn {
@@ -101,13 +105,14 @@ ul.dropdown-menu > li > a {
     color: black !important;
 }
 
-ul.dropdown-menu > li > a:hover{
-   background-color : #8080ff !important;
-   color : white !important;
-}
+    ul.dropdown-menu > li > a:hover {
+        background-color: rgba(128, 128, 255,0.5) !important;
+        color: white !important;
+    }
 
 .dropdown-menu > li > a:hover {
-    background-color: #8080ff;
+    /*background-color: #8080ff;*/
+    background-color: rgba(0, 255, 153,0.8);
 }
 
 /* to change color of textbox's border to #CD0A0A99 after validation error */
@@ -119,13 +124,77 @@ select.input-validation-error {
 }
 
 .main-footer {
-    padding: 15px;
-    background-color: #33FFAD;
+    padding: 15px 15px 0 15px;
+    /*background-color: rgba(116, 189, 160, 0.9);*/
     margin: 0;
 }
 
 /*Styling footer*/
 .app-footer {
-    margin: 10px -15px 0px -15px;
-    padding:5px;
+    padding: 5px;
+    margin:0 -15px;
+    font-weight: 600;
+    color: black;
+    background-color: rgba(116, 189, 160, 0.85);
 }
+
+.app-footer-webinfo {
+    background-color: rgba(116, 189, 160, 1);
+    margin: 0 -15px;
+    padding:0.5rem 1rem;
+}
+
+.copyright-text{
+    display:inline-block;
+}
+.social-links{
+    display:inline-block;
+    float:right;    
+}
+
+.social-links a {
+    color:rgba(255,255,255,1);
+}
+
+    .social-links a:hover {
+        color: rgba(255,255,255,0.5);        
+    }
+
+.app-footer-content > h2 {
+    text-align:center;    
+    font-family: 'Brush Script MT';
+    font-size: 3.50rem;
+    font-weight: 500;
+    text-shadow: 3px 3px 3px rgba(0,0,0,0.5);    
+}
+
+.app-footer-content h2 a {
+    text-decoration: none;
+    color: rgba(0, 0, 153,1);
+}
+
+    .app-footer-content h2 a:hover, .app-footer-content h2 a:focus {
+        color: rgba(255,255,255,0.7);        
+    } 
+   
+    .app-footer-content-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .app-footer-content-links > li {
+
+        display: inline-block;        
+        padding: 1rem;
+        margin: 0.5rem;        
+    }
+
+        .app-footer-content-links li a {
+            color: rgba(0,0,0,0.65)
+        }
+
+        .app-footer-content-links > li a:hover, .app-footer-content-links > li a:focus {
+            text-decoration: none;
+            color: rgba(255,255,255,0.7);
+        } 

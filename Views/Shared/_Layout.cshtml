@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>
         @ViewBag.Title | E_HealthCare
     </title>
@@ -48,6 +47,8 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -81,11 +82,52 @@
         </div>
     </div>
     <div class="container-fluid body-content">
-        @RenderBody()                
+        @RenderBody()
     </div>
     <div class="container-fluid main-footer">
         <footer class="app-footer">
-            <p>&copy; @DateTime.Now.Year - E-Healthcare</p>
+            <div class="app-footer-content">
+                <h2>
+                    @Html.ActionLink("E-HealthCare", "Index", "Home")
+                </h2>
+                <ul class="app-footer-content-links">
+                    <li>
+                        @Html.ActionLink("About Us", "About", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Blogs", "Index", "Blogs")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Specialities", "Specialities", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Doctors", "DoctorsList", "Doctor")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Appointment")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Feed Back", "FeedBack", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Make an Enquiry", "Enquiry", "Home")
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <footer class="app-footer-webinfo">
+            <div class="copyright-text">
+                <p><b>&copy;</b> @DateTime.Now.Year | E-HealthCare All Rights Reserved</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-lg fa-youtube-play" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-instagram" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-facebook-f" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-twitter" aria-hidden="true"></i></a>
+            </div>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

@@ -1,12 +1,16 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - E-Healthcare </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @ViewBag.Title | E_HealthCare
+    </title>
+    <link rel="icon" href="~/Images/Icons/health-care.png" type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Styles", required: false)
+    @RenderSection("HeadScripts", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,48 +26,144 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>                  
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>                    
                     <li>
-                        @if (!Request.IsAuthenticated)
-                        {
-                            <a href="@Url.Action("SignUp","Account")"><Span class="glyphicon glyphicon-user"></Span> Sign Up </a>
-                        }
+                        <div class="dropdown">
+                            <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
+                                Services <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="@Url.Action("BloodBank","Home")">Blood bank</a></li>
+                                <li><a href="@Url.Action("Physiotherapy","Home")">Physiotherapy</a></li>
+                                <li><a href="@Url.Action("Nephrology","Home")">Nephrology</a></li>
+                                <li><a href="@Url.Action("Neurology","Home")">Neurology</a></li>
+                                <li><a href="@Url.Action("GeneralSurgery","Home")">General Surgery</a></li>
+                                <li><a href="@Url.Action("Endocrinology","Home")">Endocrinology</a></li>
+                                <li><a href="@Url.Action("Pathology","Home")">Pathology</a></li>
+                                <li><a href="@Url.Action("DentalScience","Home")">Dental Science</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("Others","Home")">Others</a></li>
+                            </ul>
+                        </div>
                     </li>
 
+                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">                   
+
                     <li>
-                        @if (Request.IsAuthenticated)
-                        {
+                        
+                        @{
+                            var patientId = TempData.Peek("PatientId");
                             <div class="dropdown">
                                 <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
-                                    @User.Identity.Name
+                                    @User.Identity.Name <i class="fa fa-angle-down"></i>
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2"> 
+                                    
+                                    <li>@Html.ActionLink(" Dashboard", "PatientHome", "Patient", new { id = patientId }, new { @class="fa fa-user-o"})</li>
+                                    <li role="separator" class="divider"></li>
                                     <li><a href="@Url.Action("Logout","Account")"><Span class="glyphicon glyphicon-log-out"></Span> Logout </a></li>
                                 </ul>
                             </div>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Login","Account")"><Span class="glyphicon glyphicon-log-in"></Span> Login </a>
                         }
                     </li>
                 </ul>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid body-content div-alignment">
+        <div class="sidebar-menu">
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Profile", "PatientProfile", "Patient", null, new { @class = "fa fa-user" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Account", "Account", "Patient", null, new { @class = "fa fa-edit" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Appointments", "Appointment", "Patient", null, new { @class = "fa fa-calendar" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Health Reports", "Reports", "Patient", null, new { @class = "fa fa-address-card" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", null, new { @class = "fa fa-user-md" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Consultation", "Chat", "Patient", null, new { @class = "fa fa-comments-o" })
+                </div>
+            </div>
+        </div>
+        <div class="body_content-renderview">
+            @RenderBody()
+        </div>
 
     </div>
-    <div class="container-fluid body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - E-Healthcare</p>
+    <div class="container-fluid main-footer">
+        <footer class="app-footer">
+            <div class="app-footer-content">
+                <h2>
+                    @Html.ActionLink("E-HealthCare", "Index", "Home")
+                </h2>
+                <ul class="app-footer-content-links">
+                    <li>
+                        @Html.ActionLink("About Us", "About", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Terms & Conditions", "TermsCondition ", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Blogs", "Index", "Blogs")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Specialities", "Specialities", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Doctors", "DoctorsList", "Doctor")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Appointment")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Feed Back", "FeedBack", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Make an Enquiry", "Enquiry", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Contact Us", "Contact", "Home")
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <footer class="app-footer-webinfo">
+            <div class="copyright-text">
+                <p><b>&copy;</b> @DateTime.Now.Year | E-HealthCare All Rights Reserved</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fa fa-lg fa-youtube-play" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-instagram" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-facebook-f" aria-hidden="true"></i></a>&nbsp;
+                <a href="#"><i class="fa fa-lg fa-twitter" aria-hidden="true"></i></a>
+            </div>
         </footer>
     </div>
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/popper")

@@ -14,6 +14,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" />
+          <Property Name="ProfileImagePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Doctor">
           <Key>
@@ -25,6 +26,7 @@
           <Property Name="D_DateOfBirth" Type="date" />
           <Property Name="D_UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="D_UserId" Type="int" />
+          <Property Name="ProfileImagePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -41,6 +43,7 @@
           <Property Name="resetCode" Type="varchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" />
+          <Property Name="ProfileImagePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SiteUser">
           <Key>
@@ -155,6 +158,7 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK__Patient__UserId__6383C8BA" FromRole="Patient" ToRole="SiteUser" />
+          <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="E_HealthCareEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Patients" EntityType="Self.Patient" />
@@ -218,6 +222,7 @@
           <Property Name="D_UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="D_UserId" Type="Int32" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK_UserId_to_Id" FromRole="Doctor" ToRole="SiteUser" />
+          <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_UserId_to_Id">
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
@@ -264,6 +269,7 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.Fk_TOSiteUser" FromRole="Admin" ToRole="SiteUser" />
+          <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="Fk_TOSiteUser">
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
@@ -286,6 +292,7 @@
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="E_HealthCareModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="resetCode" ColumnName="resetCode" />
@@ -316,6 +323,7 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="E_HealthCareModel.Doctor">
               <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="D_UserId" ColumnName="D_UserId" />
                 <ScalarProperty Name="D_UserName" ColumnName="D_UserName" />
                 <ScalarProperty Name="D_DateOfBirth" ColumnName="D_DateOfBirth" />
@@ -339,6 +347,7 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="E_HealthCareModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

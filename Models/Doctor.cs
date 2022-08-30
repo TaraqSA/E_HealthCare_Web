@@ -20,6 +20,7 @@ namespace E_HealthCare_Web.Models
         public Nullable<System.DateTime> D_DateOfBirth { get; set; }
         public string D_UserName { get; set; }
         public Nullable<int> D_UserId { get; set; }
+        public string ProfileImagePath { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
     }

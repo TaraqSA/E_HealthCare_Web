@@ -19,6 +19,7 @@ namespace E_HealthCare_Web.Models
         public string Email { get; set; }
         public string UserName { get; set; }
         public Nullable<int> UserId { get; set; }
+        public string ProfileImagePath { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
     }

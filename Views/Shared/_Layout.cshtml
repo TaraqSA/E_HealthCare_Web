@@ -10,6 +10,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Styles", required: false)
+    @RenderSection("HeadScripts", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,8 +31,7 @@
                     <li>
                         <div class="dropdown">
                             <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
-                                Services
-                                <span class="caret"></span>
+                                Services <i class="fa fa-angle-down"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <li><a href="@Url.Action("BloodBank","Home")">Blood bank</a></li>
@@ -64,9 +64,24 @@
                         {
                             <div class="dropdown">
                                 <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
-                                    @User.Identity.Name
+                                    @User.Identity.Name <i class="fa fa-angle-down"></i>
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                                    
+                                    @{
+                                        var userRole = TempData.Peek("UserRole").ToString();
+                                        if (userRole == "Patient")
+                                        {
+                                            <li>@Html.ActionLink("Profile", "PatientHome", "Patient", new { id = TempData.Peek("PatientId")}, new { @class="fa fa-user-o"})</li>
+                                        }
+                                        else if (userRole == "Doctor")
+                                        {
+                                            <li>@Html.ActionLink("Profile", "DoctorHome", "Doctor", new { id = TempData.Peek("DoctorId") }, new { @class = "fa fa-user-o" })</li>
+                                        }
+                                        else if (userRole == "Admin")
+                                        {
+                                            <li>@Html.ActionLink("Profile", "AdminHome", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
+                                        }
+                                    }
                                     <li role="separator" class="divider"></li>
                                     <li><a href="@Url.Action("Logout","Account")"><Span class="glyphicon glyphicon-log-out"></Span> Logout </a></li>
                                 </ul>
@@ -98,6 +113,9 @@
                         @Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")
                     </li>
                     <li>
+                        @Html.ActionLink("Terms & Conditions", "TermsCondition ", "Home")
+                    </li>
+                    <li>
                         @Html.ActionLink("Blogs", "Index", "Blogs")
                     </li>
                     <li>
@@ -114,6 +132,9 @@
                     </li>
                     <li>
                         @Html.ActionLink("Make an Enquiry", "Enquiry", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Contact Us", "Contact", "Home")
                     </li>
                 </ul>
             </div>

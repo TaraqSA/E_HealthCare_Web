@@ -30,5 +30,9 @@ namespace E_HealthCare_Web.Models
         public virtual DbSet<Doctor> Doctors { get; set; }
         public virtual DbSet<UrlLoggin> UrlLoggins { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
+
+        public System.Data.Entity.DbSet<E_HealthCare_Web.ViewModels.PatientHomeViewModel> PatientHomeViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<E_HealthCare_Web.ViewModels.EditViewModel> EditViewModels { get; set; }
     }
 }

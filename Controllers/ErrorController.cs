@@ -20,5 +20,15 @@ namespace E_HealthCare_Web.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Error403()
+        {
+            return View();
+        }
+        public ActionResult Error500()
+        {
+            return View();
+        }
     }
 }

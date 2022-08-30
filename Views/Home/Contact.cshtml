@@ -1,17 +1,86 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@section Styles{
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <style type="text/css">
+        .map-container{
+            padding:5px;
+            margin:3px;
+        }
+
+        #map {
+            height: 400px;
+            width: 90%;
+        }
+
+        #contact-heading {
+            padding-top:1rem;
+            color: rgba(0, 0, 153,0.7);
+            letter-spacing:1.1px;
+        }
+
+        .contact-address{            
+            color:gray;
+            padding:1rem;
+            letter-spacing:1.1px;            
+        }
+
+        .contact-address address{
+            padding:0.5rem;
+        }
+
+    </style>
+}
+
+<h2 id="contact-heading">Contact Details</h2>
+<div class="map-container">
+    <div id="map"></div>
+</div>
+
+<div class="contact-address">
+    <address>
+        529G+7CR, Moulana Azad Rd, Daulat Nagar,<br />
+        Greenfield Housing Society,<br />
+        Kausa, Mumbra, Thane, Maharashtra 400612<br />
+        <abbr title="Phone">PH:</abbr>
+        +919988998812
+    </address>
+
+    <address>
+        <strong>Support:</strong>   <a href="mailto:sabbas240@gmail.com">sabbas240@gmail.com</a>
+    </address>
+</div>
+@section scripts{
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <script>
+        monument = [73.026023, 19.168171]
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2FsMTIxbWFuIiwiYSI6ImNsNnluZjliYTBwcmYzZG15bWJld2FwZjgifQ.mWmoClozpjV-SN-SGRGLnw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: monument,
+            zoom: 13
+        });
+
+        const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            '529G+7CR, Moulana Azad Rd, Daulat Nagar, Greenfield Housing Society, Kausa, Mumbra, Thane, Maharashtra 400612'
+        );
+
+        
+        const marker = new mapboxgl.Marker({ color: "red" })
+            .setLngLat(monument)
+            .addTo(map)
+            .setPopup(popup)
+            .addTo(map);
+
+        const nav = new mapboxgl.NavigationControl({
+            visualizePitch: true
+        });
+        map.addControl(nav, 'bottom-right');
+
+    </script>
+}
+

@@ -1,0 +1,330 @@
+﻿@model E_HealthCare_Web.ViewModels.PatientHomeViewModel
+
+@{
+    ViewBag.Title = "PatientHome";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .patient-dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .dashboard-heading {
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+            .dashboard-heading > h3 {
+                margin: 0;
+            }
+
+        .profile-picture {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center
+        }
+
+
+        .profile_picture-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15rem;
+            width: 15rem;
+            border-radius: 50%;
+        }
+
+        .profile_picture-sec {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+            width: 100%;
+        }
+
+            .profile_picture-sec > img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .profile_picture-sec > a {
+                height: fit-content;
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+        .modal-title {
+            display: inline-block;
+        }
+
+        .close {
+            display: inline-block;
+        }
+
+        .image-preview-div {
+            display:none;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            height: 300px;
+            width: 300px;            
+            position: relative;
+        }
+
+            .image-preview-div > img {
+                display: none;
+                height: 100%;
+                width: 100%;
+                border-radius: 3px;
+                outline: none !important;
+                object-fit: cover;
+            }
+
+            .image-preview-div > i {
+                display: none;
+                position: absolute;
+                box-sizing:border-box;
+                padding:3px;
+                top: 1.7%;
+                right: 1.7%;
+                color: rgba(255,255,255,0.8);
+                background-color:rgba(0,0,0,0.1);
+                cursor:pointer;
+                transition:0.3s;
+            }
+                .image-preview-div > i:hover, .image-preview-div > i:focus {
+                    background-color: rgba(0,0,0,0.3);
+                    color: rgba(255,255,255,0.8);
+                }
+
+                .edit_profile-buttons {
+                    padding: 1rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+        .patient-details {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 1rem 0.5rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+        }
+
+
+        .patient_details-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: gray;
+        }
+
+        .patient_details-table label {
+            margin-bottom: 0;
+        }
+
+        .patient_details-table td {
+            padding: 0.5rem;
+        }
+
+        .small-functionlities {
+            padding: 1rem 0.5rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+        }
+
+        .patient-links {
+            padding: 1rem 0.5rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+        }
+    </style>
+}
+
+
+<div class="patient-dashboard">
+    <section class="dashboard-heading">
+        <h3>My Dashboard</h3>
+    </section>
+
+    <section class="patient-details">
+        <div class="profile-picture">
+            <div class="profile_picture-img">
+                <div class="profile_picture-sec">
+                    @{
+                        if (Model.ProfileImagePath == null)
+                        {
+                            <img src="~/Images/ProfilePictures/user-default.png" alt="Patient Profile" />
+                        }
+                        else
+                        {
+                            var imagepath = Model.ProfileImagePath;
+                            <img src="@Url.Content(imagepath)" alt="Patient Profile" />
+                        }
+                    }
+
+                    <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#basicModal">
+                        <span class="fa fa-pencil"></span>&nbsp;Change Image
+                    </a>
+                </div>
+
+                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Change Profile Picture</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @using (Html.BeginForm("UploadImage", "Patient", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="modal-body">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.UserName)
+                                    <div class="image-preview-div">
+                                        <i class="fa fa-2x fa-remove" id="removeButton"></i>
+                                        <img src="#" alt="profile" id="imagePreview" />
+                                    </div>
+                                    <input type="file" name="imageUpload" id="imageUpload" accept="image/*" />
+                                    <br />
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" id="saveImage" class="btn btn-primary" disabled>Save changes</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="edit_profile-buttons">
+                @Html.ActionLink(" Edit Profile", "Edit", "Patient", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary fa fa-pencil" })
+            </div>
+        </div>
+        <div class="patient_details-info">
+            <table class="patient_details-table">
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.UserName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Gender)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DOB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DOB)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.BloodGroup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BloodGroup)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="small-functionlities">
+        function section
+    </section>
+
+    <section class="patient-links">
+        links section
+    </section>
+
+</div>
+
+
+@section scripts{
+<script language="javascript" type="text/javascript">
+
+        const disableSaveButton = document.getElementById('saveImage');       
+
+        $('#imageUpload').change(function () {
+
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.files[0]);
+                
+
+                fileReader.onload = function (x) {
+                    $('.image-preview-div').css('display', 'inherit');
+                    $('#imagePreview').css('display', 'inherit');
+                    $('#removeButton').css('display', 'inherit');
+                    $('#imagePreview').attr('src', x.target.result);
+                    disableSaveButton.removeAttribute('disabled');
+
+                }
+            }
+        });
+
+        $('#removeButton').click(function () {
+            $('#imagePreview').attr("src", "#");
+            $('#imagePreview').css('display', 'none');
+            $('#removeButton').css('display', 'none');
+            $('.image-preview-div').css('display', 'none');
+            $('#imageUpload').val('');
+            disableSaveButton.setAttribute('disabled','true');
+        });
+
+    </script>
+}

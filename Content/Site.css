@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     padding-top: 20px;    
     background-color: #dfece2;
 }
@@ -7,10 +6,59 @@ body {
 /* Set padding to keep content from hitting the edges */
 .body-content {
     min-height:90vh;
-    padding:20px;
-    padding-bottom:10px;
+    padding:20px 20px 0 20px;
+    }
+
+.div-alignment{
+    display:flex;
+    justify-content:flex-start;
+    margin:12px 0px 0px -20px;    
 }
 
+.sidebar-menu {
+    width: 20%;
+    display: flex;
+    flex-direction: column;    
+    background-color: rgba(116, 189, 160, 0.1);
+    border: 1px solid rgba(116, 189, 160, 0.4);
+    box-shadow:0px 0px 1px 0.1px rgba(0,0,0,0.3)
+}
+
+.sidebar_menu-submenu {
+    height: fit-content;
+    width: 100%;
+    background-color: rgba(116, 189, 160, 0.2);
+    border-bottom: 1px solid rgba(116, 189, 160, 0.4);
+    cursor:pointer;
+}
+
+.sidebar_menu-submenu:hover, .sidebar_menu-submenu:focus{
+    background-color:rgba(116,189,160,0.3);
+}
+
+.inner-submenu{
+    padding:1.5rem 0 1.5rem 1.8rem;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    height:100%;
+}
+
+    .inner-submenu > a {
+        text-decoration: none;
+        color: rgba(0,0,0,0.6);        
+        font-size: 2rem;
+    }
+
+        .inner-submenu > a:hover, .inner-submenu > a:focus{
+            color:rgba(255,255,255,0.6)
+        }
+
+        .body_content-renderview {
+            padding: 1rem;
+            width: 80%;
+            background-color: inherit;
+        }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -27,10 +75,10 @@ textarea {
 
 .navbar {
     font-size: 1.25em;
-    box-shadow: 0px 0px 3px 0.5px black;
+    box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.3);
     border : none;
+    height:50px;
 }
-
 
 .navbar-inverse {
     background-color: #00ff99;    
@@ -62,12 +110,6 @@ textarea {
         background-color: rgba(128, 128, 255,0.5);
         color: white;
     }
-
-
-.glyph-pad {
-    left: -4px;
-    top: 4px;}
-
 
 .Dropdown-btn {
     cursor: pointer;
@@ -124,7 +166,7 @@ select.input-validation-error {
 }
 
 .main-footer {
-    padding: 15px 15px 0 15px;
+    padding: 0 15px;
     /*background-color: rgba(116, 189, 160, 0.9);*/
     margin: 0;
 }
@@ -146,6 +188,7 @@ select.input-validation-error {
 
 .copyright-text{
     display:inline-block;
+    font-weight:600;
 }
 .social-links{
     display:inline-block;
@@ -169,12 +212,12 @@ select.input-validation-error {
 }
 
 .app-footer-content h2 a {
-    text-decoration: none;
-    color: rgba(0, 0, 153,1);
+    text-decoration: none;    
+    color: rgba(0, 0, 153,0.7);
 }
 
     .app-footer-content h2 a:hover, .app-footer-content h2 a:focus {
-        color: rgba(255,255,255,0.7);        
+        color: rgba(255,255,255,0.7);
     } 
    
     .app-footer-content-links {
@@ -197,4 +240,55 @@ select.input-validation-error {
         .app-footer-content-links > li a:hover, .app-footer-content-links > li a:focus {
             text-decoration: none;
             color: rgba(255,255,255,0.7);
-        } 
+        }
+
+
+@media screen and (max-width:764px) {
+    .navbar {
+        font-size: 1.25em;
+        box-shadow: 0px 0px 3px 0.5px black;
+        border: none;
+        height: auto;
+    }
+
+    .app-footer {
+        padding: 2px;
+        margin: 0 -15px;
+        font-weight: 600;
+        color: black;
+        background-color: rgba(116, 189, 160, 0.85);
+    }
+
+    .copyright-text {
+        font-size: 0.5rem;
+    }
+
+    .social-links {
+        font-size: 0.5rem;
+        line-height: 4.5;
+    }
+
+
+    .app-footer-content > h2 {
+        font-size: 2rem;
+    }
+
+    .app-footer-content-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding:0;
+        font-size:0.7rem;
+    }
+
+        .app-footer-content-links > li {
+            display: inline-block;
+            padding: 0.5rem;
+            margin: 0.2rem;
+        }
+
+        .app-footer-content-links li a {
+            color: rgba(0,0,0,0.65)
+        }
+}

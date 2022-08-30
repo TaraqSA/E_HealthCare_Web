@@ -19,5 +19,7 @@ namespace E_HealthCare_Web.ViewModels
 
         [Required]
         public bool PrivacyPermission { get; set; }
+  
     }
+    
 }

@@ -134,6 +134,7 @@
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -695,6 +696,12 @@
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Patient\PatientHome.cshtml" />
     <Content Include="Views\Patient\EditPatient.cshtml" />
+    <Content Include="Views\Patient\BMICalculator.cshtml" />
+    <Content Include="Views\Patient\PatientProfile.cshtml" />
+    <Content Include="Views\Patient\PatientAccount.cshtml" />
+    <Content Include="Views\Patient\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\VerifyEmail.cshtml" />
+    <Content Include="Views\Manage\EmailVerfied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

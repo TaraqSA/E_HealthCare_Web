@@ -78,32 +78,32 @@
         <div class="sidebar-menu">
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Profile", "PatientProfile", "Patient", null, new { @class = "fa fa-user" })
+                    @Html.ActionLink(" Profile", "PatientProfile", "Patient", new { id = patientId }, new { @class = "fa fa-user" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Account", "Account", "Patient", null, new { @class = "fa fa-edit" })
+                    @Html.ActionLink(" Account", "PatientAccount", "Patient", new { id = patientId }, new { @class = "fa fa-edit" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Appointments", "Appointment", "Patient", null, new { @class = "fa fa-calendar" })
+                    @Html.ActionLink(" Appointments", "Appointment", "Patient", new { id = patientId }, new { @class = "fa fa-calendar" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Health Reports", "Reports", "Patient", null, new { @class = "fa fa-address-card" })
+                    @Html.ActionLink(" Health Reports", "Reports", "Patient", new { id = patientId }, new { @class = "fa fa-address-card" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", null, new { @class = "fa fa-user-md" })
+                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { id = patientId }, new { @class = "fa fa-user-md" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Consultation", "Chat", "Patient", null, new { @class = "fa fa-comments-o" })
+                    @Html.ActionLink(" Consultation", "Chat", "Patient", new { id = patientId }, new { @class = "fa fa-comments-o" })
                 </div>
             </div>
         </div>

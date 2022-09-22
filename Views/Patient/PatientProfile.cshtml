@@ -1,0 +1,319 @@
+﻿@model E_HealthCare_Web.ViewModels.PatientProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles {
+    <style type="text/css">
+        .profile-demographic{
+            padding:2rem;
+            display:flex;
+            flex-direction:row;
+        }
+
+        .profile-image{
+            flex:1 1 30%;
+        }
+
+        .profile_image-container{
+            padding:1rem;            
+        }
+
+            .profile_image-container > img {
+                border-radius: 0.5rem;
+                box-shadow:1px 1px 5px 2px rgba(0,0,0,0.2);
+            }
+
+
+        .image_edit-button{
+            display:flex;
+            justify-content:center;
+            padding:1rem 2rem;
+        }
+
+        .profile_image-container > img {
+            height:100%;
+            width:100%;
+        }
+
+        .profile-data{            
+            flex:1 1 70%;
+        }
+
+        .profile_data-container{
+            padding-left:5rem;
+            font-family:'Comic Sans MS';
+        }
+
+        .patient_details-table label {
+            margin-bottom: 0;
+        }
+
+        .patient_details-table td {
+            padding: 0.5rem;
+        }
+
+        .colum-color {
+            background-color: rgba(116, 189, 160, 0.4);
+            background-clip:content-box;            
+            border-radius:1rem;
+        }
+
+        .colum-color > p{
+            padding:0 0.5rem;
+            margin:0;
+        }
+
+        .data_edit-btn {
+            padding: 2rem 0;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .data_edit-btn > a {
+            padding:4px 4px 2px 4px;
+            font-size:smaller;
+        }
+
+        .modal-title {
+            display: inline-block;
+        }
+
+        .close {
+            display: inline-block;
+        }
+
+        .image-preview-div {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            height: 300px;
+            width: 300px;
+            position: relative;
+        }
+
+            .image-preview-div > img {
+                display: none;
+                height: 100%;
+                width: 100%;
+                border-radius: 3px;
+                outline: none !important;
+                object-fit: cover;
+            }
+
+            .image-preview-div > i {
+                display: none;
+                position: absolute;
+                box-sizing: border-box;
+                padding: 3px;
+                top: 1.7%;
+                right: 1.7%;
+                color: rgba(255,255,255,0.8);
+                background-color: rgba(0,0,0,0.1);
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                .image-preview-div > i:hover, .image-preview-div > i:focus {
+                    background-color: rgba(0,0,0,0.3);
+                    color: rgba(255,255,255,0.8);
+                }
+
+
+    </style>
+    }
+
+
+
+<section class="profile-demographic">
+    <div class="profile-image">
+        <div class="profile_image-container">
+            @{
+                var image = Model.ProfileImagePath;
+                if (String.IsNullOrEmpty(image))
+                {
+                    <img src="~/Images/ProfilePictures/user-default.png" alt="ProfilePicture" />
+                }
+                else
+                {
+                    <img src="@Url.Content(image)" alt="ProfilePicture" />
+                }
+            }
+            
+        </div>
+        <div class="image-edit">
+            <div class="image_edit-button">
+                <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#basicModal">
+                    <span class="fa fa-pencil"></span>&nbsp;Change Profile Picture
+                </a>
+            </div>
+            <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Change Profile Picture</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        @using (Html.BeginForm("UploadImage", "Patient", new { viewActionName = "PatientProfile" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="modal-body">
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.UserName)
+                                <div class="image-preview-div">
+                                    <i class="fa fa-2x fa-remove" id="removeButton"></i>
+                                    <img src="#" alt="profile" id="imagePreview" />
+                                </div>
+                                <input type="file" name="imageUpload" id="imageUpload" accept="image/*" />
+                                <br />
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="saveImage" class="btn btn-primary" disabled>Save changes</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-data">
+        <div class="profile_data-container">
+            <table class="patient_details-table">
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.UserName)
+                    </td>
+
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.UserName)
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Name)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.Name)
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Gender)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.Gender)
+                        </p>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Email)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.Email)
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DOB) 
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.DOB)
+                        </p>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Address)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.Address)
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Phone)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.Phone)
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.BloodGroup)
+                    </td>
+                    <td class="colum-color">
+                        <p>
+                            @Html.DisplayFor(model => model.BloodGroup)
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="data_edit-btn">
+                            @Html.ActionLink(" Edit Details", "Edit", "Patient", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary fa fa-pencil" })
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+    
+</section>
+
+
+
+
+@section scripts {
+    <script language="javascript" type="text/javascript">
+
+        const disableSaveButton = document.getElementById('saveImage');
+        $('#imageUpload').change(function () {
+
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.files[0]);
+
+
+                fileReader.onload = function (x) {
+                    $('.image-preview-div').css('display', 'inherit');
+                    $('#imagePreview').css('display', 'inherit');
+                    $('#removeButton').css('display', 'inherit');
+                    $('#imagePreview').attr('src', x.target.result);
+                    disableSaveButton.removeAttribute('disabled');
+
+                }
+            }
+        });
+
+        $('#removeButton').click(function () {
+            $('#imagePreview').attr("src", "#");
+            $('#imagePreview').css('display', 'none');
+            $('#removeButton').css('display', 'none');
+            $('.image-preview-div').css('display', 'none');
+            $('#imageUpload').val('');
+            disableSaveButton.setAttribute('disabled', 'true');
+        });
+
+    </script>
+    }
+

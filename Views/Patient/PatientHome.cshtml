@@ -13,23 +13,13 @@
             flex-direction: column;
             gap: 2rem;
         }
-
-        .dashboard-heading {
-            border-radius: 4px;
-            margin-top: 0.5rem;
-        }
-
-            .dashboard-heading > h3 {
-                margin: 0;
-            }
-
+        
         .profile-picture {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center
         }
-
 
         .profile_picture-img {
             display: flex;
@@ -117,6 +107,7 @@
             padding: 1rem 0.5rem;
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            background-color: rgba(116, 189, 160, 0.5);
         }
 
 
@@ -125,7 +116,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
-            color: gray;
+            color: rgba(0,0,0,1);
         }
 
         .patient_details-table label {
@@ -136,26 +127,49 @@
             padding: 0.5rem;
         }
 
-        .small-functionlities {
-            padding: 1rem 0.5rem;
+        .patient-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1rem;
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            background-color: rgba(116, 189, 160, 0.5);
         }
 
-        .patient-links {
-            padding: 1rem 0.5rem;
+        .link {
+            flex:1 1 30%;
+            padding:1rem;
+            border: 1px solid rgba(116,189,160,0.7);
             border-radius: 4px;
-            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
+            background-color:rgba(116,189,160,0.7);
+            cursor:pointer;
+            transition:0.3s;
         }
+            .link:hover, link:focus {
+                /*background-color: rgba(116,189,160,0.1);*/
+                box-shadow: 0px 0px 5px 0.5px rgba(116,189,160,1);
+            }
+
+
+            .link > a {
+                text-decoration:none;
+                color:rgba(0,0,0,0.6);
+                font-weight:600;
+                font-size:2rem;
+            }
+
+                .link > a:hover, .link > a:focus{                                             
+                    color:rgba(0,0,0,1);
+                } 
+        
     </style>
 }
 
 
-<div class="patient-dashboard">
-    <section class="dashboard-heading">
-        <h3>My Dashboard</h3>
-    </section>
-
+<div class="patient-dashboard">   
     <section class="patient-details">
         <div class="profile-picture">
             <div class="profile_picture-img">
@@ -186,8 +200,9 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            @using (Html.BeginForm("UploadImage", "Patient", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("UploadImage", "Patient", new { viewActionName = "PatientHome"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
+
                                 <div class="modal-body">
                                     @Html.AntiForgeryToken()
                                     @Html.HiddenFor(model => model.UserName)
@@ -282,13 +297,26 @@
             </table>
         </div>
     </section>
-
-    <section class="small-functionlities">
-        function section
-    </section>
-
+    
     <section class="patient-links">
-        links section
+        <div class="link Calculate-BMI">
+            @Html.ActionLink(" Calculate BMI", "BMICalculator", "Patient",null ,new { @class="fa fa-calculator"})
+        </div>
+        <div class="link search-specialist">
+            @Html.ActionLink(" Search Specialist", "SearchSpecialist", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
+        </div>
+        <div class="link search-doctor">
+            @Html.ActionLink(" Search Doctor", "DoctorSearch", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
+        </div>
+        <div class="link medical-records">
+            @Html.ActionLink(" Medical Records","MedicalRecords","Patient",new { id = Model.Id}, new { @class = "fa fa-book" })
+        </div>
+        <div class="link my-bills">
+            @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
+        </div>
+        <div class="link appointments">
+            @Html.ActionLink(" My Appointments","Appointment","Patient",new { id = Model.Id}, new { @class = "fa fa-calendar-plus-o" })
+        </div>
     </section>
 
 </div>

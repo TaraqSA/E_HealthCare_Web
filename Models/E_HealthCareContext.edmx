@@ -27,6 +27,7 @@
           <Property Name="D_UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="D_UserId" Type="int" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -44,6 +45,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SiteUser">
           <Key>
@@ -159,6 +161,7 @@
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK__Patient__UserId__6383C8BA" FromRole="Patient" ToRole="SiteUser" />
           <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="E_HealthCareEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Patients" EntityType="Self.Patient" />
@@ -223,6 +226,7 @@
           <Property Name="D_UserId" Type="Int32" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK_UserId_to_Id" FromRole="Doctor" ToRole="SiteUser" />
           <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_UserId_to_Id">
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
@@ -292,6 +296,7 @@
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="E_HealthCareModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
                 <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -323,6 +328,7 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="E_HealthCareModel.Doctor">
               <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
                 <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="D_UserId" ColumnName="D_UserId" />
                 <ScalarProperty Name="D_UserName" ColumnName="D_UserName" />

@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Check BMI";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles{
+
+    <style type="text/css">
+        .bmi-head {
+            text-align: center;
+            letter-spacing: 1.1px;
+            color: rgba(0,148,255,0.3);
+        }
+
+        .bmi-body {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+            padding: 2rem;
+        }
+
+        .bmi-height {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .bmi_height-input > * {
+            margin-left: 1rem;
+        }
+
+        .bmi-weight {
+            display: flex;
+            gap: 1rem;
+        }
+
+            .bmi-weight > input {
+                margin-left: 0.7rem;
+            }
+
+        .bmi-btn {
+            margin-left:6.2rem;
+        }
+
+        .bmi-result {
+            text-align:center;
+            letter-spacing:1.1px;
+            color:rgba(0,0,0,0.8);
+                        
+        }
+
+        .bmi-info {
+        }
+
+
+        .bmi_info-table {
+            border: 1px solid;
+            box-shadow:0px 0px 3px 0.2px rgba(0,0,0,0.4);
+            
+        }
+
+            .bmi_info-table td, .bmi_info-table th {
+                padding: 0.5rem;
+                border: 1px solid;
+            }
+
+            .bmi_info-table tr:nth-child(odd) {
+                background-color: rgba(0,0,0,0.1);
+            }
+
+        .text::placeholder{
+            color:rgba(0,0,0,0.5);
+            font-size:0.9em;
+            font-family:Helvetica;
+        }
+    </style>
+}
+
+<h3 class="bmi-head">Check Your BMI</h3>
+<div class="bmi-body">
+    <section class="bmi-calculator">
+        @using (Html.BeginForm("BMICalculator", "Patient", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <div class="bmi-height">
+                @Html.Label("Height")
+                <div class="bmi_height-input">
+                    @Html.TextBox("Feet", "", new { @class = "text", @placeHolder = "Enter Feet", @required = "required", @type = "Number" })
+                    @Html.TextBox("Inch", "", new { @class = "text", @placeHolder = "Enter Inch", @required = "required", @type = "Number" })<br />
+                    @Html.ValidationMessage("Feet", "", null, "span")
+                </div>
+            </div><br />
+
+            <div class="bmi-weight">
+                @Html.Label("Weight")
+                @Html.TextBox("Weight", "", new { @class = "text", @placeHolder = "Enter Weight in Kg", @required = "required",@type="Number" })
+                @Html.ValidationMessage("Please Enter weight in kilograms(kg)")
+            </div><br /><br />
+            
+            <div class="bmi-btn">
+                <input type="submit" value="BMI" class="btn btn-md btn-primary" />
+            </div><br />
+            <div class="bmi-result">
+                @if (ViewBag.BMIResult != null)
+                {
+                    <p><b>Your BMI is : @ViewBag.BMIResult</b></p>
+                }
+            </div>
+        }
+    </section>
+    <section class="bmi-info">
+        @*<ul>
+                <li>
+                    Healthy BMI range: 18.5 kg/m2 - 25 kg/m2
+                </li>
+                <li>
+                    Healthy weight for the height: 59.9 kgs - 81.0
+                </li>
+                <li>
+                    Ponderal Index: 11.1 kg/m3
+                </li>
+            </ul>*@
+        <table class="bmi_info-table">
+            <tr>
+                <th>
+                    Category
+                </th>
+                <th>
+                    BMI Range - kg/m<sup>2</sup>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Severe Thinness
+                </td>
+                <td>
+                    < 16
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Moderate Thinness
+                </td>
+                <td>
+                    16 - 17
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mild Thinness
+                </td>
+                <td>
+                    17 - 18.5
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Normal
+                </td>
+                <td>
+                    18.5 - 25
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Overweight
+                </td>
+                <td>
+                    25 - 30
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Obese Class I
+                </td>
+                <td>
+                    30 - 35
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Obese Class II
+                </td>
+                <td>
+                    35 - 40
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    35 - 40
+                </td>
+                <td>
+                    > 40
+                </td>
+            </tr>
+        </table>
+    </section>
+</div>
+

@@ -71,15 +71,15 @@
                                         var userRole = TempData.Peek("UserRole").ToString();
                                         if (userRole == "Patient")
                                         {
-                                            <li>@Html.ActionLink("Profile", "PatientHome", "Patient", new { id = TempData.Peek("PatientId")}, new { @class="fa fa-user-o"})</li>
+                                            <li>@Html.ActionLink(" Profile", "PatientHome", "Patient", new { id = TempData.Peek("PatientId")}, new { @class="fa fa-user-o"})</li>
                                         }
                                         else if (userRole == "Doctor")
                                         {
-                                            <li>@Html.ActionLink("Profile", "DoctorHome", "Doctor", new { id = TempData.Peek("DoctorId") }, new { @class = "fa fa-user-o" })</li>
+                                            <li>@Html.ActionLink(" Profile", "DoctorHome", "Doctor", new { id = TempData.Peek("DoctorId") }, new { @class = "fa fa-user-o" })</li>
                                         }
                                         else if (userRole == "Admin")
                                         {
-                                            <li>@Html.ActionLink("Profile", "AdminHome", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
+                                            <li>@Html.ActionLink(" Profile", "AdminHome", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
                                         }
                                     }
                                     <li role="separator" class="divider"></li>

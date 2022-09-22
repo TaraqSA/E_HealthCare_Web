@@ -10,7 +10,7 @@ namespace E_HealthCare_Web.ModelSevices
 {
     public class PatientService
     {
-
+        E_HealthCareEntities context = new E_HealthCareEntities();
         public EditViewModel EditModelTransfer(Patient getPatient)
         {
             EditViewModel editViewModel = new EditViewModel();
@@ -36,16 +36,45 @@ namespace E_HealthCare_Web.ModelSevices
             patientHomeViewModel.BloodGroup = getPatient.p_BloodGroup;
             patientHomeViewModel.DOB = getPatient.p_dateOfBirth;
             patientHomeViewModel.Email = getPatient.p_Email;
-            patientHomeViewModel.Address = getPatient.p_address;            
+            patientHomeViewModel.Address = getPatient.p_address;
             patientHomeViewModel.ProfileImagePath = getPatient.ProfileImagePath;
-            if(getPatient.p_gender != null && getPatient.p_gender.Length == 1)
+            if (getPatient.p_gender != null && getPatient.p_gender.Length == 1)
             {
-                patientHomeViewModel.Gender =  ChangeGenderValue(getPatient.p_gender);
+                patientHomeViewModel.Gender = ChangeGenderValue(getPatient.p_gender);
+            }
+            else
+            {
+                patientHomeViewModel.Gender = getPatient.p_gender;
             }
             return patientHomeViewModel;
         }
 
-        public void UpdatePatient(Patient getPatient,EditViewModel model)
+        public PatientProfileViewModel PatientProfileModelTransfer(Patient patient)
+        {
+            PatientProfileViewModel model = new PatientProfileViewModel();
+            model.Id = patient.p_id;
+            model.Name = patient.p_name;
+            model.Phone = patient.p_phone;
+            model.ProfileImagePath = patient.ProfileImagePath;
+            model.UserName = patient.UserName;
+            model.Email = patient.p_Email;
+            model.DOB = patient.p_dateOfBirth;
+            model.BloodGroup = patient.p_BloodGroup;
+            model.Address = patient.p_address;
+            if (patient.p_gender != null && patient.p_gender.Length == 1)
+            {
+                model.Gender = ChangeGenderValue(patient.p_gender);
+            }
+            else
+            {
+                model.Gender = patient.p_gender;
+            }
+
+            return model;
+        }
+
+
+        public void UpdatePatient(Patient getPatient, EditViewModel model)
         {
             getPatient.p_name = model.FullName;
             getPatient.p_dateOfBirth = model.DOB;
@@ -69,6 +98,24 @@ namespace E_HealthCare_Web.ModelSevices
             }
             return "Unkown";
         }
-        
+
+        public PatientAccountViewModel AccountModelTransfer(Patient patient)
+        {
+            PatientAccountViewModel patientAccountViewModel = new PatientAccountViewModel();
+            patientAccountViewModel.id = patient.p_id;
+            patientAccountViewModel.UserName = patient.UserName;
+            patientAccountViewModel.IsEmailVerified = patient.IsEmailVerified;
+            patientAccountViewModel.Email = patient.p_Email;
+            return patientAccountViewModel;
+        }
+
+        public PatientPasswordChangeViewModel PasswordModelTransfer(int id, string Password)
+        {
+            PatientPasswordChangeViewModel model = new PatientPasswordChangeViewModel();
+            model.id = id;
+            model.OldPassword = Password;
+            return model;
+        }
+
     }
 }

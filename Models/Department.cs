@@ -12,33 +12,21 @@ namespace E_HealthCare_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class Department
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Patient()
+        public Department()
         {
+            this.Doctors = new HashSet<Doctor>();
             this.Appointments = new HashSet<Appointment>();
-            this.PatientReports = new HashSet<PatientReport>();
         }
     
-        public int p_id { get; set; }
-        public string p_name { get; set; }
-        public string p_gender { get; set; }
-        public string p_Email { get; set; }
-        public Nullable<System.DateTime> p_dateOfBirth { get; set; }
-        public string p_address { get; set; }
-        public string p_phone { get; set; }
-        public string p_BloodGroup { get; set; }
-        public string resetCode { get; set; }
-        public string UserName { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public string ProfileImagePath { get; set; }
-        public bool IsEmailVerified { get; set; }
+        public int Id { get; set; }
+        public string DepartmentName { get; set; }
     
-        public virtual SiteUser SiteUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Doctor> Doctors { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatientReport> PatientReports { get; set; }
     }
 }

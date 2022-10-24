@@ -1,0 +1,114 @@
+﻿@model E_HealthCare_Web.ViewModels.BookAppointmentViewModel
+
+@{
+    ViewBag.Title = "BookAppointment";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles{
+    <style>
+        .appointment-booking {
+            font-family: 'Comic Sans MS';
+        }
+    </style>
+}
+
+<section class="appointment-booking">
+    <h2>Book Appointment</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartmentSelectedId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.DepartmentSelectedId, Model.selectDepartmentList, "Select Department", new { @class = "form-control", @onchange = "fillDoctors()" })
+                    @Html.ValidationMessageFor(model => model.DepartmentSelectedId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DoctorSelectedId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.DoctorSelectedId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "D_UserName"), "Select Doctor", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DoctorSelectedId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppointmentTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AppointmentTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppointmentTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProblemDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ProblemDescription, 5, 50, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProblemDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Book Appointment" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+
+
+@section scripts{
+    <script>
+
+        function fillDoctors() {
+            var DepartmentId = $('#DepartmentSelectedId').val();
+            console.log(DepartmentId);
+            if (!(DepartmentId === null || DepartmentId === "")) {
+                $.getJSON("../FillDoctors", { deptId: DepartmentId }, function (data) {
+
+                    var select = $("#DoctorSelectedId");
+                    select.empty();
+
+                    select.append($('<option/>', {
+                        value: "",
+                        text: "Select Doctor"
+                    }));
+
+                    $.each(data, function (index, itemData) {
+
+                        select.append($('<option/>', {
+                            value: itemData.Value,
+                            text: itemData.Text
+                        }));
+
+                    });
+                });
+            } else {
+                var select = $("#DoctorSelectedId");
+                select.empty();
+
+                select.append($('<option/>', {
+                    value: "",
+                    text: "Select Doctor"
+                }));
+            };
+        }
+    </script>
+}

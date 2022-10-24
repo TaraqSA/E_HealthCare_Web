@@ -14,6 +14,11 @@ namespace E_HealthCare_Web.Models
 
     public class PatientMetadata
     {
+
+        [HiddenInput(DisplayValue = false)]
+        [Key]
+        public int p_id { get; set; }
+
         [Display(Name = "Full Name")]
         [DisplayFormat(NullDisplayText ="Not Filled")]
         public string p_name { get; set; }

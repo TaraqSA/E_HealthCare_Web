@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace E_HealthCare_Web.ModelSevices
 {
-    public class PatientService
+    public class PatientService 
     {
         E_HealthCareEntities context = new E_HealthCareEntities();
         public EditViewModel EditModelTransfer(Patient getPatient)
@@ -115,6 +115,35 @@ namespace E_HealthCare_Web.ModelSevices
             model.id = id;
             model.OldPassword = Password;
             return model;
+        }
+
+
+        public BookAppointmentViewModel BookAppointmentModelTransfer(int id)
+        {
+            Appointment appointment = new Appointment();
+            BookAppointmentViewModel model = new BookAppointmentViewModel();
+            model.Id = id;
+            model.AppointmentDate = appointment.AppointmentDate.Date;            
+            model.ProblemDescription = appointment.ProblemDescription;
+            model.doctors = context.Doctors.ToList();
+            model.departments = context.Departments.ToList();
+            model.DepartmentSelectedId = 0;
+            model.selectDepartmentList = new SelectList(model.departments, "Id", "DepartmentName", model.DepartmentSelectedId);
+            return model;
+        }
+
+
+        public void AddAppointmentToDataBase(BookAppointmentViewModel model)
+        {
+            Appointment appointment = new Appointment();
+            appointment.AppointmentDate = model.AppointmentDate.Add(model.AppointmentTime.TimeOfDay);
+            appointment.DoctorId = model.DoctorSelectedId;
+            appointment.ProblemDescription = model.ProblemDescription;
+            appointment.PatientId = model.Id;
+            appointment.DepartmentId = model.DepartmentSelectedId;
+            appointment.IsAppointmentActive = true;
+            context.Appointments.Add(appointment);
+            context.SaveChanges();
         }
 
     }

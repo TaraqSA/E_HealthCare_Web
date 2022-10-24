@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
     CheckSupportForInputTypeDate();
-    $(".CustomDatePicker").datepicker({
+    $(".CustomDatePicker").datepicker({        
         changeMonth: true,
-        changeYear: true,
+        changeYear: true,        
         yearRange: "1950:2010",
         defaultDate: "01/01/2000",
-        dateFormat: "dd/mm/yy"
-    });
+        dateFormat: "dd/mm/yy"     
+    });   
 });
 
 function CheckSupportForInputTypeDate() {

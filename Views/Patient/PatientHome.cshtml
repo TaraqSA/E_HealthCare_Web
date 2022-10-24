@@ -108,6 +108,7 @@
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
             background-color: rgba(116, 189, 160, 0.5);
+            border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
 
@@ -136,12 +137,13 @@
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
             background-color: rgba(116, 189, 160, 0.5);
+            border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
         .link {
             flex:1 1 30%;
             padding:1rem;
-            border: 1px solid rgba(116,189,160,0.7);
+            border: 1px solid rgba(116,189,160,0.9);
             border-radius: 4px;
             /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
             background-color:rgba(116,189,160,0.7);
@@ -156,7 +158,7 @@
 
             .link > a {
                 text-decoration:none;
-                color:rgba(0,0,0,0.6);
+                color:rgba(0,0,0,0.7);
                 font-weight:600;
                 font-size:2rem;
             }
@@ -315,7 +317,7 @@
             @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
         </div>
         <div class="link appointments">
-            @Html.ActionLink(" My Appointments","Appointment","Patient",new { id = Model.Id}, new { @class = "fa fa-calendar-plus-o" })
+            @Html.ActionLink(" My Appointments","AppointmentList","Patient",new { id = Model.Id}, new { @class = "fa fa-calendar-plus-o" })
         </div>
     </section>
 

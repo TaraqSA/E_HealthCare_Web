@@ -1,0 +1,139 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.ReportListViewModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Report List";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+        .main-section{
+            padding:1rem;
+            font-family:'Comic Sans MS';
+        }
+
+        .main-section > h3{
+            text-align:center;
+            padding-bottom:1rem;
+        }
+
+        .addreports{
+            padding:1rem;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        table th {
+            border: 1px solid rgba(116, 189, 160, 1);
+            background-color: rgba(116, 189, 160, 0.6) !important;
+        }
+
+        tr, td {
+            border: 1px solid rgba(116, 189, 160, 1);
+        }
+
+            table tr:nth-child(odd) {
+                background-color: rgba(116, 189, 160, 0.2);
+            }
+
+        .reportlink > a {
+            text-decoration:none;
+        }
+
+        .report-search{
+            padding-left:0.5rem;
+            display:flex;
+            gap:1rem;
+        }
+    </style>
+    }
+
+<section class="main-section">
+    <h3>All Reports</h3>
+
+    <section>
+        @using (Html.BeginForm("ReportList","Patient",FormMethod.Get))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group report-search">
+                        @Html.TextBox("searchByName", ViewBag.CurrentFilter as string, new { @class = "form-control",@placeholder = "Search By Report Name" })
+                        <button type="submit" value="Search" class="btn btn-sm btn-info fa fa-search"> Search</button>
+                    </div>
+                </div>
+                
+            }
+    </section>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().reportName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().reportType)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.reportName)
+                </td>
+
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.ReprotTypeFromDB)
+                </td>
+                <td class="reportlink">
+                    @Html.ActionLink("View", "ViewReport", new { id = item.id }, new {@target = "_blank" })
+                </td>
+                <td class="reportlink">
+                    @Html.ActionLink("Download", "DownloadReport", new { id = item.id })
+                </td>
+                <td>
+                    <a href="#" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#basicModal">
+                        <span class="fa fa-remove"></span>&nbsp;Delete Report
+                    </a>
+
+                    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">                                    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                @using (Html.BeginForm("DeleteReport", "Patient", new { reportId = item.id }, FormMethod.Post))
+                                {
+
+                                    <div class="modal-body">
+                                        @Html.AntiForgeryToken()
+                                        <h3>are you sure you want to delete your report.</h3>
+                                        <br />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" id="deleteReport" class="btn btn-danger">Delete</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("ReportList",new { page, currentFilter = ViewBag.CurrentFilter }))
+
+    <div class="addreports">
+        @Html.ActionLink("Add Report", "UploadReports", new { id = ViewBag.PatientId }, new { @class = "btn btn-sm btn-info" })
+    </div>
+</section>

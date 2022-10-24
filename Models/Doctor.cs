@@ -14,6 +14,13 @@ namespace E_HealthCare_Web.Models
     
     public partial class Doctor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Doctor()
+        {
+            this.Appointments = new HashSet<Appointment>();
+            this.Departments = new HashSet<Department>();
+        }
+    
         public int Id { get; set; }
         public string D_Name { get; set; }
         public string D_Email { get; set; }
@@ -24,5 +31,9 @@ namespace E_HealthCare_Web.Models
         public bool IsEmailVerified { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

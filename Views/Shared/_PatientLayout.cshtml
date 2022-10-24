@@ -26,7 +26,7 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>                    
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>
                         <div class="dropdown">
                             <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="false">
@@ -50,19 +50,19 @@
                     <li>@Html.ActionLink("About Us", "About", "Home")</li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">                   
+                <ul class="nav navbar-nav navbar-right">
 
                     <li>
-                        
+
                         @{
                             var patientId = TempData.Peek("PatientId");
                             <div class="dropdown">
                                 <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                                     @User.Identity.Name <i class="fa fa-angle-down"></i>
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2"> 
-                                    
-                                    <li>@Html.ActionLink(" Dashboard", "PatientHome", "Patient", new { id = patientId }, new { @class="fa fa-user-o"})</li>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                    <li>@Html.ActionLink(" Dashboard", "PatientHome", "Patient", new { id = patientId }, new { @class = "fa fa-user-o" })</li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="@Url.Action("Logout","Account")"><Span class="glyphicon glyphicon-log-out"></Span> Logout </a></li>
                                 </ul>
@@ -86,19 +86,44 @@
                     @Html.ActionLink(" Account", "PatientAccount", "Patient", new { id = patientId }, new { @class = "fa fa-edit" })
                 </div>
             </div>
-            <div class="sidebar_menu-submenu">
+
+            <div id="menuCollapsed" class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Appointments", "Appointment", "Patient", new { id = patientId }, new { @class = "fa fa-calendar" })
+                    <button type="button" id="collapsible" class="fa fa-calendar">&nbsp;Appointments</button>
                 </div>
             </div>
-            <div class="sidebar_menu-submenu">
+            <div class="sidebar_menu-submenu sidebar-collapsible">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Health Reports", "Reports", "Patient", new { id = patientId }, new { @class = "fa fa-address-card" })
+                    @Html.ActionLink(" Book Appointment", "BookAppointment", "Patient", new { id = patientId }, new { @class = "fa fa-pencil" })
                 </div>
             </div>
+            <div class="sidebar_menu-submenu sidebar-collapsible">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" See Appointments", "AppointmentList", "Patient", new { id = patientId }, new { @class = "fa fa-calendar" })
+                </div>
+            </div>
+
+
+            <div id="menuCollapsedHP" class="sidebar_menu-submenu">
+                <div class="inner-submenu">
+                    <button type="button" id="hpCollapsible" class="fa fa-address-card">&nbsp;Health Reports</button>
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu hp-collapsible">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" Upload Reports", "UploadReports", "Patient", new { id = patientId }, new { @class = "fa fa-upload" })
+                </div>
+            </div>
+            <div class="sidebar_menu-submenu hp-collapsible">
+                <div class="inner-submenu">
+                    @Html.ActionLink(" All Reports", "ReportList", "Patient", new { id = patientId }, new { @class = "fa fa-folder" })
+                </div>
+            </div>
+            
+
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { id = patientId }, new { @class = "fa fa-user-md" })
+                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { @class = "fa fa-user-md" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
@@ -169,5 +194,48 @@
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        var AppointmentButton = document.getElementById('collapsible');
+        var hpButton = document.getElementById('hpCollapsible');
+        var i;
+        AppointmentButton.addEventListener("click",
+            function () {
+                var AppointmentCollaspsible = document.getElementsByClassName("sidebar-collapsible");
+                var CollapsedDiv = document.getElementById('menuCollapsed')
+                
+                for (i = 0; i < AppointmentCollaspsible.length; i++) {                    
+                    if (AppointmentCollaspsible[i].style.maxHeight) {
+                        AppointmentCollaspsible[i].style.maxHeight = null;
+                        AppointmentCollaspsible[i].style.borderBottomWidth = 0;
+                        CollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.2)";                        
+                    } else {
+                        CollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.4)";
+                        AppointmentCollaspsible[i].style.maxHeight = CollapsedDiv.scrollHeight + "px";
+                        AppointmentCollaspsible[i].style.borderBottomWidth = "1px";                        
+                    }
+                }
+            });
+
+
+        hpButton.addEventListener("click",
+            function () {
+                var hpCollaspsible = document.getElementsByClassName("hp-collapsible");
+                var hpCollapsedDiv = document.getElementById('menuCollapsedHP')
+
+                for (i = 0; i < hpCollaspsible.length; i++) {
+                    if (hpCollaspsible[i].style.maxHeight) {
+                        hpCollaspsible[i].style.maxHeight = null;
+                        hpCollaspsible[i].style.borderBottomWidth = 0;
+                        hpCollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.2)";
+                    } else {
+                        hpCollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.4)";
+                        hpCollaspsible[i].style.maxHeight = hpCollapsedDiv.scrollHeight + "px";
+                        hpCollaspsible[i].style.borderBottomWidth = "1px";
+                    }
+                }
+            });
+
+
+    </script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace E_HealthCare_Web.Models
 {
@@ -226,6 +228,19 @@ namespace E_HealthCare_Web.Models
                 throw new ArgumentNullException("model");
             }
             return tokentk == GetToken(dt,tokentk);
+        }
+    }
+
+
+    public static class EnumHelperForDisplay
+    {
+        public static string GetDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()?
+                            .GetMember(enumValue.ToString())?
+                            .First()?
+                            .GetCustomAttribute<DisplayAttribute>()?
+                            .Name;
         }
     }
 }

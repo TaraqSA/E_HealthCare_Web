@@ -30,5 +30,8 @@ namespace E_HealthCare_Web.Models
         public virtual DbSet<Doctor> Doctors { get; set; }
         public virtual DbSet<UrlLoggin> UrlLoggins { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Appointment> Appointments { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<PatientReport> PatientReports { get; set; }
     }
 }

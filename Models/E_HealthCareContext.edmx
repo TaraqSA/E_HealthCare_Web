@@ -16,6 +16,25 @@
           <Property Name="UserId" Type="int" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="datetime" Nullable="false" />
+          <Property Name="IsAppointmentActive" Type="bit" Nullable="false" />
+          <Property Name="ProblemDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,6 +47,14 @@
           <Property Name="D_UserId" Type="int" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
           <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Doctor_Department_RelationShip">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -46,6 +73,16 @@
           <Property Name="UserId" Type="int" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
           <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientReports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReportAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="ReportName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SiteUser">
           <Key>
@@ -69,6 +106,30 @@
           <Property Name="Link_Status" Type="bit" />
           <Property Name="Reset_Url_Path" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK__Doctor_De__Depar__40058253">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Doctor_Department_RelationShip" Type="Self.Doctor_Department_RelationShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor_Department_RelationShip">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Doctor_De__Docto__40F9A68C">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Doctor_Department_RelationShip" Type="Self.Doctor_Department_RelationShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor_Department_RelationShip">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Patient__UserId__6383C8BA">
           <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
           <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
@@ -78,6 +139,18 @@
             </Principal>
             <Dependent Role="Patient">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientReport">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="PatientReports" Type="Self.PatientReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="PatientReports">
+              <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -117,15 +190,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FKAppointmentDepartmentId">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAppointmentDoctorId">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAppointmentPatientId">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="E_HealthCareModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor_Department_RelationShip" EntityType="Self.Doctor_Department_RelationShip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientReports" EntityType="Self.PatientReports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteUser" EntityType="Self.SiteUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrlLoggins" EntityType="Self.UrlLoggins" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Doctor_De__Depar__40058253" Association="Self.FK__Doctor_De__Depar__40058253">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Doctor_Department_RelationShip" EntitySet="Doctor_Department_RelationShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Doctor_De__Docto__40F9A68C" Association="Self.FK__Doctor_De__Docto__40F9A68C">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Doctor_Department_RelationShip" EntitySet="Doctor_Department_RelationShip" />
+          </AssociationSet>
           <AssociationSet Name="FK__Patient__UserId__6383C8BA" Association="Self.FK__Patient__UserId__6383C8BA">
             <End Role="SiteUser" EntitySet="SiteUser" />
             <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientReport" Association="Self.FK_PatientReport">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="PatientReports" EntitySet="PatientReports" />
           </AssociationSet>
           <AssociationSet Name="Fk_TOSiteUser" Association="Self.Fk_TOSiteUser">
             <End Role="SiteUser" EntitySet="SiteUser" />
@@ -138,6 +263,18 @@
           <AssociationSet Name="FK_UserIDToIdOfSiteUser" Association="Self.FK_UserIDToIdOfSiteUser">
             <End Role="SiteUser" EntitySet="SiteUser" />
             <End Role="UrlLoggins" EntitySet="UrlLoggins" />
+          </AssociationSet>
+          <AssociationSet Name="FKAppointmentDepartmentId" Association="Self.FKAppointmentDepartmentId">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FKAppointmentDoctorId" Association="Self.FKAppointmentDoctorId">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FKAppointmentPatientId" Association="Self.FKAppointmentPatientId">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -162,6 +299,8 @@
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK__Patient__UserId__6383C8BA" FromRole="Patient" ToRole="SiteUser" />
           <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="E_HealthCareModel.FKAppointmentPatientId" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="PatientReports" Relationship="E_HealthCareModel.FK_PatientReport" FromRole="Patient" ToRole="PatientReport" />
         </EntityType>
         <EntityContainer Name="E_HealthCareEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Patients" EntityType="Self.Patient" />
@@ -184,6 +323,29 @@
           <AssociationSet Name="Fk_TOSiteUser" Association="E_HealthCareModel.Fk_TOSiteUser">
             <End Role="SiteUser" EntitySet="SiteUsers" />
             <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="E_HealthCareModel.Appointment" />
+          <AssociationSet Name="FKAppointmentDoctorId" Association="E_HealthCareModel.FKAppointmentDoctorId">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FKAppointmentPatientId" Association="E_HealthCareModel.FKAppointmentPatientId">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="Departments" EntityType="E_HealthCareModel.Department" />
+          <AssociationSet Name="Doctor_Department_RelationShip" Association="E_HealthCareModel.Doctor_Department_RelationShip">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FKAppointmentDepartmentId" Association="E_HealthCareModel.FKAppointmentDepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="PatientReports" EntityType="E_HealthCareModel.PatientReport" />
+          <AssociationSet Name="FK_PatientReport" Association="E_HealthCareModel.FK_PatientReport">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientReport" EntitySet="PatientReports" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="SiteUser">
@@ -227,6 +389,8 @@
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.FK_UserId_to_Id" FromRole="Doctor" ToRole="SiteUser" />
           <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="E_HealthCareModel.FKAppointmentDoctorId" FromRole="Doctor" ToRole="Appointment" />
+          <NavigationProperty Name="Departments" Relationship="E_HealthCareModel.Doctor_Department_RelationShip" FromRole="Doctor" ToRole="Department" />
         </EntityType>
         <Association Name="FK_UserId_to_Id">
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
@@ -284,6 +448,93 @@
             </Principal>
             <Dependent Role="Admin">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsAppointmentActive" Type="Boolean" Nullable="false" />
+          <Property Name="ProblemDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="E_HealthCareModel.FKAppointmentDoctorId" FromRole="Appointment" ToRole="Doctor" />
+          <NavigationProperty Name="Patient" Relationship="E_HealthCareModel.FKAppointmentPatientId" FromRole="Appointment" ToRole="Patient" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="E_HealthCareModel.FKAppointmentDepartmentId" FromRole="Appointment" ToRole="Department" />
+        </EntityType>
+        <Association Name="FKAppointmentDoctorId">
+          <End Type="E_HealthCareModel.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="E_HealthCareModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAppointmentPatientId">
+          <End Type="E_HealthCareModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="E_HealthCareModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="E_HealthCareModel.Doctor_Department_RelationShip" FromRole="Department" ToRole="Doctor" />
+          <NavigationProperty Name="Appointments" Relationship="E_HealthCareModel.FKAppointmentDepartmentId" FromRole="Department" ToRole="Appointment" />
+        </EntityType>
+        <Association Name="Doctor_Department_RelationShip">
+          <End Type="E_HealthCareModel.Department" Role="Department" Multiplicity="*" />
+          <End Type="E_HealthCareModel.Doctor" Role="Doctor" Multiplicity="*" />
+        </Association>
+        <Association Name="FKAppointmentDepartmentId">
+          <End Type="E_HealthCareModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="E_HealthCareModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PatientReport">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="E_HealthCareModel.FK_PatientReport" FromRole="PatientReport" ToRole="Patient" />
+          <Property Name="ReportName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_PatientReport">
+          <End Type="E_HealthCareModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="E_HealthCareModel.PatientReport" Role="PatientReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="p_id" />
+            </Principal>
+            <Dependent Role="PatientReport">
+              <PropertyRef Name="PatientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -362,6 +613,46 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="E_HealthCareModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ProblemDescription" ColumnName="ProblemDescription" />
+                <ScalarProperty Name="IsAppointmentActive" ColumnName="IsAppointmentActive" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="E_HealthCareModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Doctor_Department_RelationShip" TypeName="E_HealthCareModel.Doctor_Department_RelationShip" StoreEntitySet="Doctor_Department_RelationShip">
+            <EndProperty Name="Doctor">
+              <ScalarProperty Name="Id" ColumnName="DoctorId" />
+            </EndProperty>
+            <EndProperty Name="Department">
+              <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="PatientReports">
+            <EntityTypeMapping TypeName="E_HealthCareModel.PatientReport">
+              <MappingFragment StoreEntitySet="PatientReports">
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ReportAddress" ColumnName="ReportAddress" />
+                <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -376,8 +667,8 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

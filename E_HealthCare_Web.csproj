@@ -68,6 +68,12 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="PasswordHashTool, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\PasswordHashTool.1.0.0\lib\PasswordHashTool.dll</HintPath>
     </Reference>
@@ -145,9 +151,15 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CustomAdmin.cs" />
     <Compile Include="Models\CustomDoctor.cs" />
     <Compile Include="Models\CustomPatient.cs" />
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Doctor.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
@@ -168,6 +180,9 @@
     </Compile>
     <Compile Include="Models\HelperMethods.cs" />
     <Compile Include="Models\Patient.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PatientReport.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteUser.cs">
@@ -345,6 +360,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -692,7 +708,6 @@
     <Content Include="Views\Admin\MakeAdmin.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Patient\Appointment.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
     <Content Include="Views\Patient\PatientHome.cshtml" />
     <Content Include="Views\Patient\EditPatient.cshtml" />
@@ -702,9 +717,15 @@
     <Content Include="Views\Patient\ChangePassword.cshtml" />
     <Content Include="Views\Manage\VerifyEmail.cshtml" />
     <Content Include="Views\Manage\EmailVerfied.cshtml" />
+    <Content Include="Views\Patient\AppointmentList.cshtml" />
+    <Content Include="Views\Patient\BookAppointment.cshtml" />
+    <Content Include="Views\Patient\CancelAppointment.cshtml" />
+    <Content Include="Views\Patient\UploadReports.cshtml" />
+    <Content Include="Views\Patient\ReportList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="HealthReports\" />
     <Folder Include="Images\.vs\Images\v16\" />
     <Folder Include="Views\Shared\EditorTemplate\" />
   </ItemGroup>

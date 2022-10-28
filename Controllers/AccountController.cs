@@ -12,6 +12,7 @@ using PasswordHashTool;
 using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography;
+using System.Web.Routing;
 
 namespace E_HealthCare_Web.Controllers
 {
@@ -61,8 +62,7 @@ namespace E_HealthCare_Web.Controllers
                         patient.SiteUser = siteUser;
 
                         siteUser.Patients.Add(patient);//for better understanding visit https://docs.microsoft.com/en-us/ef/ef6/fundamentals/relationships  
-                        databseContext.SiteUsers.Add(siteUser);
-                        //databseContext.Patients.Add(patient);
+                        databseContext.SiteUsers.Add(siteUser);                        
                         databseContext.SaveChanges();
 
                         return RedirectToAction("Login");
@@ -114,26 +114,36 @@ namespace E_HealthCare_Web.Controllers
             {
                 var context = new E_HealthCareEntities();
                 var isvalidUser = IsValidUser(userLoginViewModel);
-
-
+                
                 //if user is valid and present in database, redirect to Main page after login 
                 if (isvalidUser != null)
                 {
-                    var getRole = context.SiteUsers.Where(q => q.UserName == userLoginViewModel.UserName).FirstOrDefault().UserRole;
+                    var getRole = context.SiteUsers.Where(q => q.UserName == userLoginViewModel.UserName).Select(role => role.UserRole).FirstOrDefault();
+                    TempData["UserRole"] = getRole;
+                    TempData.Keep("UserRole");
                     if (getRole == "Patient")
                     {
-                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                        return RedirectToAction("Index", "Patient");
+                        var getPatientId = context.Patients.Where(q => q.UserName == userLoginViewModel.UserName).Select(patient => patient.p_id).FirstOrDefault();
+                        TempData["PatientId"] = getPatientId;
+                        TempData.Keep("PatientId");
+                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);                        
+                        return RedirectToAction("PatientHome", "Patient", new { id = getPatientId });
                     }
                     else if (getRole == "Doctor")
                     {
+                        var getDoctorId = context.Doctors.Where(q => q.D_UserName == userLoginViewModel.UserName).Select(doctor => doctor.Id).FirstOrDefault();
+                        TempData["DoctorId"] = getDoctorId;
+                        TempData.Keep("DoctorId");
                         FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                        return RedirectToAction("Index", "Doctor");
+                        return RedirectToAction("Index", "Doctor", new { id = getDoctorId});
                     }
                     else if (getRole == "Admin")
                     {
+                        var getAdminId = context.Admins.Where(q => q.UserName == userLoginViewModel.UserName).Select(admin => admin.Id).FirstOrDefault();
+                        TempData["AdminId"] = getAdminId;
+                        TempData.Keep("AdminId");
                         FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("Index", "Admin",new { id = getAdminId});
                     }
                     return View(userLoginViewModel);
 
@@ -219,9 +229,9 @@ namespace E_HealthCare_Web.Controllers
             return View();
         }
 
-        private void SendEmail(string emailAddress, string body, string subject)
+        public void SendEmail(string emailAddress, string body, string subject)
         {
-            using (MailMessage mm = new MailMessage("your_email", emailAddress))
+            using (MailMessage mm = new MailMessage("salmanchannel212@gmail.com", emailAddress))
             {
                 mm.Subject = subject;
                 mm.Body = body;
@@ -231,7 +241,7 @@ namespace E_HealthCare_Web.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
 
-                NetworkCredential networkCredential = new NetworkCredential(your_email, your_password);
+                NetworkCredential networkCredential = new NetworkCredential("salmanchannel212@gmail.com", "fjrfkofhusgboufd");
 
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = networkCredential;
@@ -410,7 +420,6 @@ namespace E_HealthCare_Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AllowAnonymous]
         public ActionResult DeleteAccount()
         {
             return View();

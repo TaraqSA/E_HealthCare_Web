@@ -1,7 +1,7 @@
 ﻿@model E_HealthCare_Web.ViewModels.PatientHomeViewModel
 
 @{
-    ViewBag.Title = "PatientHome";
+    ViewBag.Title = "Patient Home";
     Layout = "~/Views/Shared/_PatientLayout.cshtml";
 }
 
@@ -141,7 +141,7 @@
         }
 
         .link {
-            flex:1 1 30%;
+            flex:0 0 30%;
             padding:1rem;
             border: 1px solid rgba(116,189,160,0.9);
             border-radius: 4px;
@@ -305,17 +305,17 @@
             @Html.ActionLink(" Calculate BMI", "BMICalculator", "Patient",null ,new { @class="fa fa-calculator"})
         </div>
         <div class="link search-specialist">
-            @Html.ActionLink(" Search Specialist", "SearchSpecialist", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
+            @Html.ActionLink(" Search Specialist", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
         </div>
         <div class="link search-doctor">
-            @Html.ActionLink(" Search Doctor", "DoctorSearch", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
+            @Html.ActionLink(" Search Doctor", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
         </div>
         <div class="link medical-records">
-            @Html.ActionLink(" Medical Records","MedicalRecords","Patient",new { id = Model.Id}, new { @class = "fa fa-book" })
+            @Html.ActionLink(" Medical Records","ReportList","Patient",new { id = Model.Id}, new { @class = "fa fa-book" })
         </div>
-        <div class="link my-bills">
+        @*<div class="link my-bills">
             @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
-        </div>
+        </div>*@
         <div class="link appointments">
             @Html.ActionLink(" My Appointments","AppointmentList","Patient",new { id = Model.Id}, new { @class = "fa fa-calendar-plus-o" })
         </div>

@@ -390,15 +390,24 @@ namespace E_HealthCare_Web.ViewModels
     }
     
     public class FindDoctorViewModel
-    {
+    {   
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int id { get; set; }
 
+        [Display(Name = "Department")]        
         public IEnumerable<Department> departmentName { get; set; }
 
+        [Display(Name = "Doctor Name")]
         public IEnumerable<Doctor> doctorsName { get; set; }
-    }
 
+
+        [Display(Name = "Department")]        
+        public int? DepartmentSelectedId { get; set; }
+
+        public SelectList selectedDepartment { get; set; }
+        
+    }
+    
 }
 

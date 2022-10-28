@@ -408,6 +408,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
+    <Content Include="Images\9191758_26363.jpg" />
     <Content Include="Images\aditya-romansa-5zp0jym2w9M-unsplash.jpg" />
     <Content Include="Images\another-resize-hospital-theme.jpg" />
     <Content Include="Images\appointment-psychologist.jpg" />
@@ -428,6 +429,8 @@
     <Content Include="Images\Green-Tea-big.jpg" />
     <Content Include="Images\Green-Tea-small.jpg" />
     <Content Include="Images\Icons\health-care.png" />
+    <Content Include="Images\man-women-healthcare-removebg-preview.png" />
+    <Content Include="Images\ProfilePictures\doctor %281%29.png" />
     <Content Include="Images\ProfilePictures\user-default.png" />
     <Content Include="Images\logo\24-hours.png" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
@@ -722,6 +725,7 @@
     <Content Include="Views\Patient\CancelAppointment.cshtml" />
     <Content Include="Views\Patient\UploadReports.cshtml" />
     <Content Include="Views\Patient\ReportList.cshtml" />
+    <Content Include="Views\Patient\FindDoctors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

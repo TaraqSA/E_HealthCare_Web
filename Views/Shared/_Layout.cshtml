@@ -69,22 +69,17 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">                                    
                                     @{
                                         var userRole = TempData.Peek("UserRole").ToString();
-                                        TempData.Keep("UserRole");
                                         if (userRole == "Patient")
                                         {
                                             <li>@Html.ActionLink(" Profile", "PatientHome", "Patient", new { id = TempData.Peek("PatientId")}, new { @class="fa fa-user-o"})</li>
-                                            TempData.Keep("PatientId");
                                         }
                                         else if (userRole == "Doctor")
                                         {
                                             <li>@Html.ActionLink(" Profile", "DoctorHome", "Doctor", new { id = TempData.Peek("DoctorId") }, new { @class = "fa fa-user-o" })</li>
-                                            TempData.Keep("DoctorID");
                                         }
                                         else if (userRole == "Admin")
                                         {
                                             <li>@Html.ActionLink(" Profile", "AdminHome", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
-                                            TempData.Keep("AdminId");
-                                            
                                         }
                                     }
                                     <li role="separator" class="divider"></li>
@@ -124,13 +119,13 @@
                         @Html.ActionLink("Blogs", "Index", "Blogs")
                     </li>
                     <li>
-                        @Html.ActionLink("Specialities", "Login", "Account")
+                        @Html.ActionLink("Specialities", "Specialities", "Home")
                     </li>
                     <li>
                         @Html.ActionLink("Doctors", "DoctorsList", "Doctor")
                     </li>
                     <li>
-                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Patient")
+                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Appointment")
                     </li>
                     <li>
                         @Html.ActionLink("Feed Back", "FeedBack", "Home")

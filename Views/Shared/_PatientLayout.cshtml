@@ -56,8 +56,6 @@
 
                         @{
                             var patientId = TempData.Peek("PatientId");
-                            TempData.Keep("PatientId");
-                            
                             <div class="dropdown">
                                 <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                                     @User.Identity.Name <i class="fa fa-angle-down"></i>
@@ -125,7 +123,7 @@
 
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { id = patientId }, new { @class = "fa fa-user-md" })
+                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { @class = "fa fa-user-md" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
@@ -162,10 +160,10 @@
                         @Html.ActionLink("Specialities", "Specialities", "Home")
                     </li>
                     <li>
-                        @Html.ActionLink("Doctors", "FindDoctors", "Patient",new { id = patientId},null)
+                        @Html.ActionLink("Doctors", "DoctorsList", "Doctor")
                     </li>
                     <li>
-                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Patient",new { id = patientId},null)
+                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Appointment")
                     </li>
                     <li>
                         @Html.ActionLink("Feed Back", "FeedBack", "Home")

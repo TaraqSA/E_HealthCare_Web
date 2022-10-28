@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace E_HealthCare_Web.ModelSevices
 {
-    public class PatientService
+    public class PatientService 
     {
         E_HealthCareEntities context = new E_HealthCareEntities();
         public EditViewModel EditModelTransfer(Patient getPatient)
@@ -123,7 +123,7 @@ namespace E_HealthCare_Web.ModelSevices
             Appointment appointment = new Appointment();
             BookAppointmentViewModel model = new BookAppointmentViewModel();
             model.Id = id;
-            model.AppointmentDate = appointment.AppointmentDate.Date;
+            model.AppointmentDate = appointment.AppointmentDate.Date;            
             model.ProblemDescription = appointment.ProblemDescription;
             model.doctors = context.Doctors.ToList();
             model.departments = context.Departments.ToList();
@@ -146,35 +146,5 @@ namespace E_HealthCare_Web.ModelSevices
             context.SaveChanges();
         }
 
-
-        public FindDoctorViewModel FindDoctorModelTansfer(FindDoctorViewModel model, int? departmentSelectedId, int patientId, string DrSearch)
-        {
-            model.id = patientId;
-            model.departmentName = context.Departments.ToList();
-            var dept = context.Departments.Where(q => q.Id == departmentSelectedId).FirstOrDefault();
-            var doctors = context.Doctors.AsQueryable();
-            if ((dept == null) && String.IsNullOrWhiteSpace(DrSearch))
-            {
-                model.doctorsName = context.Doctors.ToList();
-            }
-            else if (dept != null && String.IsNullOrWhiteSpace(DrSearch))
-            {   
-                model.doctorsName = dept.Doctors;
-                
-            }
-            else if (!String.IsNullOrWhiteSpace(DrSearch) && (dept == null))
-            {
-                model.doctorsName = context.Doctors.Where(q => q.D_UserName.ToUpper().Contains(DrSearch.ToUpper()));
-            }
-            else if (!String.IsNullOrWhiteSpace(DrSearch) && (dept != null))
-            {
-                model.doctorsName =   dept.Doctors.Where(q => q.D_UserName.ToUpper().Contains(DrSearch.ToUpper()));
-            }
-
-            model.DepartmentSelectedId = departmentSelectedId.HasValue ? (int)departmentSelectedId : 0;
-            model.selectedDepartment = new SelectList(model.departmentName, "Id", "DepartmentName", model.DepartmentSelectedId);
-
-            return model;
-        }
     }
 }

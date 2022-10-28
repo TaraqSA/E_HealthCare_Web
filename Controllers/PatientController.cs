@@ -388,12 +388,12 @@ namespace E_HealthCare_Web.Controllers
             return null;
         }
 
-        public ActionResult FindDoctors(int id, string DrSearch, FindDoctorViewModel Recievedmodel)
-        {   
-            var model = patientService.FindDoctorModelTansfer(Recievedmodel, Recievedmodel.DepartmentSelectedId,id,DrSearch);            
-            return View(model);
-        }
 
+
+        public ActionResult FindDoctors()
+        {
+
+        }
         public JsonResult IsCorrectPassword(string OldPassword, int id)
         {
             var getUserName = context.Patients.Where(q => q.p_id == id).Select(q => q.UserName).FirstOrDefault();

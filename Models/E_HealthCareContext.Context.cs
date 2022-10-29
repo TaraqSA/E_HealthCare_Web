@@ -33,5 +33,7 @@ namespace E_HealthCare_Web.Models
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<PatientReport> PatientReports { get; set; }
+
+        public System.Data.Entity.DbSet<E_HealthCare_Web.ViewModels.FindDoctorViewModel> FindDoctorViewModels { get; set; }
     }
 }

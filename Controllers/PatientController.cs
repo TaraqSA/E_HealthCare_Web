@@ -390,9 +390,10 @@ namespace E_HealthCare_Web.Controllers
 
 
 
-        public ActionResult FindDoctors()
+        public ActionResult FindDoctors(int id, string DrSearch, FindDoctorViewModel Recievedmodel)
         {
-
+            var model = patientService.FindDoctorModelTansfer(Recievedmodel, Recievedmodel.DepartmentSelectedId, id, DrSearch);
+            return View(model);
         }
         public JsonResult IsCorrectPassword(string OldPassword, int id)
         {

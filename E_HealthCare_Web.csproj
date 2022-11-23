@@ -15,7 +15,7 @@
     <AssemblyName>E_HealthCare_Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44363</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -147,7 +147,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="ConsultationHub.cs" />
+    <Compile Include="Models\ConsultationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
@@ -167,7 +167,11 @@
     <Compile Include="Models\Appointment.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChatConnectionDetail.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CustomAdmin.cs" />
+    <Compile Include="Models\CustomAppointment.cs" />
     <Compile Include="Models\CustomDoctor.cs" />
     <Compile Include="Models\CustomPatient.cs" />
     <Compile Include="Models\Department.cs">
@@ -207,6 +211,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\DoctorViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
   </ItemGroup>
@@ -444,6 +449,7 @@
     <Content Include="Images\Icons\health-care.png" />
     <Content Include="Images\man-women-healthcare-removebg-preview.png" />
     <Content Include="Images\ProfilePictures\doctor %281%29.png" />
+    <Content Include="Images\ProfilePictures\dricon.png" />
     <Content Include="Images\ProfilePictures\user-default.png" />
     <Content Include="Images\logo\24-hours.png" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
@@ -724,6 +730,12 @@
     <Content Include="Views\Doctor\DoctorProfile.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\MakeAdmin.cshtml" />
+    <Content Include="Views\Doctor\DoctorHome.cshtml" />
+    <Content Include="Views\Doctor\Edit.cshtml" />
+    <Content Include="Views\Doctor\CancelAppointment.cshtml" />
+    <Content Include="Views\Doctor\DoctorAccount.cshtml" />
+    <Content Include="Views\Doctor\ChangePassword.cshtml" />
+    <Content Include="Views\Doctor\AppointmentList.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
@@ -741,6 +753,8 @@
     <Content Include="Views\Patient\UploadReports.cshtml" />
     <Content Include="Views\Patient\ReportList.cshtml" />
     <Content Include="Views\Patient\FindDoctors.cshtml" />
+    <Content Include="Views\Patient\Chat.cshtml" />
+    <Content Include="Views\Patient\_ChatBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -775,7 +789,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64255</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/E_HealthCare_Web</IISUrl>
+          <IISUrl>http://localhost:64255/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

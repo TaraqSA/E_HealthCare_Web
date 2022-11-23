@@ -50,6 +50,8 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "User Name")]
         public string UserName { get; set; }
         public string ProfileImagePath { get; set; }
+
+        
     }
     public class EditViewModel
     {
@@ -408,6 +410,41 @@ namespace E_HealthCare_Web.ViewModels
         public SelectList selectedDepartment { get; set; }
 
     }
+
+    public class ConsultationViewModel
+    {
+        [HiddenInput(DisplayValue = false)]
+        [Key]
+        public int id { get; set; }
+
+        [Display(Name = "Doctors")]
+        public IEnumerable<Doctor> DoctorsList { get; set; }
+
+        public Patient CurrentPatient { get; set; }
+        
+    }
+
+    public class ChatBoxViewModel
+    {   
+        public string MessageText { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime MessageDate { get; set; }                
+        [DataType(DataType.Time)]
+        public TimeSpan MessageTime { get; set; }
+        public int SenderId { get; set; }
+        public int RecieverId { get; set; }
+        public string ConnectionID { get; set; }
+
+    }
+
+    public class ChatLoadViewModel
+    {
+        public Patient patient { get; set; }
+        public Doctor doctor { get; set; }
+    }
+
+
+    
 
 }
 

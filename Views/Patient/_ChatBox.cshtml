@@ -1,0 +1,30 @@
+﻿@model E_HealthCare_Web.ViewModels.ChatLoadViewModel
+
+<div class="chatbox-upper">
+    <input id="doctorUserName" type="hidden" value="@Model.doctor.D_UserName" />
+    <div class="todoctor-profile">
+        @{
+            if (Model.doctor.ProfileImagePath == null)
+            {
+                <img src="~/Images/ProfilePictures/dricon.png" alt="profile" />
+            }
+            else
+            {
+                <img src="@Url.Content(Model.doctor.ProfileImagePath)" alt="profile" />
+            }
+        }
+    </div>
+    <div class="todoctor-name">
+        <label id="drname">@Html.DisplayFor(q => q.doctor.D_UserName)</label>
+    </div>
+</div>
+<div id="chatboxmiddle" class="chatbox-middle">
+    <p id="patientmsg">Hello How are you</p>
+    <p id="doctormsg">I am Fine How are you</p>
+</div>
+<div class="chatbox-lower">
+    <div class="msg-btn-conatiner">
+        <textarea id="chatmessage" placeholder="type message here.."></textarea>
+        <button type="submit" title="send" id="Sendbtn">Send</button>
+    </div>
+</div>

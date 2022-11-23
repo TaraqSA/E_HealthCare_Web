@@ -5,7 +5,13 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
+    min-height: 90vh;    
+    padding: 20px 20px 0 20px;
+}
+
+.body-content-patient {
     min-height: 90vh;
+    max-height: 90vh;
     padding: 20px 20px 0 20px;
 }
 
@@ -145,10 +151,11 @@ textarea {
     box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.3);
     border: none;
     height: 50px;
+    font-stretch:semi-condensed;
 }
 
 .navbar-inverse {
-    /*background-color: #00ff99;*/
+    /*background-color: #00ff99;  #26C281 #01796F #00A693 #009B7D */
     background-image: linear-gradient(-180deg,rgba(0, 255, 153,0.8), rgba(0, 255, 153,0.9),rgba(0, 255, 153,1),rgba(0, 255, 153,0.8));
 }
 

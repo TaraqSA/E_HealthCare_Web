@@ -1,0 +1,67 @@
+﻿@model E_HealthCare_Web.ViewModels.DoctorAccountViewModel
+
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+
+@section Styles {
+    <style type="text/css">
+        .doctor-account {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .doctor-username {
+            font-size: 2rem;
+        }
+
+        .password-change {
+            padding: 1rem;
+        }
+
+
+        .account-functionalities {
+            padding: 0.5rem;
+        }
+
+        #varifyEmail {
+            margin-left: 1rem;
+            font-size: small;
+        }
+
+        .verified {
+            background-color: #5cb85c;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-style: italic;
+            letter-spacing: 1.1px;
+            color: white;
+        }
+    </style>
+}
+
+<section class="doctor-account">
+    <div class="doctor-username">
+        @Html.LabelFor(q => q.UserName)&nbsp;&nbsp;&nbsp;@Html.DisplayFor(q => q.UserName)
+    </div>
+    <br />
+    <div class="account-functionalities">
+        @Html.ActionLink(" Change Password", "ChangePassword", "Doctor", new { id = Model.id }, new { @class = "btn btn-xs btn-primary fa fa-pencil" })
+        @{
+            if (Model.IsEmailVerified)
+            {
+                @Html.Label("  Email Verified", new { @class = "fa fa-envelope-o verified", @id = "varifyEmail" })
+            }
+            else
+            {
+                @Html.ActionLink(" Verify Email", "VerifyEmail", "Manage", new { UserName = Model.UserName, EmailAddress = Model.Email }, new { @class = "btn btn-xs btn-danger fa fa-envelope-o", @id = "varifyEmail" })
+            }
+
+        }
+
+    </div>
+
+</section>
+

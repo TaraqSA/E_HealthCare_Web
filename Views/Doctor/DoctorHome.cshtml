@@ -1,17 +1,27 @@
-﻿@model E_HealthCare_Web.ViewModels.PatientHomeViewModel
+﻿@model  E_HealthCare_Web.ViewModels.DoctorHomeViewModel
 
 @{
-    ViewBag.Title = "Patient Home";
-    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
 }
 
 @section Styles{
     <style type="text/css">
-
-        .patient-dashboard {
+        .doctor-dashboard {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .doctor-details {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 1rem 0.5rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            background-image: linear-gradient(90deg, rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.6),rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.2),rgba(116, 189, 160, 0.1));
+            border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
         .profile-picture {
@@ -43,6 +53,7 @@
                 width: 100%;
                 object-fit: cover;
                 border-radius: 50%;
+                box-shadow: 0 0 4px 1px rgba(116, 189, 160, 1);
             }
 
             .profile_picture-sec > a {
@@ -102,18 +113,8 @@
             align-items: center;
         }
 
-        .patient-details {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            padding: 1rem 0.5rem;
-            border-radius: 4px;
-            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
-            background-image: linear-gradient(90deg, rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.6),rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.2),rgba(116, 189, 160, 0.1));
-            border: 1px solid rgba(116, 189, 160, 0.5);
-        }
 
-
-        .patient_details-info {
+        .doctor-data {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -121,15 +122,23 @@
             color: rgba(0,0,0,1);
         }
 
-        .patient_details-table label {
-            margin-bottom: 0;
+        .doctor_data-table {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: rgba(0,0,0,1);
         }
 
-        .patient_details-table td {
-            padding: 0.5rem;
-        }
+            .doctor_data-table label {
+                margin-bottom: 0;
+            }
 
-        .patient-links {
+            .doctor_data-table td {
+                padding: 0.5rem;
+            }
+
+        .doctor-links {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -141,20 +150,28 @@
             border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
-        .link {
+            .doctor-links > h3 {
+                width: 100%;
+                text-align: center;
+                color: darkred;
+                letter-spacing: 1.1px;
+            }
+
+
+        /*.link {
             flex: 0 0 30%;
             padding: 1rem;
             border: 1px solid rgba(116,189,160,0.9);
-            border-radius: 4px;
-            /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
-            background-color: rgba(116,189,160,0.7);
+            border-radius: 4px;*/
+        /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
+        /*background-color: rgba(116,189,160,0.7);
             cursor: pointer;
             transition: 0.3s;
         }
 
-            .link:hover, link:focus {
-                /*background-color: rgba(116,189,160,0.1);*/
-                box-shadow: 0px 0px 5px 0.5px rgba(116,189,160,1);
+            .link:hover, link:focus {*/
+        /*background-color: rgba(116,189,160,0.1);*/
+        /*box-shadow: 0px 0px 5px 0.5px rgba(116,189,160,1);
             }
 
 
@@ -167,25 +184,37 @@
 
                 .link > a:hover, .link > a:focus {
                     color: rgba(0,0,0,1);
-                }
+                }*/
+        .table {
+            background-color: rgba(255,255,255,0.4);
+            box-shadow:0 0 2px 0.4px black; 
+        }
+            
+            .table tr , .table th, .table td{
+                border: 1px solid gray;
+            }
+
+            .table tr:nth-child(odd){
+                background-color:rgba(116,189,160,0.7);
+            }
     </style>
 }
 
 
-<div class="patient-dashboard">
-    <section class="patient-details">
+<section class="doctor-dashboard">
+    <section class="doctor-details">
         <div class="profile-picture">
             <div class="profile_picture-img">
                 <div class="profile_picture-sec">
                     @{
                         if (Model.ProfileImagePath == null)
                         {
-                            <img src="~/Images/ProfilePictures/user-default.png" alt="Patient Profile" />
+                            <img src="~/Images/ProfilePictures/user-default.png" alt="Profile" />
                         }
                         else
                         {
                             var imagepath = Model.ProfileImagePath;
-                            <img src="@Url.Content(imagepath)" alt="Patient Profile" />
+                            <img src="@Url.Content(imagepath)" alt="Profile" />
                         }
                     }
 
@@ -203,7 +232,7 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            @using (Html.BeginForm("UploadImage", "Patient", new { viewActionName = "PatientHome" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("UploadImage", "Doctor", new { viewActionName = "DoctorHome" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
 
                                 <div class="modal-body">
@@ -226,11 +255,12 @@
                 </div>
             </div>
             <div class="edit_profile-buttons">
-                @Html.ActionLink(" Edit Profile", "Edit", "Patient", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary fa fa-pencil" })
+                @Html.ActionLink(" Edit Profile", "Edit", "Doctor", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary fa fa-pencil" })
             </div>
         </div>
-        <div class="patient_details-info">
-            <table class="patient_details-table">
+
+        <div class="doctor-data">
+            <table class="doctor_data-table">
                 <tr>
                     <td colspan="2">
                         @Html.LabelFor(model => model.UserName)
@@ -243,10 +273,10 @@
 
                 <tr>
                     <td colspan="2">
-                        @Html.LabelFor(model => model.Name)
+                        @Html.LabelFor(model => model.DoctorName)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.Name)
+                        Dr. @Html.DisplayFor(model => model.DoctorName)
                     </td>
                 </tr>
                 <tr>
@@ -259,18 +289,18 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        @Html.LabelFor(model => model.Email)
+                        @Html.LabelFor(model => model.EmailAddress)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.Email)
+                        @Html.DisplayFor(model => model.EmailAddress)
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        @Html.LabelFor(model => model.DOB)
+                        @Html.LabelFor(model => model.DateOfBirth)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => model.DOB)
+                        @Html.DisplayFor(model => model.DateOfBirth)
                     </td>
                 </tr>
                 <tr>
@@ -297,32 +327,88 @@
                         @Html.DisplayFor(model => model.BloodGroup)
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Speciality)
+                    </td>
+                    <td>
+                        @{
+                            var dept = Model.Speciality;
+                            string speciality = "";
+                            if (dept.Count() > 1)
+                            {
+                                speciality = String.Join(" | ", dept.Select(q => q.DepartmentName));
+                            }
+                            else
+                            {
+                                speciality = dept.Select(q => q.DepartmentName).FirstOrDefault();
+                            }
+                        }
+                        @Html.DisplayFor(q => speciality)
+                    </td>
+                </tr>
             </table>
         </div>
     </section>
 
-    <section class="patient-links">
-        <div class="link Calculate-BMI">
-            @Html.ActionLink(" Calculate BMI", "BMICalculator", "Patient", null, new { @class = "fa fa-calculator" })
-        </div>
-        <div class="link search-specialist">
-            @Html.ActionLink(" Search Specialist", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
-        </div>
-        <div class="link search-doctor">
-            @Html.ActionLink(" Search Doctor", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
-        </div>
-        <div class="link medical-records">
-            @Html.ActionLink(" Medical Records", "ReportList", "Patient", new { id = Model.Id }, new { @class = "fa fa-book" })
-        </div>
-        @*<div class="link my-bills">
-                @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
-            </div>*@
-        <div class="link appointments">
-            @Html.ActionLink(" My Appointments", "AppointmentList", "Patient", new { id = Model.Id }, new { @class = "fa fa-calendar-plus-o" })
-        </div>
-    </section>
+    <section class="doctor-links">
+        <h3>Upcoming Appointments</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Patient Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(q => q.AppointmentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(q => q.AppointmentTime)
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            @{
+                foreach (var item in Model.Appointments)
+                {
+                    if (item.IsAppointmentActive)
+                    {
+                        Model.AppointmentTime = DateTime.Parse(item.AppointmentDate.ToString());
+                        Model.AppointmentDate = item.AppointmentDate;
+                        <tr>
+                            @if (item.Patient.p_name != null)
+                            {
+                                <td>
+                                    @Html.DisplayFor(q => item.Patient.p_name)
+                                </td>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(q => item.Patient.UserName)
+                            }
 
-</div>
+                            <td>
+                                @Html.DisplayFor(q => q.AppointmentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(q => q.AppointmentTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(q => item.Department.DepartmentName)
+                            </td>
+                            <td>
+                                @Html.ActionLink(" Cancel Appointment", "CancelAppointment", new { appointmentId = item.id, actionName = "DoctorHome" }, new { @class = "btn btn-xs btn-danger fa fa-remove" })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </section>
+</section>
 
 
 @section scripts{

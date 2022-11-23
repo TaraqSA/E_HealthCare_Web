@@ -376,7 +376,7 @@ namespace E_HealthCare_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteReport(int reportId)
-        {
+        {   
             var getReport = context.PatientReports.Where(q => q.ReportId == reportId).FirstOrDefault();            
             if(getReport != null)
             {
@@ -395,6 +395,34 @@ namespace E_HealthCare_Web.Controllers
             var model = patientService.FindDoctorModelTansfer(Recievedmodel, Recievedmodel.DepartmentSelectedId, id, DrSearch);
             return View(model);
         }
+
+        public ActionResult Chat(int id, string searchdr)
+        {
+            ViewBag.patiendId = id.ToString();
+            ConsultationViewModel model = new ConsultationViewModel();
+            model.id = id;
+            if (!String.IsNullOrEmpty(searchdr))
+            {
+                model.DoctorsList = context.Doctors.Where(q => q.D_UserName.ToUpper().Contains(searchdr.ToUpper())).ToList();
+            }
+            else
+            {
+                model.DoctorsList = context.Doctors.ToList();
+            }
+            model.CurrentPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();
+                       
+            return View(model);
+        }
+
+      
+        public ActionResult ChatBox(int patientid, int doctorid)
+        {
+            ChatLoadViewModel model = new ChatLoadViewModel();
+            model.patient = context.Patients.Where(q => q.p_id == patientid).FirstOrDefault();
+            model.doctor = context.Doctors.Where(q => q.Id == doctorid).FirstOrDefault();            
+            return PartialView("_ChatBox",model);
+        }
+
         public JsonResult IsCorrectPassword(string OldPassword, int id)
         {
             var getUserName = context.Patients.Where(q => q.p_id == id).Select(q => q.UserName).FirstOrDefault();

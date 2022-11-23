@@ -1,3 +1,4 @@
+/// ///
 /* jquery.signalR.core.js */
 /*global window:false */
 /*!
@@ -9,7 +10,8 @@
  *
  */
 
-/// <reference path="Scripts/jquery-2.2.2.js" />
+/*/// <reference path="Scripts/jquery-3.6.0.js" />*/
+<reference path="jquery-3.6.0.js" />
 /// <reference path="jquery.signalR.version.js" />
 (function ($, window, undefined) {
 

@@ -424,21 +424,12 @@ namespace E_HealthCare_Web.ViewModels
         
     }
 
-    public class ChatBoxViewModel
-    {   
-        public string MessageText { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime MessageDate { get; set; }                
-        [DataType(DataType.Time)]
-        public TimeSpan MessageTime { get; set; }
-        public int SenderId { get; set; }
-        public int RecieverId { get; set; }
-        public string ConnectionID { get; set; }
-
-    }
-
     public class ChatLoadViewModel
     {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+        public IEnumerable<Message> Message { get; set; }
         public Patient patient { get; set; }
         public Doctor doctor { get; set; }
     }

@@ -20,6 +20,15 @@ namespace E_HealthCare_Web.Controllers
         public ActionResult DoctorHome(int id)
         {
             var getDoctor = context.Doctors.Where(q => q.Id == id).FirstOrDefault();
+            var ExpiredAppointments = getDoctor.Appointments.Where(q => q.AppointmentDate < DateTime.Now).ToList();
+            if (ExpiredAppointments.Count > 0)
+            {
+                foreach (var appointment in ExpiredAppointments)
+                {
+                    appointment.IsAppointmentActive = false;
+                }
+                context.SaveChanges();
+            }
             var model = doctorService.DoctorHomeModelTransfer(getDoctor);
             return View(model);
         }
@@ -86,13 +95,13 @@ namespace E_HealthCare_Web.Controllers
             int doctorId = context.Appointments.Where(q => q.id == appointmentId).Select(s => s.DoctorId).FirstOrDefault();
             ViewBag.appointmentId = appointmentId;
             ViewBag.doctorId = doctorId;
-            ViewBag.ActionName = actionName;            
+            ViewBag.ActionName = actionName;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("CancelAppointment")]        
+        [ActionName("CancelAppointment")]
         public ActionResult CancelAppointmentPost(int id, string actionName)
         {
             var getAppointment = context.Appointments.Where(q => q.id == id).FirstOrDefault();
@@ -179,7 +188,7 @@ namespace E_HealthCare_Web.Controllers
         {
             var doctorId = id;
             var getUser = context.Doctors.Where(q => q.Id == doctorId).Select(q => q.D_UserName).FirstOrDefault();
-            var getPasswordInfo = context.SiteUsers.Where(q => q.UserName == getUser).Select(q => q.PasswordHash).FirstOrDefault();            
+            var getPasswordInfo = context.SiteUsers.Where(q => q.UserName == getUser).Select(q => q.PasswordHash).FirstOrDefault();
             var passwordModel = doctorService.PasswordModelTransfer(doctorId, getPasswordInfo);
             return View(passwordModel);
         }
@@ -209,7 +218,44 @@ namespace E_HealthCare_Web.Controllers
         //    return View();
         //}
 
+        public ActionResult Chat(int id, string searchp)
+        {
+            ViewBag.doctorId = id.ToString();
+            DoctorConsultationViewModel model = new DoctorConsultationViewModel();
+            model.id = id;
+            if (!String.IsNullOrEmpty(searchp))
+            {
+                
+                model.PatientsList = context.Patients.Where(q => q.p_name != null ? q.p_name.ToUpper().Contains(searchp.ToUpper()): q.UserName.ToUpper().Contains(searchp.ToUpper())).ToList();
+            }
+            else
+            {
+                model.PatientsList = context.Patients.ToList();
+            }
+            model.CurrentDoctor = context.Doctors.Where(q => q.Id == id).FirstOrDefault();
 
+            return View(model);
+        }
+
+
+        public ActionResult ChatBox(string patientUserName, string doctorUserName)
+        {
+
+            DoctorChatLoadViewModel model = new DoctorChatLoadViewModel();            
+            model.patient = context.Patients.Where(q => q.UserName == patientUserName).FirstOrDefault();
+            model.doctor = context.Doctors.Where(q => q.D_UserName == doctorUserName).FirstOrDefault();
+            model.Message = context.ConversationInfoes.Where(q => q.SenderId == model.doctor.D_UserId && q.RecieverId == model.patient.UserId || q.SenderId == model.patient.UserId && q.RecieverId == model.doctor.D_UserId)?.ToList().Select(q =>
+            new Message
+            {
+                IsDoctorMsg = (q.SenderId == model.doctor.D_UserId && q.RecieverId == model.patient.UserId),
+                IsPatientMsg = (q.SenderId == model.patient.UserId && q.RecieverId == model.doctor.D_UserId),
+                MessageText = q.MessageText
+            });
+            return PartialView("_ChatBox", model);
+        }
+
+
+        //Helper Methods
         public JsonResult IsCorrectPassword(string OldPassword, int id)
         {
             var getUserName = context.Doctors.Where(q => q.Id == id).Select(q => q.D_UserName).FirstOrDefault();

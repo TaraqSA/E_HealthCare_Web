@@ -14,60 +14,47 @@ namespace E_HealthCare_Web
     [Authorize]
     public class ConsultationHub : Hub
     {
-        E_HealthCareEntities dbContext = new E_HealthCareEntities();        
+        E_HealthCareEntities dbContext = new E_HealthCareEntities();
+        ConversationInfo messageInfo = new ConversationInfo();
+
         public void Consult(string message)
-        {   
-            Clients.Caller.addNewMessageToPage(message);            
+        {
+            Clients.Caller.addNewMessageToPage(message);
         }
 
-
-    
-
-        public void sendChatMessage(string doctorUserName, string message)
+        public void sendChatMessage(string ToUserName, string message)
         {
-            //var name = Context.User.Identity.Name; //name of sender client 
-            //using (dbContext)
-            //{
-            //    var User = dbContext.SiteUsers.Where(q => q.UserName == doctorUserName).FirstOrDefault();// returning user who would recieve the message
-            //    if(User == null)
-            //    {
-            //        Clients.Caller.showErrorMessage("Could Not Find That User.");
-            //    }
-            //    else
-            //    {
-            //        Clients.User(doctorUserName).addChatMessage(message);
+            using (dbContext)
+            {
+                var ToUser = dbContext.SiteUsers.Where(q => q.UserName == ToUserName).FirstOrDefault();
+                messageInfo.MessageDate = DateTime.Now;
+                messageInfo.MessageText = message;
+                messageInfo.SenderId = dbContext.SiteUsers.Where(q => q.UserName == Context.User.Identity.Name).Select(q => q.Id).FirstOrDefault();
+                messageInfo.RecieverId = ToUser.Id;
+                dbContext.ConversationInfoes.Add(messageInfo);
+                dbContext.SaveChanges();
 
-            //        //getting chatConnectionDetails details Connected column as true
-            //        var UserToRecieveMessage = dbContext.Entry(User).Collection(u => u.ChatConnectionDetails).Query().Where(q => q.IsConnected == true).FirstOrDefault();
-            //        //if(UserToRecieveMessage == null)
-            //        //{
-            //        //    Clients.Caller.showErrorMessage("The user is no longer connected.");
-            //        //}
-            //        //else
-            //        //{
-            //        //    foreach(var connection in User.ChatConnectionDetails)
-            //        //    {
-            //        //        Clients.Client(connection.SignalRConnectionId).addChatMessage(name,message);
-            //        //    }
-            //        //}
-
-            //    }
-            //}
-            
-            Clients.User(doctorUserName).sendMessageToDoctor(message);
-            Clients.Caller.addNewMessageToPage(message);
-            var s = GlobalHost.ConnectionManager.GetHubContext<ConsultationHub>();
-            var m = s.Clients.User(doctorUserName);
+                if (ToUser.UserRole == "Doctor")
+                {
+                    Clients.User(ToUserName).sendMessageToPatient(message);
+                    Clients.Caller.addNewMessageToPage(message);
+                }
+                if (ToUser.UserRole == "Patient")
+                {
+                    Clients.User(ToUserName).sendMessageToDoctor(message);
+                    Clients.Caller.addNewMessageToPage(message);
+                }
+            }
         }
 
 
         public override Task OnConnected()
-        {   
-            var name = Context.User.Identity.Name;            
+        {
+            var name = Context.User.Identity.Name;
             using (dbContext)
             {
-                var user = dbContext.SiteUsers.Include(q => q.ChatConnectionDetails).SingleOrDefault(q => q.UserName == name);               
-                if(user.ChatConnectionDetails == null || user.ChatConnectionDetails.Count == 0)
+                var user = dbContext.SiteUsers.Include(q => q.ChatConnectionDetails).SingleOrDefault(q => q.UserName == name);
+                if (user.ChatConnectionDetails == null || user.ChatConnectionDetails.Count == 0)
                 {
                     user.ChatConnectionDetails.Add(new ChatConnectionDetail
                     {
@@ -83,7 +70,7 @@ namespace E_HealthCare_Web
                     updateUserConnection.SignalRConnectionId = Context.ConnectionId;
                     updateUserConnection.UserAgent = Context.Request.Headers["User-Agent"];
                 }
-               
+
                 dbContext.SaveChanges();
             }
             return base.OnConnected();
@@ -102,8 +89,8 @@ namespace E_HealthCare_Web
 
     }
 
-    
 
-    
+
+
 
 }

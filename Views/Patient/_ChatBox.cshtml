@@ -19,8 +19,19 @@
     </div>
 </div>
 <div id="chatboxmiddle" class="chatbox-middle">
-    <p id="patientmsg">Hello How are you</p>
-    <p id="doctormsg">I am Fine How are you</p>
+    @{
+        foreach (var msg in Model.Message)
+        {
+            if (msg.IsDoctorMsg)
+            {
+                <p id="doctormsg">@msg.MessageText</p>
+            }
+            if (msg.IsPatientMsg)
+            {
+                <p id="patientmsg">@msg.MessageText</p>
+            }
+        }
+    }
 </div>
 <div class="chatbox-lower">
     <div class="msg-btn-conatiner">

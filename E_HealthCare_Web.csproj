@@ -170,6 +170,9 @@
     <Compile Include="Models\ChatConnectionDetail.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConversationInfo.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CustomAdmin.cs" />
     <Compile Include="Models\CustomAppointment.cs" />
     <Compile Include="Models\CustomDoctor.cs" />
@@ -736,6 +739,8 @@
     <Content Include="Views\Doctor\DoctorAccount.cshtml" />
     <Content Include="Views\Doctor\ChangePassword.cshtml" />
     <Content Include="Views\Doctor\AppointmentList.cshtml" />
+    <Content Include="Views\Doctor\Chat.cshtml" />
+    <Content Include="Views\Doctor\_ChatBox.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace E_HealthCare_Web
 {
-    public class Startup
+    public class Startup 
     {
         public void Configuration(IAppBuilder app)
         {

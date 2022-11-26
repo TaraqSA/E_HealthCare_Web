@@ -1,8 +1,10 @@
-﻿@model E_HealthCare_Web.ViewModels.ConsultationViewModel
+﻿@model E_HealthCare_Web.ViewModels.DoctorConsultationViewModel
+
 @{
     ViewBag.Title = "Consultation";
-    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
 }
+
 
 @section Styles {
     <style type="text/css">
@@ -14,48 +16,48 @@
             box-shadow: 0 0 3px 1px rgba(116,189,160,0.5);
         }
 
-        .doctor-list-section {
+        .patient-list-section {
             flex: 0 0 30%;
             max-height: 100%;
             border: 1px solid rgba(116,189,160,0.6);
             background-image: linear-gradient(-90deg, rgba(116,189,160,0.2),rgba(116,189,160,0.6));
         }
 
-        .drlist-overflowcontrol {
+        .plist-overflowcontrol {
             max-height: 88%;
             overflow-y: auto;
         }
 
-            .drlist-overflowcontrol::-webkit-scrollbar {
+            .plist-overflowcontrol::-webkit-scrollbar {
                 width: 5px;
             }
 
-            .drlist-overflowcontrol::-webkit-scrollbar-track {
+            .plist-overflowcontrol::-webkit-scrollbar-track {
                 background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.4));
             }
 
-            .drlist-overflowcontrol::-webkit-scrollbar-thumb {
+            .plist-overflowcontrol::-webkit-scrollbar-thumb {
                 background-color: rgba(116,189,160,0.5);
                 border-radius: 10px;
             }
 
-        .dr-profile-direction {
+        .p-profile-direction {
             display: flex;
             border-bottom: 1px solid rgba(116,189,160,0.5);
         }
 
-            .dr-profile-direction:last-child {
+            .p-profile-direction:last-child {
                 border: none;
             }
 
-        .dr-profile {
+        .p-profile {
             padding: 0.5rem;
             height: 60px;
             width: 60px;
             border-radius: 45%;
         }
 
-            .dr-profile img {
+            .p-profile img {
                 max-height: 100%;
                 max-width: 100%;
                 height: 100%;
@@ -64,18 +66,18 @@
                 object-fit: cover;
             }
 
-        .dr-name {
+        .p-name {
             padding: 1rem 0.5rem;
         }
 
-            .dr-name > a {
+            .p-name > a {
                 text-decoration: none;
                 color: rgba(0,0,0,0.8);
                 letter-spacing: 1.1px;
                 transition: color 0.2s ease-in;
             }
 
-                .dr-name > a:hover, .dr-name > a:active, .dr-name > a:focus {
+                .p-name > a:hover, .p-name > a:active, .p-name > a:focus {
                     color: white;
                 }
 
@@ -168,7 +170,7 @@
             max-height: 100%;
         }
 
-        .search-dr {
+        .search-p {
             padding: 5px;
             position: relative;
             padding: 1rem 0.5rem;
@@ -176,20 +178,20 @@
             box-shadow: 0 1px 2px 0.3px rgba(116,189,160,0.5);
         }
 
-        #searchdr {
+        #searchp {
             width: 80%;
             height: 35px;
             border-radius: 5px;
             border: 1px solid gray;
         }
 
-            #searchdr::placeholder {
+            #searchp::placeholder {
                 color: gray;
                 letter-spacing: 1.1px;
                 font-style: italic;
             }
 
-            #searchdr:active, #searchdr:focus {
+            #searchp:active, #searchp:focus {
                 outline: none;
                 box-shadow: 0 0 2px 0.5px rgba(0,0,0,0.2);
             }
@@ -213,7 +215,7 @@
             }
 
 
-        .todoctor-profile {
+        .topatient-profile {
             padding: 0.5rem;
             height: 60px;
             width: 60px;
@@ -221,13 +223,13 @@
             padding-left: 1.5rem;
         }
 
-            .todoctor-profile > img {
+            .topatient-profile > img {
                 max-height: 100%;
                 max-width: 100%;
                 object-fit: cover;
             }
 
-        .todoctor-name {
+        .topatient-name {
             padding: 0.5rem 1rem;
             height: 100%;
             display: flex;
@@ -241,15 +243,15 @@
             background-color: white;
             border-radius: 5px;
             width: fit-content;
-            align-self: flex-end;
-            margin-right: 5px;
-            margin-left:10%;
+            align-self: flex-start;
+            margin-right: 10%;
+            margin-left:5px;
         }
 
         #doctormsg {
-            align-self: flex-start;
-            margin-left: 5px;
-            margin-right:10%    ;
+            align-self: flex-end;
+            margin-left: 10%;
+            margin-right:5px;
             padding: 3px;
             background-color: rgb(255,255,255);
             border: 1px solid gray;
@@ -314,45 +316,45 @@
 }
 
 <section class="chat-wrapper">
-    <section class="doctor-list-section">
-        <div class="search-dr">
+    <section class="patient-list-section">
+        <div class="search-p">
             @using (Html.BeginForm())
             {
-                <input type="text" id="searchdr" name="searchdr" placeholder="Search Doctor" /><button type="submit" id="searchbtn"><i class="fa fa-search-plus"></i></button>
+                <input type="text" id="searchp" name="searchp" placeholder="Search Patient" /><button type="submit" id="searchbtn"><i class="fa fa-search-plus"></i></button>
             }
 
         </div>
-        <div class="drlist-overflowcontrol">
-            @foreach (var doctor in Model.DoctorsList)
+        <div class="plist-overflowcontrol">
+            @foreach (var patient in Model.PatientsList)
             {
-                <div id="drlist" class="dr-profile-direction">
-                    <div class="dr-profile">
+                <div id="plist" class="p-profile-direction">
+                    <div class="p-profile">
                         @{
-                            if (doctor.ProfileImagePath == null)
+                            if (patient.ProfileImagePath == null)
                             {
                                 <img src="~/Images/ProfilePictures/dricon.png" alt="profile" />
                             }
                             else
                             {
-                                <img src="@Url.Content(doctor.ProfileImagePath)" alt="profile" />
+                                <img src="@Url.Content(patient.ProfileImagePath)" alt="profile" />
                             }
 
                         }
                     </div>
-                    <div class="dr-name">
+                    <div class="p-name">
                         @{
-                            string doctorName;
-                            if (doctor.D_Name != null)
+                            string patientName;
+                            if (patient.p_name != null)
                             {
-                                doctorName = doctor.D_UserName;
+                                patientName = patient.p_name;
                             }
                             else
                             {
-                                doctorName = doctor.D_UserName;
+                                patientName = patient.UserName;
                             }
                         }
 
-                        @Ajax.ActionLink(doctorName, "ChatBox", new { patientUserName = Model.CurrentPatient.UserName, doctorUserName = doctor.D_UserName },
+                        @Ajax.ActionLink(patientName, "ChatBox", new { patientUserName = patient.UserName, doctorUserName = Model.CurrentDoctor.D_UserName },
                        new AjaxOptions
                        {
                            UpdateTargetId = "chatbox",
@@ -384,34 +386,35 @@
     <script>
         $(document).ready(function () {
             // Reference the auto-generated proxy for the hub.
-            var chat = $.connection.consultationHub;            
-            var PatientUserName = '@Context.User.Identity.Name';
+            var chat = $.connection.consultationHub;
+            var DoctorUserName = '@Context.User.Identity.Name';
             // Create a function that the hub can call back to display messages.
             chat.client.addNewMessageToPage = function (message) {
                 // Add the message to the page.
-                $('#chatboxmiddle').append('<p id = "patientmsg">' + htmlEncode(message)
+                $('#chatboxmiddle').append('<p id = "doctormsg">' + htmlEncode(message)
                     + '</p>');
             };
-            
-            //// Set initial focus to message input box.
-            //$('#chatmessage').focus();
+
+            // Set initial focus to message input box.
+            /*$('#chatmessage').focus();*/
 
             chat.client.showErrorMessage = function (message) {
                 // Add the message to the page.
-                $('#chatboxmiddle').append('<p id ="patientmsg">' + htmlEncode(message)
+                $('#chatboxmiddle').append('<p id ="doctormsg">' + htmlEncode(message)
                     + '</p>');
-                
+
             };
 
-            chat.client.sendMessageToDoctor = function (message) {
-                $('#chatboxmiddle').append('<p id ="doctormsg">' + htmlEncode(message)
+            chat.client.sendMessageToPatient = function (message) {
+                $('#chatboxmiddle').append('<p id ="patientmsg">' + htmlEncode(message)
                     + '</p>');
             }
             // Start the connection.
-            $.connection.hub.start().done(function () {                
-                $('body').on('click', '#Sendbtn', function () {                    
+            $.connection.hub.start().done(function () {
+                $('body').on('click', '#Sendbtn', function () {
                     // Call the Send method on the hub.
-                    chat.server.sendChatMessage($('#doctorUserName').val(), $('#chatmessage').val());                    
+                    chat.server.sendChatMessage($('#patientUserName').val(), $('#chatmessage').val());
+
                     // Clear text box and reset focus for next comment.
                     $('#chatmessage').val('').focus();
                 });

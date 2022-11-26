@@ -26,7 +26,7 @@ namespace E_HealthCare_Web.ViewModels
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
-        [DisplayFormat(ApplyFormatInEditMode = true, NullDisplayText = "Not Filled", DataFormatString ="{0:dd-MM-yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, NullDisplayText = "Not Filled", DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? DateOfBirth { get; set; }
 
         public string UserName { get; set; }
@@ -36,11 +36,11 @@ namespace E_HealthCare_Web.ViewModels
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
-        [DisplayFormat(NullDisplayText ="Not filled")]        
+        [DisplayFormat(NullDisplayText = "Not filled")]
         public string Gender { get; set; }
 
         [DisplayFormat(NullDisplayText = "Not filled")]
-        [Display(Name ="Blood Group")]
+        [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
 
         [DisplayFormat(NullDisplayText = "Not filled")]
@@ -68,22 +68,22 @@ namespace E_HealthCare_Web.ViewModels
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Full Name", Description = "Doctor Name")]        
+        [Display(Name = "Full Name", Description = "Doctor Name")]
         [Required(ErrorMessage = "enter doctor name")]
-        public string DoctorName { get; set; }               
+        public string DoctorName { get; set; }
 
         //[DisplayFormat(NullDisplayText = "None")]
         //public IEnumerable<Department> Speciality { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Enter Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        [Required(ErrorMessage ="Date of Birth required")]     
+        [Required(ErrorMessage = "Date of Birth required")]
         [Display(Name = "Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "enter gender")]
         public string Gender { get; set; }
-                
+
         [Display(Name = "Blood Group")]
         public string BloodGroup { get; set; }
 
@@ -93,11 +93,11 @@ namespace E_HealthCare_Web.ViewModels
         [DataType(DataType.PhoneNumber, ErrorMessage = "Enter Valid Phone Number")]
         public string Phone { get; set; }
     }
-    
+
     public class DoctorProfileViewModel
     {
         [Key]
-        [HiddenInput(DisplayValue =false)]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Display(Name = "Full Name")]
@@ -110,7 +110,7 @@ namespace E_HealthCare_Web.ViewModels
 
         [Display(Name = "Email")]
         [DisplayFormat(NullDisplayText = "Not Filled")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Please Enter a valid Email Address")]        
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please Enter a valid Email Address")]
         public string Email { get; set; }
 
         [Display(Name = "Date Of Birth")]
@@ -196,4 +196,38 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "Department")]
         public string departmentName { get; set; }
     }
+
+
+    public class DoctorConsultationViewModel
+    {
+        [HiddenInput(DisplayValue = false)]
+        [Key]
+        public int id { get; set; }
+
+        [Display(Name = "Doctors")]
+        public IEnumerable<Patient> PatientsList { get; set; }
+
+        public Doctor CurrentDoctor { get; set; }
+
+    }
+
+   
+
+    public class DoctorChatLoadViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+        public IEnumerable<Message> Message { get; set; }        
+        public Patient patient { get; set; }
+        public Doctor doctor { get; set; }
+    }
+
+    public class Message
+    {
+        public string MessageText { get; set; }
+        public bool IsDoctorMsg { get; set; }
+        public bool IsPatientMsg { get; set; }
+    }
+
 }

@@ -24,6 +24,7 @@
         <AssociationConnector Association="E_HealthCareModel.FK_PatientReport" />
         <EntityTypeShape EntityType="E_HealthCareModel.ChatConnectionDetail" Width="1.5" PointX="1.375" PointY="0.5" />
         <AssociationConnector Association="E_HealthCareModel.Connection_SiteUser_Relation" />
+        <EntityTypeShape EntityType="E_HealthCareModel.ConversationInfo" Width="1.5" PointX="9.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

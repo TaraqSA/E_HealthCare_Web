@@ -45,6 +45,18 @@
           <Property Name="SiteUserId" Type="int" Nullable="false" />
           <Property Name="ConnectionId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ConversationInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="MessageDate" Type="date" Nullable="false" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="SenderId" Type="int" Nullable="false" />
+          <Property Name="RecieverId" Type="int" Nullable="false" />
+          <Property Name="ConnectionId" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="Id" />
@@ -277,6 +289,7 @@
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChatConnectionDetails" EntityType="Self.ChatConnectionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Connection_SiteUser_Relation" EntityType="Self.Connection_SiteUser_Relation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConversationInfo" EntityType="Self.ConversationInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Doctor_Department_RelationShip" EntityType="Self.Doctor_Department_RelationShip" Schema="dbo" store:Type="Tables" />
@@ -408,6 +421,7 @@
             <End Role="ChatConnectionDetail" EntitySet="ChatConnectionDetails1" />
             <End Role="SiteUser" EntitySet="SiteUsers" />
           </AssociationSet>
+          <EntitySet Name="ConversationInfoes" EntityType="E_HealthCareModel.ConversationInfo" />
           </EntityContainer>
         <EntityType Name="SiteUser">
           <Key>
@@ -619,6 +633,18 @@
           <End Type="E_HealthCareModel.ChatConnectionDetail" Role="ChatConnectionDetail" Multiplicity="*" />
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="*" />
         </Association>
+        <EntityType Name="ConversationInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="MessageDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="RecieverId" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -757,6 +783,19 @@
               <ScalarProperty Name="Id" ColumnName="ConnectionId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="ConversationInfoes">
+            <EntityTypeMapping TypeName="E_HealthCareModel.ConversationInfo">
+              <MappingFragment StoreEntitySet="ConversationInfo">
+                <ScalarProperty Name="ConnectionId" ColumnName="ConnectionId" />
+                <ScalarProperty Name="RecieverId" ColumnName="RecieverId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="MessageTime" ColumnName="MessageTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -19,7 +19,7 @@ namespace E_HealthCare_Web.ModelSevices
             model.ProfileImagePath = doctor.ProfileImagePath;
             model.UserName = doctor.D_UserName;
             model.Speciality = doctor.Departments.ToList();
-            model.Appointments = doctor.Appointments.ToList();
+            model.Appointments = doctor.Appointments.Where(q=>q.IsAppointmentActive).ToList();
             model.Gender = doctor.D_Gender;
             model.Phone = doctor.D_Phone;
             model.BloodGroup = doctor.D_BloodGroup;

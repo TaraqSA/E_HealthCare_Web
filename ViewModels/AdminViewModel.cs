@@ -1,28 +1,25 @@
-﻿using E_HealthCare_Web.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using E_HealthCare_Web.Models;
 using Compare = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace E_HealthCare_Web.ViewModels
 {
-    public class DoctorHomeViewModel
+    public class AdminHomeViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Full Name", Description = "Doctor Name")]
+        [Display(Name = "Full Name", Description = "Admin Name")]
         [DisplayFormat(NullDisplayText = "Not Filled")]
-        public string DoctorName { get; set; }
+        public string AdminName { get; set; }
 
         public string ProfileImagePath { get; set; }
-
-        [DisplayFormat(NullDisplayText = "None")]
-        public IEnumerable<Department> Speciality { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
@@ -50,27 +47,28 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "Contact")]
         public string Phone { get; set; }
 
-        [Display(Name = "Appointment Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime AppointmentDate { get; set; }
+        [DisplayFormat(NullDisplayText ="No Doctors")]
+        [Display(Name ="Total Doctors")]
+        public int DoctorList { get; set; }
 
-        [Display(Name = "Appointment Time")]
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
-        public DateTime AppointmentTime { get; set; }
-        public IEnumerable<Appointment> Appointments { get; set; }
+        [DisplayFormat(NullDisplayText = "No Patients")]
+        [Display(Name = "Total Patients")]
+        public int PatientList { get; set; }
+
+        [DisplayFormat(NullDisplayText = "No Departments")]
+        [Display(Name = "Total Departments")]
+        public int DepartmentList { get; set; }
     }
 
-    public class EditDoctorViewModel
+    public class AdminEditViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Full Name", Description = "Doctor Name")]
-        [Required(ErrorMessage = "enter doctor name")]
-        public string DoctorName { get; set; }
+        [Display(Name = "Full Name", Description = "Admin Name")]
+        [Required(ErrorMessage = "enter admin name")]
+        public string AdminName { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Enter Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
@@ -91,7 +89,7 @@ namespace E_HealthCare_Web.ViewModels
         public string Phone { get; set; }
     }
 
-    public class DoctorProfileViewModel
+    public class AdminProfileViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
@@ -131,10 +129,9 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "User Name")]
         public string UserName { get; set; }
         public string ProfileImagePath { get; set; }
-
     }
 
-    public class DoctorAccountViewModel
+    public class AdminAccountViewModel
     {
         public int id { get; set; }
 
@@ -147,13 +144,13 @@ namespace E_HealthCare_Web.ViewModels
         public string Email { get; set; }
     }
 
-    public class DoctorPasswordChangeViewModel
+    public class AdminPasswordChangeViewModel
     {
         public int id { get; set; }
 
         [Required(ErrorMessage = "field is required")]
         [DataType(DataType.Password)]
-        [Remote("IsCorrectPassword", "Doctor", ErrorMessage = "Password is incorrect", AdditionalFields = "id")]
+        [Remote("IsCorrectPassword", "Admin", ErrorMessage = "Password is incorrect", AdditionalFields = "id")]
         [Display(Name = "Current Password")]
         public string OldPassword { get; set; }
 
@@ -169,62 +166,91 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "Confirm Password")]
         public string ConfirmNewPassword { get; set; }
     }
+    public class AdminListViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue =false)]
+        public int Id { get; set; }
 
-    public class DoctorAppointmentListViewModel
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Name { get; set; }
+
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Contact")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Phone { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+    }
+
+    public class CreateAdminViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Patient Name")]
-        [DisplayFormat(NullDisplayText = "Not Available")]
-        public string patientName { get; set; }
+        [Display(Name = "Admin Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "name is mandatory")]
+        public string AdminName { get; set; }
 
-        [Display(Name = "Appointment Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime appointmentDate { get; set; }
+        [Display(Name = "Email Address")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "email is mandatory")]
+        [DataType(DataType.EmailAddress)]
+        [Remote("IsEmailAlreadyExist", "Account", ErrorMessage = "email is in use")]
+        public string Email { get; set; }
 
-        [Display(Name = "Appointment Time")]
-        [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
-        public DateTime appointmentTime { get; set; }
+        [Display(Name = "UserName")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "username is mandatory")]
+        [Remote("IsUserNameAlreadyExist", "Account", ErrorMessage = "username already exists")]
+        public string UserName { get; set; }
 
-        [Display(Name = "Department")]
-        public string departmentName { get; set; }
+        [Display(Name = "Password")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password is mandatory")]
+        [DataType(DataType.Password)]        
+        [Remote("IsPasswordValid", "Account", ErrorMessage = "Password Must be Atleast 6 Characters Long with atleast one upper letter and a number")]
+        public string Password { get; set; }
+
+        [Display(Name = "Confirm Password")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Confirm Password is mandatory")]
+        [DataType(DataType.Password)]
+        [Compare("Password",ErrorMessage = "password does not match")]
+        public string ConfirmPassword { get; set; }
     }
 
 
-    public class DoctorConsultationViewModel
-    {
-        [HiddenInput(DisplayValue = false)]
-        [Key]
-        public int id { get; set; }
-
-        [Display(Name = "Doctors")]
-        public IEnumerable<Patient> PatientsList { get; set; }
-
-        public Doctor CurrentDoctor { get; set; }
-
-    }
-
-   
-
-    public class DoctorChatLoadViewModel
+    public class DoctorsListViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
-        public IEnumerable<Message> Message { get; set; }        
-        public Patient patient { get; set; }
-        public Doctor doctor { get; set; }
-    }
 
-    public class Message
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Name { get; set; }
+
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Contact")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(NullDisplayText = "Unavailable")]
+        public string Phone { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+    }
+    
+    public class DepartmentListViewModel
     {
-        public string MessageText { get; set; }
-        public bool IsDoctorMsg { get; set; }
-        public bool IsPatientMsg { get; set; }
-    }
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
 
+        [Display(Name = "Department Name")]
+        public string DepartmentName { get; set; }
+    }
 }

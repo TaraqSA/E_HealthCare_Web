@@ -82,7 +82,7 @@
                                         }
                                         else if (userRole == "Admin")
                                         {
-                                            <li>@Html.ActionLink(" Profile", "AdminHome", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
+                                            <li>@Html.ActionLink(" Profile", "Index", "Admin", new { id = TempData.Peek("AdminId") }, new { @class = "fa fa-user-o" })</li>
                                             TempData.Keep("AdminId");
 
                                         }

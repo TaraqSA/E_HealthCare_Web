@@ -31,7 +31,6 @@ namespace E_HealthCare_Web.Controllers
             accountController.SendEmail(EmailAddress, body, subject);
             return View();
         }
-
        
         public ActionResult EmailVerfied(string id)
         {
@@ -53,8 +52,6 @@ namespace E_HealthCare_Web.Controllers
             }
             return View();
         }
-
-
 
         private string Encrypt(string clearText)
         {
@@ -99,5 +96,15 @@ namespace E_HealthCare_Web.Controllers
             }
             return cipherText;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

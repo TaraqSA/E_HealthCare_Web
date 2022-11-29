@@ -1,9 +1,11 @@
-﻿@model E_HealthCare_Web.ViewModels.DoctorProfileViewModel
+﻿@model E_HealthCare_Web.ViewModels.AdminProfileViewModel
 
 @{
     ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+
 
 @section Styles {
     <style type="text/css">
@@ -47,11 +49,11 @@
             font-family: 'Comic Sans MS';
         }
 
-        .doctor_details-table label {
+        .admin_details-table label {
             margin-bottom: 0;
         }
 
-        .doctor_details-table td {
+        .admin_details-table td {
             padding: 0.5rem;
         }
 
@@ -157,7 +159,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        @using (Html.BeginForm("UploadImage", "Doctor", new { viewActionName = "DoctorProfile" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("UploadImage", "Admin", new { viewActionName = "AdminProfile" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             <div class="modal-body">
                                 @Html.AntiForgeryToken()
@@ -181,7 +183,7 @@
     </div>
     <div class="profile-data">
         <div class="profile_data-container">
-            <table class="doctor_details-table">
+            <table class="admin_details-table">
                 <tr>
                     <td colspan="2">
                         @Html.LabelFor(model => model.UserName)
@@ -266,7 +268,7 @@
                 <tr>
                     <td colspan="3">
                         <div class="data_edit-btn">
-                            @Html.ActionLink(" Edit Details", "Edit", "Doctor", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary fa fa-pencil" })
+                            @Html.ActionLink(" Edit Details", "Edit", "Admin", new { id = Model.Id }, new { @class = "btn btn-xs btn-primary fa fa-pencil" })
                         </div>
                     </td>
                 </tr>

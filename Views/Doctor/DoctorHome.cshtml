@@ -12,7 +12,20 @@
             flex-direction: column;
             gap: 2rem;
             font-family: 'Comic Sans MS';
+            max-height: 100%;
+            overflow-y: auto;
         }
+
+            .doctor-dashboard::-webkit-scrollbar {
+                width: 5px;
+            }
+            .doctor-dashboard::-webkit-scrollbar-thumb {
+                background-color: rgba(116,189,160,0.5);
+                border-radius: 10px;
+            }
+            .doctor-dashboard::-webkit-scrollbar-track {
+                background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.4));
+            }
 
         .doctor-details {
             display: grid;
@@ -353,7 +366,7 @@
 
     <section class="doctor-links">
         <h3>Upcoming Appointments</h3>
-        <table class="table">
+        <table id="tab" class="table">
             <tr>
                 <th>
                     Patient Name
@@ -413,9 +426,8 @@
 
 @section scripts{
     <script language="javascript" type="text/javascript">
-
+        
         const disableSaveButton = document.getElementById('saveImage');
-
         $('#imageUpload').change(function () {
 
             if (this.files && this.files[0]) {
@@ -442,6 +454,22 @@
             $('#imageUpload').val('');
             disableSaveButton.setAttribute('disabled', 'true');
         });
+
+        
+
+            const appointmentListTable = document.getElementById('tab');
+            const appointmentTbody = appointmentListTable.getElementsByTagName('tbody');
+            var trnode = document.createElement("tr");
+            trnode.style.padding = '4px';
+            trnode.style.textAlign = 'center';
+            trnode.style.color = 'gray';
+            trnode.style.letterSpacing = '1.1px';
+            var tdnode = document.createElement("td");
+            tdnode.colSpan = '5';
+            var textnode = document.createTextNode("no appointments");
+            if (appointmentTbody[0].childElementCount <= 1) {                
+                appointmentListTable.appendChild(trnode).appendChild(tdnode).appendChild(textnode);
+            }
 
     </script>
 }

@@ -12,8 +12,7 @@ using PasswordHashTool;
 
 namespace E_HealthCare_Web.Controllers
 {
-    [Authorize]
-
+    [Authorize(Roles = "Patient")]
     public class PatientController : Controller
     {
         // GET: Patient

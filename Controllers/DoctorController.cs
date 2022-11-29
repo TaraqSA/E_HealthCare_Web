@@ -12,13 +12,13 @@ using PagedList;
 
 namespace E_HealthCare_Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Doctor")]    
     public class DoctorController : Controller
     {
         E_HealthCareEntities context = new E_HealthCareEntities();
         DoctorService doctorService = new DoctorService();
         public ActionResult DoctorHome(int id)
-        {
+        {            
             var getDoctor = context.Doctors.Where(q => q.Id == id).FirstOrDefault();
             var ExpiredAppointments = getDoctor.Appointments.Where(q => q.AppointmentDate < DateTime.Now).ToList();
             if (ExpiredAppointments.Count > 0)
@@ -194,6 +194,7 @@ namespace E_HealthCare_Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(DoctorPasswordChangeViewModel model)
         {
             if (ModelState.IsValid)
@@ -272,5 +273,14 @@ namespace E_HealthCare_Web.Controllers
             return Json(status, JsonRequestBehavior.AllowGet);
         }
 
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

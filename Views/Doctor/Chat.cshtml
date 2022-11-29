@@ -85,7 +85,7 @@
             flex: 0 0 70%;
             overflow-x: hidden;
             border: none, 1px solid rgba(116,189,160,0.6)none,none;
-            box-shadow: 2px 0px 3px 0.5px rgba(116,189,160,0.8);
+            /*box-shadow: 2px 0px 3px 0.5px rgba(116,189,160,0.8);*/
             background-image: linear-gradient(-90deg, rgba(116,189,160,0.4),rgba(116,189,160,0.1));
             max-height: 100%;
         }
@@ -219,7 +219,7 @@
             padding: 0.5rem;
             height: 60px;
             width: 60px;
-            border-radius: 30%;
+            border-radius: 40%;
             padding-left: 1.5rem;
         }
 
@@ -227,6 +227,7 @@
                 max-height: 100%;
                 max-width: 100%;
                 object-fit: cover;
+                border-radius: 40%;
             }
 
         .topatient-name {
@@ -359,15 +360,16 @@
                        {
                            UpdateTargetId = "chatbox",
                            InsertionMode = InsertionMode.Replace,
-                           HttpMethod = "GET"
-                       })
+                           HttpMethod = "GET",
+                           OnSuccess = "chatboxToBottom",
+                       },new { id = "chatboxLink"})
                     </div>
                 </div>
             }
         </div>
     </section>
     <section class="chatbox-section">
-        <div id="chatbox">
+        <div id="chatbox" onload="alert('loaddd')">
             <div class="chathere">
                 <h1>Chat Here</h1>
             </div>
@@ -393,6 +395,7 @@
                 // Add the message to the page.
                 $('#chatboxmiddle').append('<p id = "doctormsg">' + htmlEncode(message)
                     + '</p>');
+                chatboxToBottom();
             };
 
             // Set initial focus to message input box.
@@ -408,13 +411,13 @@
             chat.client.sendMessageToPatient = function (message) {
                 $('#chatboxmiddle').append('<p id ="patientmsg">' + htmlEncode(message)
                     + '</p>');
+                chatboxToBottom();
             }
             // Start the connection.
             $.connection.hub.start().done(function () {
                 $('body').on('click', '#Sendbtn', function () {
                     // Call the Send method on the hub.
                     chat.server.sendChatMessage($('#patientUserName').val(), $('#chatmessage').val());
-
                     // Clear text box and reset focus for next comment.
                     $('#chatmessage').val('').focus();
                 });
@@ -427,5 +430,18 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-    </script>
+
+        function chatboxToBottom() {
+            console.log('finally-in');
+            const chatbox = document.getElementById('chatboxmiddle');
+            console.log(chatbox);
+            /*let c = 0;*/
+            const isScrollToBottom = chatbox.scrollHeight - chatbox.clientHeight <= chatbox.scrollTop + 1;
+            console.log(isScrollToBottom);
+            /*const newElement =*/
+            if (!isScrollToBottom) {                
+                chatbox.scrollTop = chatbox.scrollHeight - chatbox.clientHeight;//it will scroll from top to reach bottom
+            }
+        };
+    </script>    
 }

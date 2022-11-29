@@ -202,7 +202,7 @@ namespace E_HealthCare_Web.ViewModels
         [DataType(DataType.Date, ErrorMessage = "please Enter appointment date")]
         [Display(Name = "Appointment Date")]
         [Required(ErrorMessage = "appointment date is mandatory")]
-        [Remote("IsDateValid", "Patient", ErrorMessage = "please enter date starting today between monday and friday")]
+        [Remote("IsDateValid", "Patient", ErrorMessage = "please enter date starting from tomorrow between monday and friday")]
         public DateTime AppointmentDate { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:hh:mm tt}")]

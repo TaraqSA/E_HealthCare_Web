@@ -1,0 +1,106 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.DepartmentListViewModel>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Departments";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section Styles{
+    <style type="text/css">
+
+        .dept-heading h3 {
+            font-family: 'Comic Sans MS';
+            text-align: center;
+        }
+
+        .list-section {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .deptList-table {
+            box-shadow: 0px 0px 2px 0.5px rgba(0,0,0,0.2);
+        }
+
+            .deptList-table th {
+                border: 1px solid rgba(116, 189, 160, 0.8);
+                background-color: rgba(116, 189, 160, 0.6) !important;
+                border-top: 0 !important;
+            }
+
+            .deptList-table tr td {
+                border: 1px solid rgba(116, 189, 160, 0.4);
+            }
+
+            .deptList-table tr:nth-child(odd) {
+                background-color: rgba(116, 189, 160, 0.3);
+            }
+
+        .searchbox {
+            padding-left: 1.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .create-admin {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+}
+
+<section class="dept-heading">
+    <h3>
+        <label>
+            List of Departments
+        </label>
+    </h3>
+</section>
+<section class="dept-search">
+    @using (Html.BeginForm("DepartmentList", "Admin", FormMethod.Get))
+    {
+        <div class="form-group searchbox">
+            @Html.TextBox("SearchByDepartmentName", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by department's Name" })
+            <button type="submit" value="Search" class="fa fa-search btn btn-sm btn-info"> Search</button>
+        </div>
+    }
+
+</section>
+
+<section class="list-section">
+    <table class="table deptList-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DepartmentName)
+            </th>
+            <th>
+                <label>Actions</label>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @Html.ActionLink(" Remove Department", "RemoveDepartment", new { departmentId = item.Id, actionName = "DepartmentList" }, new { @class = "btn btn-xs btn-danger fa fa-remove" })&nbsp;
+                    @Html.ActionLink(" Add Doctor", "AddDoctorToDepartment", new { departmentId = item.Id }, new { @class = "btn btn-xs btn-primary fa fa-plus" })&nbsp;
+                    @Html.ActionLink(" Remove Doctor", "RemoveDoctorFromDepartment", new { departmentId = item.Id }, new { @class = "btn btn-xs btn-warning fa fa-remove" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("DepartmentList",
+    new { page, currentFilter = ViewBag.CurrentFilter }))
+</section>
+<section class="create-admin">
+    @Html.ActionLink(" Add Department", "AddDepartment", "Admin", new { id = ViewBag.adminId }, new { @class = "fa fa-plus btn btn-info" })
+</section>
+

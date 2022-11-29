@@ -5,7 +5,7 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    min-height: 90vh;    
+    min-height: 90vh;
     padding: 20px 20px 0 20px;
 }
 
@@ -49,6 +49,37 @@
     align-items: center;
     height: 100%;
 }
+
+    .inner-submenu > .fa-edit:before {
+        color: #36AE7C;
+    }
+    .inner-submenu > .fa-user:before {
+        color: #8BBCCC;
+    }
+    .inner-submenu .fa-calendar:before {
+        color: #005555;
+    }
+    .inner-submenu > .fa-pencil:before {
+        color: #153462;
+    }
+    .inner-submenu > .fa-upload:before {
+        color: #25316D;
+    }
+    .inner-submenu > .fa-folder:before {
+        color: #6D9886;
+    }
+    .inner-submenu > .fa-user-md:before {
+        color: #153462;
+    }
+    .inner-submenu > .fa-comments-o:before {
+        color: #6D9886;
+    }
+    .inner-submenu > .fa-th-list:before {
+        color: #557153;        
+    }
+    .inner-submenu > .fa-hospital-o:before {
+        color: #557153;
+    }
 
     .inner-submenu a {
         text-decoration: none;
@@ -151,7 +182,7 @@ textarea {
     box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.3);
     border: none;
     height: 50px;
-    font-stretch:semi-condensed;
+    font-stretch: semi-condensed;
 }
 
 .navbar-inverse {
@@ -217,6 +248,13 @@ textarea {
         text-align: left;
     }
 
+    .dropdown-menu > li > .fa-user-o:before {
+        color: red;
+    }
+
+    .dropdown-menu span {
+        color: #25316D;
+    }
 
 ul.dropdown-menu > li > a {
     color: black !important;

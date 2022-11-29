@@ -19,14 +19,13 @@ namespace E_HealthCare_Web.ModelSevices
             model.ProfileImagePath = doctor.ProfileImagePath;
             model.UserName = doctor.D_UserName;
             model.Speciality = doctor.Departments.ToList();
-            model.Appointments = doctor.Appointments.Where(q=>q.IsAppointmentActive).ToList();
+            model.Appointments = doctor.Appointments.Where(q=>q.IsAppointmentActive && (q.AppointmentDate - DateTime.Now).Days < 3 ).ToList();
             model.Gender = doctor.D_Gender;
             model.Phone = doctor.D_Phone;
             model.BloodGroup = doctor.D_BloodGroup;
             model.Address = doctor.D_Address;
             return model;
         }
-
 
         public EditDoctorViewModel EditModelTransfer(Doctor doctor)
         {
@@ -41,7 +40,6 @@ namespace E_HealthCare_Web.ModelSevices
             return editViewModel;
         }
 
-
         public void UpdateDoctor(Doctor doctor, EditDoctorViewModel model)
         {
             doctor.D_Name = model.DoctorName;
@@ -51,8 +49,6 @@ namespace E_HealthCare_Web.ModelSevices
             doctor.D_Phone = model.Phone;
             doctor.D_Gender = model.Gender;
         }
-
-
 
         public DoctorProfileViewModel DoctorProfileModelTransfer(Doctor doctor)
         {
@@ -69,7 +65,6 @@ namespace E_HealthCare_Web.ModelSevices
             model.Gender = doctor.D_Gender;
             return model;
         }
-
         public DoctorAccountViewModel AccountModelTransfer(Doctor doctor)
         {
             DoctorAccountViewModel doctorAccountViewModel = new DoctorAccountViewModel();
@@ -79,7 +74,6 @@ namespace E_HealthCare_Web.ModelSevices
             doctorAccountViewModel.Email = doctor.D_Email;
             return doctorAccountViewModel;
         }
-
         public DoctorPasswordChangeViewModel PasswordModelTransfer(int doctorId, string Password)
         {
             DoctorPasswordChangeViewModel model = new DoctorPasswordChangeViewModel();

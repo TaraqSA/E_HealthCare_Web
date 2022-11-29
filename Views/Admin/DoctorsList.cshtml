@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.DoctorsListViewModel>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "All Doctors";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@section Styles{
+    <style type="text/css">
+
+        .doctor-heading h3 {
+            font-family: 'Comic Sans MS';
+            text-align: center;
+        }
+
+        .list-section {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .doctorList-table {
+            box-shadow: 0px 0px 2px 0.5px rgba(0,0,0,0.2);
+        }
+
+            .doctorList-table th {
+                border: 1px solid rgba(116, 189, 160, 0.8);
+                background-color: rgba(116, 189, 160, 0.6) !important;
+                border-top: 0 !important;
+            }
+
+            .doctorList-table tr td {
+                border: 1px solid rgba(116, 189, 160, 0.4);
+            }
+
+            .doctorList-table tr:nth-child(odd) {
+                background-color: rgba(116, 189, 160, 0.3);
+            }
+
+        .searchbox {
+            padding-left: 1.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+}
+
+<section class="doctor-heading">
+    <h3>
+        <label>
+            List of Doctors
+        </label>
+    </h3>
+</section>
+<section class="doctor-search">
+    @using (Html.BeginForm("DoctorsList", "Admin", FormMethod.Get))
+    {
+        <div class="form-group searchbox">
+            @Html.TextBox("SearchByDoctorName", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by doctor's Name" })
+            <button type="submit" value="Search" class="fa fa-search btn btn-sm btn-info"> Search</button>
+        </div>
+    }
+
+</section>
+
+<section class="list-section">
+    <table class="table doctorList-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
+            </th>
+            <th>
+                <label>Actions</label>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.ActionLink(" Remove Doctor", "RemoveDoctor", new { doctorId = item.Id }, new { @class = "btn btn-xs btn-danger fa fa-remove" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("DoctorsList",
+    new { page, currentFilter = ViewBag.CurrentFilter }))
+</section>

@@ -147,6 +147,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChatConnectionDetail.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ConsultationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -161,15 +170,6 @@
     <Compile Include="ModelSevices\AdminService.cs" />
     <Compile Include="ModelSevices\DoctorService.cs" />
     <Compile Include="ModelSevices\PatientService.cs" />
-    <Compile Include="Models\Admin.cs">
-      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Appointment.cs">
-      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ChatConnectionDetail.cs">
-      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ConversationInfo.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
@@ -198,11 +198,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>E_HealthCareContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\HealthCareRoleManager.cs" />
     <Compile Include="Models\HelperMethods.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientReport.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteUser.cs">
@@ -214,6 +218,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\DoctorViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
@@ -731,8 +736,6 @@
     <Content Include="Views\Home\Psychology.cshtml" />
     <Content Include="Views\Error\Error403.cshtml" />
     <Content Include="Views\Doctor\DoctorProfile.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\MakeAdmin.cshtml" />
     <Content Include="Views\Doctor\DoctorHome.cshtml" />
     <Content Include="Views\Doctor\Edit.cshtml" />
     <Content Include="Views\Doctor\CancelAppointment.cshtml" />
@@ -741,6 +744,17 @@
     <Content Include="Views\Doctor\AppointmentList.cshtml" />
     <Content Include="Views\Doctor\Chat.cshtml" />
     <Content Include="Views\Doctor\_ChatBox.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Views\Admin\AdminAccount.cshtml" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\AdminList.cshtml" />
+    <Content Include="Views\Admin\CreateAdmin.cshtml" />
+    <Content Include="Views\Admin\RemoveAdmin.cshtml" />
+    <Content Include="Views\Admin\DoctorsList.cshtml" />
+    <Content Include="Views\Admin\RemoveDoctor.cshtml" />
+    <Content Include="Views\Admin\DepartmentList.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />

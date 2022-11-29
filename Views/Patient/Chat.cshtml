@@ -217,7 +217,7 @@
             padding: 0.5rem;
             height: 60px;
             width: 60px;
-            border-radius: 30%;
+            border-radius: 40%;
             padding-left: 1.5rem;
         }
 
@@ -225,6 +225,7 @@
                 max-height: 100%;
                 max-width: 100%;
                 object-fit: cover;
+                border-radius: 40%;
             }
 
         .todoctor-name {
@@ -357,8 +358,9 @@
                        {
                            UpdateTargetId = "chatbox",
                            InsertionMode = InsertionMode.Replace,
-                           HttpMethod = "GET"
-                       })
+                           HttpMethod = "GET",
+                           OnSuccess = "chatboxToBottom"
+                       }, new { id = "chatboxLink" })
                     </div>
                 </div>
             }
@@ -391,6 +393,7 @@
                 // Add the message to the page.
                 $('#chatboxmiddle').append('<p id = "patientmsg">' + htmlEncode(message)
                     + '</p>');
+                chatboxToBottom();
             };
             
             //// Set initial focus to message input box.
@@ -406,6 +409,7 @@
             chat.client.sendMessageToDoctor = function (message) {
                 $('#chatboxmiddle').append('<p id ="doctormsg">' + htmlEncode(message)
                     + '</p>');
+                chatboxToBottom();
             }
             // Start the connection.
             $.connection.hub.start().done(function () {                
@@ -418,11 +422,19 @@
             });
         });
 
-
         // This optional function html-encodes messages for display in the page.
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+
+        function chatboxToBottom() {            
+            const chatbox = document.getElementById('chatboxmiddle');                      
+            const isScrollToBottom = chatbox.scrollHeight - chatbox.clientHeight <= chatbox.scrollTop + 1;                       
+            if (!isScrollToBottom) {
+                
+                chatbox.scrollTop = chatbox.scrollHeight - chatbox.clientHeight;
+            }
+        };
     </script>
 }

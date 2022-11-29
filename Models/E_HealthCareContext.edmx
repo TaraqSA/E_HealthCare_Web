@@ -13,8 +13,15 @@
           <Property Name="Name" Type="nvarchar" MaxLength="25" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserId" Type="int" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ProfileImagePath" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="BloodGroup" Type="nvarchar" MaxLength="5" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResetCode" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Appointments">
           <Key>
@@ -118,6 +125,13 @@
           <Property Name="PatientId" Type="int" Nullable="false" />
           <Property Name="ReportName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="SiteUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -129,6 +143,14 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="UserRole" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="PasswordResetCode" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SiteUser_Role_Relation">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UrlLoggins">
           <Key>
@@ -200,14 +222,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Role">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="SiteUser_Role_Relation" Type="Self.SiteUser_Role_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SiteUser_Role_Relation">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Fk_TOSiteUser">
-          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="0..1" />
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="1" />
           <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SiteUser">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Admin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_User">
+          <End Role="SiteUser" Type="Self.SiteUser" Multiplicity="1" />
+          <End Role="SiteUser_Role_Relation" Type="Self.SiteUser_Role_Relation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SiteUser_Role_Relation">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -295,7 +341,9 @@
           <EntitySet Name="Doctor_Department_RelationShip" EntityType="Self.Doctor_Department_RelationShip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientReports" EntityType="Self.PatientReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteUser" EntityType="Self.SiteUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteUser_Role_Relation" EntityType="Self.SiteUser_Role_Relation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrlLoggins" EntityType="Self.UrlLoggins" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Connection_Fk" Association="Self.Connection_Fk">
             <End Role="ChatConnectionDetails" EntitySet="ChatConnectionDetails" />
@@ -317,9 +365,17 @@
             <End Role="Patient" EntitySet="Patient" />
             <End Role="PatientReports" EntitySet="PatientReports" />
           </AssociationSet>
+          <AssociationSet Name="fk_Role" Association="Self.fk_Role">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="SiteUser_Role_Relation" EntitySet="SiteUser_Role_Relation" />
+          </AssociationSet>
           <AssociationSet Name="Fk_TOSiteUser" Association="Self.Fk_TOSiteUser">
             <End Role="SiteUser" EntitySet="SiteUser" />
             <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="fk_User" Association="Self.fk_User">
+            <End Role="SiteUser" EntitySet="SiteUser" />
+            <End Role="SiteUser_Role_Relation" EntitySet="SiteUser_Role_Relation" />
           </AssociationSet>
           <AssociationSet Name="FK_UserId_to_Id" Association="Self.FK_UserId_to_Id">
             <End Role="SiteUser" EntitySet="SiteUser" />
@@ -422,6 +478,11 @@
             <End Role="SiteUser" EntitySet="SiteUsers" />
           </AssociationSet>
           <EntitySet Name="ConversationInfoes" EntityType="E_HealthCareModel.ConversationInfo" />
+          <EntitySet Name="Roles" EntityType="E_HealthCareModel.Role" />
+          <AssociationSet Name="SiteUser_Role_Relation" Association="E_HealthCareModel.SiteUser_Role_Relation">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="SiteUser">
           <Key>
@@ -439,6 +500,7 @@
           <NavigationProperty Name="UrlLoggins" Relationship="E_HealthCareModel.FK_SiteUser_UserId" FromRole="SiteUser" ToRole="UrlLoggin" />
           <NavigationProperty Name="Admins" Relationship="E_HealthCareModel.Fk_TOSiteUser" FromRole="SiteUser" ToRole="Admin" />
           <NavigationProperty Name="ChatConnectionDetails" Relationship="E_HealthCareModel.Connection_SiteUser_Relation" FromRole="SiteUser" ToRole="ChatConnectionDetail" />
+          <NavigationProperty Name="Roles" Relationship="E_HealthCareModel.SiteUser_Role_Relation" FromRole="SiteUser" ToRole="Role" />
         </EntityType>
         <Association Name="FK__Patient__UserId__6383C8BA">
           <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
@@ -516,12 +578,19 @@
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SiteUser" Relationship="E_HealthCareModel.Fk_TOSiteUser" FromRole="Admin" ToRole="SiteUser" />
           <Property Name="ProfileImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BloodGroup" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResetCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="Fk_TOSiteUser">
-          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="0..1" />
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="1" />
           <End Type="E_HealthCareModel.Admin" Role="Admin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SiteUser">
@@ -645,6 +714,18 @@
           <Property Name="RecieverId" Type="Int32" Nullable="false" />
           <Property Name="ConnectionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SiteUsers" Relationship="E_HealthCareModel.SiteUser_Role_Relation" FromRole="Role" ToRole="SiteUser" />
+        </EntityType>
+        <Association Name="SiteUser_Role_Relation">
+          <End Type="E_HealthCareModel.Role" Role="Role" Multiplicity="*" />
+          <End Type="E_HealthCareModel.SiteUser" Role="SiteUser" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -716,6 +797,13 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="E_HealthCareModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="ResetCode" ColumnName="ResetCode" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ProfileImagePath" ColumnName="ProfileImagePath" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -796,6 +884,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="E_HealthCareModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SiteUser_Role_Relation" TypeName="E_HealthCareModel.SiteUser_Role_Relation" StoreEntitySet="SiteUser_Role_Relation">
+            <EndProperty Name="SiteUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

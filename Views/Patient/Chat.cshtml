@@ -1,0 +1,440 @@
+﻿@model E_HealthCare_Web.ViewModels.ConsultationViewModel
+@{
+    ViewBag.Title = "Consultation";
+    Layout = "~/Views/Shared/_PatientLayout.cshtml";
+}
+
+@section Styles {
+    <style type="text/css">
+        .chat-wrapper {
+            display: flex;
+            max-height: 83vh;
+            min-height: 83vh;
+            font-family: 'Comic Sans MS';
+            box-shadow: 0 0 3px 1px rgba(116,189,160,0.5);
+        }
+
+        .doctor-list-section {
+            flex: 0 0 30%;
+            max-height: 100%;
+            border: 1px solid rgba(116,189,160,0.6);
+            background-image: linear-gradient(-90deg, rgba(116,189,160,0.2),rgba(116,189,160,0.6));
+        }
+
+        .drlist-overflowcontrol {
+            max-height: 88%;
+            overflow-y: auto;
+        }
+
+            .drlist-overflowcontrol::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            .drlist-overflowcontrol::-webkit-scrollbar-track {
+                background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.4));
+            }
+
+            .drlist-overflowcontrol::-webkit-scrollbar-thumb {
+                background-color: rgba(116,189,160,0.5);
+                border-radius: 10px;
+            }
+
+        .dr-profile-direction {
+            display: flex;
+            border-bottom: 1px solid rgba(116,189,160,0.5);
+        }
+
+            .dr-profile-direction:last-child {
+                border: none;
+            }
+
+        .dr-profile {
+            padding: 0.5rem;
+            height: 60px;
+            width: 60px;
+            border-radius: 45%;
+        }
+
+            .dr-profile img {
+                max-height: 100%;
+                max-width: 100%;
+                height: 100%;
+                width: 100%;
+                border-radius: 45%;
+                object-fit: cover;
+            }
+
+        .dr-name {
+            padding: 1rem 0.5rem;
+        }
+
+            .dr-name > a {
+                text-decoration: none;
+                color: rgba(0,0,0,0.8);
+                letter-spacing: 1.1px;
+                transition: color 0.2s ease-in;
+            }
+
+                .dr-name > a:hover, .dr-name > a:active, .dr-name > a:focus {
+                    color: white;
+                }
+
+        .chatbox-section {
+            flex: 0 0 70%;
+            overflow-x: hidden;
+            border: none, 1px solid rgba(116,189,160,0.6)none,none;
+            box-shadow: 2px 0px 3px 0.5px rgba(116,189,160,0.8);
+            background-image: linear-gradient(-90deg, rgba(116,189,160,0.4),rgba(116,189,160,0.1));
+            max-height: 100%;
+        }
+
+        #chatbox {
+            position: relative;
+            height: 100%;
+        }
+
+        .chathere {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            color: white;
+            padding: 0;
+            width: 50%;
+            height: 50%;
+            margin: auto;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0 0 8px black;
+        }
+
+            .chathere > h1 {
+                font-style: oblique;
+                letter-spacing: 1.1px;
+            }
+
+        .chatbox-upper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 89%;
+            text-align: center;
+            box-shadow: 0 1px 2px 0.5px rgba(116,189,160,0.8);
+            border-bottom: 1px solid rgba(116,189,160,1);
+            display: inline-flex;
+        }
+
+        .chatbox-middle {
+            position: absolute;
+            top: 11%;
+            left: 0;
+            right: 0;
+            bottom: 10%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding-top: 5px;
+            box-shadow: 0 0 5px 2px rgb(95, 158, 160) inset;
+            background-color: rgba(95, 158, 160,0.6);
+        }
+
+
+            .chatbox-middle::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            .chatbox-middle::-webkit-scrollbar-track {
+                background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.4));
+            }
+
+            .chatbox-middle::-webkit-scrollbar-thumb {
+                background-color: rgba(116,189,160,0.5);
+                border-radius: 10px;
+            }
+
+        .chatbox-lower {
+            position: absolute;
+            top: 90%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-top: 1px solid rgba(116,189,160,1);
+            box-shadow: 0 -1px 2px 0.5px rgba(116,189,160,0.8);
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .search-dr {
+            padding: 5px;
+            position: relative;
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid rgba(116,189,160,0.9);
+            box-shadow: 0 1px 2px 0.3px rgba(116,189,160,0.5);
+        }
+
+        #searchdr {
+            width: 80%;
+            height: 35px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+            #searchdr::placeholder {
+                color: gray;
+                letter-spacing: 1.1px;
+                font-style: italic;
+            }
+
+            #searchdr:active, #searchdr:focus {
+                outline: none;
+                box-shadow: 0 0 2px 0.5px rgba(0,0,0,0.2);
+            }
+
+        #searchbtn {
+            position: absolute;
+            height: 35px;
+            width: 20%;
+            color: black;
+            background-color: rgba(116,189,160,0.3);
+            outline: none;
+            font-size: 1.5em;
+            border: 1px solid gray;
+            border-radius: 4px;
+            transition: background-color 0.2s ease-in, color 0.2s ease-in-out;
+        }
+
+            #searchbtn:hover, #searchbtn:active, #searchbtn:focus {
+                color: white;
+                background-color: rgba(116,189,160,1);
+            }
+
+
+        .todoctor-profile {
+            padding: 0.5rem;
+            height: 60px;
+            width: 60px;
+            border-radius: 40%;
+            padding-left: 1.5rem;
+        }
+
+            .todoctor-profile > img {
+                max-height: 100%;
+                max-width: 100%;
+                object-fit: cover;
+                border-radius: 40%;
+            }
+
+        .todoctor-name {
+            padding: 0.5rem 1rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #patientmsg {
+            padding: 3px;
+            border: 1px solid gray;
+            background-color: white;
+            border-radius: 5px;
+            width: fit-content;
+            align-self: flex-end;
+            margin-right: 5px;
+            margin-left:10%;
+        }
+
+        #doctormsg {
+            align-self: flex-start;
+            margin-left: 5px;
+            margin-right:10%    ;
+            padding: 3px;
+            background-color: rgb(255,255,255);
+            border: 1px solid gray;
+            border-radius: 5px;
+            width: fit-content;
+        }
+
+        .msg-btn-conatiner {
+            height: 100%;
+            max-height: 100%;
+            width: 100%;
+            display: inline-flex;
+            background: linear-gradient(90deg,rgba(116,189,160,1),rgba(116,189,160,0.8));
+        }
+
+        #chatmessage {
+            width: 90% !important;
+            max-width: 100% !important;
+            height: 100%;
+            outline: none;
+            margin: 0;
+            padding: 4px;
+            resize: none;
+            border: 2px solid rgba(116,189,160,1);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-image: linear-gradient(90deg,rgba(116,189,160,0.2),rgba(116,189,160,0.4),rgba(116,189,160,0.6));
+        }
+
+            #chatmessage::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            #chatmessage::-webkit-scrollbar-track {
+                background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.5));
+            }
+
+            #chatmessage::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,1);
+                border-radius: 7px;
+            }
+
+
+        #Sendbtn {
+            height: 70%;
+            margin: 6px 0 0 5px;
+            width: 8%;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 1.2em;
+            transition: background-image 0.2s ease-in, color 0.2s ease-in;
+            letter-spacing: 1.1px;
+        }
+
+            #Sendbtn:hover, #Sendbtn:focus, #Sendbtn:active {
+                background-image: linear-gradient(90deg,rgba(116,190,161,1),rgba(116,189,160,0.8));
+                outline: 1px solid rgba(116,189,160,1);
+                color: rgba(255,255,255,0.8);
+            }
+    </style>
+}
+
+<section class="chat-wrapper">
+    <section class="doctor-list-section">
+        <div class="search-dr">
+            @using (Html.BeginForm())
+            {
+                <input type="text" id="searchdr" name="searchdr" placeholder="Search Doctor" /><button type="submit" id="searchbtn"><i class="fa fa-search-plus"></i></button>
+            }
+
+        </div>
+        <div class="drlist-overflowcontrol">
+            @foreach (var doctor in Model.DoctorsList)
+            {
+                <div id="drlist" class="dr-profile-direction">
+                    <div class="dr-profile">
+                        @{
+                            if (doctor.ProfileImagePath == null)
+                            {
+                                <img src="~/Images/ProfilePictures/dricon.png" alt="profile" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content(doctor.ProfileImagePath)" alt="profile" />
+                            }
+
+                        }
+                    </div>
+                    <div class="dr-name">
+                        @{
+                            string doctorName;
+                            if (doctor.D_Name != null)
+                            {
+                                doctorName = doctor.D_UserName;
+                            }
+                            else
+                            {
+                                doctorName = doctor.D_UserName;
+                            }
+                        }
+
+                        @Ajax.ActionLink(doctorName, "ChatBox", new { patientUserName = Model.CurrentPatient.UserName, doctorUserName = doctor.D_UserName },
+                       new AjaxOptions
+                       {
+                           UpdateTargetId = "chatbox",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET",
+                           OnSuccess = "chatboxToBottom"
+                       }, new { id = "chatboxLink" })
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <section class="chatbox-section">
+        <div id="chatbox">
+            <div class="chathere">
+                <h1>Chat Here</h1>
+            </div>
+        </div>
+    </section>
+</section>
+
+@section scripts {
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <!--SignalR script to update the chat page and send messages.-->
+    <script>
+        $(document).ready(function () {
+            // Reference the auto-generated proxy for the hub.
+            var chat = $.connection.consultationHub;            
+            var PatientUserName = '@Context.User.Identity.Name';
+            // Create a function that the hub can call back to display messages.
+            chat.client.addNewMessageToPage = function (message) {
+                // Add the message to the page.
+                $('#chatboxmiddle').append('<p id = "patientmsg">' + htmlEncode(message)
+                    + '</p>');
+                chatboxToBottom();
+            };
+            
+            //// Set initial focus to message input box.
+            //$('#chatmessage').focus();
+
+            chat.client.showErrorMessage = function (message) {
+                // Add the message to the page.
+                $('#chatboxmiddle').append('<p id ="patientmsg">' + htmlEncode(message)
+                    + '</p>');
+                
+            };
+
+            chat.client.sendMessageToDoctor = function (message) {
+                $('#chatboxmiddle').append('<p id ="doctormsg">' + htmlEncode(message)
+                    + '</p>');
+                chatboxToBottom();
+            }
+            // Start the connection.
+            $.connection.hub.start().done(function () {                
+                $('body').on('click', '#Sendbtn', function () {                    
+                    // Call the Send method on the hub.
+                    chat.server.sendChatMessage($('#doctorUserName').val(), $('#chatmessage').val());                    
+                    // Clear text box and reset focus for next comment.
+                    $('#chatmessage').val('').focus();
+                });
+            });
+        });
+
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+
+        function chatboxToBottom() {            
+            const chatbox = document.getElementById('chatboxmiddle');                      
+            const isScrollToBottom = chatbox.scrollHeight - chatbox.clientHeight <= chatbox.scrollTop + 1;                       
+            if (!isScrollToBottom) {
+                
+                chatbox.scrollTop = chatbox.scrollHeight - chatbox.clientHeight;
+            }
+        };
+    </script>
+}

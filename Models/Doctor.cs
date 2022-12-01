@@ -29,6 +29,11 @@ namespace E_HealthCare_Web.Models
         public Nullable<int> D_UserId { get; set; }
         public string ProfileImagePath { get; set; }
         public bool IsEmailVerified { get; set; }
+        public string D_Phone { get; set; }
+        public string D_Address { get; set; }
+        public string D_Gender { get; set; }
+        public string D_BloodGroup { get; set; }
+        public string resetCode { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

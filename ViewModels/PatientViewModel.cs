@@ -50,6 +50,8 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "User Name")]
         public string UserName { get; set; }
         public string ProfileImagePath { get; set; }
+
+        
     }
     public class EditViewModel
     {
@@ -200,7 +202,7 @@ namespace E_HealthCare_Web.ViewModels
         [DataType(DataType.Date, ErrorMessage = "please Enter appointment date")]
         [Display(Name = "Appointment Date")]
         [Required(ErrorMessage = "appointment date is mandatory")]
-        [Remote("IsDateValid", "Patient", ErrorMessage = "please enter date starting today between monday and friday")]
+        [Remote("IsDateValid", "Patient", ErrorMessage = "please enter date starting from tomorrow between monday and friday")]
         public DateTime AppointmentDate { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:hh:mm tt}")]
@@ -388,17 +390,52 @@ namespace E_HealthCare_Web.ViewModels
         }
 
     }
-    
+
     public class FindDoctorViewModel
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int id { get; set; }
 
+        [Display(Name = "Department")]
         public IEnumerable<Department> departmentName { get; set; }
 
+        [Display(Name = "Doctor Name")]
         public IEnumerable<Doctor> doctorsName { get; set; }
+
+
+        [Display(Name = "Department")]
+        public int? DepartmentSelectedId { get; set; }
+
+        public SelectList selectedDepartment { get; set; }
+
     }
+
+    public class ConsultationViewModel
+    {
+        [HiddenInput(DisplayValue = false)]
+        [Key]
+        public int id { get; set; }
+
+        [Display(Name = "Doctors")]
+        public IEnumerable<Doctor> DoctorsList { get; set; }
+
+        public Patient CurrentPatient { get; set; }
+        
+    }
+
+    public class ChatLoadViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+        public IEnumerable<Message> Message { get; set; }
+        public Patient patient { get; set; }
+        public Doctor doctor { get; set; }
+    }
+
+
+    
 
 }
 

@@ -1,0 +1,126 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.DoctorAppointmentListViewModel>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Appointments";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .appointment-heading h3 {
+            font-family: 'Comic Sans MS';
+            text-align: center;
+        }
+
+        .list-section {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .appointmentList-table {
+            box-shadow: 0px 0px 2px 0.5px rgba(0,0,0,0.2);
+        }
+
+            .appointmentList-table th {
+                border: 1px solid rgba(116, 189, 160, 0.8);
+                background-color: rgba(116, 189, 160, 0.6) !important;
+                border-top: 0 !important;
+            }
+
+            .appointmentList-table tr td {
+                border: 1px solid rgba(116, 189, 160, 0.4);
+            }
+
+            .appointmentList-table tr:nth-child(odd) {
+                background-color: rgba(116, 189, 160, 0.3);
+            }
+
+        .sortlinks > a {
+            text-decoration: none;
+        }
+
+        .searchbox {
+            padding-left: 1.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .bookap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+}
+
+<section class="appointment-heading">
+    <h3>
+        <label>
+            Appointment List
+        </label>
+    </h3>
+</section>
+<section class="appointment-search">
+    @using (Html.BeginForm("AppointmentList", "Doctor", FormMethod.Get))
+    {
+        <div class="form-group searchbox">
+            @Html.TextBox("SearchByPatientName", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search Patient By Name" })
+            <button type="submit" value="Search" class="fa fa-search btn btn-sm btn-info"> Search</button>
+        </div>
+    }
+
+</section>
+
+<section class="list-section">
+    <table class="table appointmentList-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().patientName)
+            </th>
+            <th class="sortlinks">
+                @Html.ActionLink("Appointment Date", "AppointmentList", new { sortOrder = ViewBag.DateSortOrder, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th class="sortlinks">
+                @Html.ActionLink("Appointment Time", "AppointmentList", new { sortOrder = ViewBag.TimeSortOrder, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().departmentName)
+            </th>
+            <th>
+                <label>Actions</label>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.patientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointmentTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.departmentName)
+                </td>
+                <td>
+                    @Html.ActionLink(" Cancel Appointment", "CancelAppointment", new { appointmentId = item.Id, actionName = "AppointmentList"}, new { @class = "btn btn-xs btn-danger fa fa-remove" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("AppointmentList",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+    @*<div class="bookap">
+        @Html.ActionLink("Book Appointment", "BookAppointment", new { id = ViewBag.DoctorId }, new { @class = "btn btn-sm btn-info" })
+    </div>*@
+</section>
+

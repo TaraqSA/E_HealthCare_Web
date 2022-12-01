@@ -15,7 +15,7 @@
     <AssemblyName>E_HealthCare_Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44363</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -51,12 +51,24 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -135,6 +147,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChatConnectionDetail.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConsultationHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
@@ -148,13 +170,11 @@
     <Compile Include="ModelSevices\AdminService.cs" />
     <Compile Include="ModelSevices\DoctorService.cs" />
     <Compile Include="ModelSevices\PatientService.cs" />
-    <Compile Include="Models\Admin.cs">
-      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Appointment.cs">
+    <Compile Include="Models\ConversationInfo.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomAdmin.cs" />
+    <Compile Include="Models\CustomAppointment.cs" />
     <Compile Include="Models\CustomDoctor.cs" />
     <Compile Include="Models\CustomPatient.cs" />
     <Compile Include="Models\Department.cs">
@@ -178,11 +198,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>E_HealthCareContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\HealthCareRoleManager.cs" />
     <Compile Include="Models\HelperMethods.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PatientReport.cs">
+      <DependentUpon>E_HealthCareContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SiteUser.cs">
@@ -192,7 +216,10 @@
       <DependentUpon>E_HealthCareContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\DoctorViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
   </ItemGroup>
@@ -428,6 +455,9 @@
     <Content Include="Images\Green-Tea-big.jpg" />
     <Content Include="Images\Green-Tea-small.jpg" />
     <Content Include="Images\Icons\health-care.png" />
+    <Content Include="Images\man-women-healthcare-removebg-preview.png" />
+    <Content Include="Images\ProfilePictures\doctor %281%29.png" />
+    <Content Include="Images\ProfilePictures\dricon.png" />
     <Content Include="Images\ProfilePictures\user-default.png" />
     <Content Include="Images\logo\24-hours.png" />
     <Content Include="Images\logo\blood-type %28128%29.png" />
@@ -578,6 +608,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.13.1.js" />
     <Content Include="Scripts\jquery-ui-1.13.1.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -704,8 +736,30 @@
     <Content Include="Views\Home\Psychology.cshtml" />
     <Content Include="Views\Error\Error403.cshtml" />
     <Content Include="Views\Doctor\DoctorProfile.cshtml" />
+    <Content Include="Views\Doctor\DoctorHome.cshtml" />
+    <Content Include="Views\Doctor\Edit.cshtml" />
+    <Content Include="Views\Doctor\CancelAppointment.cshtml" />
+    <Content Include="Views\Doctor\DoctorAccount.cshtml" />
+    <Content Include="Views\Doctor\ChangePassword.cshtml" />
+    <Content Include="Views\Doctor\AppointmentList.cshtml" />
+    <Content Include="Views\Doctor\Chat.cshtml" />
+    <Content Include="Views\Doctor\_ChatBox.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\MakeAdmin.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Views\Admin\AdminAccount.cshtml" />
+    <Content Include="Views\Admin\ChangePassword.cshtml" />
+    <Content Include="Views\Admin\AdminList.cshtml" />
+    <Content Include="Views\Admin\CreateAdmin.cshtml" />
+    <Content Include="Views\Admin\RemoveAdmin.cshtml" />
+    <Content Include="Views\Admin\DoctorsList.cshtml" />
+    <Content Include="Views\Admin\RemoveDoctor.cshtml" />
+    <Content Include="Views\Admin\DepartmentList.cshtml" />
+    <Content Include="Views\Admin\AddDepartment.cshtml" />
+    <Content Include="Views\Admin\RemoveDepartment.cshtml" />
+    <Content Include="Views\Admin\AddDoctorToDepartment.cshtml" />
+    <Content Include="Views\Admin\DepartmentDoctors.cshtml" />
+    <Content Include="Views\Admin\RemoveDoctorFromDepartment.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />
@@ -722,6 +776,9 @@
     <Content Include="Views\Patient\CancelAppointment.cshtml" />
     <Content Include="Views\Patient\UploadReports.cshtml" />
     <Content Include="Views\Patient\ReportList.cshtml" />
+    <Content Include="Views\Patient\FindDoctors.cshtml" />
+    <Content Include="Views\Patient\Chat.cshtml" />
+    <Content Include="Views\Patient\_ChatBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -756,7 +813,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64255</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/E_HealthCare_Web</IISUrl>
+          <IISUrl>http://localhost:64255/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

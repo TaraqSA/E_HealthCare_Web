@@ -18,8 +18,15 @@ namespace E_HealthCare_Web.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int UserId { get; set; }
         public string ProfileImagePath { get; set; }
+        public string Address { get; set; }
+        public string BloodGroup { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public bool IsEmailVerified { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Gender { get; set; }
+        public string ResetCode { get; set; }
     
         public virtual SiteUser SiteUser { get; set; }
     }

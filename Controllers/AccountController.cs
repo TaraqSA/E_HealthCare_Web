@@ -13,18 +13,17 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography;
 using System.Web.Routing;
+using System.Text.RegularExpressions;
 
 namespace E_HealthCare_Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-
         public ActionResult Index()
         {
             return View();
         }
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -36,8 +35,7 @@ namespace E_HealthCare_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        [ActionName("SignUp")]
-        [Authorize]
+        [ActionName("SignUp")]        
         public ActionResult SignUpPost(UserSignUpViewModel userSignUPViewModels)
         {
             if (ModelState.IsValid) //checking if user has given correct values to their respective fields
@@ -59,7 +57,7 @@ namespace E_HealthCare_Web.Controllers
                         siteUser.UserRole = "Patient";
                         patient.p_Email = userSignUPViewModels.Email;
                         patient.UserName = userSignUPViewModels.UserName;
-                        patient.SiteUser = siteUser;
+                        patient.SiteUser = siteUser;                        
 
                         siteUser.Patients.Add(patient);//for better understanding visit https://docs.microsoft.com/en-us/ef/ef6/fundamentals/relationships  
                         databseContext.SiteUsers.Add(siteUser);                        
@@ -126,7 +124,8 @@ namespace E_HealthCare_Web.Controllers
                         var getPatientId = context.Patients.Where(q => q.UserName == userLoginViewModel.UserName).Select(patient => patient.p_id).FirstOrDefault();
                         TempData["PatientId"] = getPatientId;
                         TempData.Keep("PatientId");
-                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);                        
+                        FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false); 
+                        
                         return RedirectToAction("PatientHome", "Patient", new { id = getPatientId });
                     }
                     else if (getRole == "Doctor")
@@ -135,7 +134,7 @@ namespace E_HealthCare_Web.Controllers
                         TempData["DoctorId"] = getDoctorId;
                         TempData.Keep("DoctorId");
                         FormsAuthentication.SetAuthCookie(userLoginViewModel.UserName, false);
-                        return RedirectToAction("Index", "Doctor", new { id = getDoctorId});
+                        return RedirectToAction("DoctorHome", "Doctor", new { id = getDoctorId});
                     }
                     else if (getRole == "Admin")
                     {
@@ -411,6 +410,15 @@ namespace E_HealthCare_Web.Controllers
                 status = true;
             }
             return Json(status, JsonRequestBehavior.AllowGet);
+        }
+        [AllowAnonymous]
+        public JsonResult IsPasswordValid(string Password)
+        {
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasMinimum8Chars = new Regex(@".{6,}");
+            bool IsValid = hasNumber.IsMatch(Password) && hasUpperChar.IsMatch(Password) && hasMinimum8Chars.IsMatch(Password);
+            return Json(IsValid, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout()

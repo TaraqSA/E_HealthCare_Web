@@ -6,22 +6,12 @@ using System.Web.Mvc;
 
 namespace E_HealthCare_Web.Controllers
 {
-   
-    [AllowAnonymous]
     public class ErrorController : Controller
-    {
-        
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+    { 
         public ActionResult NotFound404()
         {
             return View();
         }
-
-
         public ActionResult Error403()
         {
             return View();

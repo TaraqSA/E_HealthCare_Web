@@ -56,6 +56,8 @@
 
                         @{
                             var patientId = TempData.Peek("PatientId");
+                            TempData.Keep("PatientId");
+
                             <div class="dropdown">
                                 <button class="Dropdown-btn btn-block text-left dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false">
                                     @User.Identity.Name <i class="fa fa-angle-down"></i>
@@ -74,7 +76,7 @@
         </div>
     </div>
 
-    <div class="container-fluid body-content div-alignment">
+    <div class="container-fluid body-content-patient div-alignment">
         <div class="sidebar-menu">
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
@@ -119,11 +121,11 @@
                     @Html.ActionLink(" All Reports", "ReportList", "Patient", new { id = patientId }, new { @class = "fa fa-folder" })
                 </div>
             </div>
-            
+
 
             <div class="sidebar_menu-submenu">
                 <div class="inner-submenu">
-                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { @class = "fa fa-user-md" })
+                    @Html.ActionLink(" Find Doctors", "FindDoctors", "Patient", new { id = patientId }, new { @class = "fa fa-user-md" })
                 </div>
             </div>
             <div class="sidebar_menu-submenu">
@@ -160,10 +162,10 @@
                         @Html.ActionLink("Specialities", "Specialities", "Home")
                     </li>
                     <li>
-                        @Html.ActionLink("Doctors", "DoctorsList", "Doctor")
+                        @Html.ActionLink("Doctors", "FindDoctors", "Patient", new { id = patientId }, null)
                     </li>
                     <li>
-                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Appointment")
+                        @Html.ActionLink("Book an Appointment", "BookAppointment", "Patient", new { id = patientId }, null)
                     </li>
                     <li>
                         @Html.ActionLink("Feed Back", "FeedBack", "Home")
@@ -190,6 +192,7 @@
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/UnobtrusiveJquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
@@ -202,16 +205,16 @@
             function () {
                 var AppointmentCollaspsible = document.getElementsByClassName("sidebar-collapsible");
                 var CollapsedDiv = document.getElementById('menuCollapsed')
-                
-                for (i = 0; i < AppointmentCollaspsible.length; i++) {                    
+
+                for (i = 0; i < AppointmentCollaspsible.length; i++) {
                     if (AppointmentCollaspsible[i].style.maxHeight) {
                         AppointmentCollaspsible[i].style.maxHeight = null;
                         AppointmentCollaspsible[i].style.borderBottomWidth = 0;
-                        CollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.2)";                        
+                        CollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.2)";
                     } else {
                         CollapsedDiv.style.backgroundColor = "rgba(116, 189, 160, 0.4)";
                         AppointmentCollaspsible[i].style.maxHeight = CollapsedDiv.scrollHeight + "px";
-                        AppointmentCollaspsible[i].style.borderBottomWidth = "1px";                        
+                        AppointmentCollaspsible[i].style.borderBottomWidth = "1px";
                     }
                 }
             });

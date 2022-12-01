@@ -1,7 +1,7 @@
 ﻿@model E_HealthCare_Web.ViewModels.PatientHomeViewModel
 
 @{
-    ViewBag.Title = "PatientHome";
+    ViewBag.Title = "Patient Home";
     Layout = "~/Views/Shared/_PatientLayout.cshtml";
 }
 
@@ -13,7 +13,7 @@
             flex-direction: column;
             gap: 2rem;
         }
-        
+
         .profile-picture {
             display: flex;
             flex-direction: column;
@@ -60,11 +60,11 @@
         }
 
         .image-preview-div {
-            display:none;
+            display: none;
             margin-top: 1rem;
             padding: 0.5rem;
             height: 300px;
-            width: 300px;            
+            width: 300px;
             position: relative;
         }
 
@@ -80,26 +80,27 @@
             .image-preview-div > i {
                 display: none;
                 position: absolute;
-                box-sizing:border-box;
-                padding:3px;
+                box-sizing: border-box;
+                padding: 3px;
                 top: 1.7%;
                 right: 1.7%;
                 color: rgba(255,255,255,0.8);
-                background-color:rgba(0,0,0,0.1);
-                cursor:pointer;
-                transition:0.3s;
+                background-color: rgba(0,0,0,0.1);
+                cursor: pointer;
+                transition: 0.3s;
             }
+
                 .image-preview-div > i:hover, .image-preview-div > i:focus {
                     background-color: rgba(0,0,0,0.3);
                     color: rgba(255,255,255,0.8);
                 }
 
-                .edit_profile-buttons {
-                    padding: 1rem;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
+        .edit_profile-buttons {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         .patient-details {
             display: grid;
@@ -107,7 +108,7 @@
             padding: 1rem 0.5rem;
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
-            background-color: rgba(116, 189, 160, 0.5);
+            background-image: linear-gradient(90deg, rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.6),rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.2),rgba(116, 189, 160, 0.1));
             border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
@@ -136,20 +137,21 @@
             padding: 1rem;
             border-radius: 4px;
             box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
-            background-color: rgba(116, 189, 160, 0.5);
+            background-image: linear-gradient(180deg, rgba(116, 189, 160, 0.1),rgba(116, 189, 160, 0.5),rgba(116, 189, 160, 0.2));
             border: 1px solid rgba(116, 189, 160, 0.5);
         }
 
         .link {
-            flex:1 1 30%;
-            padding:1rem;
+            flex: 0 0 30%;
+            padding: 1rem;
             border: 1px solid rgba(116,189,160,0.9);
             border-radius: 4px;
             /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
-            background-color:rgba(116,189,160,0.7);
-            cursor:pointer;
-            transition:0.3s;
+            background-color: rgba(116,189,160,0.7);
+            cursor: pointer;
+            transition: 0.3s;
         }
+
             .link:hover, link:focus {
                 /*background-color: rgba(116,189,160,0.1);*/
                 box-shadow: 0px 0px 5px 0.5px rgba(116,189,160,1);
@@ -157,21 +159,20 @@
 
 
             .link > a {
-                text-decoration:none;
-                color:rgba(0,0,0,0.7);
-                font-weight:600;
-                font-size:2rem;
+                text-decoration: none;
+                color: rgba(0,0,0,0.7);
+                font-weight: 600;
+                font-size: 2rem;
             }
 
-                .link > a:hover, .link > a:focus{                                             
-                    color:rgba(0,0,0,1);
-                } 
-        
+                .link > a:hover, .link > a:focus {
+                    color: rgba(0,0,0,1);
+                }
     </style>
 }
 
 
-<div class="patient-dashboard">   
+<div class="patient-dashboard">
     <section class="patient-details">
         <div class="profile-picture">
             <div class="profile_picture-img">
@@ -202,7 +203,7 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            @using (Html.BeginForm("UploadImage", "Patient", new { viewActionName = "PatientHome"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("UploadImage", "Patient", new { viewActionName = "PatientHome" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
 
                                 <div class="modal-body">
@@ -299,25 +300,25 @@
             </table>
         </div>
     </section>
-    
+
     <section class="patient-links">
         <div class="link Calculate-BMI">
-            @Html.ActionLink(" Calculate BMI", "BMICalculator", "Patient",null ,new { @class="fa fa-calculator"})
+            @Html.ActionLink(" Calculate BMI", "BMICalculator", "Patient", null, new { @class = "fa fa-calculator" })
         </div>
         <div class="link search-specialist">
-            @Html.ActionLink(" Search Specialist", "SearchSpecialist", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
+            @Html.ActionLink(" Search Specialist", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-search-plus" })
         </div>
         <div class="link search-doctor">
-            @Html.ActionLink(" Search Doctor", "DoctorSearch", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
+            @Html.ActionLink(" Search Doctor", "FindDoctors", "Patient", new { id = Model.Id }, new { @class = "fa fa-user-md" })
         </div>
         <div class="link medical-records">
-            @Html.ActionLink(" Medical Records","MedicalRecords","Patient",new { id = Model.Id}, new { @class = "fa fa-book" })
+            @Html.ActionLink(" Medical Records", "ReportList", "Patient", new { id = Model.Id }, new { @class = "fa fa-book" })
         </div>
-        <div class="link my-bills">
-            @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
-        </div>
+        @*<div class="link my-bills">
+                @Html.ActionLink(" My Bills","Bills","Patient",new { id = Model.Id}, new { @class = "fa fa-money" })
+            </div>*@
         <div class="link appointments">
-            @Html.ActionLink(" My Appointments","AppointmentList","Patient",new { id = Model.Id}, new { @class = "fa fa-calendar-plus-o" })
+            @Html.ActionLink(" My Appointments", "AppointmentList", "Patient", new { id = Model.Id }, new { @class = "fa fa-calendar-plus-o" })
         </div>
     </section>
 
@@ -325,16 +326,16 @@
 
 
 @section scripts{
-<script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
 
-        const disableSaveButton = document.getElementById('saveImage');       
+        const disableSaveButton = document.getElementById('saveImage');
 
         $('#imageUpload').change(function () {
 
             if (this.files && this.files[0]) {
                 var fileReader = new FileReader();
                 fileReader.readAsDataURL(this.files[0]);
-                
+
 
                 fileReader.onload = function (x) {
                     $('.image-preview-div').css('display', 'inherit');
@@ -353,7 +354,7 @@
             $('#removeButton').css('display', 'none');
             $('.image-preview-div').css('display', 'none');
             $('#imageUpload').val('');
-            disableSaveButton.setAttribute('disabled','true');
+            disableSaveButton.setAttribute('disabled', 'true');
         });
 
     </script>

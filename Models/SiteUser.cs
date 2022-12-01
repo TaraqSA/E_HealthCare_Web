@@ -21,6 +21,8 @@ namespace E_HealthCare_Web.Models
             this.Doctors = new HashSet<Doctor>();
             this.UrlLoggins = new HashSet<UrlLoggin>();
             this.Admins = new HashSet<Admin>();
+            this.ChatConnectionDetails = new HashSet<ChatConnectionDetail>();
+            this.Roles = new HashSet<Role>();
         }
     
         public int Id { get; set; }
@@ -39,5 +41,9 @@ namespace E_HealthCare_Web.Models
         public virtual ICollection<UrlLoggin> UrlLoggins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Admin> Admins { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatConnectionDetail> ChatConnectionDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Role> Roles { get; set; }
     }
 }

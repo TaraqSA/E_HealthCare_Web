@@ -1,0 +1,475 @@
+﻿@model  E_HealthCare_Web.ViewModels.DoctorHomeViewModel
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+        .doctor-dashboard {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            font-family: 'Comic Sans MS';
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+            .doctor-dashboard::-webkit-scrollbar {
+                width: 5px;
+            }
+            .doctor-dashboard::-webkit-scrollbar-thumb {
+                background-color: rgba(116,189,160,0.5);
+                border-radius: 10px;
+            }
+            .doctor-dashboard::-webkit-scrollbar-track {
+                background: linear-gradient(90deg, rgba(116,189,160,0.1),rgba(116,189,160,0.4));
+            }
+
+        .doctor-details {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            padding: 1rem 0.5rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            background-image: linear-gradient(90deg, rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.6),rgba(116, 189, 160, 0.4),rgba(116, 189, 160, 0.2),rgba(116, 189, 160, 0.1));
+            border: 1px solid rgba(116, 189, 160, 0.5);
+        }
+
+        .profile-picture {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .profile_picture-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 15rem;
+            width: 15rem;
+            border-radius: 50%;
+        }
+
+        .profile_picture-sec {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+            width: 100%;
+        }
+
+            .profile_picture-sec > img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+                box-shadow: 0 0 4px 1px rgba(116, 189, 160, 1);
+            }
+
+            .profile_picture-sec > a {
+                height: fit-content;
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+        .modal-title {
+            display: inline-block;
+        }
+
+        .close {
+            display: inline-block;
+        }
+
+        .image-preview-div {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            height: 300px;
+            width: 300px;
+            position: relative;
+        }
+
+            .image-preview-div > img {
+                display: none;
+                height: 100%;
+                width: 100%;
+                border-radius: 3px;
+                outline: none !important;
+                object-fit: cover;
+            }
+
+            .image-preview-div > i {
+                display: none;
+                position: absolute;
+                box-sizing: border-box;
+                padding: 3px;
+                top: 1.7%;
+                right: 1.7%;
+                color: rgba(255,255,255,0.8);
+                background-color: rgba(0,0,0,0.1);
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+                .image-preview-div > i:hover, .image-preview-div > i:focus {
+                    background-color: rgba(0,0,0,0.3);
+                    color: rgba(255,255,255,0.8);
+                }
+
+        .edit_profile-buttons {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .doctor-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: rgba(0,0,0,1);
+        }
+
+        .doctor_data-table {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: rgba(0,0,0,1);
+        }
+
+            .doctor_data-table label {
+                margin-bottom: 0;
+            }
+
+            .doctor_data-table td {
+                padding: 0.5rem;
+            }
+
+        .doctor-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0px 0px 3px 0.5px rgba(116,189,160,0.4);
+            background-image: linear-gradient(180deg, rgba(116, 189, 160, 0.1),rgba(116, 189, 160, 0.5),rgba(116, 189, 160, 0.2));
+            border: 1px solid rgba(116, 189, 160, 0.5);
+        }
+
+            .doctor-links > h3 {
+                width: 100%;
+                text-align: center;
+                color: darkred;
+                letter-spacing: 1.1px;
+            }
+
+
+        /*.link {
+            flex: 0 0 30%;
+            padding: 1rem;
+            border: 1px solid rgba(116,189,160,0.9);
+            border-radius: 4px;*/
+        /*box-shadow: 0px 0px 5px 0.1px rgba(116,189,160,0.8);*/
+        /*background-color: rgba(116,189,160,0.7);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .link:hover, link:focus {*/
+        /*background-color: rgba(116,189,160,0.1);*/
+        /*box-shadow: 0px 0px 5px 0.5px rgba(116,189,160,1);
+            }
+
+
+            .link > a {
+                text-decoration: none;
+                color: rgba(0,0,0,0.7);
+                font-weight: 600;
+                font-size: 2rem;
+            }
+
+                .link > a:hover, .link > a:focus {
+                    color: rgba(0,0,0,1);
+                }*/
+        .table {
+            background-color: rgba(255,255,255,0.4);
+            box-shadow:0 0 2px 0.4px black; 
+        }
+            
+            .table tr , .table th, .table td{
+                border: 1px solid gray;
+            }
+
+            .table tr:nth-child(odd){
+                background-color:rgba(116,189,160,0.7);
+            }
+    </style>
+}
+
+
+<section class="doctor-dashboard">
+    <section class="doctor-details">
+        <div class="profile-picture">
+            <div class="profile_picture-img">
+                <div class="profile_picture-sec">
+                    @{
+                        if (Model.ProfileImagePath == null)
+                        {
+                            <img src="~/Images/ProfilePictures/user-default.png" alt="Profile" />
+                        }
+                        else
+                        {
+                            var imagepath = Model.ProfileImagePath;
+                            <img src="@Url.Content(imagepath)" alt="Profile" />
+                        }
+                    }
+
+                    <a href="#" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#basicModal">
+                        <span class="fa fa-pencil"></span>&nbsp;Change Image
+                    </a>
+                </div>
+
+                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Change Profile Picture</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @using (Html.BeginForm("UploadImage", "Doctor", new { viewActionName = "DoctorHome" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+
+                                <div class="modal-body">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.UserName)
+                                    <div class="image-preview-div">
+                                        <i class="fa fa-2x fa-remove" id="removeButton"></i>
+                                        <img src="#" alt="profile" id="imagePreview" />
+                                    </div>
+                                    <input type="file" name="imageUpload" id="imageUpload" accept="image/*" />
+                                    <br />
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" id="saveImage" class="btn btn-primary" disabled>Save changes</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="edit_profile-buttons">
+                @Html.ActionLink(" Edit Profile", "Edit", "Doctor", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary fa fa-pencil" })
+            </div>
+        </div>
+
+        <div class="doctor-data">
+            <table class="doctor_data-table">
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.UserName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DoctorName)
+                    </td>
+                    <td>
+                        Dr. @Html.DisplayFor(model => model.DoctorName)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Gender)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.EmailAddress)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.DateOfBirth)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Address)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.BloodGroup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.BloodGroup)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.LabelFor(model => model.Speciality)
+                    </td>
+                    <td>
+                        @{
+                            var dept = Model.Speciality;
+                            string speciality = "";
+                            if (dept.Count() > 1)
+                            {
+                                speciality = String.Join(" | ", dept.Select(q => q.DepartmentName));
+                            }
+                            else
+                            {
+                                speciality = dept.Select(q => q.DepartmentName).FirstOrDefault();
+                            }
+                        }
+                        @Html.DisplayFor(q => speciality)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="doctor-links">
+        <h3>Upcoming Appointments</h3>
+        <table id="tab" class="table">
+            <tr>
+                <th>
+                    Patient Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(q => q.AppointmentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(q => q.AppointmentTime)
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            @{
+                foreach (var item in Model.Appointments)
+                {
+                    if (item.IsAppointmentActive)
+                    {
+                        Model.AppointmentTime = DateTime.Parse(item.AppointmentDate.ToString());
+                        Model.AppointmentDate = item.AppointmentDate;
+                        <tr>
+                            @if (item.Patient.p_name != null)
+                            {
+                                <td>
+                                    @Html.DisplayFor(q => item.Patient.p_name)
+                                </td>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(q => item.Patient.UserName)
+                            }
+
+                            <td>
+                                @Html.DisplayFor(q => q.AppointmentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(q => q.AppointmentTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(q => item.Department.DepartmentName)
+                            </td>
+                            <td>
+                                @Html.ActionLink(" Cancel Appointment", "CancelAppointment", new { appointmentId = item.id, actionName = "DoctorHome" }, new { @class = "btn btn-xs btn-danger fa fa-remove" })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </section>
+</section>
+
+
+@section scripts{
+    <script language="javascript" type="text/javascript">
+        
+        const disableSaveButton = document.getElementById('saveImage');
+        $('#imageUpload').change(function () {
+
+            if (this.files && this.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.readAsDataURL(this.files[0]);
+
+
+                fileReader.onload = function (x) {
+                    $('.image-preview-div').css('display', 'inherit');
+                    $('#imagePreview').css('display', 'inherit');
+                    $('#removeButton').css('display', 'inherit');
+                    $('#imagePreview').attr('src', x.target.result);
+                    disableSaveButton.removeAttribute('disabled');
+
+                }
+            }
+        });
+
+        $('#removeButton').click(function () {
+            $('#imagePreview').attr("src", "#");
+            $('#imagePreview').css('display', 'none');
+            $('#removeButton').css('display', 'none');
+            $('.image-preview-div').css('display', 'none');
+            $('#imageUpload').val('');
+            disableSaveButton.setAttribute('disabled', 'true');
+        });
+
+        
+
+            const appointmentListTable = document.getElementById('tab');
+            const appointmentTbody = appointmentListTable.getElementsByTagName('tbody');
+            var trnode = document.createElement("tr");
+            trnode.style.padding = '4px';
+            trnode.style.textAlign = 'center';
+            trnode.style.color = 'gray';
+            trnode.style.letterSpacing = '1.1px';
+            var tdnode = document.createElement("td");
+            tdnode.colSpan = '5';
+            var textnode = document.createTextNode("no appointments");
+            if (appointmentTbody[0].childElementCount <= 1) {                
+                appointmentListTable.appendChild(trnode).appendChild(tdnode).appendChild(textnode);
+            }
+
+    </script>
+}

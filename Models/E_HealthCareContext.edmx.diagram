@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="493e2bfa130143fda2ae49986589a8a2" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="E_HealthCareModel.Patient" Width="1.5" PointX="4.875" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="493e2bfa130143fda2ae49986589a8a2" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="E_HealthCareModel.Patient" Width="1.5" PointX="4.625" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="E_HealthCareModel.SiteUser" Width="2.25" PointX="1.125" PointY="3.375" IsExpanded="true" />
         <AssociationConnector Association="E_HealthCareModel.FK__Patient__UserId__6383C8BA" />
-        <EntityTypeShape EntityType="E_HealthCareModel.Doctor" Width="1.5" PointX="4.25" PointY="0.75" />
+        <EntityTypeShape EntityType="E_HealthCareModel.Doctor" Width="1.5" PointX="4.375" PointY="0.5" />
         <AssociationConnector Association="E_HealthCareModel.FK_UserId_to_Id" />
-        <EntityTypeShape EntityType="E_HealthCareModel.UrlLoggin" Width="1.5" PointX="4.25" PointY="8.75" />
+        <EntityTypeShape EntityType="E_HealthCareModel.UrlLoggin" Width="1.5" PointX="4.25" PointY="9.375" />
         <AssociationConnector Association="E_HealthCareModel.FK_SiteUser_UserId" />
-        <EntityTypeShape EntityType="E_HealthCareModel.Admin" Width="1.5" PointX="4.25" PointY="11.875" />
+        <EntityTypeShape EntityType="E_HealthCareModel.Admin" Width="1.5" PointX="4.25" PointY="12.625" />
         <AssociationConnector Association="E_HealthCareModel.Fk_TOSiteUser" />
         <EntityTypeShape EntityType="E_HealthCareModel.Appointment" Width="1.5" PointX="7.125" PointY="3.125" />
         <AssociationConnector Association="E_HealthCareModel.FKAppointmentDoctorId" />
@@ -22,6 +22,11 @@
         <AssociationConnector Association="E_HealthCareModel.FKAppointmentDepartmentId" />
         <EntityTypeShape EntityType="E_HealthCareModel.PatientReport" Width="1.5" PointX="7.125" PointY="7.25" />
         <AssociationConnector Association="E_HealthCareModel.FK_PatientReport" />
+        <EntityTypeShape EntityType="E_HealthCareModel.ChatConnectionDetail" Width="1.5" PointX="1.375" PointY="0.5" />
+        <AssociationConnector Association="E_HealthCareModel.Connection_SiteUser_Relation" />
+        <EntityTypeShape EntityType="E_HealthCareModel.ConversationInfo" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="E_HealthCareModel.Role" Width="1.5" PointX="10.125" PointY="5.5" />
+        <AssociationConnector Association="E_HealthCareModel.SiteUser_Role_Relation" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

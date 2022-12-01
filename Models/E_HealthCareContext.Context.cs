@@ -33,5 +33,8 @@ namespace E_HealthCare_Web.Models
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<PatientReport> PatientReports { get; set; }
+        public virtual DbSet<ChatConnectionDetail> ChatConnectionDetails { get; set; }
+        public virtual DbSet<ConversationInfo> ConversationInfoes { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

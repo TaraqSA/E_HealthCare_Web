@@ -12,8 +12,7 @@ using PasswordHashTool;
 
 namespace E_HealthCare_Web.Controllers
 {
-    [Authorize]
-
+    [Authorize(Roles = "Patient")]
     public class PatientController : Controller
     {
         // GET: Patient
@@ -22,8 +21,17 @@ namespace E_HealthCare_Web.Controllers
         PatientService patientService = new PatientService();
         public ActionResult PatientHome(int id)
         {
-            var getPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();            
+            var getPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();
             var model = patientService.PatientHomeModelTransfer(getPatient);
+            var ExpiredAppointments = getPatient.Appointments.Where(q => q.AppointmentDate < DateTime.Now).ToList();
+            if (ExpiredAppointments.Count > 0)
+            {
+                foreach (var appointment in ExpiredAppointments)
+                {
+                    appointment.IsAppointmentActive = false;
+                }
+                context.SaveChanges();
+            }
             return View(model);
         }
 
@@ -62,7 +70,7 @@ namespace E_HealthCare_Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var getPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();            
+            var getPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();
             var model = patientService.EditModelTransfer(getPatient);
             return View("EditPatient", model);
         }
@@ -71,7 +79,7 @@ namespace E_HealthCare_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditViewModel model)
         {
-            var getPatient = context.Patients.Where(q => q.p_id == model.Id).FirstOrDefault();            
+            var getPatient = context.Patients.Where(q => q.p_id == model.Id).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 patientService.UpdatePatient(getPatient, model);
@@ -116,7 +124,7 @@ namespace E_HealthCare_Web.Controllers
 
 
         public ActionResult BookAppointment(int id)
-        {   
+        {
             var model = patientService.BookAppointmentModelTransfer(id);
             return View(model);
         }
@@ -125,7 +133,7 @@ namespace E_HealthCare_Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult FillDoctors(int? DeptId)
         {
-            var doctors = context.Departments.Where(q => q.Id == DeptId).Select(q => q.Doctors).FirstOrDefault();            
+            var doctors = context.Departments.Where(q => q.Id == DeptId).Select(q => q.Doctors).FirstOrDefault();
             var doctorData = doctors.Select(m => new SelectListItem() { Text = m.D_UserName, Value = m.Id.ToString() });
             return Json(doctorData, JsonRequestBehavior.AllowGet);
         }
@@ -135,7 +143,7 @@ namespace E_HealthCare_Web.Controllers
         public ActionResult BookAppointment(BookAppointmentViewModel model)
         {
             if (ModelState.IsValid)
-            {   
+            {
                 patientService.AddAppointmentToDataBase(model);
                 return RedirectToAction("AppointmentList", new { id = model.Id });
             }
@@ -149,7 +157,7 @@ namespace E_HealthCare_Web.Controllers
             ViewBag.DateSortOrder = sortOrder == "Date" ? "date_desc" : "Date";
             ViewBag.TimeSortOrder = sortOrder == "Time" ? "time_desc" : "Time";
 
-            if(SearchByDrName != null)
+            if (SearchByDrName != null)
             {
                 page = 1;
             }
@@ -166,7 +174,7 @@ namespace E_HealthCare_Web.Controllers
                 id = q.id,
                 appointmentDate = q.AppointmentDate.Date,
                 appointmentTime = DateTime.Parse(q.AppointmentDate.ToString()),
-                departmentName = q.Department.DepartmentName,                
+                departmentName = q.Department.DepartmentName,
                 doctorName = q.Doctor.D_UserName
 
             });
@@ -197,7 +205,7 @@ namespace E_HealthCare_Web.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            return View(model.ToPagedList(pageNumber,pageSize));
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
@@ -230,7 +238,7 @@ namespace E_HealthCare_Web.Controllers
             var model = patientService.PatientProfileModelTransfer(getPatient);
             return View(model);
         }
-       
+
         public ActionResult PatientAccount(int id)
         {
             var getPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();
@@ -272,7 +280,7 @@ namespace E_HealthCare_Web.Controllers
         public ActionResult UploadReports(int id)
         {
             var model = new UploadReportViewModel();
-            model.id = id;            
+            model.id = id;
             return View(model);
         }
 
@@ -286,13 +294,13 @@ namespace E_HealthCare_Web.Controllers
                 var getPatient = context.Patients.Where(q => q.p_id == model.id).FirstOrDefault();
                 PatientReport PatientHealthReport = new PatientReport();
 
-                if(pdfUpload != null)//saving pdf file report address to database
+                if (pdfUpload != null)//saving pdf file report address to database
                 {
                     var allowedExtension = ".pdf";
                     var fileName = Path.GetFileName(pdfUpload.FileName);
                     var extension = Path.GetExtension(pdfUpload.FileName).ToLower();
 
-                    if(extension != allowedExtension)
+                    if (extension != allowedExtension)
                     {
                         return View();
                     }
@@ -316,7 +324,7 @@ namespace E_HealthCare_Web.Controllers
             return View();
         }
 
-        
+
         public ActionResult ReportList(int id, string searchByName, string currentfilter, int? page)
         {
             //searching and paging
@@ -335,10 +343,10 @@ namespace E_HealthCare_Web.Controllers
             {
                 id = q.ReportId,
                 reportType = q.ReportType,
-                fileLink = q.ReportAddress,                
+                fileLink = q.ReportAddress,
                 reportName = q.ReportName
 
-            }) ;
+            });
 
             if (!String.IsNullOrEmpty(searchByName))
             {
@@ -349,8 +357,8 @@ namespace E_HealthCare_Web.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
-            
-            return View(model.ToPagedList(pageNumber,pageSize));
+
+            return View(model.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult ViewReport(int id)
@@ -363,7 +371,7 @@ namespace E_HealthCare_Web.Controllers
         public ActionResult DownloadReport(int id)
         {
             var getReportAddress = context.PatientReports.Where(q => q.ReportId == id).Select(q => q.ReportAddress).FirstOrDefault();
-            if(getReportAddress != null)
+            if (getReportAddress != null)
             {
                 string fullFileAddress = Path.GetFullPath(@"C:\Users\HOME\source\repos\E_HealthCare_Web\" + getReportAddress);
                 return File(fullFileAddress, "application/pdf", "MyReport.pdf");
@@ -377,8 +385,8 @@ namespace E_HealthCare_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteReport(int reportId)
         {
-            var getReport = context.PatientReports.Where(q => q.ReportId == reportId).FirstOrDefault();            
-            if(getReport != null)
+            var getReport = context.PatientReports.Where(q => q.ReportId == reportId).FirstOrDefault();
+            if (getReport != null)
             {
                 int patienId = getReport.PatientId;
                 context.PatientReports.Remove(getReport);
@@ -390,10 +398,46 @@ namespace E_HealthCare_Web.Controllers
 
 
 
-        public ActionResult FindDoctors()
+        public ActionResult FindDoctors(int id, string DrSearch, FindDoctorViewModel Recievedmodel)
         {
-
+            var model = patientService.FindDoctorModelTansfer(Recievedmodel, Recievedmodel.DepartmentSelectedId, id, DrSearch);
+            return View(model);
         }
+
+        public ActionResult Chat(int id, string searchdr)
+        {
+            ViewBag.patiendId = id.ToString();
+            ConsultationViewModel model = new ConsultationViewModel();
+            model.id = id;
+            if (!String.IsNullOrEmpty(searchdr))
+            {
+                model.DoctorsList = context.Doctors.Where(q => q.D_Name != null ? q.D_Name.ToUpper().Contains(searchdr.ToUpper()) : q.D_UserName.ToUpper().Contains(searchdr.ToUpper())).ToList();
+            }
+            else
+            {
+                model.DoctorsList = context.Doctors.ToList();
+            }
+            model.CurrentPatient = context.Patients.Where(q => q.p_id == id).FirstOrDefault();
+
+            return View(model);
+        }
+
+
+        public ActionResult ChatBox(string patientUserName, string doctorUserName)
+        {
+            ChatLoadViewModel model = new ChatLoadViewModel();
+            model.patient = context.Patients.Where(q => q.UserName == patientUserName).FirstOrDefault();
+            model.doctor = context.Doctors.Where(q => q.D_UserName == doctorUserName).FirstOrDefault();
+            model.Message = context.ConversationInfoes.Where(q => q.SenderId == model.doctor.D_UserId && q.RecieverId == model.patient.UserId || q.SenderId == model.patient.UserId && q.RecieverId == model.doctor.D_UserId)?.ToList().Select(q =>
+            new Message
+            {
+                IsDoctorMsg = (q.SenderId == model.doctor.D_UserId && q.RecieverId == model.patient.UserId),
+                IsPatientMsg = (q.SenderId == model.patient.UserId && q.RecieverId == model.doctor.D_UserId),
+                MessageText = q.MessageText
+            });
+            return PartialView("_ChatBox", model);
+        }
+
         public JsonResult IsCorrectPassword(string OldPassword, int id)
         {
             var getUserName = context.Patients.Where(q => q.p_id == id).Select(q => q.UserName).FirstOrDefault();

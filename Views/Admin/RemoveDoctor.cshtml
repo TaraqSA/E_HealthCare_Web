@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Remove";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@section Styles {
+    <style type="text/css">
+        .confirm-sec {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Comic Sans MS';
+        }
+
+        .back-anchor {
+            padding-left: 2rem;
+        }
+
+            .back-anchor a {
+                text-decoration: none;
+            }
+    </style>
+}
+
+
+@using (Html.BeginForm("RemoveDoctor", "Admin", new { doctorId = ViewBag.DoctorId, currentAdminId = ViewBag.CurrentAdminId }, FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+    <section class="confirm-sec">
+        <div>
+            <h4>Are you sure you want to remove doctor @ViewBag.DoctorName ?</h4>
+        </div><br />
+        <div>
+            <input type="submit" value="Remove" class="btn btn-sm btn-danger" />
+        </div>
+    </section>
+    <br />
+    <br />
+    <div class="back-anchor">
+        @Html.ActionLink($"Go back", "DoctorsList", new { id = ViewBag.CurrentAdminId })
+    </div>
+
+}
+

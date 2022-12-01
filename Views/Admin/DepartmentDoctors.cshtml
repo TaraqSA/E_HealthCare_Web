@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.DepartmentDoctorViewModel>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Doctors List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .doctor-heading h3 {
+            font-family: 'Comic Sans MS';
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+
+        .list-section {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .doctortList-table {
+            box-shadow: 0px 0px 2px 0.5px rgba(0,0,0,0.2);
+        }
+
+        .doctorList-table th {
+            border: 1px solid rgba(116, 189, 160, 0.8);
+            background-color: rgba(116, 189, 160, 0.6) !important;
+            border-top: 0 !important;
+        }
+
+        .doctorList-table tr td {
+            border: 1px solid rgba(116, 189, 160, 0.4);
+        }
+
+        .doctorList-table tr:nth-child(odd) {
+            background-color: rgba(116, 189, 160, 0.3);
+        }
+
+        .searchbox {
+            padding-left: 1.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+}
+
+<section class="doctor-heading">
+    <h3>
+        <label>
+            Doctors List in @ViewBag.DepartmentName Department
+        </label>
+    </h3>
+</section>
+<section class="doctor-search">
+    @using (Html.BeginForm("DepartmentDoctors", "Admin", new { departmentId = ViewBag.DepartmentId }, FormMethod.Get))
+    {
+        <input type="hidden" value="@ViewBag.DepartmentId" name="departmentId" id="departmentId" />
+        <div class="form-group searchbox">
+            @Html.TextBox("SearchByDoctorName", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by doctor's Name" })
+            <button type="submit" value="Search" class="fa fa-search btn btn-sm btn-info"> Search</button>
+        </div>
+    }
+
+</section>
+
+<section class="list-section">
+    <table class="table doctorList-table">
+        <tr>
+            <th>
+                Sr. No
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @{ int j = i + 1;}@j
+                </td>
+                <td>
+                    @Html.DisplayFor(q => q[i].DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(q => q[i].Email)
+                </td>
+                <td>
+                    @Html.ActionLink(" Remove From Department", "RemoveDoctorFromDepartment", 
+                   new { id = ViewBag.AdminId, doctorId = Model[i].Id, departmentId = ViewBag.DepartmentId },
+                   new { @class = "fa fa-remove btn btn-sm btn-danger"})
+                </td>
+            </tr>
+        }
+
+
+    </table>    
+    @Html.PagedListPager(Model, page => Url.Action("DepartmentDoctors",
+    new
+        {
+            page,
+            adminId = ViewBag.AdminId,
+            departmentId = ViewBag.DepartmentId,
+        currentFilter = ViewBag.CurrentFilter
+        }))
+</section>
+

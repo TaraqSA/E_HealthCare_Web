@@ -230,7 +230,7 @@ namespace E_HealthCare_Web.Controllers
 
         public void SendEmail(string emailAddress, string body, string subject)
         {
-            using (MailMessage mm = new MailMessage("salmanchannel212@gmail.com", emailAddress))
+            using (MailMessage mm = new MailMessage("youremail", emailAddress))
             {
                 mm.Subject = subject;
                 mm.Body = body;
@@ -240,7 +240,7 @@ namespace E_HealthCare_Web.Controllers
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
 
-                NetworkCredential networkCredential = new NetworkCredential("salmanchannel212@gmail.com", "fjrfkofhusgboufd");
+                NetworkCredential networkCredential = new NetworkCredential("youremail", "password");
 
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = networkCredential;

@@ -11,4 +11,4 @@ E-HealthCare Provides Interface for patients and Doctors Make Appointments, View
 Doctors patients can Chat with each other for consultations.
 
 
-Admin can manage Doctors.
+Admin can manage Doctors and departments.

@@ -755,6 +755,11 @@
     <Content Include="Views\Admin\DoctorsList.cshtml" />
     <Content Include="Views\Admin\RemoveDoctor.cshtml" />
     <Content Include="Views\Admin\DepartmentList.cshtml" />
+    <Content Include="Views\Admin\AddDepartment.cshtml" />
+    <Content Include="Views\Admin\RemoveDepartment.cshtml" />
+    <Content Include="Views\Admin\AddDoctorToDepartment.cshtml" />
+    <Content Include="Views\Admin\DepartmentDoctors.cshtml" />
+    <Content Include="Views\Admin\RemoveDoctorFromDepartment.cshtml" />
     <None Include="Views\Error\NotFound404.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Error\Error500.cshtml" />

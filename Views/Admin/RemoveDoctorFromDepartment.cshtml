@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
 @section Styles {
     <style type="text/css">
         .confirm-sec {
@@ -26,12 +25,12 @@
 }
 
 
-@using (Html.BeginForm("RemoveDoctor", "Admin", new { doctorId = ViewBag.DoctorId, currentAdminId = ViewBag.CurrentAdminId }, FormMethod.Post, null))
+@using (Html.BeginForm("RemoveDoctorFromDepartment", "Admin", new { id = ViewBag.AdminId, departmentId = ViewBag.DepartmentId,  doctorId = ViewBag.DoctorId }, FormMethod.Post, null))
 {
     @Html.AntiForgeryToken()
     <section class="confirm-sec">
         <div>
-            <h4>Are you sure you want to remove doctor @ViewBag.DoctorName ?</h4>
+            <h4>Are you sure you want to remove Dr. @ViewBag.DoctorName ?</h4>
         </div><br />
         <div>
             <input type="submit" value="Remove" class="btn btn-sm btn-danger" />
@@ -40,7 +39,7 @@
     <br />
     <br />
     <div class="back-anchor">
-        @Html.ActionLink($"Go back", "DoctorsList", new { id = ViewBag.CurrentAdminId })
+        @Html.ActionLink($"Go back", "DepartmentDoctors", new { id = ViewBag.AdminId, departmentId = ViewBag.DepartmentId })
     </div>
 
 }

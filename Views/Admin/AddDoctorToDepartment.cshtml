@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<E_HealthCare_Web.ViewModels.AddDoctorToDepartmentViewModel>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Add Doctors";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles{
+    <style type="text/css">
+
+        .doctor-heading h3 {
+            font-family: 'Comic Sans MS';
+            text-align: center;
+            padding-bottom:1rem;
+        }
+
+        .list-section {
+            padding: 2rem;
+            font-family: 'Comic Sans MS';
+        }
+
+        .doctortList-table {
+            box-shadow: 0px 0px 2px 0.5px rgba(0,0,0,0.2);
+        }
+
+        .doctorList-table th {
+            border: 1px solid rgba(116, 189, 160, 0.8);
+            background-color: rgba(116, 189, 160, 0.6) !important;
+            border-top: 0 !important;
+        }
+
+        .doctorList-table tr td {
+            border: 1px solid rgba(116, 189, 160, 0.4);
+        }
+
+        .doctorList-table tr:nth-child(odd) {
+            background-color: rgba(116, 189, 160, 0.3);
+        }
+
+        .searchbox {
+            padding-left: 1.8rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .add-doctor-btn{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+    </style>
+}
+
+<section class="doctor-heading">
+    <h3>
+        <label>
+            Add Doctors To  @ViewBag.DepartmentName Department
+        </label>
+    </h3>
+</section>
+<section class="doctor-search">
+    @using (Html.BeginForm("AddDoctorToDepartment", "Admin", new { departmentId = ViewBag.DepartmentId }, FormMethod.Get))
+    {
+        <input type="hidden" value="@ViewBag.DepartmentId" name="departmentId" id="departmentId" />
+        <div class="form-group searchbox">
+            @Html.TextBox("SearchByDoctorName", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by doctor's Name" })
+            <button type="submit" value="Search" class="fa fa-search btn btn-sm btn-info"> Search</button>
+        </div>
+    }
+
+</section>
+
+<section class="list-section">
+    @using (Html.BeginForm("AddDoctorToDepartment", "Admin", new { departmentId = ViewBag.DepartmentId, pageNo = ViewBag.Page }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <table class="table doctorList-table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().isDoctorChecked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DoctorName)
+            </th>
+        </tr>
+        @for(int i = 0; i < Model.Count ; i++)
+        {   
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(q => q[i].isDoctorChecked)
+                    @Html.HiddenFor(q => q[i].Id)
+                    @Html.HiddenFor(q => q[i].DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(q => q[i].DoctorName)
+                </td>
+            </tr>
+        }
+
+
+    </table>
+    <div class="add-doctor-btn">
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+    }
+
+    @Html.PagedListPager(Model, page => Url.Action("AddDoctorToDepartment",
+    new { page, adminId = ViewBag.AdminId, departmentId = ViewBag.DepartmentId,
+        currentFilter = ViewBag.CurrentFilter }))
+</section>
+

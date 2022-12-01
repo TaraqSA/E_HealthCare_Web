@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using E_HealthCare_Web.Models;
+using PagedList;
 using Compare = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace E_HealthCare_Web.ViewModels
@@ -253,4 +254,45 @@ namespace E_HealthCare_Web.ViewModels
         [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
     }
+
+    public class AddNewDepartmentViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue =false)]
+        public int Id { get; set; }
+
+        [Display(Name = "Department Name")]
+        [Required(ErrorMessage = " please Enter department name")]
+        public string DepartmentName { get; set; }
+    }
+
+    public class AddDoctorToDepartmentViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        [Display(Name = "Doctor Name")]
+        public string DoctorName { get; set; }
+
+        [Display(Name = "Select Doctor To Add")]        
+        public bool isDoctorChecked { get; set; }
+        
+    }
+
+    public class DepartmentDoctorViewModel
+    {
+        [Key]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        [Display(Name = "Doctor Name")]
+        public string DoctorName { get; set; }
+
+        [Display(Name = "Email Address")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+    }
+
 }
+    

@@ -246,7 +246,7 @@ namespace E_HealthCare_Web.Controllers
             var model = dbContext.Doctors.ToList().Select(q => new DoctorsListViewModel
             {
                 Id = q.Id,
-                Name = q.D_Name == null? "Unavailable" :q.D_Name,
+                Name = q.D_Name == null ? "Unavailable" : q.D_Name,
                 Gender = q.D_Gender,
                 Phone = q.D_Phone,
                 Email = q.D_Email
@@ -270,7 +270,7 @@ namespace E_HealthCare_Web.Controllers
             var currentAdminId = dbContext.Admins.Where(q => q.UserName == User.Identity.Name).Select(q => q.Id).FirstOrDefault();
             ViewBag.CurrentAdminId = currentAdminId;
             ViewBag.DoctorId = doctorId;
-            ViewBag.DoctorName = getdoctorToRemove.D_Name;            
+            ViewBag.DoctorName = getdoctorToRemove.D_Name;
             return View();
         }
 
@@ -285,15 +285,15 @@ namespace E_HealthCare_Web.Controllers
             var getDepartments = getDoctor.Departments;
             var getSiteUser = getDoctor.SiteUser;
             var getRoles = getSiteUser.Roles;
-            foreach(var appoinment in getAppointments)
+            foreach (var appoinment in getAppointments)
             {
                 dbContext.Appointments.Remove(appoinment);
             }
-            foreach(var dept in getDepartments.ToList())
+            foreach (var dept in getDepartments.ToList())
             {
                 getDepartments.Remove(dept);
             }
-            foreach(var role in getRoles.ToList())
+            foreach (var role in getRoles.ToList())
             {
                 getRoles.Remove(role);
             }
@@ -320,7 +320,7 @@ namespace E_HealthCare_Web.Controllers
             ViewBag.CurrentFilter = SearchByDepartmentName;
 
 
-            var model = dbContext.Departments.ToList().Select(s => new DepartmentListViewModel {Id = s.Id, DepartmentName = s.DepartmentName });
+            var model = dbContext.Departments.ToList().Select(s => new DepartmentListViewModel { Id = s.Id, DepartmentName = s.DepartmentName });
 
             if (!String.IsNullOrEmpty(SearchByDepartmentName))
             {
@@ -334,24 +334,220 @@ namespace E_HealthCare_Web.Controllers
         }
         public ActionResult AddDepartment(int id)
         {
-            return View();
+            AddNewDepartmentViewModel model = new AddNewDepartmentViewModel();
+            model.Id = id;
+            return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDepartment(AddNewDepartmentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Department department = new Department();
+                department.DepartmentName = model.DepartmentName;
+                dbContext.Departments.Add(department);
+                dbContext.SaveChanges();
+                return RedirectToAction("DepartmentList", new { id = model.Id });
+            }
+            return View(model);
+        }
+
 
         public ActionResult RemoveDepartment(int departmentId)
         {
+            var getDepartment = dbContext.Departments.Find(departmentId);
+            ViewBag.DepartmentId = getDepartment.Id;
+            ViewBag.DepartmentName = getDepartment.DepartmentName;
+            ViewBag.AdminId = dbContext.Admins.Where(q => q.UserName == User.Identity.Name).Select(q => q.Id).FirstOrDefault();
             return View();
         }
 
-        public ActionResult AddDoctorToDepartment(Doctor doctor)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveDepartment(int departmentId, int adminId)
         {
-            return View();
+            var getDepartment = dbContext.Departments.Find(departmentId);
+            var getAppointments = getDepartment.Appointments;
+            var getDoctors = getDepartment.Doctors;
+
+            foreach (var appointment in getAppointments.ToList())
+            {
+                getAppointments.Remove(appointment);
+            }
+            foreach (var doctor in getDoctors.ToList())
+            {
+                getDoctors.Remove(doctor);
+            }
+
+            dbContext.Departments.Remove(getDepartment);
+            dbContext.SaveChanges();
+            return RedirectToAction("DepartmentList", new { id = adminId });
         }
 
-
-        public ActionResult RemoveDoctorFromDepartment(int doctorId,int departmentId)
+        public ActionResult AddDoctorToDepartment(int id, int departmentId, string currentfilter, int? page, string SearchByDoctorName)
         {
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            if (SearchByDoctorName != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchByDoctorName = currentfilter;
+            }
+            ViewBag.CurrentFilter = SearchByDoctorName;
+
+            var department = dbContext.Departments.Where(q => q.Id == departmentId).FirstOrDefault();
+            var getDoctors = department.Doctors.Select(q => q.Id).ToList();
+
+            ViewBag.DepartmentId = department.Id;
+            ViewBag.DepartmentName = department.DepartmentName;
+            ViewBag.AdminId = id;
+            ViewBag.Page = pageNumber;
+
+            var DoctorsList = new List<AddDoctorToDepartmentViewModel>();
+
+            foreach (var doc in dbContext.Doctors)//for loop for getting doctors that are not available in department
+            {
+                bool flag = true;
+                var doctor = new AddDoctorToDepartmentViewModel();
+                int NoOfDoctors = getDoctors.Count();
+                int counter = 1;
+                if (NoOfDoctors > 0)
+                {
+                    for (int i = 0; i < NoOfDoctors; i++)
+                    {
+                        if (doc.Id == getDoctors[i]) break;
+                        if (doc.Id != getDoctors[i] && counter == NoOfDoctors)
+                        {
+                            flag = false;
+                        }
+                        counter++;
+                    }
+                }
+                else if (NoOfDoctors == 0)
+                {
+                    flag = false;
+                }
+
+                if (!flag)
+                {
+                    doctor.Id = doc.Id;
+                    doctor.DoctorName = doc.D_Name ?? doc.D_UserName;
+                    doctor.isDoctorChecked = false;
+                    DoctorsList.Add(doctor);
+                    getDoctors.Add(doc.Id);
+                }
+
+            }
+
+            if (!String.IsNullOrEmpty(SearchByDoctorName))
+            {
+                DoctorsList = DoctorsList.Where(s => s.DoctorName.ToUpper().Contains(SearchByDoctorName.ToUpper())).ToList();
+            }
+
+
+            return View(DoctorsList.ToPagedList(page ?? pageNumber, pageSize));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDoctorToDepartment(IEnumerable<AddDoctorToDepartmentViewModel> model, int departmentId, int pageNo)
+        {
+            var getDepartment = dbContext.Departments.Find(departmentId);
+            if (model != null) {            
+            var getDoctorIdAdd = model.Where(q => q.isDoctorChecked == true).ToList().Select(q => q.Id);
+            if (getDoctorIdAdd.Count() > 0)
+            {
+                List<Doctor> doctorslist = new List<Doctor>();
+
+                foreach (var id in getDoctorIdAdd)
+                {
+                    var doctor = dbContext.Doctors.Find(id);
+                    doctorslist.Add(doctor);
+                }
+                foreach (var doctor in doctorslist)
+                {
+                    getDepartment.Doctors.Add(doctor);
+                }
+                dbContext.SaveChanges();
+                return RedirectToAction("DepartmentList", new { id = departmentId, page = pageNo });
+            }
+            }
+            return RedirectToAction("DepartmentList", new { id = departmentId, page = pageNo });
+        }
+
+
+        public ActionResult DepartmentDoctors(int id, int departmentId, string currentfilter, int? page, string SearchByDoctorName)
+        {
+            var getDepartment = dbContext.Departments.Find(departmentId);
+            var DoctorsList = getDepartment.Doctors.Select(q => new DepartmentDoctorViewModel { 
+                                Id = q.Id,
+                                DoctorName = q.D_Name ?? q.D_UserName,
+                                Email = q.D_Email
+                                });
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            if (SearchByDoctorName != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchByDoctorName = currentfilter;
+            }
+            ViewBag.CurrentFilter = SearchByDoctorName;
+
+            ViewBag.DepartmentId = departmentId;
+            ViewBag.DepartmentName = getDepartment.DepartmentName;
+            ViewBag.AdminId = id;
+            ViewBag.Page = pageNumber;
+
+            if (!String.IsNullOrEmpty(SearchByDoctorName))
+            {
+                DoctorsList = DoctorsList.Where(s => s.DoctorName.ToUpper().Contains(SearchByDoctorName.ToUpper())).ToList();
+            }
+
+            return View(DoctorsList.ToPagedList(pageNumber,pageSize));
+        }
+
+        public ActionResult RemoveDoctorFromDepartment(int id, int doctorId, int departmentId)
+        {
+            ViewBag.AdminId = id;
+            ViewBag.DoctorId = doctorId;
+            ViewBag.DepartmentId = departmentId;
+            var doctor = dbContext.Doctors.Find(doctorId);
+            var doctorName = doctor.D_Name ?? doctor.D_UserName;
+            ViewBag.DoctorName = doctorName;
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("RemoveDoctorFromDepartment")]
+        public ActionResult RemoveDoctorFromDepartmentPost(int id, int departmentId, int doctorId)
+        {
+            var getDepartment = dbContext.Departments.Find(departmentId);
+            var getDoctor = getDepartment.Doctors.Where(q => q.Id == doctorId).FirstOrDefault();
+            if(getDoctor != null)
+            {
+                var DoctorAppintmentsInDepartment = getDepartment.Appointments.Where(q => q.DoctorId == doctorId).ToList();
+                foreach (var appointments in DoctorAppintmentsInDepartment)
+                {
+                    DoctorAppintmentsInDepartment.Remove(appointments);
+                }
+                getDepartment.Doctors.Remove(getDoctor);
+                dbContext.SaveChanges();
+                return RedirectToAction("DepartmentDoctors", new { id = id, departmentId = departmentId });
+            }
+            return View();
+
+        }
+
 
         //Helper Methods
         public JsonResult IsCorrectPassword(string OldPassword, int id)

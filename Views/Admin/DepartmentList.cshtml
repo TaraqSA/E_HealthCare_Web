@@ -44,7 +44,7 @@
             gap: 1rem;
         }
 
-        .create-admin {
+        .create-department {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,9 +88,9 @@
                     @Html.DisplayFor(modelItem => item.DepartmentName)
                 </td>
                 <td>
-                    @Html.ActionLink(" Remove Department", "RemoveDepartment", new { departmentId = item.Id, actionName = "DepartmentList" }, new { @class = "btn btn-xs btn-danger fa fa-remove" })&nbsp;
-                    @Html.ActionLink(" Add Doctor", "AddDoctorToDepartment", new { departmentId = item.Id }, new { @class = "btn btn-xs btn-primary fa fa-plus" })&nbsp;
-                    @Html.ActionLink(" Remove Doctor", "RemoveDoctorFromDepartment", new { departmentId = item.Id }, new { @class = "btn btn-xs btn-warning fa fa-remove" })
+                    @Html.ActionLink(" Add Doctor", "AddDoctorToDepartment", new { id = ViewBag.adminId, departmentId = item.Id }, new { @class = "btn btn-xs btn-primary fa fa-plus" })&nbsp;
+                    @Html.ActionLink(" Department Doctors", "DepartmentDoctors", new { id = ViewBag.adminId, departmentId = item.Id }, new { @class = "btn btn-xs btn-info fa fa-user-md" })&nbsp;
+                    @Html.ActionLink(" Remove Department", "RemoveDepartment", new { departmentId = item.Id, actionName = "DepartmentList" }, new { @class = "btn btn-xs btn-danger fa fa-remove" })
                 </td>
             </tr>
         }
@@ -100,7 +100,7 @@
     @Html.PagedListPager(Model, page => Url.Action("DepartmentList",
     new { page, currentFilter = ViewBag.CurrentFilter }))
 </section>
-<section class="create-admin">
+<section class="create-department">
     @Html.ActionLink(" Add Department", "AddDepartment", "Admin", new { id = ViewBag.adminId }, new { @class = "fa fa-plus btn btn-info" })
 </section>
 
